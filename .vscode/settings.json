@@ -1,6 +1,11 @@
 {
+  "prettier.enable": false,
+  "editor.defaultFormatter": "denoland.vscode-deno",
   "deno.enablePaths": ["./app"],
+  "deno.suggest.imports.autoDiscover": true,
   "deno.enable": true,
-  "deno.config": "./deno.json",
-  "editor.inlayHints.enabled": "off"
+  "deno.lint": true,
+  "deno.path": "/usr/local/bin/deno"
+  // "deno.config": "./deno.json",
+  // "editor.inlayHints.enabled": "off"
 }

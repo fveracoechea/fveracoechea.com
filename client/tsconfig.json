@@ -10,6 +10,7 @@
     "jsxFragment": "JSX.createFragment",
     "jsxImportSource": "jsx"
   },
+  "exclude": ["../app", "../public", "../content"],
   "include": [
     "./*.ts",
     "./*.tsx",
