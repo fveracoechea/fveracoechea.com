@@ -1,7 +1,6 @@
 {
-  "deno.enablePaths": [
-    "./"
-  ],
+  "deno.enablePaths": ["./app"],
   "deno.enable": true,
+  "deno.config": "./deno.json",
   "editor.inlayHints.enabled": "off"
 }

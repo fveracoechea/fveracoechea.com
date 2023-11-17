@@ -1,4 +1,4 @@
-import { HTTPException, MiddlewareHandler } from "hono";
+import { HTTPException, Context, Next } from "hono";
 import { html, raw } from "hono/middleware";
 import { HtmlEscapedString } from "https://deno.land/x/hono@v3.10.0/utils/html.ts";
 
@@ -11,10 +11,10 @@ type WithCotentVars = {
   };
 };
 
-export const contentMiddleware: MiddlewareHandler<WithCotentVars> = async (
-  ctx,
-  next
-) => {
+export async function contentMiddleware(
+  ctx: Context<WithCotentVars>,
+  next: Next
+) {
   const filename =
     ctx.req.path === "/" ? "./content/home.md" : `./content${ctx.req.path}.md`;
 
@@ -27,4 +27,4 @@ export const contentMiddleware: MiddlewareHandler<WithCotentVars> = async (
   } finally {
     await next();
   }
-};
+}

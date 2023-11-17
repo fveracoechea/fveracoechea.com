@@ -4,13 +4,11 @@ import { serveStatic, secureHeaders } from "hono/middleware";
 import home from "./routes/home.tsx";
 import { env } from "./shared/env.ts";
 
-import "../scripts/postcss.ts";
-
 import { jsxMiddleware } from "./middleware/jsxRenderer.tsx";
 
 const app = new Hono()
   .use("*", secureHeaders())
-  .use("/public/*", serveStatic({ root: "./" }))
+  .get("/public/*", serveStatic())
   .use("*", jsxMiddleware)
   .route("/", home);
 

@@ -10,11 +10,15 @@ export function Document(props: Props) {
     <html lang="en-US">
       <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/public/css/styles.css" />
+        <link
+          rel="stylesheet"
+          href="/public/styles.css"
+          title="main-tailwindcss"
+        />
       </head>
       <body>
         {props.children}
-        {env.ENV === "dev" && <script src="/public/js/development.js" />}
+        {env.ENV === "dev" && <script src="/public/main.js" type="module" />}
       </body>
     </html>
   );

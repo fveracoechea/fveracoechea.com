@@ -1,8 +1,9 @@
 {
   "tasks": {
-    "dev": "deno task dev:server",
+    "dev": "deno task dev:server & deno task dev:tailwind & deno task dev:build-client",
     "dev:server": "deno run -A --watch app/main.ts",
-    "dev:tailwind": "deno run -A --watch scripts/postcss.ts"
+    "dev:tailwind": "deno run -A app/scripts/postcss.ts",
+    "dev:build-client": "deno run -A app/scripts/client-esbuild.ts"
   },
   "compilerOptions": {
     "strict": true,
