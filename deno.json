@@ -20,5 +20,6 @@
     "hono/jsx": "https://deno.land/x/hono@v3.10.0/jsx/index.ts",
     "hono/middleware": "https://deno.land/x/hono@v3.10.0/middleware.ts",
     "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.10.0/jsx/jsx-runtime.ts"
-  }
+  },
+  "importMap": "./vendor/import_map.json"
 }

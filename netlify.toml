@@ -1,5 +1,6 @@
-
+[build]
+  edge_functions = "src/edge-functions"
 
 [[edge_functions]]
-function = "json"
-path = "/test"
+  function = "index"
+  path = "/*"
