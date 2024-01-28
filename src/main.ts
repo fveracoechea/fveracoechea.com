@@ -1,3 +1,6 @@
+/** @jsx precompile */
+/** @jsxImportSource https://esm.sh/hono@3.12.8/jsx */
+
 import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
 import {
   serveStatic,
