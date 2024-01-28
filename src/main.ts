@@ -1,13 +1,7 @@
-/** @jsx jsx */
-/** @jsxFrag Fragment */
-
 import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
 import {
   serveStatic,
   secureHeaders,
-  // deno-lint-ignore no-unused-vars
-  jsx,
-  Fragment,
 } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
 import home from "./routes/home.tsx";
 
