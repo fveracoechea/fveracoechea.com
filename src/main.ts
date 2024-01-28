@@ -1,7 +1,13 @@
+/** @jsx jsx */
+/** @jsxImportSource hono/jsx */
+
 import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
+
 import {
   serveStatic,
   secureHeaders,
+  jsx,
+  Fragment,
 } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
 import home from "./routes/home.tsx";
 
