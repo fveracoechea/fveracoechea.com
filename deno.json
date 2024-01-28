@@ -5,5 +5,9 @@
     "dev:tailwind": "deno run -A app/scripts/postcss.ts",
     "dev:build-client": "deno run -A app/scripts/client-esbuild.ts"
   },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
+  },
   "importMap": "./import_map.json"
 }
