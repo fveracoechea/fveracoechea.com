@@ -1,6 +1,12 @@
-import { HTTPException, Context, Next } from "hono";
-import { html, raw } from "hono/middleware";
-import { HtmlEscapedString } from "https://deno.land/x/hono@v3.10.0/utils/html.ts";
+import {
+  HTTPException,
+  Context,
+  Next,
+} from "https://deno.land/x/hono@v3.12.8/mod.ts";
+
+import { html, raw } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
+
+import { HtmlEscapedString } from "https://deno.land/x/hono@v3.12.8/utils/html.ts";
 
 import { extract } from "https://deno.land/std@0.206.0/front_matter/any.ts";
 import { render } from "https://deno.land/x/gfm@0.2.5/mod.ts";
@@ -13,8 +19,9 @@ type WithCotentVars = {
 
 export async function contentMiddleware(
   ctx: Context<WithCotentVars>,
-  next: Next
+  next: Next,
 ) {
+  console.log(Deno.cwd());
   const filename =
     ctx.req.path === "/" ? "./content/home.md" : `./content${ctx.req.path}.md`;
 

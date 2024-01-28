@@ -1,6 +1,9 @@
 [build]
-  edge_functions = "src/edge-functions"
+  edge_functions = "src"
+
+[functions]
+  deno_import_map = "./import_map.json"
 
 [[edge_functions]]
-  function = "index"
+  function = "main"
   path = "/*"

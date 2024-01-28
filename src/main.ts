@@ -1,15 +1,25 @@
-import { Hono } from "hono";
-import { serveStatic, secureHeaders } from "hono/middleware";
+/** @jsx jsx */
+/** @jsxFrag Fragment */
 
+import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
+import {
+  serveStatic,
+  secureHeaders,
+  // deno-lint-ignore no-unused-vars
+  jsx,
+  Fragment,
+} from "https://deno.land/x/hono@v3.12.8/middleware.ts";
 import home from "./routes/home.tsx";
-// import { env } from "./shared/env.ts";
+
+import { handle } from "https://deno.land/x/hono@v3.12.8/adapter/netlify/mod.ts";
 
 import { jsxMiddleware } from "./middleware/jsxRenderer.tsx";
 
-export const app = new Hono()
-  .use("*", secureHeaders())
-  .get("/public/*", serveStatic())
-  .use("*", jsxMiddleware)
-  .route("/", home);
+const app = new Hono();
 
-// Deno.serve({ port: env.PORT }, app.fetch);
+app.use("*", secureHeaders());
+app.get("/public/*", serveStatic());
+app.use("*", jsxMiddleware);
+app.route("/", home);
+
+export default handle(app);

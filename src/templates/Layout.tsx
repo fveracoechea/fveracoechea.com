@@ -1,4 +1,4 @@
-import { Child } from "hono/middleware";
+import { Child } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
 
 type Props = {
   children?: Child;

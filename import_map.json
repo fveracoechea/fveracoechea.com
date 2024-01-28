@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "tailwindcss": "npm:tailwindcss",
+    "@tailwindcss/typography": "npm:@tailwindcss/typography",
+    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts",
+    "hono": "https://deno.land/x/hono@v3.12.8/mod.ts",
+    "hono/helper": "https://deno.land/x/hono@v3.12.8/helper.ts",
+    "hono/jsx": "https://deno.land/x/hono@v3.12.8/jsx/index.ts",
+    "hono/middleware": "https://deno.land/x/hono@v3.12.8/middleware.ts",
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.12.8/jsx/jsx-runtime.ts"
+  }
+}

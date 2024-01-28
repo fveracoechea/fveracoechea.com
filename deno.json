@@ -5,21 +5,9 @@
     "dev:tailwind": "deno run -A app/scripts/postcss.ts",
     "dev:build-client": "deno run -A app/scripts/client-esbuild.ts"
   },
+  "importMap": "./import_map.json",
   "compilerOptions": {
-    "strict": true,
     "jsx": "precompile",
     "jsxImportSource": "hono/jsx"
-  },
-  "exclude": ["./client"],
-  "imports": {
-    "tailwindcss": "npm:tailwindcss",
-    "@tailwindcss/typography": "npm:@tailwindcss/typography",
-    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts",
-    "hono": "https://deno.land/x/hono@v3.10.0/mod.ts",
-    "hono/helper": "https://deno.land/x/hono@v3.10.0/helper.ts",
-    "hono/jsx": "https://deno.land/x/hono@v3.10.0/jsx/index.ts",
-    "hono/middleware": "https://deno.land/x/hono@v3.10.0/middleware.ts",
-    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.10.0/jsx/jsx-runtime.ts"
-  },
-  "importMap": "./vendor/import_map.json"
+  }
 }

@@ -1,5 +1,4 @@
-import { Child } from "hono/middleware";
-import { env } from "../shared/env.ts";
+import { Child } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
 
 type Props = {
   children?: Child;
@@ -16,10 +15,7 @@ export function Document(props: Props) {
           title="main-tailwindcss"
         />
       </head>
-      <body>
-        {props.children}
-        {env.ENV === "dev" && <script src="/public/main.js" type="module" />}
-      </body>
+      <body>{props.children}</body>
     </html>
   );
 }
