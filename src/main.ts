@@ -7,6 +7,7 @@ import {
 import home from "./routes/home.tsx";
 
 import { jsxMiddleware } from "./middleware/jsxRenderer.tsx";
+import blog from "./routes/blog.tsx";
 
 const app = new Hono();
 
@@ -14,5 +15,6 @@ app.use("*", secureHeaders());
 app.get("/public/*", serveStatic());
 app.use("*", jsxMiddleware);
 app.route("/", home);
+app.route("/", blog);
 
 Deno.serve(app.fetch);

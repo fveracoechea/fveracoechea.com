@@ -4,7 +4,7 @@ import {
   Next,
 } from "https://deno.land/x/hono@v3.12.8/mod.ts";
 
-import { html, raw } from "https://deno.land/x/hono@v3.12.8/middleware.ts";
+import { html, raw } from "hono/middleware";
 
 import { HtmlEscapedString } from "https://deno.land/x/hono@v3.12.8/utils/html.ts";
 
@@ -21,13 +21,13 @@ export async function contentMiddleware(
   ctx: Context<WithCotentVars>,
   next: Next,
 ) {
-  console.log(Deno.cwd());
   const filename =
     ctx.req.path === "/" ? "./content/home.md" : `./content${ctx.req.path}.md`;
 
   try {
     const str = await Deno.readTextFile(filename);
     const result = extract(str);
+    console.log(result);
     ctx.set("content", html`${raw(render(result.body))}`);
   } catch {
     throw new HTTPException(404, { message: "Page not found" });

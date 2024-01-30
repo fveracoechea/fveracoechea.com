@@ -1,4 +1,4 @@
-import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
+import { Hono } from "hono";
 import { contentMiddleware } from "../middleware/content.ts";
 
 const home = new Hono();
