@@ -1,9 +1,8 @@
 {
   "tasks": {
-    "dev": "deno task dev:server & deno task dev:tailwind & deno task dev:build-client",
-    "dev:server": "deno run -A --watch app/main.ts",
-    "dev:tailwind": "deno run -A app/scripts/postcss.ts",
-    "dev:build-client": "deno run -A app/scripts/client-esbuild.ts"
+    "dev": "deno task dev:server & deno task dev:tailwind",
+    "dev:server": "deno run -A --watch src/main.ts",
+    "dev:tailwind": "deno run -A src/scripts/postcss.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

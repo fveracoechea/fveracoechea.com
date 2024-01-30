@@ -1,8 +1,9 @@
 import { Hono } from "https://deno.land/x/hono@v3.12.8/mod.ts";
+import { contentMiddleware } from "../middleware/content.ts";
 
 const home = new Hono();
 
-home.get("/", (ctx) => {
+home.get("/", contentMiddleware, (ctx) => {
   return ctx.render(
     <div class="py-4">
       <h1 class="text-indigo-500 text-4xl">Francisco Veracoechea</h1>
