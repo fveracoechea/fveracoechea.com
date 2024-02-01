@@ -27,7 +27,6 @@ export async function contentMiddleware(
   try {
     const str = await Deno.readTextFile(filename);
     const result = extract(str);
-    console.log(result);
     ctx.set("content", html`${raw(render(result.body))}`);
   } catch {
     throw new HTTPException(404, { message: "Page not found" });

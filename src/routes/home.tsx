@@ -3,14 +3,12 @@ import { contentMiddleware } from "../middleware/content.ts";
 
 const home = new Hono();
 
-home.get("/", contentMiddleware, (ctx) => {
+home.get("/", (ctx) => {
   return ctx.render(
     <div class="py-4">
-      <h1 class="text-indigo-500 text-4xl">Francisco Veracoechea</h1>
+      <h1 class="text-primary text-4xl">Francisco Veracoechea</h1>
       <p>Software Enginier</p>
-      <main>
-        <article class="prose">{ctx.var.content}</article>
-      </main>
+      <main>Content</main>
     </div>,
   );
 });

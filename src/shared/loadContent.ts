@@ -5,10 +5,12 @@ import { unified } from "https://esm.sh/unified@11.0.4";
 import remarkParse from "https://esm.sh/remark-parse@11.0.0";
 import remarkRehype from "https://esm.sh/remark-rehype@11.1.0";
 
-import rehypeHighlight from "https://esm.sh/rehype-highlight@6.0.0";
+import rehypeHighlight from "https://esm.sh/rehype-highlight@7.0.0";
 import rehypeStringify from "https://esm.sh/rehype-stringify@10.0.0";
+import rehypeAutolinkHeadings from "https://esm.sh/rehype-autolink-headings@7.1.0";
+import rehypeSlug from "https://esm.sh/rehype-slug@6.0.0";
 
-export async function loadContent(path: string) {
+export async function loadArticle(path: string) {
   const filename = path === "/" ? "./content/home.md" : `./content${path}.md`;
 
   try {
@@ -18,10 +20,12 @@ export async function loadContent(path: string) {
     const processor = unified()
       .use(remarkParse)
       .use(remarkRehype)
+      .use(rehypeSlug)
+      .use(rehypeAutolinkHeadings)
       .use(rehypeHighlight)
       .use(rehypeStringify);
 
-    const content = (await processor.process(result.body)) as unknown;
+    const content = (await processor.process(result.body)).toString();
 
     return { attributes: result.attrs, content };
   } catch {

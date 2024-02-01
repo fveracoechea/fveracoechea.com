@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno task dev:server & deno task dev:tailwind",
+    "dev": "ENV='dev' deno task dev:server & deno task dev:tailwind",
     "dev:server": "deno run -A --watch src/main.ts",
     "dev:tailwind": "deno run -A src/scripts/postcss.ts"
   },
@@ -16,6 +16,7 @@
     "hono/helper": "https://deno.land/x/hono@v3.12.8/helper.ts",
     "hono/jsx": "https://deno.land/x/hono@v3.12.8/jsx/index.ts",
     "hono/middleware": "https://deno.land/x/hono@v3.12.8/middleware.ts",
+    "hono/streaming": "https://deno.land/x/hono@v3.12.8/jsx/streaming.ts",
     "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v3.12.8/jsx/jsx-runtime.ts"
   }
 }
