@@ -32,6 +32,9 @@ function Header() {
           )}
         </a>
         <ul class="flex p-2 gap-4">
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
           <li class="justify-self-end">
             <a
               class="block w-7 h-7 hover:text-primary"
@@ -59,7 +62,6 @@ export function Layout(props: Props) {
     <>
       <Header />
       <Container size="mobile" as="main">
-        <a href="/blog">blog</a>
         <div>{props.children}</div>
       </Container>
       <Container as="footer">Footer</Container>
