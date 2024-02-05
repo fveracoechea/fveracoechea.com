@@ -20,7 +20,7 @@ export function Document(props: Props) {
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css"
         />
       </head>
-      <body class="bg-white text-dark">
+      <body class="bg-pattern-light text-dark bg-repeat">
         <script
           crossorigin="anonymous"
           src="https://deno.land/x/refresh/client.js"
