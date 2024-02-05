@@ -1,14 +1,15 @@
 import postcss from "https://deno.land/x/postcss@8.4.16/mod.js";
-import autoprefixer from "npm:autoprefixer@10.4.16";
-import cssnano from "npm:cssnano@6.0.1";
-import { tailwind } from "../../tailwind.config.ts";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import config from "../../tailwind.config.ts";
+import tailwindcss from "tailwindcss";
 
 // deno-lint-ignore no-explicit-any
-const plugins: any[] = [autoprefixer(), tailwind, cssnano()];
+const plugins: any[] = [autoprefixer(), tailwindcss(config), cssnano()];
 
 async function buildTailwind() {
   try {
-    const css = await Deno.readTextFile("./styles.css");
+    const css = await Deno.readTextFile("./input.css");
     const result = await postcss(plugins).process(css, {
       from: "styles.css",
       to: "public/styles.css",

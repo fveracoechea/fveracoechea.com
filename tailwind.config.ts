@@ -1,5 +1,5 @@
-import tailwindcss from "npm:tailwindcss@3.3.5";
-import typography from "npm:@tailwindcss/typography";
+import { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 // https://www.color-hex.com/color/548ca8
 // https://colorhunt.co/palette/334257476072548ca8eeeeee
@@ -9,7 +9,7 @@ const light = "#87AEC2";
 const dark = "#334257";
 const white = "#EEEEEE";
 
-export const tailwind = tailwindcss({
+export default {
   content: ["./src/**/*.{html,ts,tsx}"],
   theme: {
     colors: {
@@ -28,7 +28,12 @@ export const tailwind = tailwindcss({
       semibold: "600",
       bold: "700",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "pattern-light": "url(/public/images/px-light.png)",
+        "pattern-grey": "url(/public/images/px-grey.webp)",
+      },
+    },
   },
   plugins: [typography],
-});
+} satisfies Config;
