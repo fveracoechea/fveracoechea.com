@@ -2,6 +2,7 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:@catppuccin/tailwindcss@^0.1.6": "npm:@catppuccin/tailwindcss@0.1.6_tailwindcss@3.4.1__postcss@8.4.33",
       "npm:@tailwindcss/typography@0.5.10": "npm:@tailwindcss/typography@0.5.10_tailwindcss@3.4.1__postcss@8.4.33",
       "npm:@tailwindcss/typography@^0.5.10": "npm:@tailwindcss/typography@0.5.10_tailwindcss@3.4.1__postcss@8.4.33",
       "npm:autoprefixer@^10.4.17": "npm:autoprefixer@10.4.17_postcss@8.4.33",
@@ -14,6 +15,12 @@
       "@alloc/quick-lru@5.2.0": {
         "integrity": "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==",
         "dependencies": {}
+      },
+      "@catppuccin/tailwindcss@0.1.6_tailwindcss@3.4.1__postcss@8.4.33": {
+        "integrity": "sha512-V+Y0AwZ5SSyvOVAcDl7Ng30xy+m82OKnEJ+9+kcZZ7lRyXuZrAb2GScdq9XR3v+ggt8qiZ/G4TvaC9cJ88AAXA==",
+        "dependencies": {
+          "tailwindcss": "tailwindcss@3.4.1_postcss@8.4.33"
+        }
       },
       "@isaacs/cliui@8.0.2": {
         "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
@@ -1720,6 +1727,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@catppuccin/tailwindcss@^0.1.6",
         "npm:@tailwindcss/typography@^0.5.10",
         "npm:autoprefixer@^10.4.17",
         "npm:cssnano@^6.0.3",

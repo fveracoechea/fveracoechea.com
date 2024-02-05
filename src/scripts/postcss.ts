@@ -16,7 +16,7 @@ async function buildTailwind() {
     });
 
     const data = new TextEncoder().encode(result.css);
-    await Deno.writeFile("public/styles.css", data);
+    await Deno.writeFile("public/css/main.css", data);
   } catch (error) {
     console.error(error);
   }

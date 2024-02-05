@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@catppuccin/tailwindcss": "^0.1.6",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.17",
     "cssnano": "^6.0.3",

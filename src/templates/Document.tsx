@@ -12,15 +12,12 @@ export function Document(props: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           rel="stylesheet"
-          href="/public/styles.css"
+          href="/public/css/main.css"
           title="main-tailwindcss"
         />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css"
-        />
+        <link rel="stylesheet" href="/public/css/catppuccin.css" />
       </head>
-      <body class="bg-pattern-light text-dark bg-repeat">
+      <body class="bg-cat-crust text-cat-text">
         <script
           crossorigin="anonymous"
           src="https://deno.land/x/refresh/client.js"

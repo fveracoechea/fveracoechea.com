@@ -18,7 +18,6 @@ async function Post(props: { path: string }) {
 blog.get("/blog", (ctx) => {
   return ctx.render(
     <div class="py-4">
-      <h1 class="text-indigo-500 text-4xl">Blog</h1>
       <main>
         <Suspense fallback={<p>Loading...</p>}>
           <Post path="/blog" />

@@ -1,13 +1,14 @@
 import { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import catppuccin from "@catppuccin/tailwindcss";
 
 // https://www.color-hex.com/color/548ca8
 // https://colorhunt.co/palette/334257476072548ca8eeeeee
 
-const primary = "#4682A9";
-const light = "#87AEC2";
-const dark = "#334257";
-const white = "#EEEEEE";
+// const primary = "#4682A9";
+// const light = "#87AEC2";
+// const dark = "#334257";
+// const white = "#EEEEEE";
 
 export default {
   content: ["./src/**/*.{html,ts,tsx}"],
@@ -16,10 +17,10 @@ export default {
       transparent: "transparent",
       inherit: "inherit",
       current: "currentColor",
-      dark,
-      white,
-      primary,
-      light,
+      // dark,
+      // white,
+      // primary,
+      // light,
     },
     fontWeight: {
       light: "300",
@@ -35,5 +36,11 @@ export default {
       },
     },
   },
-  plugins: [typography],
+  plugins: [
+    typography,
+    catppuccin({
+      prefix: "cat",
+      defaultFlavour: "mocha",
+    }),
+  ],
 } satisfies Config;
