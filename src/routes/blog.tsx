@@ -1,19 +1,8 @@
 import { Hono } from "hono";
 import { Suspense } from "hono/streaming";
-import { loadArticle } from "../shared/loadContent.ts";
+import { Post } from "../components/Post.tsx";
 
 const blog = new Hono();
-
-async function Post(props: { path: string }) {
-  const data = await loadArticle(props.path);
-
-  return (
-    <article
-      class="prose"
-      dangerouslySetInnerHTML={{ __html: String(data.content) }}
-    />
-  );
-}
 
 blog.get("/blog", (ctx) => {
   return ctx.render(

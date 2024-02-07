@@ -27,5 +27,8 @@ body {
   --tw-prose-counters: theme(colors.cat-blue.DEFAULT);
   --tw-prose-bullets: theme(colors.cat-blue.DEFAULT);
   --tw-prose-pre-bg: theme(colors.cat-base.DEFAULT);
-  @apply max-w-none;
+  --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
+  --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
+  --tw-prose-code: theme(colors.cat-mauve.DEFAULT);
+  @apply max-w-none prose-code:font-medium;
 }

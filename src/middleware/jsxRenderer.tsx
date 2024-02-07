@@ -1,7 +1,7 @@
 import { jsxRenderer } from "hono/middleware";
 
-import { Document } from "../templates/Document.tsx";
-import { Layout } from "../templates/Layout.tsx";
+import { Document } from "../components//templates/Document.tsx";
+import { Layout } from "../components//templates/Layout.tsx";
 
 export const jsxMiddleware = jsxRenderer(
   (props) => (
