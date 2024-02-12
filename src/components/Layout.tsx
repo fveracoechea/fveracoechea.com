@@ -1,7 +1,7 @@
 import { Child } from "hono/middleware";
-import { Container } from "../Container.tsx";
-import { Github } from "../svg/Github.tsx";
-import { LinkedIn } from "../svg/LinkedIn.tsx";
+import { Container } from "./Container.tsx";
+import { Github } from "./svg/Github.tsx";
+import { LinkedIn } from "./svg/LinkedIn.tsx";
 import clsx from "npm:clsx";
 
 type Props = {
@@ -45,7 +45,7 @@ function Header() {
           </span>
         </a>
 
-        <Icons />
+        <Icons gap="4" />
       </Container>
     </header>
   );

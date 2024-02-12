@@ -10,6 +10,15 @@ import rehypeStringify from "https://esm.sh/rehype-stringify@10.0.0";
 import rehypeAutolinkHeadings from "https://esm.sh/rehype-autolink-headings@7.1.0";
 import rehypeSlug from "https://esm.sh/rehype-slug@6.0.0";
 
+import { z } from "zod";
+
+const AttributeSchema = z.object({
+  title: z.string(),
+  date: z.string(),
+  image: z.string().optional(),
+  description: z.string(),
+});
+
 export async function loadArticle(path: string) {
   const filename = path === "/" ? "./content/home.md" : `./content${path}.md`;
 
@@ -27,8 +36,32 @@ export async function loadArticle(path: string) {
 
     const content = (await processor.process(result.body)).toString();
 
-    return { attributes: result.attrs, content };
+    return { attributes: await AttributeSchema.parseAsync(result.attrs), content };
   } catch {
     throw new HTTPException(404, { message: "Page not found" });
+  }
+}
+
+export type PostAttributes = z.infer<typeof AttributeSchema> & {
+  url: string;
+};
+
+export async function loadBlog() {
+  try {
+    const posts: PostAttributes[] = [];
+
+    for await (const file of Deno.readDir("./content/blog")) {
+      if (!file.isFile) continue;
+      const content = await Deno.readTextFile(`./content/blog/${file.name}`);
+      const result = extract(content);
+      posts.push({
+        ...await AttributeSchema.parseAsync(result.attrs),
+        url: `/blog/${file.name.replace(".md", "")}`,
+      });
+    }
+
+    return posts;
+  } catch {
+    return [];
   }
 }
