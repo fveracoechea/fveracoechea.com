@@ -2,6 +2,7 @@
 title: Francisco Veracoechea
 date: 10/12/2023
 description: Passionate software engineer specializing in web applications technologies.
+image: /public/images/blog-1.jpg 
 ---
 
 # Getting to Know me

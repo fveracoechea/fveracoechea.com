@@ -17,10 +17,6 @@ export function Document(props: Props) {
         <link rel="stylesheet" href="/public/css/catppuccin.css" />
       </head>
       <body class="bg-cat-crust text-cat-text">
-        <script
-          crossorigin="anonymous"
-          src="https://deno.land/x/refresh/client.js"
-        />
         {props.children}
       </body>
     </html>

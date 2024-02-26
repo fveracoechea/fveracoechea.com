@@ -1,7 +1,8 @@
 ---
 title: Web Development Unveiled
 date: 11/14/2023
-description: This article provides a concise overview of web development, covering front-end technologies like HTML, CSS, and JavaScript, as well as back-end essentials. It emphasizes best practices, from responsive design to security measures, and explores emerging trends such as Progressive Web Apps and serverless architecture.
+description: This article provides a concise overview of web development, covering front-end technologies like HTML, CSS, and JavaScript, as well as back-end essentials.
+image: /public/images/blog-2.jpg
 ---
 
 # Web Development Unveiled
