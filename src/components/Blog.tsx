@@ -10,7 +10,7 @@ export async function Blog() {
     <section id="home-blog">
       <h2 class="text-xl font-semibold mb-6">Articles</h2>
 
-      <div class="grid grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {posts.map((p) => (
           <article
             class={clsx(
