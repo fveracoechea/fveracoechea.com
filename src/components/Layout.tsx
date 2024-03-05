@@ -8,18 +8,24 @@ type Props = {
   children?: Child;
 };
 
-function Icons(props: { class?: string; gap?: "2" | "4" }) {
-  const classNames = clsx("block", props.class ?? "h-8 w-8");
-  const container = clsx("flex", `gap-${props.gap ?? "4"}`);
+function Icons(props: { variant: "md" | "sm"; class?: string; gap?: "2" | "4" }) {
+  const { variant } = props;
+
+  const container = clsx("flex", variant === "md" ? "gap-4" : "gap-2");
+  const icons = clsx(
+    "block transition-colors hover:text-cat-blue",
+    variant === "md" ? "h-8 w-8" : "h-5 w-5",
+  );
+
   return (
     <ul class={container}>
       <li class="justify-self-end">
-        <a class={classNames} href="https://github.com/fveracoechea">
+        <a class={icons} href="https://github.com/fveracoechea">
           <Github />
         </a>
       </li>
       <li class="justify-self-end">
-        <a class={classNames} href="https://www.linkedin.com/in/fveracoechea/">
+        <a class={icons} href="https://www.linkedin.com/in/fveracoechea/">
           <LinkedIn />
         </a>
       </li>
@@ -41,11 +47,11 @@ function Header() {
             Francisco Veracoechea
           </h1>
           <span class="text-lg text-cat-subtext1 leading-tight font-normal">
-            Software Engineer
+            Frontend Engineer
           </span>
         </a>
 
-        <Icons gap="4" />
+        <Icons variant="md" />
       </Container>
     </header>
   );
@@ -61,8 +67,8 @@ function Footer() {
           <span>All rights reserved.</span>
         </div>
         <div class="flex items-center gap-2">
-          <h6 class="text-cat-subtext0 font-medium">Francisco Veracoechea</h6>
-          <Icons class="h-5 w-5" gap="2" />
+          <h6 class="text-cat-subtext0 text-lg font-medium">Francisco Veracoechea</h6>
+          <Icons variant="sm" />
         </div>
       </Container>
     </footer>

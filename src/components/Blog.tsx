@@ -1,31 +1,30 @@
 import clsx from "npm:clsx";
 import { loadBlog } from "../shared/loadContent.ts";
 
-const imageWidth = 220;
-
 export async function Blog() {
   const posts = await loadBlog();
 
   return (
-    <section id="home-blog">
+    <section id="home-blog" class="pb-8">
       <h2 class="text-xl font-semibold mb-6">Articles</h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {posts.map((p) => (
           <article
             class={clsx(
-              "flex flex-col gap-2 h-44 rounded overflow-hidden transition-colors",
+              "flex flex-col gap-2 rounded overflow-hidden transition-colors",
               "border border-cat-surface0 group bg-cat-base hover:bg-cat-surface0",
             )}
           >
-            <a href={p.url} class="flex h-full">
+            <a href={p.url} class="flex h-full flex-col">
               {p.image && (
-                <figure class={`w-[${imageWidth}px] h-full`}>
+                <figure class="w-full">
                   <img
                     src={p.image}
-                    width={imageWidth}
                     alt={p.title}
-                    class="h-full rounded-tl rounded-bl object-cover"
+                    height={368}
+                    width={552}
+                    class="object-cover"
                   />
                 </figure>
               )}

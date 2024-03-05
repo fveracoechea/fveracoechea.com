@@ -1,15 +1,18 @@
+import clsx from "npm:clsx";
 import { loadArticle } from "../shared/loadContent.ts";
 
 type Props = {
   path: string;
+  className?: string;
 };
 
 export async function Post(props: Props) {
-  const data = await loadArticle(props.path);
+  const { path, className = null } = props;
+  const data = await loadArticle(path);
 
   return (
     <article
-      class="prose"
+      class={clsx("prose", className)}
       dangerouslySetInnerHTML={{ __html: String(data.content) }}
     />
   );

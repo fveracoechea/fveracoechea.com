@@ -7,10 +7,11 @@ const home = new Hono();
 
 home.get("/", (ctx) => {
   return ctx.render(
-    <div class="flex flex-col gap-6 pt-2">
+    <div class="">
       <Suspense fallback="Loading...">
-        <Post path="/home" />
+        <Post path="/home" className="pb-8" />
       </Suspense>
+
       <Suspense fallback="Loading...">
         <Blog />
       </Suspense>

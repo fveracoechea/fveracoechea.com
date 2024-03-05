@@ -24,7 +24,7 @@ export function Container<Root extends ElementType = DefaultElement>(
   const Element = as ?? "div";
 
   const classNames = clsx(
-    "p-4 mx-auto my-0",
+    "p-6 mx-auto my-0",
     size === "tablet" ? "max-w-6xl" : "max-w-4xl",
     className,
   );
