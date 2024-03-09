@@ -14,7 +14,7 @@ effectively, developed an expert-level understanding of **Javascript** and **Typ
 as well remarkable skills in modern technologies like ReacJs, NextJS, NodeJs, Graphql, and
 ReactNative.
 
-```ts
+```typescript
 async function coding(coffee) {
   if (coffee.isEmpty) return coffee.brew();
 

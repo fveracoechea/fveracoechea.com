@@ -1,5 +1,5 @@
 ---
-title: Francisco Veracoechea
+title: Getting to Know me
 date: 10/12/2023
 description: Passionate software engineer specializing in web applications technologies.
 image: /public/images/blog-1.jpg 
@@ -14,6 +14,8 @@ technologies. My journey in the world of programming has been marked by a deep p
 development and a collaborative approach to teamwork. My mindset is firmly rooted in
 problem-solving and creativity, qualities that drive my work and contribute to the success
 of the projects I undertake.
+
+![Getting to Know me](/public/images/blog-1.jpg)
 
 ## What I Do
 

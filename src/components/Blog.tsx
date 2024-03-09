@@ -42,3 +42,37 @@ export async function Blog() {
     </section>
   );
 }
+
+function PostCardLoader() {
+  return (
+    <div
+      class={clsx(
+        "flex flex-col gap-2 rounded overflow-hidden",
+        "border border-cat-surface0 bg-cat-base",
+        "cursor-wait",
+      )}
+    >
+      <div class="h-44 bg-cat-surface0"></div>
+      <div class="flex flex-col gap-4 p-4">
+        <div class="h-4 w-3/5 rounded-lg bg-cat-surface0" />
+        <div class="h-2 w-1/4 rounded-lg bg-cat-surface0" />
+        <div class="flex flex-col gap-2">
+          <div class="h-3 w-full rounded-lg bg-cat-surface0" />
+          <div class="h-3 w-4/5 rounded-lg bg-cat-surface0" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function BlogLoader() {
+  return (
+    <section id="home-blog" class="flex flex-col gap-8 pb-8">
+      <div class="h-6 w-1/5 rounded-lg bg-cat-surface0" />
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <PostCardLoader />
+        <PostCardLoader />
+      </div>
+    </section>
+  );
+}

@@ -79,7 +79,7 @@ export function Layout(props: Props) {
   return (
     <>
       <Header />
-      <Container style={{ minHeight: "calc(100vh - 175px)" }}>
+      <Container style={{ minHeight: "calc(100vh - 196px)" }}>
         <main>{props.children}</main>
       </Container>
       <Footer />
