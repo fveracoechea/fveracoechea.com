@@ -1101,6 +1101,7 @@
     }
   },
   "redirects": {
+    "https://deno.land/x/hono/helper.ts": "https://deno.land/x/hono@v4.1.0/helper.ts",
     "https://esm.sh/v135/@types/he@~1.2/index.d.ts": "https://esm.sh/v135/@types/he@1.2.3/index.d.ts",
     "https://esm.sh/v135/@types/katex@~0.16/index.d.ts": "https://esm.sh/v135/@types/katex@0.16.7/index.d.ts",
     "https://esm.sh/v135/@types/marked@^5/index.d.ts": "https://esm.sh/v135/@types/marked@5.0.2/index.d.ts",

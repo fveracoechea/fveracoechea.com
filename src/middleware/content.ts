@@ -4,8 +4,7 @@ import {
   Next,
 } from "https://deno.land/x/hono@v3.12.8/mod.ts";
 
-import { html, raw } from "hono/middleware";
-
+import { html, raw } from "https://deno.land/x/hono@v4.1.0/helper.ts";
 import { HtmlEscapedString } from "https://deno.land/x/hono@v3.12.8/utils/html.ts";
 
 import { extract } from "https://deno.land/std@0.206.0/front_matter/any.ts";

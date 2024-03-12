@@ -8,13 +8,17 @@ type Props = {
   children?: Child;
 };
 
-function Icons(props: { variant: "md" | "sm"; class?: string }) {
+function Icons(props: {
+  variant: "md" | "sm";
+  class?: string;
+  gap?: "2" | "4";
+}) {
   const { variant } = props;
-  const container = clsx("flex", variant === "md" ? "gap-3 lg:gap-4" : "gap-2");
 
+  const container = clsx("flex", variant === "md" ? "gap-4" : "gap-2");
   const icons = clsx(
     "block transition-colors hover:text-cat-blue",
-    variant === "md" ? "h-6 w-6 lg:h-8 lg:w-8" : "h-5 w-5",
+    variant === "md" ? "h-8 w-8" : "h-5 w-5",
   );
 
   return (

@@ -1,9 +1,7 @@
 import { Hono } from "hono";
-import { Article, ArticleLoader } from "../components/Post.tsx";
-import { Suspense } from "hono/streaming";
 import { jsxMiddleware } from "../middleware/jsxRenderer.tsx";
-import { SidemenuLoader } from "../components/Sidemenu.tsx";
 import { Sidemenu } from "../components/Sidemenu.tsx";
+import { Article } from "../components/Post.tsx";
 
 const blog = new Hono();
 
@@ -11,17 +9,12 @@ blog.use(jsxMiddleware);
 
 blog.get("/:post", (ctx) => {
   const url = new URL(ctx.req.url);
-  const props = { path: url.pathname, className: "flex-[3] py-4" };
 
   return ctx.render(
-    <section class="flex gap-4" id={props.path.replace("/", "")}>
-      <Suspense fallback={<SidemenuLoader />}>
-        <Sidemenu />
-      </Suspense>
-      <Suspense fallback={<ArticleLoader {...props} />}>
-        <Article {...props} />
-      </Suspense>
-    </section>,
+    <div class="flex gap-4">
+      <Sidemenu />
+      <Article path={url.pathname} class="flex-[3] py-4 w-full lg:w-3/4" />
+    </div>,
   );
 });
 
