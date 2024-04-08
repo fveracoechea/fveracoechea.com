@@ -32,13 +32,19 @@ export function SocialLinks(props: Props) {
   return (
     <ul className={listClasname}>
       <li className="justify-self-end">
-        <a title="Github" className={iconClassname} href="https://github.com/fveracoechea">
+        <a
+          title="Github"
+          target="_blank"
+          className={iconClassname}
+          href="https://github.com/fveracoechea"
+        >
           <FontAwesomeIcon icon={faSquareGithub} />
         </a>
       </li>
       <li className="justify-self-end">
         <a
           title="LinkedIn"
+          target="_blank"
           className={iconClassname}
           href="https://www.linkedin.com/in/fveracoechea/"
         >
@@ -47,7 +53,7 @@ export function SocialLinks(props: Props) {
       </li>
       <li className="justify-self-end">
         <button
-          id="theme-toggler"
+          data-id="theme-toggler"
           className={cx(iconClassname, 'appearance-none border-none')}
           title="Switch color theme"
         >

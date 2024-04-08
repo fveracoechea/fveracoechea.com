@@ -18,6 +18,6 @@ function toggleTheme() {
 }
 
 globalThis.addEventListener('load', () => {
-  const button = document.getElementById('theme-toggler');
-  button.addEventListener('click', toggleTheme);
+  const buttons = document.querySelectorAll('ul li button[data-id="theme-toggler"');
+  buttons.forEach(btn => btn.addEventListener('click', toggleTheme));
 });

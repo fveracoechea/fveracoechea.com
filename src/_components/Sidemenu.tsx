@@ -21,7 +21,7 @@ function Sidemenu(props: Lume.Data) {
                 )}
                 href={post.url}
               >
-                <span className="text-sm">{post.title}</span>
+                <span className="text-sm font-medium">{post.title}</span>
                 <span className="text-xs">{format(post.date, 'MMM dd, yyyy')}</span>
               </a>
             </li>
