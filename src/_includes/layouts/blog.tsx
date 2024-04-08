@@ -6,7 +6,7 @@ function BlogLayout(props: Lume.Data) {
     <BaseLayout>
       <div className="flex gap-4">
         <comp.Sidemenu {...props} />
-        <article className="prose flex-[3] py-4">{children}</article>
+        <article className="prose flex-[3] overflow-x-hidden py-4">{children}</article>
       </div>
     </BaseLayout>
   );
