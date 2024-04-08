@@ -1,6 +1,6 @@
-import { Config } from "tailwindcss";
-import typography from "@tailwindcss/typography";
-import catppuccin from "@catppuccin/tailwindcss";
+import catppuccin from '@catppuccin/tailwindcss';
+import typography from '@tailwindcss/typography';
+import type { Config } from 'tailwindcss';
 
 // https://www.color-hex.com/color/548ca8
 // https://colorhunt.co/palette/334257476072548ca8eeeeee
@@ -11,36 +11,31 @@ import catppuccin from "@catppuccin/tailwindcss";
 // const white = "#EEEEEE";
 
 export default {
-  content: ["./src/**/*.{html,ts,tsx}"],
+  content: ['./_includes/layouts/*.{html,ts,tsx}'],
+  safelist: ['cat-latte', 'cat-mocha'],
   theme: {
     colors: {
-      transparent: "transparent",
-      inherit: "inherit",
-      current: "currentColor",
+      transparent: 'transparent',
+      inherit: 'inherit',
+      current: 'currentColor',
       // dark,
       // white,
       // primary,
       // light,
     },
     fontWeight: {
-      light: "300",
-      normal: "400",
-      medium: "500",
-      semibold: "600",
-      bold: "700",
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
     },
     extend: {
       backgroundImage: {
-        "pattern-light": "url(/public/images/px-light.png)",
-        "pattern-grey": "url(/public/images/px-grey.webp)",
+        'pattern-light': 'url(/public/images/px-light.png)',
+        'pattern-grey': 'url(/public/images/px-grey.webp)',
       },
     },
   },
-  plugins: [
-    typography,
-    catppuccin({
-      prefix: "cat",
-      defaultFlavour: "mocha",
-    }),
-  ],
+  plugins: [typography, catppuccin({ prefix: 'cat' })],
 } satisfies Config;

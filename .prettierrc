@@ -1,0 +1,19 @@
+{
+  "printWidth": 100,
+  "trailingComma": "all",
+  "semi": true,
+  "singleQuote": true,
+  "arrowParens": "avoid",
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "importOrder": [
+    "^(react-(.*)$)|^(react/(.*)$)|^(react$)",
+    "<THIRD_PARTY_MODULES>",
+    "^_includes/(.*)$",
+    "^_components/(.*)$",
+    "^[../]",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "tailwindFunctions": ["clsx"]
+}

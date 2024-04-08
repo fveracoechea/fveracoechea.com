@@ -34,3 +34,7 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+_site
+_bin
+deno.lock

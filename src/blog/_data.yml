@@ -1,0 +1,9 @@
+type: post
+layout: layouts/blog.tsx
+metas:
+  title: '=title'
+  descripton: '=descripton'
+  image: '=image'
+  lang: 'en-US'
+  site: 'Francisco Veracoechea'
+  robots: true
