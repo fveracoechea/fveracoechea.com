@@ -1,12 +1,13 @@
 import BaseLayout from '../components/BaseLayout.tsx';
 
 function BlogLayout(props: Lume.Data) {
-  const { children, comp } = props;
+  const Sidemenu = props.comp.Sidemenu;
+
   return (
-    <BaseLayout>
+    <BaseLayout {...props}>
       <div className="flex gap-4">
-        <comp.Sidemenu {...props} />
-        <article className="prose flex-[3] overflow-x-hidden py-4">{children}</article>
+        <Sidemenu {...props} />
+        <article className="prose flex-[3] overflow-x-hidden py-4">{props.children}</article>
       </div>
     </BaseLayout>
   );

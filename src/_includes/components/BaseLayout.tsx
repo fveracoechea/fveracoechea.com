@@ -33,7 +33,7 @@ function Footer() {
     <footer className="bg-cat-base">
       <Container className="flex flex-col justify-between md:flex-row">
         <div className="flex items-center gap-2">
-          <h6 className="text-lg font-medium text-cat-subtext0">Francisco Veracoechea</h6>
+          <p className="text-lg font-medium text-cat-subtext0">Francisco Veracoechea</p>
           <SocialLinks size="sm" />
         </div>
         <div className="flex gap-2">
@@ -46,12 +46,12 @@ function Footer() {
   );
 }
 
-type Props = React.PropsWithChildren;
+type Props = Lume.Data;
 
 export default function MainLayout(props: Props) {
-  const { children } = props;
+  const { children, ...layoutData } = props;
   return (
-    <Document>
+    <Document {...layoutData}>
       <Header />
       <Container style={{ minHeight: 'calc(100vh - 196px)' }}>
         <main>{children}</main>

@@ -15,18 +15,6 @@ body {
   }
 }
 
-/* @media (prefers-color-scheme: light) { */
-/*   body { */
-/*     @apply cat-latte; */
-/*   } */
-/* } */
-/**/
-/* @media (prefers-color-scheme: dark) { */
-/*   body { */
-/*     @apply cat-mocha; */
-/*   } */
-/* } */
-
 .prose {
   --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
   --tw-prose-headings: theme(colors.cat-text.DEFAULT);

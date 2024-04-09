@@ -2,7 +2,7 @@ type: post
 layout: layouts/blog.tsx
 metas:
   title: '=title'
-  descripton: '=descripton'
+  description: '=description'
   image: '=image'
   lang: 'en-US'
   site: 'Francisco Veracoechea'

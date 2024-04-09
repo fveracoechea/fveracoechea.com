@@ -3,7 +3,7 @@ import { faCircleHalfStroke } from 'npm:@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from 'npm:@fortawesome/react-fontawesome';
 import { type VariantProps, cva, cx } from 'npm:class-variance-authority';
 
-const icon = cva('block transition-colors hover:text-cat-blue', {
+const icon = cva('block hover:text-cat-blue', {
   variants: {
     size: {
       md: 'h-6 w-6 lg:h-7 lg:w-7',

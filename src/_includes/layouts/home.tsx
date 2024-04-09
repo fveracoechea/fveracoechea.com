@@ -1,11 +1,12 @@
 import BaseLayout from '../components/BaseLayout.tsx';
 
 function HomeLayout(props: Lume.Data) {
-  const { comp, children } = props;
+  const Articles = props.comp.Articles;
+
   return (
-    <BaseLayout>
-      <section className="prose pb-8">{children}</section>
-      <comp.Articles />
+    <BaseLayout {...props}>
+      <section className="prose pb-8">{props.children}</section>
+      <Articles />
     </BaseLayout>
   );
 }

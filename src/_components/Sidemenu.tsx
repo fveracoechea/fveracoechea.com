@@ -16,7 +16,7 @@ function Sidemenu(props: Lume.Data) {
             <li key={post.url}>
               <a
                 className={cx(
-                  'flex flex-col transition-colors hover:text-cat-blue',
+                  'flex flex-col hover:text-cat-blue',
                   url === post.url ? 'text-cat-mauve' : 'text-cat-subtext1',
                 )}
                 href={post.url}
