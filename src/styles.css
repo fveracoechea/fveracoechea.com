@@ -40,6 +40,10 @@ button {
   --tw-prose-code: theme(colors.cat-mauve.DEFAULT);
   @apply max-w-none prose-code:font-medium;
 
+  img {
+    @apply rounded border border-cat-surface0;
+  }
+
   pre {
     @apply border border-cat-surface0;
   }

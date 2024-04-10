@@ -17,9 +17,9 @@ function Header() {
           >
             Francisco Veracoechea
           </h1>
-          <span className="font-normal leading-tight text-cat-subtext1 lg:text-lg">
+          <h2 className="text-base font-normal leading-tight text-cat-subtext1 lg:text-lg">
             Frontend Engineer
-          </span>
+          </h2>
         </a>
 
         <SocialLinks size="md" />
