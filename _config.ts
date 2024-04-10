@@ -1,5 +1,6 @@
 import lume from 'lume/mod.ts';
 import code_highlight from 'lume/plugins/code_highlight.ts';
+import favicon from 'lume/plugins/favicon.ts';
 import jsx from 'lume/plugins/jsx.ts';
 import mdx from 'lume/plugins/mdx.ts';
 import metas from 'lume/plugins/metas.ts';
@@ -41,6 +42,7 @@ site.use(
 );
 
 // static assets
+site.use(favicon());
 site.copy('images', 'images');
 site.copy('scripts', 'scripts');
 

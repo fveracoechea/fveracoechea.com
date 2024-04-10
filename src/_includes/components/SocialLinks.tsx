@@ -1,13 +1,11 @@
-import { faLinkedin, faSquareGithub } from 'npm:@fortawesome/free-brands-svg-icons';
-import { faCircleHalfStroke } from 'npm:@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from 'npm:@fortawesome/react-fontawesome';
+import { DarkMode, GitHub, LightMode, LinkedIn } from 'npm:@mui/icons-material';
 import { type VariantProps, cva, cx } from 'npm:class-variance-authority';
 
 const icon = cva('block hover:text-cat-blue', {
   variants: {
     size: {
-      md: 'h-6 w-6 lg:h-7 lg:w-7',
-      sm: 'h-5 w-5',
+      md: 'text-2xl md:text-4xl',
+      sm: 'text-xl',
     },
   },
 });
@@ -16,7 +14,7 @@ const list = cva('flex', {
   variants: {
     size: {
       md: 'gap-3 lg:gap-4',
-      sm: 'gap-2',
+      sm: 'gap-3',
     },
   },
 });
@@ -38,7 +36,7 @@ export function SocialLinks(props: Props) {
           className={iconClassname}
           href="https://github.com/fveracoechea"
         >
-          <FontAwesomeIcon icon={faSquareGithub} />
+          <GitHub fontSize="inherit" />
         </a>
       </li>
       <li className="justify-self-end">
@@ -48,7 +46,7 @@ export function SocialLinks(props: Props) {
           className={iconClassname}
           href="https://www.linkedin.com/in/fveracoechea/"
         >
-          <FontAwesomeIcon icon={faLinkedin} />
+          <LinkedIn fontSize="inherit" />
         </a>
       </li>
       <li className="justify-self-end">
@@ -57,7 +55,8 @@ export function SocialLinks(props: Props) {
           className={cx(iconClassname, 'appearance-none border-none')}
           title="Switch color theme"
         >
-          <FontAwesomeIcon icon={faCircleHalfStroke} />
+          <DarkMode fontSize="inherit" data-icon="dark" />
+          <LightMode fontSize="inherit" data-icon="light" />
         </button>
       </li>
     </ul>

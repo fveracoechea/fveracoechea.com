@@ -6,7 +6,7 @@ import { SocialLinks } from '../components/SocialLinks.tsx';
 
 function Header() {
   return (
-    <header className="bg-cat-base">
+    <header className="border-b border-cat-surface0 bg-cat-base">
       <Container className="flex items-center justify-between py-8">
         <a href="/">
           <h1
@@ -30,9 +30,9 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-cat-base">
+    <footer className="border-t border-cat-surface0 bg-cat-base">
       <Container className="flex flex-col justify-between md:flex-row">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <p className="text-lg font-medium text-cat-subtext0">Francisco Veracoechea</p>
           <SocialLinks size="sm" />
         </div>
@@ -53,7 +53,7 @@ export default function MainLayout(props: Props) {
   return (
     <Document {...layoutData}>
       <Header />
-      <Container style={{ minHeight: 'calc(100vh - 196px)' }}>
+      <Container style={{ minHeight: 'calc(100vh - 202px)' }}>
         <main>{children}</main>
       </Container>
       <Footer />

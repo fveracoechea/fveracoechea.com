@@ -8,11 +8,24 @@ body {
   scroll-behavior: smooth;
 }
 
+html.cat-mocha button svg[data-icon='dark'] {
+  display: none;
+}
+
+html.cat-latte button svg[data-icon='light'] {
+  display: none;
+}
+
 @media (prefers-reduced-motion) {
   html,
   body {
     scroll-behavior: auto;
   }
+}
+
+a,
+button {
+  @apply transition-colors;
 }
 
 .prose {
@@ -26,4 +39,8 @@ body {
   --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
   --tw-prose-code: theme(colors.cat-mauve.DEFAULT);
   @apply max-w-none prose-code:font-medium;
+
+  pre {
+    @apply border border-cat-surface0;
+  }
 }

@@ -17,7 +17,8 @@ function Articles(props: Lume.Data) {
             key={post.url}
             className={cx(
               'flex flex-col gap-2 overflow-hidden rounded',
-              'group border border-cat-surface0 bg-cat-base hover:bg-cat-surface0',
+              'group border border-cat-surface0 bg-cat-base',
+              'ring-cat-blue transition-shadow hover:border-cat-blue hover:ring-1',
             )}
           >
             <a href={post.url} className="flex h-full flex-col">
@@ -31,7 +32,7 @@ function Articles(props: Lume.Data) {
                 />
               </figure>
               <figcaption className="flex flex-1 flex-col gap-1 p-4">
-                <h3 className="font-medium text-cat-text group-hover:text-cat-blue">
+                <h3 className="font-medium text-cat-text transition-colors group-hover:text-cat-blue">
                   {post.title}
                 </h3>
                 <small className="text-cat-subtext0">{format(post.date, 'MMM dd, yyyy')}</small>

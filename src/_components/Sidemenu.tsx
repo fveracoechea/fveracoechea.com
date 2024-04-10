@@ -10,7 +10,7 @@ function Sidemenu(props: Lume.Data) {
   return (
     <div className="hidden flex-1 lg:block">
       <aside className="sticky top-6 flex flex-1 flex-col gap-4 p-2">
-        <h5 className="font-semibold text-cat-subtext0">Articles</h5>
+        <h5 className="text-lg font-semibold text-cat-subtext0">Articles</h5>
         <ul className="flex flex-col gap-2">
           {blog.map(post => (
             <li key={post.url}>
