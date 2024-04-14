@@ -1,0 +1,93 @@
+---
+title: Strongly Typed Polymorphic Components
+description: Deep dive into building strongly typed polymorphic React components
+image: /images/poly-comp-2.png
+---
+
+# Strongly Typed Polymorphic Components
+
+<div className="flex justify-center bg-[rgb(56,55,66)] rounded border border-cat-surface0">
+<img className="plain m-0 max-w-72" width="1024" height="1024" src="/images/poly-comp-2.png" alt="polymorphic components" />
+</div>
+
+
+Polymorphic Components are a particular type of compoent, that can be useful when building multipurpose utility components, UI libraries, and design-systems.
+
+Cool... so what are they? and why? 
+
+The word **polymorphic** means "occurring in several different forms", so it's safe to say in the context of React.js, a polymorphic component is one that can dynamically change the type of element rendered. That basically means, you can have a single component that acts as a `div`, `span`, `header`, or any other HTML tag or custom component, depending on your needs.
+
+As you can imagine, that particular feature enables us to create very flexible and reusable components since they can adapt to different HTML elements or custom components while retaining their own functionalities and props.
+
+## Basic implementation
+
+Let's start by creating a simple `Container` component that basically just adds some basic CSS to a given HTML *element*:
+
+```typescript
+import { ReactNode, ElementType } from 'react'
+
+type Props = {
+    children: ReactNode;
+    element: ElementType; 
+}
+
+function Container(props: Props) {
+    const { children, element } = props;
+    const Element =  element ?? 'div';
+    return (
+      <Element style={{ maxWidth: 800, margin: '0 auto', padding: 20 }}>
+        {children}
+      </Element>
+    )
+}
+```
+
+As you can see, the `element` prop dictates what HTML tag is rendered in the browser, when rendering that component we get the following results:
+
+<table>
+    <tr>
+        <th>JSX</th>
+        <th>Result</th>
+    </tr>
+    <tr>
+        <td>
+            ```tsx
+            <Container>first</Container>
+            ```
+        </td>
+        <td>
+            ```html
+            <div>first</div>
+            ```
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ```tsx
+            <Container element="header">second</Container>
+            ```
+        </td>
+        <td>
+            ```html
+            <header>second</header>
+            ```
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ```tsx
+            <Container element="section">third</Container>
+            ```
+        </td>
+        <td>
+            ```html
+            <section>third</section>
+            ```
+        </td>
+    </tr>
+</table>
+
+So now you can reuse styles and behavior more easily, pretty cool right... not too fast, there are two issues with this implementation:
+
+1. It isn't type safe, no auto-complete on html attribues, no warnings, nothing.
+2. What about `ref`? passing a ref to the component doesn't work either.
