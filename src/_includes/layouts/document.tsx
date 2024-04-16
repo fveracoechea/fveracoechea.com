@@ -1,6 +1,4 @@
-type Props = Lume.Data;
-
-export function Document(props: Props) {
+export default function Document(props: Lume.Data) {
   const { children } = props;
   return (
     <html lang="en-US">
@@ -11,7 +9,7 @@ export function Document(props: Props) {
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/scripts/theme.js" />
       </head>
-      <body className="bg-cat-crust text-cat-text">{children}</body>
+      <body className="bg-cat-base text-cat-text">{children}</body>
     </html>
   );
 }

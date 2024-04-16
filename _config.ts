@@ -1,3 +1,4 @@
+import rehypeSlug from 'https://esm.sh/rehype-slug@6.0.0';
 import lume from 'lume/mod.ts';
 import code_highlight from 'lume/plugins/code_highlight.ts';
 import favicon from 'lume/plugins/favicon.ts';
@@ -9,14 +10,30 @@ import robots from 'lume/plugins/robots.ts';
 import sitemap from 'lume/plugins/sitemap.ts';
 import tailwindcss from 'lume/plugins/tailwindcss.ts';
 
+import extractToc from './src/_includes/plugins/mdxToc.ts';
 import tailwindConfig from './tailwind.config.ts';
 
-const site = lume({ src: './src', location: new URL('https://fveracoechea.com') });
+const site = lume(
+  {
+    src: './src',
+    location: new URL('https://fveracoechea.com'),
+  },
+  {
+    markdown: {
+      extensions: ['.md', '.mdx'],
+    },
+  },
+);
 
 // rendering
 site.use(jsx());
 site.use(code_highlight());
-site.use(mdx());
+site.use(
+  mdx({
+    rehypePlugins: [rehypeSlug],
+  }),
+);
+site.use(extractToc('post'));
 
 // styles
 site.use(

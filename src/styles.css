@@ -25,7 +25,9 @@ html.cat-latte button svg[data-icon='light'] {
 
 a,
 button {
-  @apply transition-colors;
+  outline: none;
+  @apply focus-visible:scale-95 focus-visible:text-cat-mauve;
+  @apply transition-colors transition-transform;
 }
 
 .prose {
@@ -34,11 +36,20 @@ button {
   --tw-prose-bold: theme(colors.cat-text.DEFAULT);
   --tw-prose-counters: theme(colors.cat-blue.DEFAULT);
   --tw-prose-bullets: theme(colors.cat-blue.DEFAULT);
-  --tw-prose-pre-bg: theme(colors.cat-base.DEFAULT);
+  --tw-prose-pre-bg: theme(colors.cat-mantle.DEFAULT);
   --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
   --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
   --tw-prose-code: theme(colors.cat-mauve.DEFAULT);
+  --tw-prose-links: theme(colors.cat-blue.DEFAULT);
   @apply max-w-none prose-code:font-medium;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply scroll-my-4;
+  }
 
   img:not(.plain) {
     @apply rounded border border-cat-surface0;

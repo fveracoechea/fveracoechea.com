@@ -1,93 +1,222 @@
 ---
-title: Strongly Typed Polymorphic Components
+title: Type Safe Polymorphic React Components
 description: Deep dive into building strongly typed polymorphic React components
 image: /images/poly-comp-2.png
 ---
 
-# Strongly Typed Polymorphic Components
+# Type Safe Polymorphic React Components
 
-<div className="flex justify-center bg-[rgb(56,55,66)] rounded border border-cat-surface0">
-<img className="plain m-0 max-w-72" width="1024" height="1024" src="/images/poly-comp-2.png" alt="polymorphic components" />
+<div className="flex justify-center rounded border border-cat-surface0 bg-[rgb(56,55,66)]">
+  <img
+    className="plain m-0 max-w-72"
+    width="1024"
+    height="1024"
+    src="/images/poly-comp-2.png"
+    alt="polymorphic components"
+  />
 </div>
 
+Polymorphic Components are a particular type of compoent, that can be useful
+when building multipurpose utility components, UI libraries, and design-systems.
 
-Polymorphic Components are a particular type of compoent, that can be useful when building multipurpose utility components, UI libraries, and design-systems.
+Cool... so what are they? and why?
 
-Cool... so what are they? and why? 
+The word **polymorphic** means:
 
-The word **polymorphic** means "occurring in several different forms", so it's safe to say in the context of React.js, a polymorphic component is one that can dynamically change the type of element rendered. That basically means, you can have a single component that acts as a `div`, `span`, `header`, or any other HTML tag or custom component, depending on your needs.
+> "occurring in several different forms"
 
-As you can imagine, that particular feature enables us to create very flexible and reusable components since they can adapt to different HTML elements or custom components while retaining their own functionalities and props.
+Based on that in context of React.js, a polymorphic component is one that can
+dynamically change the type of element rendered. That basically means, you can
+have a single component that acts as a `div`, `span`, `header`, or any other
+HTML tag or custom component, depending on your needs.
+
+As you can imagine, that particular feature enables us to create very flexible
+and reusable components since they can adapt to different HTML elements or
+custom components while retaining their own functionalities and props.
 
 ## Basic implementation
 
-Let's start by creating a simple `Container` component that basically just adds some basic CSS to a given HTML *element*:
+Let's start by creating a simple `Container` component that basically just adds
+some basic CSS to a given HTML _element_:
 
 ```typescript
-import { ReactNode, ElementType } from 'react'
+import { ElementType, ReactNode } from "react";
 
 type Props = {
-    children: ReactNode;
-    element: ElementType; 
-}
+  children: ReactNode;
+  element: ElementType;
+};
 
 function Container(props: Props) {
-    const { children, element } = props;
-    const Element =  element ?? 'div';
-    return (
-      <Element style={{ maxWidth: 800, margin: '0 auto', padding: 20 }}>
-        {children}
-      </Element>
-    )
+  const { children, element } = props;
+  const Element = element ?? "div";
+  return (
+    <Element className="max-w-5xl p-4 my-0 mx-auto">
+      {children}
+    </Element>
+  );
 }
 ```
 
-As you can see, the `element` prop dictates what HTML tag is rendered in the browser, when rendering that component we get the following results:
+As you can see, the `element` prop dictates what HTML tag is rendered in the
+browser, when rendering that component we get the following results:
 
-<table>
-    <tr>
-        <th>JSX</th>
-        <th>Result</th>
-    </tr>
-    <tr>
-        <td>
-            ```tsx
-            <Container>first</Container>
-            ```
-        </td>
-        <td>
-            ```html
-            <div>first</div>
-            ```
-        </td>
-    </tr>
-    <tr>
-        <td>
-            ```tsx
-            <Container element="header">second</Container>
-            ```
-        </td>
-        <td>
-            ```html
-            <header>second</header>
-            ```
-        </td>
-    </tr>
-    <tr>
-        <td>
-            ```tsx
-            <Container element="section">third</Container>
-            ```
-        </td>
-        <td>
-            ```html
-            <section>third</section>
-            ```
-        </td>
-    </tr>
-</table>
+```typescript
+// input
+<Container>first</Container>
+// output
+<div>first</div>
 
-So now you can reuse styles and behavior more easily, pretty cool right... not too fast, there are two issues with this implementation:
+// input
+<Container element="header">second</Container>
+// output
+<header>second</header>
 
-1. It isn't type safe, no auto-complete on html attribues, no warnings, nothing.
-2. What about `ref`? passing a ref to the component doesn't work either.
+// input
+<Container element="section">third</Container>
+// output
+<section>third</section>
+```
+
+So now you can reuse styles and behavior more easily, pretty cool right...
+
+### Current limitations
+
+There are two issues with our basic implementation, let's explore these.
+
+#### No attribute support
+
+For better reference, let's create a `Text` component following the basic
+example:
+
+```typescript
+function Text({ children, element }: Props) {
+  const Element = element ?? "span";
+  return <Element>{children}</Element>;
+}
+```
+
+The only props this component accepts are `element` and `children`, there’s no
+attribute support for even `element` props.
+
+For example, if we set `element="a"` as a link, we should also support passing
+an `href` to the component.
+
+At this point, we can just go ahead and spread every other props passed as
+follows:
+
+```typescript
+function Text({ children, element, ...otherProps }: Props) {
+  const Element = element ?? "span";
+  return <Element {...otherProps}>{children}</Element>;
+}
+```
+
+But now it highlights another problem. Wrong attributes will now be passed down
+to the component as well. Consider the following:
+
+```html
+<Text as="span" href="google.com">Lorem ipsum</Text>
+```
+
+#### No Ref support
+
+Passing a ref to the component doesn't work either, according to the React docs:
+
+> Components that want to expose their DOM nodes have to opt in to that
+> behavior.> A component can specify that it “forwards” its ref to one of its
+> children.
+
+That's when [forwardRef](https://react.dev/reference/react/forwardRef) comes
+into play.
+
+## Addressing problems
+
+Next let's solve the two previously mentioned problems, this is where things
+start getttng a bit tricky.
+
+### Enabling attribute support
+
+Let's start by defining the utility types, these are going play a very important
+role, it may seem overwhelming at first glance but we'll break it down.
+
+#### Utility types
+
+```typescript
+export type ObjectAny = Record<string | number | symbol, unknown>;
+
+export interface OverridableTypeMap {
+  props: ObjectAny;
+  defaultComponent: React.ElementType;
+}
+
+/**
+ * Remove properties `K` from `T`.
+ * Distributive for union types.
+ */
+type DistributiveOmit<T, K extends keyof ObjectAny> = T extends ObjectAny
+  ? Omit<T, K>
+  : never;
+
+/**
+ * Like `T & U`, but using the value types from `U` where their properties overlap.
+ */
+export type Overwrite<T, U> = DistributiveOmit<T, keyof U> & U;
+
+/**
+ * Props defined on the component.
+ */
+type BaseProps<M extends OverridableTypeMap> = M["props"];
+
+/**
+ * Props of the component if `as={Component}` is used.
+ */
+type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> =
+  & BaseProps<M>
+  & DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
+
+/**
+ * Props if `as={Component}` is NOT used.
+ */
+export type DefaultComponentProps<M extends OverridableTypeMap> =
+  & BaseProps<M>
+  & DistributiveOmit<
+    React.ComponentPropsWithRef<M["defaultComponent"]>,
+    keyof BaseProps<M>
+  >;
+
+/**
+ * A component whose root component can be controlled via an `as` prop.
+ *
+ * Adjusts valid props based on the type of `as`.
+ */
+export interface OverridableComponent<M extends OverridableTypeMap> {
+  <C extends React.ElementType>(
+    props: {
+      /**
+       * The component used for the root node.
+       * Either a string to use a HTML element or a component.
+       */
+      as: C;
+    } & OverrideProps<M, C>,
+  ): JSX.Element | null;
+  (props: DefaultComponentProps<M>): JSX.Element | null;
+  propTypes?: ObjectAny;
+}
+
+/**
+ * Own props of the component augmented with props of the root component.
+ */
+export type PolymorphicProps<
+  TypeMap extends OverridableTypeMap,
+  RootComponent extends React.ElementType,
+> =
+  & TypeMap["props"]
+  & DistributiveOmit<
+    React.ComponentPropsWithRef<RootComponent>,
+    keyof TypeMap["props"]
+  >
+  & {
+    as?: React.ElementType;
+  };
+```

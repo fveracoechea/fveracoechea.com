@@ -1,5 +1,10 @@
 export type ObjectAny = Record<string | number | symbol, unknown>;
 
+export interface OverridableTypeMap {
+  props: ObjectAny;
+  defaultComponent: React.ElementType;
+}
+
 /**
  * Simplifies the display of a type (without modifying it).
  * Taken from https://effectivetypescript.com/2022/02/25/gentips-4-display/
@@ -11,52 +16,50 @@ export type Simplify<T> = T extends Function ? T : { [K in keyof T]: T[K] };
  * Remove properties `K` from `T`.
  * Distributive for union types.
  */
-type DistributiveOmit<T, K extends keyof ObjectAny> = T extends ObjectAny ? Omit<T, K> : never;
+type DistributiveOmit<T, K extends keyof ObjectAny> = T extends ObjectAny
+  ? Omit<T, K>
+  : never;
 
 /**
  * Like `T & U`, but using the value types from `U` where their properties overlap.
  */
 export type Overwrite<T, U> = DistributiveOmit<T, keyof U> & U;
 
-export interface OverridableTypeMap {
-  props: ObjectAny;
-  defaultComponent: React.ElementType;
-}
-
 /**
  * Props defined on the component.
  */
-type BaseProps<M extends OverridableTypeMap> = M['props'];
+type BaseProps<M extends OverridableTypeMap> = M["props"];
 
 /**
- * Props of the component if `element={Component}` is used.
+ * Props of the component if `as={Component}` is used.
  */
-type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> = BaseProps<M> &
-  DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
+type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> =
+  & BaseProps<M>
+  & DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
 
 /**
- * Props if `element={Component}` is NOT used.
+ * Props if `as={Component}` is NOT used.
  */
-export type DefaultComponentProps<M extends OverridableTypeMap> = BaseProps<M> &
-  DistributiveOmit<React.ComponentPropsWithRef<M['defaultComponent']>, keyof BaseProps<M>>;
+export type DefaultComponentProps<M extends OverridableTypeMap> =
+  & BaseProps<M>
+  & DistributiveOmit<
+    React.ComponentPropsWithRef<M["defaultComponent"]>,
+    keyof BaseProps<M>
+  >;
 
 /**
- * A component whose root component can be controlled via an `element` prop.
+ * A component whose root component can be controlled via an `as` prop.
  *
- * Adjusts valid props based on the type of `element`.
+ * Adjusts valid props based on the type of `as`.
  */
 export interface OverridableComponent<M extends OverridableTypeMap> {
-  // If you make ObjectAny changes to this interface, please make sure to update the
-  // `OverridableComponent` type in `mui-material/src/OverridableComponent.d.ts` as well.
-  // Also, there are types in Base UI that have a similar shape to this interface
-  // (e.g. SelectType, OptionType, etc.).
   <C extends React.ElementType>(
     props: {
       /**
        * The component used for the root node.
        * Either a string to use a HTML element or a component.
        */
-      element?: C;
+      as: C;
     } & OverrideProps<M, C>,
   ): JSX.Element | null;
   (props: DefaultComponentProps<M>): JSX.Element | null;
@@ -69,7 +72,12 @@ export interface OverridableComponent<M extends OverridableTypeMap> {
 export type PolymorphicProps<
   TypeMap extends OverridableTypeMap,
   RootComponent extends React.ElementType,
-> = TypeMap['props'] &
-  DistributiveOmit<React.ComponentPropsWithRef<RootComponent>, keyof TypeMap['props']> & {
-    element?: React.ElementType;
+> =
+  & TypeMap["props"]
+  & DistributiveOmit<
+    React.ComponentPropsWithRef<RootComponent>,
+    keyof TypeMap["props"]
+  >
+  & {
+    as?: React.ElementType;
   };

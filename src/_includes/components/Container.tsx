@@ -1,17 +1,17 @@
-import { type VariantProps, cva } from 'npm:class-variance-authority';
-import { forwardRef, memo } from 'npm:react';
+import { cva, type VariantProps } from "npm:class-variance-authority";
+import { forwardRef, memo } from "npm:react";
 
-import { OverridableComponent, PolymorphicProps } from '../types/components.ts';
+import { OverridableComponent, PolymorphicProps } from "../types/components.ts";
 
-const containerVariants = cva('p-6 mx-auto my-0', {
+const containerVariants = cva("mx-auto my-0 p-6", {
   variants: {
     size: {
-      tablet: 'max-w-6xl',
-      mobile: 'max-w-4xl',
+      tablet: "max-w-6xl",
+      mobile: "max-w-4xl",
     },
   },
   defaultVariants: {
-    size: 'tablet',
+    size: "tablet",
   },
 });
 
@@ -19,16 +19,20 @@ type Props = VariantProps<typeof containerVariants>;
 
 type ContainerTypeMap = {
   props: Props;
-  defaultComponent: 'div';
+  defaultComponent: "div";
 };
 
-export type ContainerProps<Root extends React.ElementType = ContainerTypeMap['defaultComponent']> =
-  PolymorphicProps<ContainerTypeMap, Root>;
+export type ContainerProps<
+  Root extends React.ElementType = ContainerTypeMap["defaultComponent"],
+> = PolymorphicProps<ContainerTypeMap, Root>;
 
-function ContainerImpl(props: ContainerProps, forwardedRef: React.ForwardedRef<Element>) {
-  const { children, element, size = 'tablet', className, ...otherProps } = props;
+function ContainerImpl(
+  props: ContainerProps,
+  forwardedRef: React.ForwardedRef<Element>,
+) {
+  const { children, as, size = "tablet", className, ...otherProps } = props;
 
-  const Element = element ?? 'div';
+  const Element = as ?? "div";
   const classNames = containerVariants({ size, className });
 
   return (
@@ -38,4 +42,6 @@ function ContainerImpl(props: ContainerProps, forwardedRef: React.ForwardedRef<E
   );
 }
 
-export const Container = memo(forwardRef(ContainerImpl)) as OverridableComponent<ContainerTypeMap>;
+export const Container = memo(
+  forwardRef(ContainerImpl),
+) as OverridableComponent<ContainerTypeMap>;

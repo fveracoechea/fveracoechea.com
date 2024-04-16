@@ -15,5 +15,5 @@
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "tailwindFunctions": ["clsx"]
+  "tailwindFunctions": ["clsx", "cva", "cx"]
 }
