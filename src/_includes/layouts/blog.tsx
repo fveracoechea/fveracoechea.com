@@ -1,8 +1,6 @@
 import { cx } from "npm:class-variance-authority";
 import { format } from "npm:date-fns";
 
-import { PostData } from "../types/article.ts";
-
 export const layout = "layouts/base.tsx";
 
 function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
