@@ -39,9 +39,13 @@ button {
   --tw-prose-pre-bg: theme(colors.cat-mantle.DEFAULT);
   --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
   --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
-  --tw-prose-code: theme(colors.cat-mauve.DEFAULT);
+  --tw-prose-code: theme(colors.cat-maroon.DEFAULT);
   --tw-prose-links: theme(colors.cat-blue.DEFAULT);
   @apply max-w-none prose-code:font-medium;
+
+  p a {
+    @apply underline-offset-2 transition-colors hover:text-cat-text;
+  }
 
   h1,
   h2,

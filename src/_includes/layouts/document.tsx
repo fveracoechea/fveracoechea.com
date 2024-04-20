@@ -9,7 +9,7 @@ export default function Document(props: Lume.Data) {
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/scripts/theme.js" />
       </head>
-      <body className="bg-cat-base text-cat-text">{children}</body>
+      <body className="bg-cat-mantle text-cat-text">{children}</body>
     </html>
   );
 }

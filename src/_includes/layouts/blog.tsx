@@ -1,11 +1,15 @@
-import { cx } from 'npm:class-variance-authority';
+import { cx } from "npm:class-variance-authority";
+import { format } from "npm:date-fns";
 
-export const layout = 'layouts/base.tsx';
+import { PostData } from "../types/article.ts";
+
+export const layout = "layouts/base.tsx";
 
 function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
   return (
     <>
       <li
+        key={item.id}
         className={cx(
           item.depth === 3 && `pl-3`,
           item.depth === 4 && `pl-6`,
@@ -15,9 +19,9 @@ function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
         <a
           href={`#${item.id}`}
           className={cx(
-            'text-sm hover:text-cat-blue',
-            item.depth === 2 && 'font-semibold',
-            item.depth > 2 && 'font-medium',
+            "text-sm hover:text-cat-blue",
+            item.depth === 2 && "font-semibold",
+            item.depth > 2 && "font-medium",
           )}
         >
           {item.value}
@@ -32,13 +36,36 @@ function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
 export default function BlogLayout(props: Lume.Data) {
   return (
     <div className="flex gap-10">
-      <article className="prose flex-[4] overflow-x-hidden py-4">{props.children}</article>
+      <article className="prose flex-[4] overflow-x-hidden py-4">
+        <header className="flex flex-col gap-4">
+          <h1 className="my-0 text-2xl leading-none md:text-4xl">
+            {props.title}
+          </h1>
+
+          <section>
+            <time
+              className="text-sm text-cat-subtext0"
+              dateTime={new Date(props.createdAt).toString()}
+            >
+              {format(props.createdAt, "PPPP")}
+            </time>
+            <p className="m-0 text-sm text-cat-subtext0">{props.description}</p>
+            <img
+              className="mx-0 mb-0 mt-4"
+              src={props.image}
+              alt={props.title}
+            />
+          </section>
+        </header>
+
+        {props.children}
+      </article>
 
       <aside className="hidden flex-1 border-l border-cat-surface0 pl-8 lg:block">
         <nav className="sticky top-6 flex flex-1 flex-col gap-4 py-2">
           <p className="text-md font-semibold text-cat-text">On This Page</p>
           <ul className="flex flex-col gap-2.5 text-sm text-cat-overlay2">
-            {props.toc.at(0)?.children?.map(toTableOfContents)}
+            {props.toc.map(toTableOfContents)}
           </ul>
         </nav>
       </aside>

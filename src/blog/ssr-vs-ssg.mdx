@@ -1,11 +1,10 @@
 ---
-title: SSR vs. SSG
-# date: 09/3/2024
-description: Exploring the differences between server-side rendering (SSR) and static generation (SG) in web application development.
+title: SSR vs SSG Choosing the Right Approach
+description: Exploring the differences between server-side rendering and static generation.
 image: /images/blog-3.jpg
+createdAt: 03/12/2024
+published: true
 ---
-
-# SSR vs. SSG: Choosing the Right Approach for Your Web Application
 
 When it comes to building modern web applications, developers often face the
 dilemma of choosing between server-side rendering (SSR) and static generation
@@ -14,8 +13,6 @@ depends on various factors such as project requirements, scalability,
 performance, and development workflow. In this article, we'll delve into the
 differences between SSR and SG and discuss when each approach is most suitable.
 
-![SSR vs. SSG](/images/blog-3.jpg)
-
 ## Server-Side Rendering (SSR)
 
 Server-side rendering involves generating the HTML for a web page on the server
@@ -23,7 +20,7 @@ and sending the fully rendered page to the client's browser. This means that the
 client receives a complete page ready for display without any additional
 processing required.
 
-### Pros of SSR:
+### Pros of SSR
 
 1. **SEO-Friendly**: Search engine crawlers can easily index content since the
    HTML is fully rendered on the server.
@@ -32,7 +29,7 @@ processing required.
 3. **Dynamic Content Support**: SSR allows for dynamic content generation based
    on user-specific data.
 
-### Cons of SSR:
+### Cons of SSR
 
 1. **Server Load**: Rendering pages on the server can increase the server load,
    especially during high traffic periods.
@@ -49,7 +46,7 @@ request. The HTML, CSS, and JavaScript files are generated ahead of time and
 served as static files to the client. This approach is commonly used with static
 site generators like Next.js, Gatsby, or Hugo.
 
-### Pros of SG:
+### Pros of SG
 
 1. **Better Performance**: Since pages are pre-rendered, load times are
    typically faster, resulting in a better user experience.
@@ -58,7 +55,7 @@ site generators like Next.js, Gatsby, or Hugo.
 3. **CDN Compatibility**: Static files can be easily distributed across Content
    Delivery Networks (CDNs) for faster global access.
 
-### Cons of SG:
+### Cons of SG
 
 1. **Limited Dynamic Content**: Content that needs to be generated dynamically
    based on user interactions may require client-side rendering or additional

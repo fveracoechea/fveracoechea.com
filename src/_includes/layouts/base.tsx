@@ -54,9 +54,11 @@ export default function MainLayout(props: Lume.Data) {
   return (
     <>
       <Header />
-      <Container style={{ minHeight: "calc(100vh - 202px)" }}>
-        <main>{children}</main>
-      </Container>
+      <div className="min-h-[calc(100vh-202px)] bg-cat-base">
+        <Container>
+          <main>{children}</main>
+        </Container>
+      </div>
       <Footer />
     </>
   );

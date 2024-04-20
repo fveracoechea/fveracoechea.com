@@ -1,34 +1,24 @@
 ---
-title: Type Safe Polymorphic React Components
-description: Deep dive into building strongly typed polymorphic React components
-image: /images/poly-comp-2.png
+title: Polymorphic React Components
+description: Deep dive into building type-safe polymorphic React components.
+image: /images/polymorphic-components.jpeg
+createdAt: 04/20/2024
+published: true
 ---
 
-# Type Safe Polymorphic React Components
+## What and Why?
 
-<div className="flex justify-center rounded border border-cat-surface0 bg-[rgb(56,55,66)]">
-  <img
-    className="plain m-0 max-w-72"
-    width="1024"
-    height="1024"
-    src="/images/poly-comp-2.png"
-    alt="polymorphic components"
-  />
-</div>
-
-Polymorphic Components are a particular type of compoent, that can be useful
-when building multipurpose utility components, UI libraries, and design-systems.
-
-Cool... so what are they? and why?
+Polymorphic Components are a particular type of component, useful when building
+multipurpose utility components, UI libraries, and design-systems.
 
 The word **polymorphic** means:
 
-> "occurring in several different forms"
+> Occurring in several different forms
 
-Based on that in context of React.js, a polymorphic component is one that can
-dynamically change the type of element rendered. That basically means, you can
-have a single component that acts as a `div`, `span`, `header`, or any other
-HTML tag or custom component, depending on your needs.
+In the context of React.js, a polymorphic component is one that can dynamically
+change the type of element rendered. That basically means, you can have a single
+component that acts as a `div`, `span`, `header`, or any other HTML tag or
+custom component, depending on your needs.
 
 As you can imagine, that particular feature enables us to create very flexible
 and reusable components since they can adapt to different HTML elements or
@@ -37,19 +27,11 @@ custom components while retaining their own functionalities and props.
 ## Basic implementation
 
 Let's start by creating a simple `Container` component that basically just adds
-some basic CSS to a given HTML _element_:
+some basic CSS to a given HTML element:
 
 ```typescript
-import { ElementType, ReactNode } from "react";
-
-type Props = {
-  children: ReactNode;
-  element: ElementType;
-};
-
-function Container(props: Props) {
-  const { children, element } = props;
-  const Element = element ?? "div";
+function Container({ children, as }) {
+  const Element = as ?? "div";
   return (
     <Element className="max-w-5xl p-4 my-0 mx-auto">
       {children}
@@ -58,24 +40,19 @@ function Container(props: Props) {
 }
 ```
 
-As you can see, the `element` prop dictates what HTML tag is rendered in the
-browser, when rendering that component we get the following results:
+As you can see, the `as` prop dictates what HTML tag is rendered in the browser,
+when rendering that component we get the following results:
 
-```typescript
-// input
-<Container>first</Container>
-// output
-<div>first</div>
+```html
+<!-- input -->
+<Container as="header">first</Container>
+<!-- output -->
+<header>first</header>
 
-// input
-<Container element="header">second</Container>
-// output
-<header>second</header>
-
-// input
-<Container element="section">third</Container>
-// output
-<section>third</section>
+<!-- input -->
+<Container as="section">second</Container>
+<!-- output -->
+<section>second</section>
 ```
 
 So now you can reuse styles and behavior more easily, pretty cool right...
@@ -84,44 +61,43 @@ So now you can reuse styles and behavior more easily, pretty cool right...
 
 There are two issues with our basic implementation, let's explore these.
 
-#### No attribute support
+#### No auto-complete
 
-For better reference, let's create a `Text` component following the basic
-example:
+For better reference, let's look at a the following `Text` component example:
 
 ```typescript
-function Text({ children, element }: Props) {
-  const Element = element ?? "span";
+function Text({ children, as }) {
+  const Element = as ?? "span";
   return <Element>{children}</Element>;
 }
 ```
 
-The only props this component accepts are `element` and `children`, there’s no
-attribute support for even `element` props.
+The only props this component accepts are `as` and `children`, there’s no
+attribute support for even `as` props. For example, if we set `as="a"` for a
+link, we should also support passing an `href` to the component.
 
-For example, if we set `element="a"` as a link, we should also support passing
-an `href` to the component.
-
-At this point, we can just go ahead and spread every other props passed as
+An easy solution may be to just go ahead and spread every other props passed as
 follows:
 
 ```typescript
-function Text({ children, element, ...otherProps }: Props) {
-  const Element = element ?? "span";
+function Text({ children, as, ...otherProps }) {
+  const Element = as ?? "span";
   return <Element {...otherProps}>{children}</Element>;
 }
 ```
 
-But now it highlights another problem. Wrong attributes will now be passed down
-to the component as well. Consider the following:
+Although another issue arises, wrong attributes can also be passed down to the
+component, for example:
 
 ```html
-<Text as="span" href="google.com">Lorem ipsum</Text>
+<Text as="whatever">Lorem ipsum</Text>
+
+<Text as="h2" href="google.com">Lorem ipsum</Text>
 ```
 
 #### No Ref support
 
-Passing a ref to the component doesn't work either, according to the React docs:
+Passing a ref to it doesn't work either, according to React docs:
 
 > Components that want to expose their DOM nodes have to opt in to that
 > behavior.> A component can specify that it “forwards” its ref to one of its
@@ -135,17 +111,20 @@ into play.
 Next let's solve the two previously mentioned problems, this is where things
 start getttng a bit tricky.
 
-### Enabling attribute support
+![Let's start coding](/images/coding.jpeg)
 
-Let's start by defining the utility types, these are going play a very important
-role, it may seem overwhelming at first glance but we'll break it down.
+### Utility types
 
-#### Utility types
+Let's start by defining some utility types, these are going play a very
+important role, don't worry it may seem overwhelming at first glance but it will
+all start making sense as we go.
 
 ```typescript
-export type ObjectAny = Record<string | number | symbol, unknown>;
+// types/polymorphic.ts
 
-export interface OverridableTypeMap {
+export type ObjectAny = Record<PropertyKey, unknown>;
+
+interface OverridableTypeMap {
   props: ObjectAny;
   defaultComponent: React.ElementType;
 }
@@ -169,13 +148,6 @@ export type Overwrite<T, U> = DistributiveOmit<T, keyof U> & U;
 type BaseProps<M extends OverridableTypeMap> = M["props"];
 
 /**
- * Props of the component if `as={Component}` is used.
- */
-type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> =
-  & BaseProps<M>
-  & DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
-
-/**
  * Props if `as={Component}` is NOT used.
  */
 export type DefaultComponentProps<M extends OverridableTypeMap> =
@@ -184,25 +156,6 @@ export type DefaultComponentProps<M extends OverridableTypeMap> =
     React.ComponentPropsWithRef<M["defaultComponent"]>,
     keyof BaseProps<M>
   >;
-
-/**
- * A component whose root component can be controlled via an `as` prop.
- *
- * Adjusts valid props based on the type of `as`.
- */
-export interface OverridableComponent<M extends OverridableTypeMap> {
-  <C extends React.ElementType>(
-    props: {
-      /**
-       * The component used for the root node.
-       * Either a string to use a HTML element or a component.
-       */
-      as: C;
-    } & OverrideProps<M, C>,
-  ): JSX.Element | null;
-  (props: DefaultComponentProps<M>): JSX.Element | null;
-  propTypes?: ObjectAny;
-}
 
 /**
  * Own props of the component augmented with props of the root component.
@@ -220,3 +173,146 @@ export type PolymorphicProps<
     as?: React.ElementType;
   };
 ```
+
+### Implement Component with Prop types
+
+Now let's define a more type safe `Text` component, these are the steps we may
+follow:
+
+1. Define what prop types our component will receive.
+2. Create an `OverridableTypeMap` like interface which will contain the
+   previously defined props, and default element in case no `as` prop is
+   provided.
+3. With the help of the utility types, define a Polymorphic Component Prop type,
+   this type should also recive a
+   [generic](https://www.typescriptlang.org/docs/handbook/2/generics.html) which
+   we will be calling `Root`.
+4. Implement the component's render function.
+
+So this is what it should look like:
+
+```typescript
+import { PolymorphicProps } from "../types/polymorphic.ts";
+
+// Step 1
+type Props = {
+  size: "medium" | "small";
+};
+
+// Step 2
+type TextTypeMap = {
+  props: Props;
+  defaultComponent: "span";
+};
+
+// Step 3
+export type TextProps<
+  Root extends React.ElementType = TextTypeMap["defaultComponent"],
+> = PolymorphicProps<TextTypeMap, Root>;
+
+// Step 4
+export function Text(props: TextProps) {
+  const { children, as, size = "medium", className, ...otherProps } = props;
+
+  const Element = as ?? "span";
+
+  const sizeVariants = {
+    medium: "text-base leading-tight",
+    small: "text-sm leading-normal",
+  };
+
+  const styles = `${sizeVariants[size]} ${className}`;
+
+  return (
+    <Element {...otherProps} className={styles}>
+      {children}
+    </Element>
+  );
+}
+```
+
+At this point, we should have a component that offers some level of prop type
+support and auto-complete, however we are not there yet so let's keep going.
+
+### Ref support
+
+As you may already know, Ref support is being done by calling
+[forwardRef](https://react.dev/reference/react/forwardRef) to let your component
+receive a ref and forward it to a child component:
+
+```typescript
+function TextImpl(props: TextProps, forwardedRef: React.ForwardedRef<Element>) {
+  const { children, as, size = "medium", className, ...otherProps } = props;
+
+  /* ... */
+
+  return (
+    <Element {...otherProps} className={styles} ref={forwardRef}>
+      {children}
+    </Element>
+  );
+}
+
+export const Text = forwardRef(TextImpl);
+```
+
+### Attribute support
+
+Let's start by adding a couple more utility types, which will be used to
+override the **forwardRef**'s default behavior and will allow components to
+dynamically change attribute types based on the root element provided (`as`
+prop)
+
+```typescript
+// types/polymorphic.ts
+
+/**
+ * Props of the component if `as={Component}` is used.
+ */
+type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> =
+  & BaseProps<M>
+  & DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
+
+/**
+ * A component whose root component can be controlled via an `as` prop.
+ * Adjusts valid props based on the type of `as`.
+ */
+export interface OverridableComponent<M extends OverridableTypeMap> {
+  <C extends React.ElementType>(
+    props: {
+      /**
+       * The component used for the root node.
+       * Either a string to use a HTML element or a component.
+       */
+      as: C;
+    } & OverrideProps<M, C>,
+  ): JSX.Element | null;
+  (props: DefaultComponentProps<M>): JSX.Element | null;
+  propTypes?: ObjectAny;
+}
+```
+
+We are almost there, as a final step we need to use the `OverridableComponent`
+interface on our Text component export as follows:
+
+```typescript
+export const Text = forwardRef(TextImpl) as OverridableComponent<TextTypeMap>;
+```
+
+## Concluding Thoughts
+
+Wrapping it up, we've explored one of may ways to create reusble and flexible
+React components that can switch between HTML elements thanks to the `as` prop,
+while addressing critical challenges such as auto-complete and ref support. In
+the end, we were able to build a robust Text component:
+
+### Demo
+
+<video width="900" height="600" controls>
+  <source src="/videos/poly-text.webm" type="video/webm" />
+</video>
+
+### Full code example
+
+- Text component: [Text.tsx]()
+- Utility types: [polymorphic.ts]()
