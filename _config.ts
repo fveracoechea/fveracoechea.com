@@ -48,7 +48,14 @@ site.use(
 );
 site.use(postcss());
 
-site.use(ogImages());
+site.use(
+  ogImages({
+    satori: {
+      width: 750,
+      height: 400,
+    },
+  }),
+);
 site.use(metas(/* Options */));
 // Explicit allow access to Google and Bing
 site.use(
