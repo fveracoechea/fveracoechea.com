@@ -13,7 +13,7 @@ function Articles(props: Lume.Data) {
 
   return (
     <section id="post-grid" className="pb-8">
-      <h3 className="mb-6 text-xl font-semibold">Articles</h3>
+      <h3 className="mb-6 text-xl font-semibold">Recent Articles</h3>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {blog.map((post) => {
