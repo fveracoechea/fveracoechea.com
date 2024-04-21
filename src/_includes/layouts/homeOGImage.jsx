@@ -24,7 +24,6 @@ export default function HomeOGImage() {
       />
       <div
         style={{
-          alignSelf: "flex-end",
           display: "flex",
           flexDirection: "column",
           gap: "1px",
