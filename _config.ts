@@ -6,6 +6,7 @@ import favicon from "lume/plugins/favicon.ts";
 import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import metas from "lume/plugins/metas.ts";
+import ogImages from "lume/plugins/og_images.ts";
 import postcss from "lume/plugins/postcss.ts";
 import robots from "lume/plugins/robots.ts";
 import sitemap from "lume/plugins/sitemap.ts";
@@ -47,8 +48,9 @@ site.use(
 );
 site.use(postcss());
 
-// Explicit allow access to Google and Bing
+site.use(ogImages());
 site.use(metas(/* Options */));
+// Explicit allow access to Google and Bing
 site.use(
   robots({
     allow: ["Googlebot", "Bingbot"],
