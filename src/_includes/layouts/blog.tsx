@@ -19,7 +19,7 @@ function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
           className={cx(
             "text-sm hover:text-cat-blue",
             item.depth === 2 && "font-semibold",
-            item.depth > 2 && "font-medium",
+            // item.depth > 2 && "font-medium",
           )}
         >
           {item.value}

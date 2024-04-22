@@ -13,13 +13,13 @@ function Header() {
           <h1
             className={cx(
               "bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text text-transparent",
-              "text-xl font-semibold lg:text-2xl",
+              "text-lg font-semibold md:text-2xl",
             )}
           >
-            Francisco Veracoechea
+            {"Francisco Veracoechea"}
           </h1>
-          <h2 className="text-base font-normal leading-tight text-cat-subtext1 lg:text-lg">
-            Frontend Engineer
+          <h2 className="font-mono text-xs font-normal leading-tight text-cat-subtext1 md:text-base">
+            {'() => "Frontend Engineer"'}
           </h2>
         </a>
 

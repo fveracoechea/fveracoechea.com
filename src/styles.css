@@ -1,13 +1,20 @@
 @import 'css/code-catppuccin.css';
+@import 'css/fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Fira Sans', sans-serif;
+  }
+}
 
 html,
 body {
   scroll-behavior: smooth;
 }
-
 html.cat-mocha button svg[data-icon='dark'] {
   display: none;
 }

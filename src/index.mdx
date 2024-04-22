@@ -22,10 +22,11 @@ Currently focusing on: Web performance, Software architecture, Linux.
 
 ```typescript
 async function coding(coffee) {
-  if (coffee.isEmpty) return coffee.brew();
-
-  coffee.drink();
   await work.execute();
+
+  if (coffee.isEmpty) coffee.brew();
+  coffee.drink();
+
   coding(coffee);
 }
 ```

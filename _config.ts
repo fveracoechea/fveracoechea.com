@@ -73,6 +73,7 @@ site.use(
 // static assets
 site.use(favicon());
 site.copy("images", "images");
+site.copy("fonts", "fonts");
 site.copy("videos", "videos");
 site.copy("scripts", "scripts");
 

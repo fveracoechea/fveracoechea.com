@@ -18,6 +18,7 @@
       "npm:autoprefixer@10.4.19": "npm:autoprefixer@10.4.19_postcss@8.4.38",
       "npm:autoprefixer@^10.4.17": "npm:autoprefixer@10.4.19_postcss@8.4.38",
       "npm:class-variance-authority": "npm:class-variance-authority@0.7.0",
+      "npm:clsx": "npm:clsx@2.1.0",
       "npm:cssnano@^6.0.3": "npm:cssnano@6.1.2_postcss@8.4.38",
       "npm:date-fns": "npm:date-fns@3.6.0",
       "npm:date-fns@3.6.0": "npm:date-fns@3.6.0",
