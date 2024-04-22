@@ -106,10 +106,10 @@ Passing a ref to it doesn't work either, according to React docs:
 That's when [forwardRef](https://react.dev/reference/react/forwardRef) comes
 into play.
 
-## Addressing problems
+## Addressing current limitations
 
 Next let's solve the two previously mentioned problems, this is where things
-start getttng a bit tricky.
+start to get tricky.
 
 ![Let's start coding](/images/coding.jpeg)
 
@@ -174,7 +174,7 @@ export type PolymorphicProps<
   };
 ```
 
-### Implement Component with Prop types
+<!-- ### Implement component with prop types -->
 
 Now let's define a more type safe `Text` component, these are the steps we may
 follow:
@@ -299,7 +299,7 @@ interface on our Text component export as follows:
 export const Text = forwardRef(TextImpl) as OverridableComponent<TextTypeMap>;
 ```
 
-## Concluding Thoughts
+## Concluding thoughts
 
 Wrapping it up, we've explored one of may ways to create reusble and flexible
 React components that can switch between HTML elements thanks to the `as` prop,
