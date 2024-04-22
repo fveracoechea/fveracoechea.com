@@ -18,8 +18,15 @@ function Header() {
           >
             {"Francisco Veracoechea"}
           </h1>
-          <h2 className="font-mono text-xs font-normal leading-tight text-cat-subtext1 md:text-base">
-            {'() => "Frontend Engineer"'}
+          <h2
+            className={cx(
+              "font-mono text-xs font-normal leading-tight",
+              "md:text-base",
+            )}
+          >
+            <span className="text-cat-red">{"()"}</span>
+            <span className="text-cat-subtext0">{" => "}</span>
+            <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
 

@@ -15,6 +15,7 @@ html,
 body {
   scroll-behavior: smooth;
 }
+
 html.cat-mocha button svg[data-icon='dark'] {
   display: none;
 }
