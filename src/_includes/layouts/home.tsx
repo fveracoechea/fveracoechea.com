@@ -8,16 +8,16 @@ function HomeLayout(props: Lume.Data) {
   return (
     <>
       <section className="flex flex-col flex-wrap gap-8 pb-8 md:flex-row">
-        <div className="flex flex-1 items-center justify-center md:max-w-fit">
+        <div className="relative flex flex-1 items-center justify-center">
           <img
             className={clsx(
-              "max-h-80 w-full rounded border border-cat-surface0",
-              "object-cover md:h-[390px] md:max-h-none md:w-auto md:max-w-full",
+              "h-full w-full max-w-80 rounded border border-cat-surface0",
+              "object-cover md:absolute md:max-w-none",
             )}
             src="/images/me.jpg"
           />
         </div>
-        <div className="prose w-full flex-[2]">{props.children}</div>
+        <div className="prose w-full flex-1 lg:flex-[2]">{props.children}</div>
       </section>
       <Articles />
     </>

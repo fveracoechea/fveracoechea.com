@@ -8,7 +8,7 @@ export const layout = "layouts/document.tsx";
 function Header() {
   return (
     <header className="border-b border-cat-surface0 bg-cat-mantle">
-      <Container className="flex items-center justify-between py-8">
+      <Container className="flex items-center justify-between gap-2 py-8">
         <a href="/">
           <h1
             className={cx(
