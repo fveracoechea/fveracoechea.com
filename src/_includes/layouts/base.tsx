@@ -44,10 +44,7 @@ function Footer() {
           <span>|</span>
           <span>Francisco Veracoechea</span>
         </div>
-        <div className="flex flex-col items-center gap-3 md:flex-row">
-          <p className="text-lg font-medium text-cat-subtext0"></p>
-          <SocialLinks size="sm" />
-        </div>
+        <SocialLinks size="sm" />
       </div>
     </footer>
   );
