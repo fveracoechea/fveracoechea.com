@@ -34,7 +34,7 @@ function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
 export default function BlogLayout(props: Lume.Data) {
   return (
     <div className="flex gap-10">
-      <article className="prose flex-[4] overflow-x-hidden py-4">
+      <article className="prose flex-[4] overflow-x-hidden py-10">
         <header className="flex flex-col gap-4">
           <h1 className="my-0 text-2xl leading-none md:text-4xl">
             {props.title}
@@ -60,7 +60,7 @@ export default function BlogLayout(props: Lume.Data) {
       </article>
 
       <aside className="hidden flex-1 border-l border-cat-surface0 pl-8 lg:block">
-        <nav className="sticky top-6 flex flex-1 flex-col gap-4 py-2">
+        <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-10">
           <p className="text-md font-semibold text-cat-text">On This Page</p>
           <ul className="flex flex-col gap-2.5 text-sm text-cat-overlay2">
             {props.toc.map(toTableOfContents)}

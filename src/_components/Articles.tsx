@@ -12,7 +12,7 @@ function Articles(props: Lume.Data) {
     );
 
   return (
-    <section id="post-grid" className="pb-8">
+    <section id="post-grid">
       <h3 className="mb-6 text-xl font-semibold">Recent Articles</h3>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">

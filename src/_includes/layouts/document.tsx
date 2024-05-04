@@ -1,3 +1,5 @@
+import { cx } from "npm:class-variance-authority";
+
 export default function Document(props: Lume.Data) {
   const { children } = props;
   return (
@@ -9,7 +11,23 @@ export default function Document(props: Lume.Data) {
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/scripts/theme.js" />
       </head>
-      <body className="bg-cat-mantle text-cat-text">{children}</body>
+      <body className={cx("relative bg-cat-base text-cat-text")}>
+        <div
+          className={cx(
+            "absolute left-0 top-0 z-0 h-[30vh] w-full md:h-[20vh]",
+            "from-cat-crust to-cat-base",
+            "bg-gradient-to-b",
+          )}
+        />
+        <div className="relative z-10">{children}</div>
+        <div
+          className={cx(
+            "absolute bottom-0 left-0 z-0 h-[30vh] w-full md:h-[20vh]",
+            "from-cat-base to-cat-crust",
+            "bg-gradient-to-b",
+          )}
+        />
+      </body>
     </html>
   );
 }

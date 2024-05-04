@@ -6,7 +6,7 @@ function HomeLayout(props: Lume.Data) {
   const Articles = props.comp.Articles;
 
   return (
-    <>
+    <div className="py-10">
       <section className="flex flex-col flex-wrap gap-8 pb-8 md:flex-row">
         <div className="relative flex flex-1 items-center justify-center">
           <img
@@ -20,7 +20,7 @@ function HomeLayout(props: Lume.Data) {
         <div className="prose w-full flex-1 lg:flex-[2]">{props.children}</div>
       </section>
       <Articles />
-    </>
+    </div>
   );
 }
 

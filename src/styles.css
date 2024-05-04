@@ -1,5 +1,5 @@
-@import 'css/code-catppuccin.css';
 @import 'css/fonts.css';
+@import 'css/code-catppuccin.css';
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +8,12 @@
 @layer base {
   html {
     font-family: 'Fira Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto my-0 max-w-6xl px-6;
   }
 }
 
