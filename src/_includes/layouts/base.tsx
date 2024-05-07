@@ -55,7 +55,7 @@ export default function MainLayout(props: Lume.Data) {
   return (
     <>
       <Header />
-      <div className={cx("min-h-[calc(100vh-202px)]")}>
+      <div className={cx("min-h-[calc(100vh-202px)] bg-transparent")}>
         <div className="container">
           <main>{children}</main>
         </div>

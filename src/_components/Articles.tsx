@@ -15,44 +15,40 @@ function Articles(props: Lume.Data) {
     <section id="post-grid">
       <h3 className="mb-6 text-xl font-semibold">Recent Articles</h3>
 
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         {blog.map((post) => {
           return (
-            <article
-              key={post.url}
-              className={cx(
-                "flex flex-col gap-2 overflow-hidden rounded",
-                "border border-cat-surface0 bg-cat-mantle",
-                "ring-cat-blue transition-shadow hover:border-cat-blue hover:ring-1",
-                "focus-within:border-cat-mauve focus-within:ring-1 focus-within:ring-cat-mauve",
-              )}
-            >
-              <a href={post.url} className="group flex h-full flex-col">
-                <figure className="w-full flex-1">
+            <article key={post.url} className="group flex ">
+              <a href={post.url} className="flex w-full flex-col">
+                <figure className="flex-1">
                   <img
                     src={post.image}
                     alt={post.title}
-                    height={368}
-                    width={552}
-                    className="object-cover"
+                    height={281}
+                    width={535}
+                    className={cx(
+                      "h-auto w-full rounded border border-cat-surface0 object-cover",
+                      "ring-0 ring-cat-surface0 transition-shadow",
+                      "group-hover:border-cat-blue group-hover:ring-2 group-hover:ring-cat-blue",
+                      "group-focus-within:border-cat-mauve",
+                      "group-focus-within:ring-2 group-focus-within:ring-cat-mauve",
+                    )}
                   />
                 </figure>
-                <figcaption className="flex flex-1 flex-col gap-1 p-4">
-                  <h3
+                <figcaption className="flex flex-[3] flex-col gap-1 pt-4">
+                  <h4
                     className={cx(
-                      "font-medium text-cat-text transition-colors",
-                      "group-hover:text-cat-blue group-focus-visible:text-cat-mauve",
-                      "group-focus:text-cat-mauve",
+                      "text-base font-medium text-cat-text underline-offset-2 transition-colors",
+                      "group-hover:text-cat-blue group-hover:underline",
+                      "group-focus-within:text-cat-mauve group-focus-within:text-cat-mauve",
                     )}
                   >
                     {post.title}
-                  </h3>
-                  <small className="text-cat-subtext0">
+                  </h4>
+                  <small className="text-sm text-cat-subtext0">
                     {format(post.createdAt, "PPP")}
                   </small>
-                  <p className="text-sm text-cat-subtext1">
-                    {post.description}
-                  </p>
+                  <p className="text-cat-subtext1">{post.description}</p>
                 </figcaption>
               </a>
             </article>
