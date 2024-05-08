@@ -3,7 +3,7 @@ title: 'Simplifying complex component variants with Tailwind and CVA'
 description: "Addressing Tailwind's common pitfalts when deailing with different variants of one component using Class Variance Authority."
 image: /images/cva-tailwind.jpeg
 createdAt: 05/07/2024
-published: false
+published: true
 ---
 
 Tailwind is a unponionated **utility-first CSS framework** that offers great
@@ -16,20 +16,22 @@ Although I love working with Tailwind, I've noticed some potential pitfalls when
 creating bigger components, for example as part of a design-system, that has a
 lot of different style variants.
 
-Consider the scenario of creating a button component within a design system.
-This button needs various states and styles, such as primary, secondary, and
-destructive variants, along with disabled and loading states for each variant.
+Consider the scenario of creating a component within a design system.
+This component needs various states and styles, such as **size, color, disabled,** etc. 
 While Tailwind provides an extensive set of utility classes to customize styles,
-managing the classNames for such a complex component can become messy and
-unmaintainable.
+managing and maintaing the `classNames` for such a complex component can become quite difficult overtime.
 
 ### Button component
 
-Think about a button that can be a primary, secondary, danger button and even
-has a disabled and loading state for all these 3 variants:
+Think about a button that can be a contained, outlined, text and even has a 
+color, disabled and fullWidth state for all these 3 variants.
 
-| variant   | color   | size   | loading | disabled |
-| --------- | ------- | ------ | ------- | -------- |
-| contained | primary | small  | true    | true     |
-| outlined  | success | medium | false   | false    |
-| text      | danger  | large  |         |          |
+| variant   | color   | size   | fullWidth | disabled |
+| --------- | ------- | ------ | --------- | -------- |
+| contained | primary | small  | true      | true     |
+| outlined  | success | medium | false     | false    |
+| text      | danger  | large  |           |          |
+
+If you thought that all those Tailwind classnames can become quite messy, then  you are right:
+
+

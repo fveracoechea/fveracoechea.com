@@ -1,5 +1,7 @@
 {
   "imports": {
+    "cva": "npm:class-variance-authority",
+    "clsx": "npm:clsx",
     "lume/": "https://deno.land/x/lume@v2.1.3/",
     "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.3.9/"
   },
