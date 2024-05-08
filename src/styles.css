@@ -55,6 +55,8 @@ button {
   --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
   --tw-prose-code: theme(colors.cat-maroon.DEFAULT);
   --tw-prose-links: theme(colors.cat-blue.DEFAULT);
+  --tw-prose-th-borders: theme(colors.cat-surface1.DEFAULT);
+  --tw-prose-td-borders: theme(colors.cat-surface0.DEFAULT);
   @apply max-w-none prose-code:font-medium;
 
   p a {
@@ -75,5 +77,9 @@ button {
 
   pre {
     @apply border border-cat-surface0;
+  }
+
+  table tr td {
+    @apply text-center;
   }
 }

@@ -35,20 +35,21 @@ function Articles(props: Lume.Data) {
                     )}
                   />
                 </figure>
-                <figcaption className="flex flex-[3] flex-col gap-1 pt-4">
+                <figcaption className="flex flex-[3] flex-col gap-2 pt-4">
                   <h4
                     className={cx(
                       "text-base font-medium text-cat-text underline-offset-2 transition-colors",
                       "group-hover:text-cat-blue group-hover:underline",
-                      "group-focus-within:text-cat-mauve group-focus-within:text-cat-mauve",
+                      "group-focus-within:text-cat-mauve",
                     )}
                   >
                     {post.title}
                   </h4>
-                  <small className="text-sm text-cat-subtext0">
-                    {format(post.createdAt, "PPP")}
-                  </small>
-                  <p className="text-cat-subtext1">{post.description}</p>
+                  <p className="text-sm text-cat-subtext1">
+                    <b>{format(post.createdAt, "PPP")}</b>
+                    <span>&nbsp;-&nbsp;</span>
+                    <span>{post.description}</span>
+                  </p>
                 </figcaption>
               </a>
             </article>
