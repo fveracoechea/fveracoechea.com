@@ -1,4 +1,4 @@
-import { cx } from "cva";
+import { cx } from "npm:class-variance-authority";
 import { format } from "npm:date-fns";
 
 import { PostData } from "../_includes/types/article.ts";

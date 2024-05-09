@@ -16,22 +16,150 @@ Although I love working with Tailwind, I've noticed some potential pitfalls when
 creating bigger components, for example as part of a design-system, that has a
 lot of different style variants.
 
-Consider the scenario of creating a component within a design system.
-This component needs various states and styles, such as **size, color, disabled,** etc. 
-While Tailwind provides an extensive set of utility classes to customize styles,
-managing and maintaing the `classNames` for such a complex component can become quite difficult overtime.
+Consider the scenario of creating a component within a design system. This
+component needs various states and styles, such as **size, color, disabled,**
+etc. While Tailwind provides an extensive set of utility classes to customize
+styles, managing and maintaing the `classNames` for a component like that can
+become quite difficult overtime.
 
-### Button component
+### Conditional variants
 
-Think about a button that can be a contained, outlined, text and even has a 
-color, disabled and fullWidth state for all these 3 variants.
+Let's look at the following button, this component can have three different
+variants (contained, outlined, and text), along with color and disabled state
+for all these variants:
 
-| variant   | color   | size   | fullWidth | disabled |
-| --------- | ------- | ------ | --------- | -------- |
-| contained | primary | small  | true      | true     |
-| outlined  | success | medium | false     | false    |
-| text      | danger  | large  |           |          |
+#### Contained
 
-If you thought that all those Tailwind classnames can become quite messy, then  you are right:
+<comp.ButtonsDemo variant="contained" />
 
+#### Outlined
 
+<comp.ButtonsDemo variant="outlined" />
+
+#### Text
+
+<comp.ButtonsDemo variant="text" />
+
+## Manually matching props to classNames
+
+Now let's explore what would a component look like, if we were using
+[clsx](https://www.npmjs.com/package/clsx) to manage classNames. Disclaimer: If
+you thought that all those Tailwind classnames can become quite messy, then you
+are probably right...
+
+### Prop types
+
+```typescript
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: "contained" | "outlined" | "text";
+  color?: "primary" | "success" | "danger";
+  size?: "small" | "medium" | "large";
+  disabled?: boolean;
+}
+```
+
+### Implementation
+
+```typescript
+import clsx from "clsx";
+
+export default function Button(props: ButtonProps) {
+  const {
+    children,
+    size = "medium",
+    variant = "contained",
+    color = "primary",
+    disabled,
+  } = props;
+
+  const classNames = clsx(
+    "h-fit appearance-none rounded font-medium transition-colors",
+    variant === "contained" && [
+      "text-cat-crust",
+      disabled ? "bg-cat-overlay2" : [
+        color === "primary" && "bg-cat-blue hover:bg-cat-blue/80",
+        color === "success" && "bg-cat-green hover:bg-cat-green/80",
+        color === "danger" && "bg-cat-red hover:bg-cat-red/80",
+      ],
+    ],
+    variant === "outlined" && [
+      "border-2 bg-cat-base",
+      disabled ? "border-cat-overlay2 text-cat-overlay2" : [
+        color === "primary" &&
+        "border-cat-blue text-cat-blue hover:bg-cat-blue/15",
+        color === "success" &&
+        "border-cat-green text-cat-green hover:bg-cat-green/15",
+        color === "danger" && "border-cat-red text-cat-red hover:bg-cat-red/15",
+      ],
+    ],
+    variant === "text" && [
+      "font-medium",
+      disabled ? "text-cat-overlay2" : [
+        color === "primary" && "text-cat-blue hover:bg-cat-blue/15",
+        color === "success" && "text-cat-green hover:bg-cat-green/15",
+        color === "danger" && "text-cat-red hover:bg-cat-red/15",
+      ],
+    ],
+    size === "small" && "px-4 py-1 text-sm",
+    size === "medium" && "px-6 py-1.5 text-base",
+    size === "large" && "px-8 py-2 text-lg",
+    disabled && "cursor-not-allowed",
+  );
+
+  return (
+    <button className={classNames} disabled={disabled}>
+      <span>{children}</span>
+    </button>
+  );
+}
+```
+
+Please keep in mind that it is just a simple button with simple styles,
+something like this could easly become messier at a larger scale and more
+complicated depending on the components behavior.
+
+### Need of a better solution
+
+Even after doing my best to organize all the conditionals using
+[clsx](https://www.npmjs.com/package/clsx), you can see that it lacks a bit of
+structure and consistency, which makes it hard to follow and understand at first
+glance.
+
+At this point, we need more a stable solution that can bring a better and more
+consistent structure to apply style variants and conditional classNames. This is
+when [CVA](https://cva.style/) comes into play.
+
+## Class variance authority
+
+A library that caught my attention a few weeks ago. CVA aims to take the away
+pain points of manually matching classes to props and manually adding types.
+
+Much like [Stitches](https://stitches.dev/), I feel like it intruduces a more
+structured approach to styling, allowing me to focus on the more fun aspects of
+UI development.
+
+### Implementing a better button
+
+Let's take a closer look it and test whether it makes easir to match and apply
+conditional classNames in a more readable way.
+
+```typescript
+import clsx from "clsx";
+
+export default function Button(props: ButtonProps) {
+  const {
+    children,
+    size = "medium",
+    variant = "contained",
+    color = "primary",
+    disabled,
+  } = props;
+
+  return (
+    <button className={classNames} disabled={disabled}>
+      <span>{children}</span>
+    </button>
+  );
+}
+```

@@ -2,6 +2,8 @@ import catppuccin from "@catppuccin/tailwindcss";
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
+// import colors from "tailwindcss/colors";
+
 // https://www.color-hex.com/color/548ca8
 // https://colorhunt.co/palette/334257476072548ca8eeeeee
 
@@ -18,15 +20,9 @@ export default {
       sans: ["'Fira Sans'", "sans-serif"],
       mono: ["'Fira Code'", "monospace"],
     },
-    colors: {
-      transparent: "transparent",
-      inherit: "inherit",
-      current: "currentColor",
-      // dark,
-      // white,
-      // primary,
-      // light,
-    },
+    // colors: {
+    //   ...colors,
+    // },
     fontWeight: {
       light: "300",
       normal: "400",

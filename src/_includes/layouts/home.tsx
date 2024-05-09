@@ -2,7 +2,7 @@ import clsx from "npm:clsx";
 
 export const layout = "layouts/base.tsx";
 
-function HomeLayout(props: Lume.Data) {
+export default function HomeLayout(props: Lume.Data) {
   const Articles = props.comp.Articles;
 
   return (
@@ -23,5 +23,3 @@ function HomeLayout(props: Lume.Data) {
     </div>
   );
 }
-
-export default HomeLayout;
