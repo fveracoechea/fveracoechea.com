@@ -4464,7 +4464,8 @@
   "workspace": {
     "dependencies": [
       "npm:class-variance-authority",
-      "npm:clsx"
+      "npm:clsx",
+      "npm:react"
     ],
     "packageJson": {
       "dependencies": [

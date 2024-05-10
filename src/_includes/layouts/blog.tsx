@@ -1,7 +1,7 @@
-import { cx } from "npm:class-variance-authority";
-import { format } from "npm:date-fns";
+import { cx } from 'cva';
+import { format } from 'npm:date-fns';
 
-export const layout = "layouts/base.tsx";
+export const layout = 'layouts/base.tsx';
 
 function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
   return (
@@ -17,8 +17,8 @@ function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
         <a
           href={`#${item.id}`}
           className={cx(
-            "text-sm hover:text-cat-blue",
-            item.depth === 2 && "font-semibold",
+            'text-sm hover:text-cat-blue',
+            item.depth === 2 && 'font-semibold',
             // item.depth > 2 && "font-medium",
           )}
         >
@@ -45,7 +45,7 @@ export default function BlogLayout(props: Lume.Data) {
               className="text-sm text-cat-subtext0"
               dateTime={new Date(props.createdAt).toString()}
             >
-              {format(props.createdAt, "PPPP")}
+              {format(props.createdAt, 'PPPP')}
             </time>
             <p className="m-0 text-sm text-cat-subtext0">{props.description}</p>
             <img

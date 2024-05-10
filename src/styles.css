@@ -6,80 +6,80 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: 'Fira Sans', sans-serif;
-  }
+    html {
+        font-family: 'Fira Sans', sans-serif;
+    }
 }
 
 @layer components {
-  .container {
-    @apply mx-auto my-0 max-w-6xl px-6;
-  }
+    .container {
+        @apply mx-auto my-0 max-w-6xl px-6;
+    }
 }
 
 html,
 body {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 html.cat-mocha button svg[data-icon='dark'] {
-  display: none;
+    display: none;
 }
 
 html.cat-latte button svg[data-icon='light'] {
-  display: none;
+    display: none;
 }
 
 @media (prefers-reduced-motion) {
-  html,
-  body {
-    scroll-behavior: auto;
-  }
+    html,
+    body {
+        scroll-behavior: auto;
+    }
 }
 
 a,
 button {
-  outline: none;
-  @apply focus-visible:scale-95 focus-visible:text-cat-mauve;
-  @apply transition-colors transition-transform;
+    outline: none;
+    @apply focus-visible:scale-95 focus-visible:text-cat-mauve;
+    @apply transition-colors transition-transform;
 }
 
 .prose {
-  --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
-  --tw-prose-headings: theme(colors.cat-text.DEFAULT);
-  --tw-prose-bold: theme(colors.cat-text.DEFAULT);
-  --tw-prose-counters: theme(colors.cat-blue.DEFAULT);
-  --tw-prose-bullets: theme(colors.cat-blue.DEFAULT);
-  --tw-prose-pre-bg: theme(colors.cat-mantle.DEFAULT);
-  --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
-  --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
-  --tw-prose-code: theme(colors.cat-maroon.DEFAULT);
-  --tw-prose-links: theme(colors.cat-blue.DEFAULT);
-  --tw-prose-th-borders: theme(colors.cat-surface1.DEFAULT);
-  --tw-prose-td-borders: theme(colors.cat-surface0.DEFAULT);
-  @apply max-w-none prose-code:font-medium;
+    --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
+    --tw-prose-headings: theme(colors.cat-text.DEFAULT);
+    --tw-prose-bold: theme(colors.cat-text.DEFAULT);
+    --tw-prose-counters: theme(colors.cat-blue.DEFAULT);
+    --tw-prose-bullets: theme(colors.cat-blue.DEFAULT);
+    --tw-prose-pre-bg: theme(colors.cat-mantle.DEFAULT);
+    --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
+    --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
+    --tw-prose-code: theme(colors.cat-maroon.DEFAULT);
+    --tw-prose-links: theme(colors.cat-blue.DEFAULT);
+    --tw-prose-th-borders: theme(colors.cat-surface1.DEFAULT);
+    --tw-prose-td-borders: theme(colors.cat-surface0.DEFAULT);
+    @apply max-w-none prose-code:font-medium;
 
-  p a {
-    @apply underline-offset-2 transition-colors hover:text-cat-text;
-  }
+    p a {
+        @apply underline-offset-2 transition-colors hover:text-cat-text;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    @apply scroll-my-4;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        @apply scroll-my-4;
+    }
 
-  img:not(.plain) {
-    @apply rounded border border-cat-surface0;
-  }
+    img:not(.plain) {
+        @apply rounded border border-cat-surface0;
+    }
 
-  pre {
-    @apply border border-cat-surface0;
-  }
+    pre {
+        @apply border border-cat-surface0;
+    }
 
-  table tr td {
-    @apply text-center;
-  }
+    table tr td {
+        @apply text-center;
+    }
 }

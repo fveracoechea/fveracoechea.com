@@ -1,37 +1,38 @@
-import clsx from "npm:clsx";
-import { forwardRef } from "npm:react";
+import { forwardRef } from 'react';
+
+import clsx from 'clsx';
 
 import {
   OverridableComponent,
   PolymorphicProps,
-} from "../types/polymorphic.ts";
+} from '../types/polymorphic.ts';
 
 type Props = {
-  variant?: "mobile" | "tablet";
+  variant?: 'mobile' | 'tablet';
 };
 
 type ContainerTypeMap = {
   props: Props;
-  defaultComponent: "div";
+  defaultComponent: 'div';
 };
 
 export type ContainerProps<
-  Root extends React.ElementType = ContainerTypeMap["defaultComponent"],
+  Root extends React.ElementType = ContainerTypeMap['defaultComponent'],
 > = PolymorphicProps<ContainerTypeMap, Root>;
 
 function ContainerImpl(
   props: ContainerProps,
   forwardedRef: React.ForwardedRef<Element>,
 ) {
-  const { children, as, variant = "tablet", className, ...otherProps } = props;
+  const { children, as, variant = 'tablet', className, ...otherProps } = props;
 
-  const Element = as ?? "div";
+  const Element = as ?? 'div';
 
   const styles = {
-    base: "my-0 mx-auto max-w-6xl",
+    base: 'my-0 mx-auto max-w-6xl',
     variant: {
-      mobile: "p-4",
-      tablet: "p-8",
+      mobile: 'p-4',
+      tablet: 'p-8',
     },
   };
 
@@ -46,6 +47,6 @@ function ContainerImpl(
   );
 }
 
-export const Container = forwardRef(ContainerImpl) as OverridableComponent<
-  ContainerTypeMap
->;
+export const Container = forwardRef(
+  ContainerImpl,
+) as OverridableComponent<ContainerTypeMap>;
