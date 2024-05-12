@@ -18,5 +18,10 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "npm:preact"
+  },
+  "fmt": {
+    "exclude": [
+      "*"
+    ]
   }
 }

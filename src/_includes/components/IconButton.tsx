@@ -1,25 +1,31 @@
 import clsx from 'clsx';
-import { ComponentChildren, ComponentProps, JSX } from 'preact';
+import { ComponentProps } from 'preact';
 
-type Props<T extends JSX.ElementType> = ComponentProps<T> & {
-  as?: T;
-  children: ComponentChildren;
-};
 
-export function IconButton<T extends JSX.ElementType = 'button'>(
-  props: Props<T>,
-) {
-  const { as: Element = 'button', class: className, ...otherProps } = props;
+type Root = 'a' | 'button';
+
+type IconButtonProps<R extends Root> = ComponentProps<R> & {
+  as?: Root
+}
+
+export function IconButton <R extends Root = 'button'>(props: IconButtonProps<R>) {
+  const { children, as, class: className, ...otherProps } = props as IconButtonProps<'button'>;
+
+  const Element = (as ?? 'button') as 'button'
 
   return (
     <Element
       {...otherProps}
       class={clsx(
-        'appearance-none rounded border-none p-4 transition-colors',
+        'flex',
+        'appearance-none rounded border-none p-2 transition-colors',
         'text-cat-text hover:bg-cat-blue/20 hover:text-cat-blue',
+        'focus-visible:bg-cat-mauve/20 focus-visible:text-cat-mauve',
+        className
       )}
+
     >
-      <span>{props.children}</span>
+      <span>{children}</span>
     </Element>
   );
 }

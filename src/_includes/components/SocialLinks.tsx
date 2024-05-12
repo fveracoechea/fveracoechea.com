@@ -1,5 +1,6 @@
 import { type VariantProps, cva, cx } from 'cva';
 import { Github, Linkedin, Moon, Sun } from 'npm:lucide-preact';
+import { IconButton } from "./IconButton.tsx";
 
 const icon = cva('block hover:text-cat-blue', {
   variants: {
@@ -13,8 +14,8 @@ const icon = cva('block hover:text-cat-blue', {
 const list = cva('flex', {
   variants: {
     size: {
-      md: 'gap-3',
-      sm: 'gap-3',
+      md: 'gap-1 md:gap-2',
+      sm: 'gap-1',
     },
   },
 });
@@ -30,34 +31,36 @@ export function SocialLinks(props: Props) {
   return (
     <ul className={listClasname}>
       <li className="justify-self-end">
-        <a
+        <IconButton
+          as="a"
           title="Github"
           target="_blank"
-          className={iconClassname}
+          class={iconClassname}
           href="https://github.com/fveracoechea"
         >
           <Github fontSize="inherit" />
-        </a>
+        </IconButton>
       </li>
       <li className="justify-self-end">
-        <a
+        <IconButton
+          as="a"
           title="LinkedIn"
           target="_blank"
           className={iconClassname}
           href="https://www.linkedin.com/in/fveracoechea/"
         >
           <Linkedin fontSize="inherit" />
-        </a>
+        </IconButton>
       </li>
       <li className="justify-self-end">
-        <button
+        <IconButton
           data-id="theme-toggler"
           className={cx(iconClassname, 'appearance-none border-none')}
           title="Switch color theme"
         >
           <Moon fontSize="inherit" data-icon="dark" />
           <Sun fontSize="inherit" data-icon="light" />
-        </button>
+        </IconButton>
       </li>
     </ul>
   );

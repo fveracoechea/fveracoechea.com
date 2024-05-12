@@ -6,6 +6,10 @@
 @tailwind utilities;
 
 @layer base {
+    * {
+        outline: none;
+    }
+        
     html {
         font-family: 'Fira Sans', sans-serif;
     }
@@ -37,12 +41,7 @@ html.cat-latte button svg[data-icon='light'] {
     }
 }
 
-a,
-button {
-    outline: none;
-    @apply focus-visible:scale-95 focus-visible:text-cat-mauve;
-    @apply transition-colors transition-transform;
-}
+
 
 .prose {
     --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
