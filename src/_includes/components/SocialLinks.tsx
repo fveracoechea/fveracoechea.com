@@ -1,5 +1,5 @@
 import { type VariantProps, cva, cx } from 'cva';
-import { DarkMode, GitHub, LightMode, LinkedIn } from 'npm:@mui/icons-material';
+import { Github, Linkedin, Moon, Sun } from 'npm:lucide-preact';
 
 const icon = cva('block hover:text-cat-blue', {
   variants: {
@@ -36,7 +36,7 @@ export function SocialLinks(props: Props) {
           className={iconClassname}
           href="https://github.com/fveracoechea"
         >
-          <GitHub fontSize="inherit" />
+          <Github fontSize="inherit" />
         </a>
       </li>
       <li className="justify-self-end">
@@ -46,7 +46,7 @@ export function SocialLinks(props: Props) {
           className={iconClassname}
           href="https://www.linkedin.com/in/fveracoechea/"
         >
-          <LinkedIn fontSize="inherit" />
+          <Linkedin fontSize="inherit" />
         </a>
       </li>
       <li className="justify-self-end">
@@ -55,8 +55,8 @@ export function SocialLinks(props: Props) {
           className={cx(iconClassname, 'appearance-none border-none')}
           title="Switch color theme"
         >
-          <DarkMode fontSize="inherit" data-icon="dark" />
-          <LightMode fontSize="inherit" data-icon="light" />
+          <Moon fontSize="inherit" data-icon="dark" />
+          <Sun fontSize="inherit" data-icon="light" />
         </button>
       </li>
     </ul>
