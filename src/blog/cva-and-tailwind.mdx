@@ -5,7 +5,7 @@ description:
   one component using Class Variance Authority.
 image: /images/cva-tailwind.jpeg
 createdAt: 05/07/2024
-published: false
+published: true
 ---
 
 Tailwind is a unponionated **utility-first CSS framework** that offers great
@@ -64,9 +64,9 @@ interface ButtonProps {
 ### Implementation
 
 ```typescript
-import clsx from "clsx";
+import clsx, { ClassValue } from 'clsx';
 
-function Button(props: ButtonProps) {
+export default function Button(props: ButtonProps) {
   const {
     children,
     size = 'medium',
@@ -75,9 +75,12 @@ function Button(props: ButtonProps) {
     disabled,
   } = props;
 
-  const classNames = clsx(
+  const styles: ClassValue = [
     'h-fit appearance-none rounded font-medium transition-colors',
-    variant === 'contained' && [
+  ];
+
+  if (variant === 'contained') {
+    styles.push(
       'text-cat-mantle',
       disabled
         ? 'bg-cat-overlay2'
@@ -86,22 +89,24 @@ function Button(props: ButtonProps) {
             color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
             color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
           ],
-    ],
-    variant === 'outlined' && [
+    );
+  }
+
+  if (variant === 'outlined') {
+    styles.push(
       'border-2 bg-cat-mantle',
       disabled
-        ? 'border-cat-overlay2 text-cat-overlay2'
+        ? 'bg-cat-overlay2'
         : [
-            color === 'primary' &&
-              'border-cat-blue text-cat-blue hover:bg-cat-blue/15',
-            color === 'success' &&
-              'border-cat-green text-cat-green hover:bg-cat-green/15',
-            color === 'danger' &&
-              'border-cat-red text-cat-red hover:bg-cat-red/15',
+            color === 'primary' && 'bg-cat-blue hover:bg-cat-blue/80',
+            color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
+            color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
           ],
-    ],
-    variant === 'text' && [
-      'font-medium',
+    );
+  }
+
+  if (variant === 'text') {
+    styles.push(
       disabled
         ? 'text-cat-overlay2'
         : [
@@ -109,7 +114,10 @@ function Button(props: ButtonProps) {
             color === 'success' && 'text-cat-green hover:bg-cat-green/15',
             color === 'danger' && 'text-cat-red hover:bg-cat-red/15',
           ],
-    ],
+    );
+  }
+
+  styles.push(
     size === 'small' && 'px-4 py-1 text-sm',
     size === 'medium' && 'px-6 py-1.5 text-base',
     size === 'large' && 'px-8 py-2 text-lg',
@@ -117,7 +125,7 @@ function Button(props: ButtonProps) {
   );
 
   return (
-    <button className={classNames} disabled={disabled}>
+    <button className={clsx(styles)} disabled={disabled}>
       <span>{children}</span>
     </button>
   );
@@ -154,21 +162,110 @@ Let's take a closer look it and test whether it makes easier to match and apply
 conditional classNames in a more readable way.
 
 ```typescript
-import clsx from "clsx";
-
-export default function Button(props: ButtonProps) {
-  const {
-    children,
-    size = "medium",
-    variant = "contained",
-    color = "primary",
-    disabled,
-  } = props;
-
-  return (
-    <button className={classNames} disabled={disabled}>
-      <span>{children}</span>
-    </button>
-  );
-}
+const button = cva(
+  'h-fit appearance-none rounded font-medium transition-colors',
+  {
+    variants: {
+      variant: {
+        contained: 'text-cat-mantle',
+        outlined: 'border-2 bg-transparent',
+        text: 'bg-transparent',
+      },
+      color: {
+        primary: '',
+        success: '',
+        danger: '',
+      },
+      size: {
+        small: 'px-4 py-1 text-sm',
+        medium: 'px-6 py-1.5 text-base',
+        large: 'px-8 py-2 text-lg',
+      },
+      disabled: {
+        true: 'cursor-not-allowed',
+        false: 'cursor-pointer',
+      },
+    },
+    compoundVariants: [
+      {
+        variant: 'contained',
+        color: 'primary',
+        disabled: false,
+        className: 'bg-cat-blue hover:bg-cat-blue/80',
+      },
+      {
+        variant: 'contained',
+        color: 'success',
+        disabled: false,
+        className: 'bg-cat-green hover:bg-cat-green/80',
+      },
+      {
+        variant: 'contained',
+        color: 'danger',
+        disabled: false,
+        className: 'bg-cat-red hover:bg-cat-red/80',
+      },
+      {
+        variant: 'contained',
+        color: ['primary', 'success', 'danger'],
+        disabled: true,
+        className: 'bg-cat-overlay2',
+      },
+      {
+        variant: 'outlined',
+        color: 'primary',
+        disabled: false,
+        className: 'border-cat-blue text-cat-blue hover:bg-cat-blue/15',
+      },
+      {
+        variant: 'outlined',
+        color: 'success',
+        disabled: false,
+        className: 'border-cat-green text-cat-green hover:bg-cat-green/15',
+      },
+      {
+        variant: 'outlined',
+        color: 'danger',
+        disabled: false,
+        className: 'border-cat-red text-cat-red hover:bg-cat-red/15',
+      },
+      {
+        variant: 'outlined',
+        color: ['primary', 'success', 'danger'],
+        disabled: true,
+        className: 'border-cat-overlay2 text-cat-overlay2',
+      },
+      {
+        variant: 'text',
+        color: 'primary',
+        disabled: false,
+        className: 'text-cat-blue hover:bg-cat-blue/15',
+      },
+      {
+        variant: 'text',
+        color: 'success',
+        disabled: false,
+        className: 'text-cat-green hover:bg-cat-green/15',
+      },
+      {
+        variant: 'text',
+        color: 'danger',
+        disabled: false,
+        className: 'text-cat-red hover:bg-cat-red/15',
+      },
+      {
+        variant: 'text',
+        color: ['primary', 'success', 'danger'],
+        disabled: true,
+        className: 'text-cat-overlay2',
+      },
+    ],
+    defaultVariants: {
+      variant: 'contained',
+      color: 'primary',
+      disabled: false,
+      size: 'medium',
+    },
+  },
+);
 ```

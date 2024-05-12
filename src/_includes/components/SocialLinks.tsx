@@ -1,6 +1,7 @@
 import { type VariantProps, cva, cx } from 'cva';
 import { Github, Linkedin, Moon, Sun } from 'npm:lucide-preact';
-import { IconButton } from "./IconButton.tsx";
+
+import { IconButton } from './IconButton.tsx';
 
 const icon = cva('block hover:text-cat-blue', {
   variants: {

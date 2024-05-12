@@ -8,11 +8,11 @@ function Header() {
   return (
     <header className={cx('border-b border-cat-surface0')}>
       <div className="container flex items-center justify-between gap-2 py-8">
-        <a href="/">
+        <a href="/" class="transition-transform focus-visible:scale-95">
           <h1
             className={cx(
               'bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text text-transparent',
-              'text-lg font-semibold md:text-2xl',
+              'text-lg font-semibold transition-colors md:text-2xl',
             )}
           >
             Francisco Veracoechea

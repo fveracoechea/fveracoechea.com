@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import Button from '../../examples/components/Button.tsx';
+import Button from '../../examples/components/CVAButton.tsx';
 
 type Props = {
   variant: 'contained' | 'outlined' | 'text';
