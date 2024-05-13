@@ -1,6 +1,7 @@
 import { cx } from 'cva';
 
 import { SocialLinks } from '../components/SocialLinks.tsx';
+import ThemeSwitchwer from "../components/ThemeSwitchwer.tsx";
 
 export const layout = 'layouts/document.tsx';
 
@@ -28,8 +29,7 @@ function Header() {
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
-
-        <SocialLinks size="md" />
+        <ThemeSwitchwer />
       </div>
     </header>
   );
