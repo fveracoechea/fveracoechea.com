@@ -1,9 +1,16 @@
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'npm:preact/hooks';
 
-import { THEME, Theme } from '../types/theme.ts';
 import { IconButton } from './IconButton.tsx';
 import { Computer, Moon, Sun } from './Icons.tsx';
+
+const THEME = {
+  DARK: 'cat-mocha',
+  LIGHT: 'cat-latte',
+  SYSTEM: 'system-theme',
+} as const;
+
+type Theme = keyof typeof THEME;
 
 function checkRadio(element: HTMLLabelElement) {
   element.tabIndex = 0;

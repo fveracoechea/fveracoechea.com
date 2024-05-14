@@ -1,4 +1,8 @@
-import { THEME } from './_includes/types/theme.ts';
+export const THEME = {
+  DARK: 'cat-mocha',
+  LIGHT: 'cat-latte',
+  SYSTEM: 'system-theme',
+} as const;
 
 function isValidTheme(theme: string | null): theme is string {
   return (
