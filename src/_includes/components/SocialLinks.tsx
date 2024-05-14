@@ -1,22 +1,13 @@
-import { type VariantProps, cva, cx } from 'cva';
-import { Github, Linkedin, Moon, Sun } from 'npm:lucide-preact';
+import { type VariantProps, cva } from 'cva';
 
 import { IconButton } from './IconButton.tsx';
-
-const icon = cva('block hover:text-cat-blue', {
-  variants: {
-    size: {
-      md: 'text-3xl md:text-4xl',
-      sm: 'text-2xl',
-    },
-  },
-});
+import { Github, Linkedin } from './Icons.tsx';
 
 const list = cva('flex', {
   variants: {
     size: {
-      md: 'gap-1 md:gap-2',
-      sm: 'gap-1',
+      md: 'gap-2 text-2xl',
+      sm: 'gap-1 text-xl',
     },
   },
 });
@@ -26,7 +17,6 @@ type Props = VariantProps<typeof icon> & { className?: string };
 export function SocialLinks(props: Props) {
   const { size = 'sm', className } = props;
 
-  const iconClassname = icon({ size });
   const listClasname = list({ size, className });
 
   return (
@@ -36,10 +26,9 @@ export function SocialLinks(props: Props) {
           as="a"
           title="Github"
           target="_blank"
-          class={iconClassname}
           href="https://github.com/fveracoechea"
         >
-          <Github fontSize="inherit" />
+          <Github />
         </IconButton>
       </li>
       <li className="justify-self-end">
@@ -47,20 +36,9 @@ export function SocialLinks(props: Props) {
           as="a"
           title="LinkedIn"
           target="_blank"
-          className={iconClassname}
           href="https://www.linkedin.com/in/fveracoechea/"
         >
-          <Linkedin fontSize="inherit" />
-        </IconButton>
-      </li>
-      <li className="justify-self-end">
-        <IconButton
-          data-id="theme-toggler"
-          className={cx(iconClassname, 'appearance-none border-none')}
-          title="Switch color theme"
-        >
-          <Moon fontSize="inherit" data-icon="dark" />
-          <Sun fontSize="inherit" data-icon="light" />
+          <Linkedin />
         </IconButton>
       </li>
     </ul>

@@ -9,7 +9,7 @@
     * {
         outline: none;
     }
-        
+
     html {
         font-family: 'Fira Sans', sans-serif;
     }
@@ -41,7 +41,17 @@ html.cat-latte button svg[data-icon='light'] {
     }
 }
 
+@media (prefers-color-scheme: light) {
+    html.system-theme {
+        @apply cat-latte;
+    }
+}
 
+@media (prefers-color-scheme: dark) {
+    html.system-theme {
+        @apply cat-mocha;
+    }
+}
 
 .prose {
     --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
@@ -81,4 +91,9 @@ html.cat-latte button svg[data-icon='light'] {
     table tr td {
         @apply text-center;
     }
+}
+
+svg.lucide {
+    width: 1em;
+    height: 1em;
 }

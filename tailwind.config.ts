@@ -2,7 +2,7 @@ import catppuccin from '@catppuccin/tailwindcss';
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 
-export default {
+const config: Config = {
   content: ['./_includes/layouts/*.{html,ts,tsx}'],
   safelist: ['cat-latte', 'cat-mocha'],
   theme: {
@@ -25,4 +25,6 @@ export default {
     },
   },
   plugins: [typography, catppuccin({ prefix: 'cat' })],
-} satisfies Config;
+};
+
+export default config;

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import clsx from 'npm:clsx';
 
 export const layout = 'layouts/base.tsx';
 

@@ -9,7 +9,7 @@ export default function Document(props: Lume.Data) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{props.title}</title>
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
-        <script src="/scripts/theme.js" />
+        <script type="module" src="/theme.js" />
       </head>
       <body className={cx('relative bg-cat-base text-cat-text')}>
         <div
@@ -27,6 +27,8 @@ export default function Document(props: Lume.Data) {
             'bg-gradient-to-b',
           )}
         />
+
+        <script type="module" defer src="/main.js" />
       </body>
     </html>
   );
