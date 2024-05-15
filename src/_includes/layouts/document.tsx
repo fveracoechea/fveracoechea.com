@@ -28,7 +28,7 @@ export default function Document(props: Lume.Data) {
           )}
         />
 
-        <script type="module" defer src="/main.js" />
+        <script type="module" src="/main.js" />
       </body>
     </html>
   );

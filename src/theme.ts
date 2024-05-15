@@ -1,21 +1,16 @@
-export const THEME = {
+const THEME = {
   DARK: 'cat-mocha',
   LIGHT: 'cat-latte',
   SYSTEM: 'system-theme',
 } as const;
 
-function isValidTheme(theme: string | null): theme is string {
-  return (
-    theme === THEME.DARK || theme === THEME.LIGHT || theme === THEME.SYSTEM
-  );
-}
-
 const theme = localStorage.getItem('theme');
-const html = document.querySelector('html');
+const html = document.querySelector('html')!;
 
-if (!isValidTheme(theme)) {
-  localStorage.setItem('theme', THEME.SYSTEM);
-  html?.classList.add(THEME.SYSTEM);
+if (theme === THEME.DARK || theme === THEME.LIGHT || theme === THEME.SYSTEM) {
+  html.classList.add(theme);
 } else {
-  html?.classList.add(theme);
+  localStorage.setItem('theme', THEME.SYSTEM);
+  html.classList.add(THEME.SYSTEM);
 }
+
