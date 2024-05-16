@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
-import Button from '../_includes/components/CVAButton.tsx';
+import Button from "../_includes/components/CVAButton.tsx";
 
 type Props = {
-  variant: 'contained' | 'outlined' | 'text';
+  variant: "contained" | "outlined" | "text";
 };
 
 export default function (props: Props) {
@@ -12,9 +12,9 @@ export default function (props: Props) {
     <div className="flex flex-col gap-2">
       <div
         className={clsx(
-          'playground not-prose flex gap-4 bg-cat-mantle',
-          'flex-wrap items-center md:justify-between',
-          'rounded border border-cat-surface0 bg-cat-base p-4',
+          "playground not-prose flex gap-4 bg-cat-mantle",
+          "flex-wrap items-center md:justify-between",
+          "rounded border border-cat-surface0 bg-cat-base p-4",
         )}
       >
         <Button variant={v} color="primary" size="small">

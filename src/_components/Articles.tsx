@@ -1,12 +1,12 @@
-import { cx } from 'cva';
-import { format } from 'npm:date-fns';
+import { cx } from "cva";
+import { format } from "npm:date-fns";
 
-import { PostData } from '../_includes/types/article.ts';
+import { PostData } from "../_includes/types/article.ts";
 
 function Articles(props: Lume.Data) {
   const { search } = props;
   const blog = search
-    .pages<PostData>('type=post published=true', '', 8)
+    .pages<PostData>("type=post published=true", "", 8)
     .toSorted(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -28,26 +28,26 @@ function Articles(props: Lume.Data) {
                     height={281}
                     width={535}
                     className={cx(
-                      'h-auto w-full rounded border border-cat-surface0 object-cover',
-                      'ring-0 ring-cat-surface0 transition-shadow',
-                      'group-hover:border-cat-blue group-hover:ring-2 group-hover:ring-cat-blue',
-                      'group-focus-within:border-cat-mauve',
-                      'group-focus-within:ring-2 group-focus-within:ring-cat-mauve',
+                      "h-auto w-full rounded border border-cat-surface0 object-cover",
+                      "ring-0 ring-cat-surface0 transition-shadow",
+                      "group-hover:border-cat-blue group-hover:ring-2 group-hover:ring-cat-blue",
+                      "group-focus-within:border-cat-mauve",
+                      "group-focus-within:ring-2 group-focus-within:ring-cat-mauve",
                     )}
                   />
                 </figure>
                 <figcaption className="flex flex-[3] flex-col gap-2 pt-4">
                   <h4
                     className={cx(
-                      'text-base font-medium text-cat-text underline-offset-2 transition-colors',
-                      'group-hover:text-cat-blue group-hover:underline',
-                      'group-focus-within:text-cat-mauve',
+                      "text-base font-medium text-cat-text underline-offset-2 transition-colors",
+                      "group-hover:text-cat-blue group-hover:underline",
+                      "group-focus-within:text-cat-mauve",
                     )}
                   >
                     {post.title}
                   </h4>
                   <p className="text-sm text-cat-subtext1">
-                    <b>{format(post.createdAt, 'PPP')}</b>
+                    <b>{format(post.createdAt, "PPP")}</b>
                     <span>&nbsp;-&nbsp;</span>
                     <span>{post.description}</span>
                   </p>

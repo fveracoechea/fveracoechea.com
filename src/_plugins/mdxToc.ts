@@ -1,7 +1,7 @@
-import rehypeSlug from 'https://esm.sh/rehype-slug@6.0.0';
-import { compile } from 'npm:@mdx-js/mdx';
-import withToc from 'npm:@stefanprobst/rehype-extract-toc';
-import withTocExport from 'npm:@stefanprobst/rehype-extract-toc/mdx';
+import rehypeSlug from "https://esm.sh/rehype-slug@6.0.0";
+import { compile } from "npm:@mdx-js/mdx";
+import withToc from "npm:@stefanprobst/rehype-extract-toc";
+import withTocExport from "npm:@stefanprobst/rehype-extract-toc/mdx";
 
 type TocData = {
   depth: number;
@@ -11,7 +11,7 @@ type TocData = {
 };
 
 export default (pageType?: string) => (site: Lume.Site) => {
-  site.preprocess(['.mdx'], async pages => {
+  site.preprocess([".mdx"], async pages => {
     for (const page of pages) {
       if (pageType && pageType !== page.data.type) continue;
 

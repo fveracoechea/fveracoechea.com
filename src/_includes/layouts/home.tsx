@@ -1,6 +1,6 @@
-import clsx from 'npm:clsx';
+import clsx from "npm:clsx";
 
-export const layout = 'layouts/base.tsx';
+export const layout = "layouts/base.tsx";
 
 export default function HomeLayout(props: Lume.Data) {
   const Articles = props.comp.Articles;
@@ -11,8 +11,8 @@ export default function HomeLayout(props: Lume.Data) {
         <div className="relative flex flex-1 items-center justify-center">
           <img
             className={clsx(
-              'h-full w-full max-w-80 rounded border border-cat-surface0',
-              'object-cover md:absolute md:max-w-none',
+              "h-full w-full max-w-80 rounded border border-cat-surface0",
+              "object-cover md:absolute md:max-w-none",
             )}
             src="/images/me.jpg"
           />

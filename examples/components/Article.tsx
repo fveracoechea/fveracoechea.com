@@ -1,5 +1,5 @@
-import { Container } from './Container.tsx';
-import { Text } from './Text.tsx';
+import { Container } from "./Container.tsx";
+import { Text } from "./Text.tsx";
 
 export function Article() {
   return (

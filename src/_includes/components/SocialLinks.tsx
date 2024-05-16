@@ -1,13 +1,13 @@
-import { type VariantProps, cva } from 'cva';
+import { type VariantProps, cva } from "cva";
 
-import { IconButton } from './IconButton.tsx';
-import { Github, Linkedin } from './Icons.tsx';
+import { IconButton } from "./IconButton.tsx";
+import { Github, Linkedin } from "./Icons.tsx";
 
-const list = cva('flex', {
+const list = cva("flex", {
   variants: {
     size: {
-      md: 'gap-2 text-2xl',
-      sm: 'gap-1 text-xl',
+      md: "gap-2 text-2xl",
+      sm: "gap-1 text-xl",
     },
   },
 });
@@ -15,7 +15,7 @@ const list = cva('flex', {
 type Props = VariantProps<typeof icon> & { className?: string };
 
 export function SocialLinks(props: Props) {
-  const { size = 'sm', className } = props;
+  const { size = "sm", className } = props;
 
   const listClasname = list({ size, className });
 

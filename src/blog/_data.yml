@@ -1,9 +1,9 @@
 type: post
 layout: layouts/blog.tsx
 metas:
-  title: '=title'
-  description: '=description'
-  image: '=image'
-  lang: 'en-US'
-  site: 'Francisco Veracoechea'
+  title: "=title"
+  description: "=description"
+  image: "=image"
+  lang: "en-US"
+  site: "Francisco Veracoechea"
   robots: true

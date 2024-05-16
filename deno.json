@@ -19,6 +19,7 @@
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "format": "deno run -A npm:prettier . --write",
     "build": "deno task lume",
     "serve": "deno task lume -s"
   },

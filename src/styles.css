@@ -1,5 +1,5 @@
-@import 'css/fonts.css';
-@import 'css/code-catppuccin.css';
+@import "css/fonts.css";
+@import "css/code-catppuccin.css";
 
 @tailwind base;
 @tailwind components;
@@ -11,7 +11,7 @@
     }
 
     html {
-        font-family: 'Fira Sans', sans-serif;
+        font-family: "Fira Sans", sans-serif;
     }
 }
 
@@ -26,11 +26,11 @@ body {
     scroll-behavior: smooth;
 }
 
-html.cat-mocha button svg[data-icon='dark'] {
+html.cat-mocha button svg[data-icon="dark"] {
     display: none;
 }
 
-html.cat-latte button svg[data-icon='light'] {
+html.cat-latte button svg[data-icon="light"] {
     display: none;
 }
 
