@@ -145,14 +145,14 @@ export type Overwrite<T, U> = DistributiveOmit<T, keyof U> & U;
 /**
  * Props defined on the component.
  */
-type BaseProps<M extends OverridableTypeMap> = M['props'];
+type BaseProps<M extends OverridableTypeMap> = M["props"];
 
 /**
  * Props if `as={Component}` is NOT used.
  */
 export type DefaultComponentProps<M extends OverridableTypeMap> = BaseProps<M> &
   DistributiveOmit<
-    React.ComponentPropsWithRef<M['defaultComponent']>,
+    React.ComponentPropsWithRef<M["defaultComponent"]>,
     keyof BaseProps<M>
   >;
 
@@ -162,10 +162,10 @@ export type DefaultComponentProps<M extends OverridableTypeMap> = BaseProps<M> &
 export type PolymorphicProps<
   TypeMap extends OverridableTypeMap,
   RootComponent extends React.ElementType,
-> = TypeMap['props'] &
+> = TypeMap["props"] &
   DistributiveOmit<
     React.ComponentPropsWithRef<RootComponent>,
-    keyof TypeMap['props']
+    keyof TypeMap["props"]
   > & {
     as?: React.ElementType;
   };

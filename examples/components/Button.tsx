@@ -1,66 +1,66 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx, { ClassValue } from "clsx";
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'contained' | 'outlined' | 'text';
-  color?: 'primary' | 'success' | 'danger';
-  size?: 'small' | 'medium' | 'large';
+  variant?: "contained" | "outlined" | "text";
+  color?: "primary" | "success" | "danger";
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
   const {
     children,
-    size = 'medium',
-    variant = 'contained',
-    color = 'primary',
+    size = "medium",
+    variant = "contained",
+    color = "primary",
     disabled,
   } = props;
 
   const styles: ClassValue = [
-    'h-fit appearance-none rounded font-medium transition-colors',
+    "h-fit appearance-none rounded font-medium transition-colors",
   ];
 
-  if (variant === 'contained') {
+  if (variant === "contained") {
     styles.push(
-      'text-cat-mantle',
+      "text-cat-mantle",
       disabled
-        ? 'bg-cat-overlay2'
+        ? "bg-cat-overlay2"
         : [
-            color === 'primary' && 'bg-cat-blue hover:bg-cat-blue/80',
-            color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
-            color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
+            color === "primary" && "bg-cat-blue hover:bg-cat-blue/80",
+            color === "success" && "bg-cat-green hover:bg-cat-green/80",
+            color === "danger" && "bg-cat-red hover:bg-cat-red/80",
           ],
     );
   }
-  if (variant === 'outlined') {
+  if (variant === "outlined") {
     styles.push(
-      'border-2 bg-cat-mantle',
+      "border-2 bg-cat-mantle",
       disabled
-        ? 'bg-cat-overlay2'
+        ? "bg-cat-overlay2"
         : [
-            color === 'primary' && 'bg-cat-blue hover:bg-cat-blue/80',
-            color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
-            color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
+            color === "primary" && "bg-cat-blue hover:bg-cat-blue/80",
+            color === "success" && "bg-cat-green hover:bg-cat-green/80",
+            color === "danger" && "bg-cat-red hover:bg-cat-red/80",
           ],
     );
-  } else if (variant === 'text') {
+  } else if (variant === "text") {
     styles.push(
       disabled
-        ? 'text-cat-overlay2'
+        ? "text-cat-overlay2"
         : [
-            color === 'primary' && 'text-cat-blue hover:bg-cat-blue/15',
-            color === 'success' && 'text-cat-green hover:bg-cat-green/15',
-            color === 'danger' && 'text-cat-red hover:bg-cat-red/15',
+            color === "primary" && "text-cat-blue hover:bg-cat-blue/15",
+            color === "success" && "text-cat-green hover:bg-cat-green/15",
+            color === "danger" && "text-cat-red hover:bg-cat-red/15",
           ],
     );
   }
 
   styles.push(
-    size === 'small' && 'px-4 py-1 text-sm',
-    size === 'medium' && 'px-6 py-1.5 text-base',
-    size === 'large' && 'px-8 py-2 text-lg',
-    disabled && 'cursor-not-allowed',
+    size === "small" && "px-4 py-1 text-sm",
+    size === "medium" && "px-6 py-1.5 text-base",
+    size === "large" && "px-8 py-2 text-lg",
+    disabled && "cursor-not-allowed",
   );
 
   return (

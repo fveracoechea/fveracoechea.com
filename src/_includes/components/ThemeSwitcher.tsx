@@ -1,21 +1,21 @@
-import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'npm:preact/hooks';
+import clsx from "clsx";
+import { useEffect, useRef, useState } from "npm:preact/hooks";
 
 import { withIsland } from '../helpers/islands.tsx';
 import { IconButton } from './IconButton.tsx';
 import { Computer, Moon, Sun } from './Icons.tsx';
 
 const THEME = {
-  DARK: 'cat-mocha',
-  LIGHT: 'cat-latte',
-  SYSTEM: 'system-theme',
+  DARK: "cat-mocha",
+  LIGHT: "cat-latte",
+  SYSTEM: "system-theme",
 } as const;
 
 type Theme = keyof typeof THEME;
 
 function checkRadio(element: HTMLLabelElement) {
   element.tabIndex = 0;
-  element.setAttribute('aria-checked', 'true');
+  element.setAttribute("aria-checked", "true");
   element.focus();
   // We click it to "check", so that the radio change event fires.
   element.click();
@@ -23,7 +23,7 @@ function checkRadio(element: HTMLLabelElement) {
 
 function uncheckRadio(element: HTMLLabelElement) {
   element.tabIndex = -1;
-  element.setAttribute('aria-checked', 'false');
+  element.setAttribute("aria-checked", "false");
   element.blur();
 }
 
@@ -66,10 +66,10 @@ function ThemeSwitcher() {
     setTheme(t);
     for (const key in THEME) {
       if (Object.prototype.hasOwnProperty.call(THEME, key))
-        document.querySelector('html')?.classList.remove(THEME[key as Theme]);
+        document.querySelector("html")?.classList.remove(THEME[key as Theme]);
     }
-    document.querySelector('html')?.classList.add(THEME[t]);
-    localStorage.setItem('theme', THEME[t]);
+    document.querySelector("html")?.classList.add(THEME[t]);
+    localStorage.setItem("theme", THEME[t]);
   }
 
   function onKeyDownHandler(e: KeyboardEvent) {
@@ -86,7 +86,7 @@ function ThemeSwitcher() {
       ArrowLeft: () => checkPrevious(collection, target),
       ArrowDown: () => checkNext(collection, target),
       ArrowRight: () => checkNext(collection, target),
-      ' ': () => checkRadio(target),
+      " ": () => checkRadio(target),
       Enter: () => checkRadio(target),
     };
 
@@ -99,14 +99,14 @@ function ThemeSwitcher() {
   }
 
   useEffect(function loadTheme() {
-    const theme = localStorage.getItem('theme');
+    const theme = localStorage.getItem("theme");
     switch (theme) {
       case THEME.DARK:
-        return setTheme('DARK');
+        return setTheme("DARK");
       case THEME.LIGHT:
-        return setTheme('LIGHT');
+        return setTheme("LIGHT");
       case THEME.SYSTEM:
-        return setTheme('SYSTEM');
+        return setTheme("SYSTEM");
     }
   }, []);
 
@@ -115,8 +115,8 @@ function ThemeSwitcher() {
       role="radiogroup"
       ref={radiogroupRef}
       class={clsx(
-        'flex bg-cat-base text-xl md:text-2xl',
-        'rounded border border-cat-surface0 text-cat-text',
+        "flex bg-cat-base text-xl md:text-2xl",
+        "rounded border border-cat-surface0 text-cat-text",
       )}
     >
       <IconButton
@@ -125,11 +125,11 @@ function ThemeSwitcher() {
         onKeyDown={onKeyDownHandler}
         rounded={false}
         title="Light theme"
-        active={theme === 'LIGHT'}
-        tabIndex={theme === 'LIGHT' ? 0 : -1}
-        onClick={() => saveTheme('LIGHT')}
+        active={theme === "LIGHT"}
+        tabIndex={theme === "LIGHT" ? 0 : -1}
+        onClick={() => saveTheme("LIGHT")}
         class="rounded-bl rounded-tl"
-        aria-checked={theme === 'LIGHT'}
+        aria-checked={theme === "LIGHT"}
       >
         <span>
           <Sun />
@@ -141,10 +141,10 @@ function ThemeSwitcher() {
         onKeyDown={onKeyDownHandler}
         rounded={false}
         title="Dark theme"
-        active={theme === 'DARK'}
-        tabIndex={theme === 'DARK' ? 0 : -1}
-        onClick={() => saveTheme('DARK')}
-        aria-checked={theme === 'DARK'}
+        active={theme === "DARK"}
+        tabIndex={theme === "DARK" ? 0 : -1}
+        onClick={() => saveTheme("DARK")}
+        aria-checked={theme === "DARK"}
       >
         <Moon />
       </IconButton>
@@ -154,11 +154,11 @@ function ThemeSwitcher() {
         rounded={false}
         onKeyDown={onKeyDownHandler}
         title="System theme"
-        active={theme === 'SYSTEM'}
-        tabIndex={theme === 'SYSTEM' ? 0 : -1}
-        onClick={() => saveTheme('SYSTEM')}
+        active={theme === "SYSTEM"}
+        tabIndex={theme === "SYSTEM" ? 0 : -1}
+        onClick={() => saveTheme("SYSTEM")}
         class="rounded-br rounded-tr"
-        aria-checked={theme === 'SYSTEM'}
+        aria-checked={theme === "SYSTEM"}
       >
         <Computer />
       </IconButton>

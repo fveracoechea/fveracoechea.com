@@ -1,13 +1,13 @@
-import { cx } from 'cva';
+import { cx } from "cva";
 
-import { SocialLinks } from '../components/SocialLinks.tsx';
-import ThemeSwitcher from '../components/ThemeSwitcher.tsx';
+import { SocialLinks } from "../components/SocialLinks.tsx";
+import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
-export const layout = 'layouts/document.tsx';
+export const layout = "layouts/document.tsx";
 
 function Header() {
   return (
-    <header className={cx('border-b border-cat-surface0')}>
+    <header className={cx("border-b border-cat-surface0")}>
       <div className="container flex items-center justify-between gap-2 py-8">
         <a href="/" class="transition-transform focus-visible:scale-95">
           <h1
@@ -20,12 +20,12 @@ function Header() {
           </h1>
           <h2
             className={cx(
-              'font-mono text-xs font-normal leading-tight',
-              'md:text-base',
+              "font-mono text-xs font-normal leading-tight",
+              "md:text-base",
             )}
           >
-            <span className="text-cat-red">{'()'}</span>
-            <span className="text-cat-subtext0">{' => '}</span>
+            <span className="text-cat-red">{"()"}</span>
+            <span className="text-cat-subtext0">{" => "}</span>
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
@@ -55,7 +55,7 @@ export default function MainLayout(props: Lume.Data) {
   return (
     <>
       <Header />
-      <div className={cx('min-h-[calc(100vh-202px)] bg-transparent')}>
+      <div className={cx("min-h-[calc(100vh-202px)] bg-transparent")}>
         <div className="container">
           <main>{children}</main>
         </div>

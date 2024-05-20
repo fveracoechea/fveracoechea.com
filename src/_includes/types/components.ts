@@ -33,9 +33,8 @@ type BaseProps<M extends OverridableTypeMap> = M["props"];
 /**
  * Props if `as={Component}` is NOT used.
  */
-export type DefaultComponentProps<M extends OverridableTypeMap> =
-  & BaseProps<M>
-  & DistributiveOmit<
+export type DefaultComponentProps<M extends OverridableTypeMap> = BaseProps<M> &
+  DistributiveOmit<
     React.ComponentPropsWithRef<M["defaultComponent"]>,
     keyof BaseProps<M>
   >;
@@ -46,22 +45,22 @@ export type DefaultComponentProps<M extends OverridableTypeMap> =
 export type PolymorphicProps<
   TypeMap extends OverridableTypeMap,
   RootComponent extends React.ElementType,
-> =
-  & TypeMap["props"]
-  & DistributiveOmit<
+> = TypeMap["props"] &
+  DistributiveOmit<
     React.ComponentPropsWithRef<RootComponent>,
     keyof TypeMap["props"]
-  >
-  & {
+  > & {
     as?: React.ElementType;
   };
 
 /**
  * Props of the component if `as={Component}` is used.
  */
-type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> =
-  & BaseProps<M>
-  & DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
+type OverrideProps<
+  M extends OverridableTypeMap,
+  C extends React.ElementType,
+> = BaseProps<M> &
+  DistributiveOmit<React.ComponentPropsWithRef<C>, keyof BaseProps<M>>;
 
 /**
  * A component whose root component can be controlled via an `as` prop.
