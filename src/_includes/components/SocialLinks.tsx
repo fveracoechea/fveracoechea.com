@@ -12,7 +12,7 @@ const list = cva('flex', {
   },
 });
 
-type Props = VariantProps<typeof icon> & { className?: string };
+type Props = VariantProps<typeof list> & { className?: string };
 
 export function SocialLinks(props: Props) {
   const { size = 'sm', className } = props;

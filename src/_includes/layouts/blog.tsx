@@ -3,7 +3,7 @@ import { format } from 'npm:date-fns';
 
 export const layout = 'layouts/base.tsx';
 
-function toTableOfContents(item: Lume.TocEntry): React.ReactNode {
+function toTableOfContents(item: Lume.TocEntry): JSX.Element {
   return (
     <>
       <li

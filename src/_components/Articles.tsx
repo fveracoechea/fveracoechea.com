@@ -5,6 +5,7 @@ import { PostData } from '../_includes/types/article.ts';
 
 function Articles(props: Lume.Data) {
   const { search } = props;
+
   const blog = search
     .pages<PostData>('type=post published=true', '', 8)
     .toSorted(

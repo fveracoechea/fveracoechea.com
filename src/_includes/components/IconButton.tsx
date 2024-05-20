@@ -2,7 +2,10 @@ import { cva } from 'cva';
 import { ComponentProps } from 'preact';
 
 const iconButton = cva(
-  'flex cursor-pointer appearance-none p-2 ring-cat-blue/80 transition-colors focus-visible:ring-2',
+  [
+    'flex cursor-pointer appearance-none p-2 ring-cat-blue/80',
+    ' transition-colors focus-visible:ring-2',
+  ],
   {
     variants: {
       active: {

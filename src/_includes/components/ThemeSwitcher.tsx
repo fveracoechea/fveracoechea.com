@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'npm:preact/hooks';
 
+import { withIsland } from '../helpers/islands.tsx';
 import { IconButton } from './IconButton.tsx';
 import { Computer, Moon, Sun } from './Icons.tsx';
 
@@ -57,7 +58,7 @@ function checkNext(collection: HTMLLabelElement[], element: HTMLLabelElement) {
   }
 }
 
-export default function ThemeSwitcher() {
+function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme | null>(null);
   const radiogroupRef = useRef<HTMLDivElement | null>(null);
 
@@ -76,8 +77,6 @@ export default function ThemeSwitcher() {
     if (!(target instanceof HTMLLabelElement)) return;
     if (!radiogroupRef.current) return;
 
-    e.preventDefault();
-
     const collection = Array.from<HTMLLabelElement>(
       radiogroupRef.current.querySelectorAll('label[role="radio"]'),
     );
@@ -92,7 +91,11 @@ export default function ThemeSwitcher() {
     };
 
     const action = cases[e.key];
-    if (action) action();
+
+    if (action) {
+      e.preventDefault();
+      action();
+    }
   }
 
   useEffect(function loadTheme() {
@@ -162,3 +165,5 @@ export default function ThemeSwitcher() {
     </div>
   );
 }
+
+export default withIsland(ThemeSwitcher, 'ThemeSwitcher');

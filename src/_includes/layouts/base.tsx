@@ -12,8 +12,8 @@ function Header() {
         <a href="/" class="transition-transform focus-visible:scale-95">
           <h1
             className={cx(
-              'bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text text-transparent',
-              'text-lg font-semibold transition-colors md:text-2xl',
+              'bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text',
+              'text-lg font-semibold text-transparent transition-colors md:text-2xl',
             )}
           >
             Francisco Veracoechea
@@ -29,10 +29,7 @@ function Header() {
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
-
-        <div data-island="ThemeSwitcher">
-          <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher />
       </div>
     </header>
   );

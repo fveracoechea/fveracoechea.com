@@ -9,7 +9,7 @@ export default function Document(props: Lume.Data) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{props.title}</title>
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
-        <script type="module" src="/theme.js" />
+        <script src="/theme.js" />
       </head>
       <body className={cx('relative bg-cat-base text-cat-text')}>
         <div

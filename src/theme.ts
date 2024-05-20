@@ -1,21 +1,15 @@
-export const THEME = {
+const THEME = {
   DARK: 'cat-mocha',
   LIGHT: 'cat-latte',
   SYSTEM: 'system-theme',
 } as const;
 
-function isValidTheme(theme: string | null): theme is string {
-  return (
-    theme === THEME.DARK || theme === THEME.LIGHT || theme === THEME.SYSTEM
-  );
-}
-
 const theme = localStorage.getItem('theme');
 const html = document.querySelector('html');
 
-if (!isValidTheme(theme)) {
+if (theme === THEME.DARK || theme === THEME.LIGHT || theme === THEME.SYSTEM) {
+  html?.classList.add(theme);
+} else {
   localStorage.setItem('theme', THEME.SYSTEM);
   html?.classList.add(THEME.SYSTEM);
-} else {
-  html?.classList.add(theme);
 }
