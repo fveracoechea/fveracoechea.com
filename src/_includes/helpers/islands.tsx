@@ -7,11 +7,20 @@ export type IslandsConfig = Record<
   () => Promise<{ default: (props: IslandProps) => JSX.Element }>
 >;
 
-export function isIsland(
-  k: unknown,
-  islands: IslandsConfig,
-): k is keyof typeof islands {
-  return typeof k === 'string' && k in islands;
+/**
+ * Type guard.
+ * Determines whether an object has a property with the specified name.
+ * */
+function isKeyOf<R extends Record<PropertyKey, unknown>>(
+  record: R,
+  key: unknown,
+): key is keyof R {
+  return (
+    (typeof key === 'string' ||
+      typeof key === 'number' ||
+      typeof key === 'symbol') &&
+    Object.prototype.hasOwnProperty.call(record, key)
+  );
 }
 
 type IslandProps = {
@@ -42,16 +51,14 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
     class extends HTMLElement {
       async connectedCallback() {
         const src = this.getAttribute('src');
-        if (!isIsland(src, config))
+
+        if (!isKeyOf(config, src))
           throw new Error(`${src} is not a registered island`);
 
-        if (this.hasAttribute('visible')) {
-          await this.visible();
-        }
+        if (this.hasAttribute('visible')) await this.visible();
 
-        if (this.hasAttribute('media')) {
+        if (this.hasAttribute('media'))
           await this.media(this.getAttribute('media')!);
-        }
 
         const load = config[src];
         const Component = await load();

@@ -1,9 +1,9 @@
 import { type VariantProps, cva } from 'cva';
 
-import { IconButton } from './IconButton.tsx';
-import { Github, Linkedin, RSS } from './Icons.tsx';
+import { IconButton } from '../_includes/components/IconButton.tsx';
+import { Github, Linkedin, RSS } from '../_includes/components/Icons.tsx';
 
-const list = cva('flex', {
+const list = cva('not-prose flex', {
   variants: {
     size: {
       md: 'gap-2 text-2xl',
