@@ -1,21 +1,21 @@
 ---
 title: Simplifying component variants with Tailwind and CVA
 description:
-  Addressing Tailwind's common pitfalts when dealing with style variants using
+  Addressing common pitfalls in Tailwind when dealing with style variants using
   Class Variance Authority.
 image: /images/cva-tailwind.jpeg
 published: true
 ---
 
-Tailwind is a unponionated **utility-first CSS framework** that offers great
-flexibility, reliability and zero-runtime overhead, which makes it one of the
-best and most popular solutions out there when it comes to styling.
+Tailwind is a unopinionated **utility-first CSS framework** that offers great
+flexibility, reliability and zero-runtime overhead. This makes it one of the
+best and most popular solutions for styling.
 
 ## The problem
 
 Although I love working with Tailwind, I've noticed some potential pitfalls when
-creating bigger components, for example as part of a design-system, that has a
-lot of different style variants.
+creating larger components, such as those in a design system, which has many
+different style variants.
 
 As an example, let's look at the following component developed as part of a
 design-system library:
@@ -36,26 +36,25 @@ function Button(props: ButtonProps) {
 }
 ```
 
-As you can see, this component may be rendered as one of three different
-modifiers **contained**, **outlined**, and **text**. On top of that, it's got
-**color** and **disabled** states for all these modifiers. The goal is to have a
-button that may look and feel differently based on what props were provided to
-it.
+As you can see, this component can be rendered with three different modifiers:
+**contained**, **outlined**, and **text**. Additionally, it has color and
+disabled states for all these modifiers. The goal is to have a button that looks
+and feels different based on the provided props.
 
-### Manually matching props to classNames
+### Manual class management
 
-Tailwind provides an extensive set of utility classes to customize styles,
-however at some point managing and maintaining the classNames required for a
-component like that can become quite difficult.
+Tailwind provides an extensive set of utility classes for customizing styles.
+However, managing and maintaining the class names for a complex component can
+become quite difficult.
 
-Anyways, let's explore that can be accomplished...
+Anyways, let's explore how that can be accomplished...
 
 ### Exploration
 
-Usually, I like to start thinking about prop types as they give me a better
-picture of the components behavior. After that, my first thought would be to use
-an array to store all classNames, then conditionally push `string` classNames to
-the array depending the given props, that may look like this:
+Usually, I start by considering prop types, as they give me a better picture of
+the component's behavior. Then, I might use an array to store all class names
+and conditionally push `string` class names to the array based on the given
+props. This could look like this:
 
 ```tsx
 const styles: string[] = [
@@ -75,9 +74,9 @@ const classNames = styles.join(" ");
 return <button className={classNames}>{children}</button>;
 ```
 
-Personally I don't like this approach, we definitely need something more
+Personally, I don't like this approach, we definitely need something more
 declarative, let's try using [clsx](https://www.npmjs.com/package/clsx) to
-manage classNames instead:
+manage class names instead:
 
 ```tsx
 const styles = clsx(
@@ -101,53 +100,50 @@ It doesn't look as bad, but keep in mind it is just simply defining the styles
 for the **contained** modifier, you can probably imagine how complicated it can
 get as soon as you start adding all the other variants and modifiers.
 
-Although it is viable, I feel like implementation can become more and more
-unmanageable overtime specially when adding new features and behaviors to the
+Although it is viable, I feel like the implementation can become more and more
+unmanageable over time, especially when adding new features and behaviors to the
 component.
 
-## The ideal solution
+## Ideal solution
 
-Even after doing my best to organize all the conditionals using
-[clsx](https://www.npmjs.com/package/clsx), that still isn't a clean enough way
-to handle styles as it lacks a bit of structure and consistency, and thus making
-the component's code more difficult to follow and understand specially as it
-grows in size.
+Even after organizing all the conditionals using
+[clsx](https://www.npmjs.com/package/clsx), it still isn't a clean enough way to
+handle styles. It lacks structure and consistency, making the component's code
+more difficult to follow and understand, especially as it grows in size.
 
-Ideally we would use a more declarative approach with a consistent structure
+Ideally, we would use a more declarative approach with a consistent structure
 that helps:
 
 - Identify all the possible variants and their corresponding modifiers
 - Avoid className overlaps
-- Apply special styles when more than one variants match
+- Apply special styles when more than one variant matches
 - Define default styles in case none are provided
 - Generate component Prop Types
 
-## Class variance authority
+## Class Variance Authority (CVA)
 
-Also known as [CVA](https://cva.style/), it's library that caught my attention a
-few weeks ago. Its goal is to take away the pain points of manually matching
-classes to props and mainating types in sync. Much like
-[Stitches](https://stitches.dev/), I feel like it introduces a more structured
-approach to styling, allowing me to focus on the more fun aspects of web UI
-development.
+[CVA](https://cva.style/) is a library that caught my attention a few weeks ago.
+Its goal is to alleviate the pain points of manually matching classes to props
+and maintaining types in sync. Similar to [Stitches](https://stitches.dev/), it
+introduces a more structured approach to styling, allowing me to focus on the
+more enjoyable aspects of web UI development.
 
 ### Usage
 
 CVA's first-class variant API can be summarized into the following three key
 elements:
 
-- `variants`: Key used to define style variants. There is no limit to how many
-  variants you can add. They can be booleans by using "true" or "false" as the
-  key.
-- `compoundVariants`: Declares what styles should apply when multiple other
+- `variants`: Used to define style variants. There is no limit to how many
+  variants you can add, and they can be booleans.
+- `compoundVariants`: Declares styles that should apply when multiple other
   variant conditions are met.
-- `defaultVariants`: Defines what styles are as set default.
+- `defaultVariants`: Defines default styles when none are provided.
 
 In other words, you can design composable component APIs, you can define a
 single variant, multiple variants, and even compound variants which allow you to
 define styles based on a combination of variants.
 
-Let’s build a button component, using CVA's variant API
+Let's build a button component using CVA's variant API.
 
 ### Button Variants
 
@@ -292,21 +288,20 @@ export default function Button(props: ButtonProps) {
 
 <comp.ButtonsDemo variant="text" />
 
-This library could be a game changer in the right situations, specially when it
+This library could be a game changer in the right situations, especially when it
 comes to building complex style variants. With CVA, readability and
-maintainability get a significant upgrade. No more hunting for specific a style
-in a sea of classNames. It just keeps things very well organized, allowing you
+maintainability get a significant upgrade. No more hunting for a specific style
+in a sea of class names. It just keeps things very well organized, allowing you
 to focus on what matters.
 
 ## Wrapping Up
 
-As with any tool, it's essential to weigh the pros and cons. While CVA shines in
-terms of developer convenience, keep an eye on performance. As with any
-abstraction layer, there may be trade-offs in terms of bundle size and runtime
-performance. But with a bit of optimization, the benefits far outweigh the
-trade-offs.
+As with any tool, it's essential to weigh the pros and cons. While CVA excels in
+developer convenience, you should monitor performance. As with any abstraction
+layer, there may be trade-offs in terms of bundle size and runtime performance.
+However, with a bit of optimization, the benefits far outweigh the trade-offs.
 
 Overall, Class Variance Authority is a great solution to the challenges
 associated with styling complex components in Tailwind projects. While it may
 not be for everyone, CVA holds immense promise for streamlining styling
-complexities and allows developers to create remarkable interfaces.
+complexities and allowing developers to create remarkable interfaces.
