@@ -1,13 +1,13 @@
-import { type VariantProps, cva } from 'cva';
+import { type VariantProps, cva } from "cva";
 
-import { IconButton } from '../_includes/components/IconButton.tsx';
-import { Github, Linkedin, RSS } from '../_includes/components/Icons.tsx';
+import { IconButton } from "../_includes/components/IconButton.tsx";
+import { Github, Linkedin, RSS } from "../_includes/components/Icons.tsx";
 
-const list = cva('not-prose flex', {
+const list = cva("not-prose flex", {
   variants: {
     size: {
-      md: 'gap-2 text-2xl',
-      sm: 'gap-2 text-xl',
+      md: "gap-2 text-2xl",
+      sm: "gap-2 text-xl",
     },
   },
 });
@@ -15,7 +15,7 @@ const list = cva('not-prose flex', {
 type Props = VariantProps<typeof list> & { className?: string };
 
 export default function SocialLinks(props: Props) {
-  const { size = 'sm', className } = props;
+  const { size = "sm", className } = props;
 
   const listClasname = list({ size, className });
 

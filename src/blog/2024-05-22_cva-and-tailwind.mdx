@@ -1,0 +1,312 @@
+---
+title: Simplifying component variants with Tailwind and CVA
+description:
+  Addressing Tailwind's common pitfalts when dealing with style variants using
+  Class Variance Authority.
+image: /images/cva-tailwind.jpeg
+published: true
+---
+
+Tailwind is a unponionated **utility-first CSS framework** that offers great
+flexibility, reliability and zero-runtime overhead, which makes it one of the
+best and most popular solutions out there when it comes to styling.
+
+## The problem
+
+Although I love working with Tailwind, I've noticed some potential pitfalls when
+creating bigger components, for example as part of a design-system, that has a
+lot of different style variants.
+
+As an example, let's look at the following component developed as part of a
+design-system library:
+
+```tsx
+type ButtonProps = {
+  children: React.ReactNode;
+  modifier?: "contained" | "outlined" | "text";
+  color?: "primary" | "success" | "danger";
+  size?: "small" | "medium" | "large";
+  disabled?: boolean;
+};
+
+function Button(props: ButtonProps) {
+  const { children, modifier, color, size, disabled } = props;
+  const className = "???";
+  return <button className={className}>{children}</button>;
+}
+```
+
+As you can see, this component may be rendered as one of three different
+modifiers **contained**, **outlined**, and **text**. On top of that, it's got
+**color** and **disabled** states for all these modifiers. The goal is to have a
+button that may look and feel differently based on what props were provided to
+it.
+
+### Manually matching props to classNames
+
+Tailwind provides an extensive set of utility classes to customize styles,
+however at some point managing and maintaining the classNames required for a
+component like that can become quite difficult.
+
+Anyways, let's explore that can be accomplished...
+
+### Exploration
+
+Usually, I like to start thinking about prop types as they give me a better
+picture of the components behavior. After that, my first thought would be to use
+an array to store all classNames, then conditionally push `string` classNames to
+the array depending the given props, that may look like this:
+
+```tsx
+const styles: string[] = [
+  "h-fit appearance-none rounded font-medium transition-colors",
+];
+
+if (variant === "contained") {
+  styles.push("text-cat-mantle");
+  if (disabled) styles.push("bg-cat-overlay2");
+  else if (color === "primary") styles.push("bg-cat-blue hover:bg-cat-blue/80");
+  else if (color === "success")
+    styles.push("bg-cat-green hover:bg-cat-green/80");
+  else if (color === "danger") styles.push("bg-cat-red hover:bg-cat-red/80");
+}
+
+const classNames = styles.join(" ");
+return <button className={classNames}>{children}</button>;
+```
+
+Personally I don't like this approach, we definitely need something more
+declarative, let's try using [clsx](https://www.npmjs.com/package/clsx) to
+manage classNames instead:
+
+```tsx
+const styles = clsx(
+  "h-fit appearance-none rounded font-medium transition-colors",
+  variant === "contained" && [
+    "text-cat-mantle",
+    disabled
+      ? "bg-cat-overlay2"
+      : [
+          color === "primary" && "bg-cat-blue hover:bg-cat-blue/80",
+          color === "success" && "bg-cat-green hover:bg-cat-green/80",
+          color === "danger" && "bg-cat-red hover:bg-cat-red/80",
+        ],
+  ],
+);
+
+return <button className={styles}>{children}</button>;
+```
+
+It doesn't look as bad, but keep in mind it is just simply defining the styles
+for the **contained** modifier, you can probably imagine how complicated it can
+get as soon as you start adding all the other variants and modifiers.
+
+Although it is viable, I feel like implementation can become more and more
+unmanageable overtime specially when adding new features and behaviors to the
+component.
+
+## The ideal solution
+
+Even after doing my best to organize all the conditionals using
+[clsx](https://www.npmjs.com/package/clsx), that still isn't a clean enough way
+to handle styles as it lacks a bit of structure and consistency, and thus making
+the component's code more difficult to follow and understand specially as it
+grows in size.
+
+Ideally we would use a more declarative approach with a consistent structure
+that helps:
+
+- Identify all the possible variants and their corresponding modifiers
+- Avoid className overlaps
+- Apply special styles when more than one variants match
+- Define default styles in case none are provided
+- Generate component Prop Types
+
+## Class variance authority
+
+Also known as [CVA](https://cva.style/), it's library that caught my attention a
+few weeks ago. Its goal is to take away the pain points of manually matching
+classes to props and mainating types in sync. Much like
+[Stitches](https://stitches.dev/), I feel like it introduces a more structured
+approach to styling, allowing me to focus on the more fun aspects of web UI
+development.
+
+### Usage
+
+CVA's first-class variant API can be summarized into the following three key
+elements:
+
+- `variants`: Key used to define style variants. There is no limit to how many
+  variants you can add. They can be booleans by using "true" or "false" as the
+  key.
+- `compoundVariants`: Declares what styles should apply when multiple other
+  variant conditions are met.
+- `defaultVariants`: Defines what styles are as set default.
+
+In other words, you can design composable component APIs, you can define a
+single variant, multiple variants, and even compound variants which allow you to
+define styles based on a combination of variants.
+
+Let’s build a button component, using CVA's variant API
+
+### Button Variants
+
+```typescript
+const button = cva(
+  "h-fit appearance-none rounded font-medium transition-colors",
+  {
+    variants: {
+      modifier: {
+        contained: "text-cat-mantle",
+        outlined: "border-2 bg-transparent",
+        text: "bg-transparent",
+      },
+      color: {
+        primary: "",
+        success: "",
+        danger: "",
+      },
+      size: {
+        small: "px-4 py-1 text-sm",
+        medium: "px-6 py-1.5 text-base",
+        large: "px-8 py-2 text-lg",
+      },
+      disabled: {
+        true: "cursor-not-allowed",
+        false: "cursor-pointer",
+      },
+    },
+    compoundVariants: [
+      {
+        modifier: "contained",
+        color: "primary",
+        disabled: false,
+        className: "bg-cat-blue hover:bg-cat-blue/80",
+      },
+      {
+        modifier: "contained",
+        color: "success",
+        disabled: false,
+        className: "bg-cat-green hover:bg-cat-green/80",
+      },
+      {
+        modifier: "contained",
+        color: "danger",
+        disabled: false,
+        className: "bg-cat-red hover:bg-cat-red/80",
+      },
+      {
+        modifier: "contained",
+        color: ["primary", "success", "danger"],
+        disabled: true,
+        className: "bg-cat-overlay2",
+      },
+      {
+        modifier: "outlined",
+        color: "primary",
+        disabled: false,
+        className: "border-cat-blue text-cat-blue hover:bg-cat-blue/15",
+      },
+      {
+        modifier: "outlined",
+        color: "success",
+        disabled: false,
+        className: "border-cat-green text-cat-green hover:bg-cat-green/15",
+      },
+      {
+        modifier: "outlined",
+        color: "danger",
+        disabled: false,
+        className: "border-cat-red text-cat-red hover:bg-cat-red/15",
+      },
+      {
+        modifier: "outlined",
+        color: ["primary", "success", "danger"],
+        disabled: true,
+        className: "border-cat-overlay2 text-cat-overlay2",
+      },
+      {
+        modifier: "text",
+        color: "primary",
+        disabled: false,
+        className: "text-cat-blue hover:bg-cat-blue/15",
+      },
+      {
+        modifier: "text",
+        color: "success",
+        disabled: false,
+        className: "text-cat-green hover:bg-cat-green/15",
+      },
+      {
+        modifier: "text",
+        color: "danger",
+        disabled: false,
+        className: "text-cat-red hover:bg-cat-red/15",
+      },
+      {
+        modifier: "text",
+        color: ["primary", "success", "danger"],
+        disabled: true,
+        className: "text-cat-overlay2",
+      },
+    ],
+    defaultVariants: {
+      modifier: "contained",
+      color: "primary",
+      disabled: false,
+      size: "medium",
+    },
+  },
+);
+```
+
+### Button Component
+
+```tsx
+type ButtonProps = VariantProps<typeof button> & {
+  children: ComponentChildren;
+};
+
+export default function Button(props: ButtonProps) {
+  const { children, size, modifier, color, disabled } = props;
+
+  const classNames = button({ modifier, color, size, disabled });
+
+  return (
+    <button className={classNames} disabled={disabled ?? false}>
+      <span>{children}</span>
+    </button>
+  );
+}
+```
+
+#### Contained
+
+<comp.ButtonsDemo variant="contained" />
+
+#### Outlined
+
+<comp.ButtonsDemo variant="outlined" />
+
+#### Text
+
+<comp.ButtonsDemo variant="text" />
+
+This library could be a game changer in the right situations, specially when it
+comes to building complex style variants. With CVA, readability and
+maintainability get a significant upgrade. No more hunting for specific a style
+in a sea of classNames. It just keeps things very well organized, allowing you
+to focus on what matters.
+
+## Wrapping Up
+
+As with any tool, it's essential to weigh the pros and cons. While CVA shines in
+terms of developer convenience, keep an eye on performance. As with any
+abstraction layer, there may be trade-offs in terms of bundle size and runtime
+performance. But with a bit of optimization, the benefits far outweigh the
+trade-offs.
+
+Overall, Class Variance Authority is a great solution to the challenges
+associated with styling complex components in Tailwind projects. While it may
+not be for everyone, CVA holds immense promise for streamlining styling
+complexities and allows developers to create remarkable interfaces.

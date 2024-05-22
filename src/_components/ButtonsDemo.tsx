@@ -17,22 +17,22 @@ export default function (props: Props) {
           "rounded border border-cat-surface0 bg-cat-base p-4",
         )}
       >
-        <Button variant={v} color="primary" size="small">
+        <Button modifier={v} color="primary" size="small">
           Small
         </Button>
-        <Button variant={v} color="primary" size="medium">
+        <Button modifier={v} color="primary" size="medium">
           Medium
         </Button>
-        <Button variant={v} color="primary" size="large">
+        <Button modifier={v} color="primary" size="large">
           Large
         </Button>
-        <Button variant={v} color="success">
+        <Button modifier={v} color="success">
           Success
         </Button>
-        <Button variant={v} color="danger">
+        <Button modifier={v} color="danger">
           Danger
         </Button>
-        <Button variant={v} color="primary" disabled>
+        <Button modifier={v} color="primary" disabled>
           Disabled
         </Button>
       </div>

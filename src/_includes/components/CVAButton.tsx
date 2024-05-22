@@ -5,7 +5,7 @@ const button = cva(
   "h-fit appearance-none rounded font-medium transition-colors",
   {
     variants: {
-      variant: {
+      modifier: {
         contained: "text-cat-mantle",
         outlined: "border-2 bg-transparent",
         text: "bg-transparent",
@@ -27,80 +27,80 @@ const button = cva(
     },
     compoundVariants: [
       {
-        variant: "contained",
+        modifier: "contained",
         color: "primary",
         disabled: false,
         className: "bg-cat-blue hover:bg-cat-blue/80",
       },
       {
-        variant: "contained",
+        modifier: "contained",
         color: "success",
         disabled: false,
         className: "bg-cat-green hover:bg-cat-green/80",
       },
       {
-        variant: "contained",
+        modifier: "contained",
         color: "danger",
         disabled: false,
         className: "bg-cat-red hover:bg-cat-red/80",
       },
       {
-        variant: "contained",
+        modifier: "contained",
         color: ["primary", "success", "danger"],
         disabled: true,
         className: "bg-cat-overlay2",
       },
       {
-        variant: "outlined",
+        modifier: "outlined",
         color: "primary",
         disabled: false,
         className: "border-cat-blue text-cat-blue hover:bg-cat-blue/15",
       },
       {
-        variant: "outlined",
+        modifier: "outlined",
         color: "success",
         disabled: false,
         className: "border-cat-green text-cat-green hover:bg-cat-green/15",
       },
       {
-        variant: "outlined",
+        modifier: "outlined",
         color: "danger",
         disabled: false,
         className: "border-cat-red text-cat-red hover:bg-cat-red/15",
       },
       {
-        variant: "outlined",
+        modifier: "outlined",
         color: ["primary", "success", "danger"],
         disabled: true,
         className: "border-cat-overlay2 text-cat-overlay2",
       },
       {
-        variant: "text",
+        modifier: "text",
         color: "primary",
         disabled: false,
         className: "text-cat-blue hover:bg-cat-blue/15",
       },
       {
-        variant: "text",
+        modifier: "text",
         color: "success",
         disabled: false,
         className: "text-cat-green hover:bg-cat-green/15",
       },
       {
-        variant: "text",
+        modifier: "text",
         color: "danger",
         disabled: false,
         className: "text-cat-red hover:bg-cat-red/15",
       },
       {
-        variant: "text",
+        modifier: "text",
         color: ["primary", "success", "danger"],
         disabled: true,
         className: "text-cat-overlay2",
       },
     ],
     defaultVariants: {
-      variant: "contained",
+      modifier: "contained",
       color: "primary",
       disabled: false,
       size: "medium",
@@ -113,9 +113,9 @@ type ButtonProps = VariantProps<typeof button> & {
 };
 
 export default function Button(props: ButtonProps) {
-  const { children, size, variant, color, disabled } = props;
+  const { children, size, modifier, color, disabled } = props;
 
-  const classNames = button({ variant, color, size, disabled });
+  const classNames = button({ modifier, color, size, disabled });
 
   return (
     <button className={classNames} disabled={disabled ?? false}>
