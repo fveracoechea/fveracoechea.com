@@ -4,7 +4,7 @@ description:
   Addressing Tailwind's common pitfalts when dealing with different variants of
   one component using Class Variance Authority.
 image: /images/cva-tailwind.jpeg
-published: true
+published: false
 ---
 
 Tailwind is a unponionated **utility-first CSS framework** that offers great
@@ -43,97 +43,69 @@ for all these variants:
 
 ## Manually matching props to classNames
 
-Now let's explore what would a component look like, if we were using
-[clsx](https://www.npmjs.com/package/clsx) to manage classNames. Disclaimer: If
-you thought that all those Tailwind classnames can become quite messy, then you
-are probably right...
+Now let's explore how to manually matching those type to classNames.
 
 ### Prop types
+
+Usually, I like to start by defining prop types as they give me a better picture
+of the components behavior:
 
 ```typescript
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'contained' | 'outlined' | 'text';
-  color?: 'primary' | 'success' | 'danger';
-  size?: 'small' | 'medium' | 'large';
+  variant?: "contained" | "outlined" | "text";
+  color?: "primary" | "success" | "danger";
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
 }
 ```
 
 ### Implementation
 
+My first thought would be to do something like this:
+
 ```typescript
-import clsx, { ClassValue } from 'clsx';
+const styles: string[] = [];
 
-export default function Button(props: ButtonProps) {
-  const {
-    children,
-    size = 'medium',
-    variant = 'contained',
-    color = 'primary',
-    disabled,
-  } = props;
-
-  const styles: ClassValue = [
-    'h-fit appearance-none rounded font-medium transition-colors',
-  ];
-
-  if (variant === 'contained') {
+if (variant === "contained") {
+  styles.push("text-cat-mantle");
+  if (disabled) styles.push("bg-cat-overlay2")
+  else
     styles.push(
-      'text-cat-mantle',
-      disabled
-        ? 'bg-cat-overlay2'
-        : [
-            color === 'primary' && 'bg-cat-blue hover:bg-cat-blue/80',
-            color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
-            color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
-          ],
-    );
-  }
-
-  if (variant === 'outlined') {
-    styles.push(
-      'border-2 bg-cat-mantle',
-      disabled
-        ? 'bg-cat-overlay2'
-        : [
-            color === 'primary' && 'bg-cat-blue hover:bg-cat-blue/80',
-            color === 'success' && 'bg-cat-green hover:bg-cat-green/80',
-            color === 'danger' && 'bg-cat-red hover:bg-cat-red/80',
-          ],
-    );
-  }
-
-  if (variant === 'text') {
-    styles.push(
-      disabled
-        ? 'text-cat-overlay2'
-        : [
-            color === 'primary' && 'text-cat-blue hover:bg-cat-blue/15',
-            color === 'success' && 'text-cat-green hover:bg-cat-green/15',
-            color === 'danger' && 'text-cat-red hover:bg-cat-red/15',
-          ],
-    );
-  }
-
-  styles.push(
-    size === 'small' && 'px-4 py-1 text-sm',
-    size === 'medium' && 'px-6 py-1.5 text-base',
-    size === 'large' && 'px-8 py-2 text-lg',
-    disabled && 'cursor-not-allowed',
-  );
-
-  return (
-    <button className={clsx(styles)} disabled={disabled}>
-      <span>{children}</span>
-    </button>
-  );
+      color === "primary" ? "bg-cat-blue hover:bg-cat-blue/80" : '',
+      color === "success" ? "bg-cat-green hover:bg-cat-green/80" : '',
+      color === "danger" ? "bg-cat-red hover:bg-cat-red/80" : '',
+    )
 }
+
+<button className={styles.join(' ')} >{children}</button>
 ```
 
-Please keep in mind that it is just a simple button with simple styles,
-something like this could easily become messier at a larger scale and more
-complicated depending on the components behavior.
+What if we try using [clsx](https://www.npmjs.com/package/clsx) to manage
+classNames:
+
+```typescript
+
+const styles = clsx(
+  variant === "container" && [
+    "text-cat-mantle",
+    disabled
+      ? "bg-cat-overlay2"
+      : [
+          color === "primary" && "bg-cat-blue hover:bg-cat-blue/80",
+          color === "success" && "bg-cat-green hover:bg-cat-green/80",
+          color === "danger" && "bg-cat-red hover:bg-cat-red/80",
+        ],
+  ],
+);
+
+<button className={styles}>{children}</button>
+```
+
+It doesn't look too bad, but keep in mind that it is just a simple button with
+simple styles, you can get an idea on how complicated it can get as soon as you
+start adding all the other variants. Applying styles like that could easily
+become very diffucult to follow and reason about, especially at a larger scale.
 
 ### Need of a better solution
 
@@ -162,108 +134,108 @@ conditional classNames in a more readable way.
 
 ```typescript
 const button = cva(
-  'h-fit appearance-none rounded font-medium transition-colors',
+  "h-fit appearance-none rounded font-medium transition-colors",
   {
     variants: {
       variant: {
-        contained: 'text-cat-mantle',
-        outlined: 'border-2 bg-transparent',
-        text: 'bg-transparent',
+        contained: "text-cat-mantle",
+        outlined: "border-2 bg-transparent",
+        text: "bg-transparent",
       },
       color: {
-        primary: '',
-        success: '',
-        danger: '',
+        primary: "",
+        success: "",
+        danger: "",
       },
       size: {
-        small: 'px-4 py-1 text-sm',
-        medium: 'px-6 py-1.5 text-base',
-        large: 'px-8 py-2 text-lg',
+        small: "px-4 py-1 text-sm",
+        medium: "px-6 py-1.5 text-base",
+        large: "px-8 py-2 text-lg",
       },
       disabled: {
-        true: 'cursor-not-allowed',
-        false: 'cursor-pointer',
+        true: "cursor-not-allowed",
+        false: "cursor-pointer",
       },
     },
     compoundVariants: [
       {
-        variant: 'contained',
-        color: 'primary',
+        variant: "contained",
+        color: "primary",
         disabled: false,
-        className: 'bg-cat-blue hover:bg-cat-blue/80',
+        className: "bg-cat-blue hover:bg-cat-blue/80",
       },
       {
-        variant: 'contained',
-        color: 'success',
+        variant: "contained",
+        color: "success",
         disabled: false,
-        className: 'bg-cat-green hover:bg-cat-green/80',
+        className: "bg-cat-green hover:bg-cat-green/80",
       },
       {
-        variant: 'contained',
-        color: 'danger',
+        variant: "contained",
+        color: "danger",
         disabled: false,
-        className: 'bg-cat-red hover:bg-cat-red/80',
+        className: "bg-cat-red hover:bg-cat-red/80",
       },
       {
-        variant: 'contained',
-        color: ['primary', 'success', 'danger'],
+        variant: "contained",
+        color: ["primary", "success", "danger"],
         disabled: true,
-        className: 'bg-cat-overlay2',
+        className: "bg-cat-overlay2",
       },
       {
-        variant: 'outlined',
-        color: 'primary',
+        variant: "outlined",
+        color: "primary",
         disabled: false,
-        className: 'border-cat-blue text-cat-blue hover:bg-cat-blue/15',
+        className: "border-cat-blue text-cat-blue hover:bg-cat-blue/15",
       },
       {
-        variant: 'outlined',
-        color: 'success',
+        variant: "outlined",
+        color: "success",
         disabled: false,
-        className: 'border-cat-green text-cat-green hover:bg-cat-green/15',
+        className: "border-cat-green text-cat-green hover:bg-cat-green/15",
       },
       {
-        variant: 'outlined',
-        color: 'danger',
+        variant: "outlined",
+        color: "danger",
         disabled: false,
-        className: 'border-cat-red text-cat-red hover:bg-cat-red/15',
+        className: "border-cat-red text-cat-red hover:bg-cat-red/15",
       },
       {
-        variant: 'outlined',
-        color: ['primary', 'success', 'danger'],
+        variant: "outlined",
+        color: ["primary", "success", "danger"],
         disabled: true,
-        className: 'border-cat-overlay2 text-cat-overlay2',
+        className: "border-cat-overlay2 text-cat-overlay2",
       },
       {
-        variant: 'text',
-        color: 'primary',
+        variant: "text",
+        color: "primary",
         disabled: false,
-        className: 'text-cat-blue hover:bg-cat-blue/15',
+        className: "text-cat-blue hover:bg-cat-blue/15",
       },
       {
-        variant: 'text',
-        color: 'success',
+        variant: "text",
+        color: "success",
         disabled: false,
-        className: 'text-cat-green hover:bg-cat-green/15',
+        className: "text-cat-green hover:bg-cat-green/15",
       },
       {
-        variant: 'text',
-        color: 'danger',
+        variant: "text",
+        color: "danger",
         disabled: false,
-        className: 'text-cat-red hover:bg-cat-red/15',
+        className: "text-cat-red hover:bg-cat-red/15",
       },
       {
-        variant: 'text',
-        color: ['primary', 'success', 'danger'],
+        variant: "text",
+        color: ["primary", "success", "danger"],
         disabled: true,
-        className: 'text-cat-overlay2',
+        className: "text-cat-overlay2",
       },
     ],
     defaultVariants: {
-      variant: 'contained',
-      color: 'primary',
+      variant: "contained",
+      color: "primary",
       disabled: false,
-      size: 'medium',
+      size: "medium",
     },
   },
 );
