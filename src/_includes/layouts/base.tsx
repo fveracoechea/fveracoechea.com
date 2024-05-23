@@ -1,37 +1,37 @@
-import { cx } from 'cva';
+import { cx } from "cva";
 
-import SocialLinks from '../../_components/SocialLinks.tsx';
-import ThemeSwitcher from '../components/ThemeSwitcher.tsx';
+import SocialLinks from "../../_components/SocialLinks.tsx";
+import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
-export const layout = 'layouts/document.tsx';
+export const layout = "layouts/document.tsx";
 
 function Header() {
   return (
-    <header className={cx('border-b border-cat-surface0')}>
+    <header className={cx("border-b border-cat-surface0")}>
       <div className="container flex items-center justify-between gap-2 py-8">
         <a
           href="/"
           class={cx(
-            'rounded border-4 border-transparent transition-shadow',
-            'ring-cat-blue/60 ring-offset-cat-crust focus-visible:ring-2',
+            "rounded border-4 border-transparent transition-shadow",
+            "ring-cat-blue/60 ring-offset-cat-crust focus-visible:ring-2",
           )}
         >
           <h1
             className={cx(
-              'bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text',
-              'text-lg font-semibold text-transparent transition-colors md:text-2xl',
+              "bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text",
+              "text-lg font-semibold text-transparent transition-colors md:text-2xl",
             )}
           >
             Francisco Veracoechea
           </h1>
           <h2
             className={cx(
-              'font-mono text-xs font-normal leading-tight',
-              'md:text-base',
+              "font-mono text-xs font-normal leading-tight",
+              "md:text-base",
             )}
           >
-            <span className="text-cat-red">{'()'}</span>
-            <span className="text-cat-subtext0">{' => '}</span>
+            <span className="text-cat-red">{"()"}</span>
+            <span className="text-cat-subtext0">{" => "}</span>
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
@@ -61,7 +61,7 @@ export default function MainLayout(props: Lume.Data) {
   return (
     <>
       <Header />
-      <div className={cx('min-h-[calc(100vh-202px)] bg-transparent')}>
+      <div className={cx("min-h-[calc(100vh-202px)] bg-transparent")}>
         <div className="container">
           <main>{children}</main>
         </div>
