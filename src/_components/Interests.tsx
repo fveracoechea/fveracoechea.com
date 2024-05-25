@@ -25,11 +25,11 @@ const interests = [
 
 export default function Interests() {
   return (
-    <div className="mb-8">
+    <div className="">
       <ul
         className={clsx(
-          "not-prose flex justify-evenly",
-          "rounded border border-cat-surface0 bg-cat-mantle",
+          "not-prose flex flex-col gap-2",
+          // "rounded border border-cat-surface0 bg-cat-mantle",
           // "bg-gradient-to-r from-cat-blue/10 to-cat-mauve/10 text-cat-text",
         )}
       >
@@ -37,7 +37,7 @@ export default function Interests() {
           <li
             key={x.label}
             className={clsx(
-              "flex flex-auto items-center justify-center gap-2 p-4",
+              "flex items-center justify-stretch gap-2",
               // i < interests.length -1 && "border-r border-r-cat-text",
             )}
           >
