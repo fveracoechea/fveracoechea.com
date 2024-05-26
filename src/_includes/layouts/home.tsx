@@ -8,17 +8,16 @@ export default function HomeLayout(props: Lume.Data) {
   const { search } = props;
   return (
     <div className="py-10">
-      <section className="flex flex-col flex-wrap gap-10 pb-10 md:flex-row">
-        <div className="relative flex items-center justify-center ">
+      <section className="flex flex-row gap-10 pb-10">
+        <div className="">
           <img
-            className={clsx(
-              "h-80 rounded border border-cat-surface0",
-              "object-cover  md:w-auto",
-            )}
+            className={clsx("h-auto w-96 rounded border border-cat-surface0")}
             src="/images/me.jpg"
           />
         </div>
-        <div className="prose w-80 ">{props.children}</div>
+        <div>
+          <div className="prose">{props.children}</div>
+        </div>
       </section>
       <Articles search={search} />
     </div>
