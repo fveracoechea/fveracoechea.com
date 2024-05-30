@@ -2,6 +2,7 @@ import { cx } from "cva";
 
 export default function Document(props: Lume.Data) {
   const { children } = props;
+
   return (
     <html lang="en-US" className="bg-cat-crust">
       <head>
@@ -27,7 +28,6 @@ export default function Document(props: Lume.Data) {
             "bg-gradient-to-b",
           )}
         />
-
         <script type="module" src="/main.js" />
       </body>
     </html>

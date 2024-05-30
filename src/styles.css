@@ -34,6 +34,10 @@ html.cat-latte button svg[data-icon="light"] {
     display: none;
 }
 
+x-island {
+    display: contents;
+}
+
 @media (prefers-reduced-motion) {
     html,
     body {

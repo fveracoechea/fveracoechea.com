@@ -20,6 +20,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "pattern-light": "url(/images/px-light.png)",
+        "cat-waves": "url(/images/cat-waves.png)",
         "pattern-grey": "url(/images/px-grey.webp)",
       },
     },

@@ -14,6 +14,7 @@
     "lucide-preact": "https://cdn.jsdelivr.net/npm/lucide-preact",
     "react": "npm:react",
     "preact": "npm:preact",
+    "preact/hooks": "npm:preact/hooks",
     "cva": "npm:class-variance-authority",
     "clsx": "npm:clsx"
   },

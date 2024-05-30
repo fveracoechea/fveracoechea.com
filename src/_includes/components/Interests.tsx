@@ -1,11 +1,6 @@
 import clsx from "clsx";
 
-import {
-  BarChart,
-  Gauge,
-  Layers,
-  Person,
-} from "../_includes/components/Icons.tsx";
+import { BarChart, Gauge, Layers, Person } from "./Icons.tsx";
 
 const interests = [
   {
@@ -25,28 +20,29 @@ const interests = [
 
 export default function Interests() {
   return (
-    <div className="prose">
-      <h4>Expertise</h4>
+    <section
+      id="interests"
+      className="bg-cat-waves mb-10 rounded bg-cover bg-center text-cat-text"
+    >
       <ul
         className={clsx(
-          "not-prose flex flex-col gap-2.5",
-          // "rounded border border-cat-surface0 bg-cat-mantle",
-          // "bg-gradient-to-r from-cat-blue/10 to-cat-mauve/10 text-cat-text",
+          "not-prose grid w-full grid-cols-4",
+          "rounded border border-cat-surface0 bg-cat-mantle/80",
         )}
       >
         {interests.map((x, i) => (
           <li
             key={x.label}
             className={clsx(
-              "flex items-center justify-stretch gap-2.5",
-              // i < interests.length -1 && "border-r border-r-cat-text",
+              "flex flex-col items-stretch justify-center gap-2 px-10 py-6",
+              i < interests.length - 1 && "border-r border-r-cat-surface2",
             )}
           >
-            <span className="text-xl ">{x.icon}</span>
+            <span className="text-4xl ">{x.icon}</span>
             <span className="text-sm ">{x.label}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }

@@ -1,6 +1,6 @@
 import { cx } from "cva";
 
-import SocialLinks from "../../_components/SocialLinks.tsx";
+import SocialLinks from "../components/SocialLinks.tsx";
 import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
 export const layout = "layouts/document.tsx";
