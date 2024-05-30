@@ -26,16 +26,15 @@ export default function Interests() {
     >
       <ul
         className={clsx(
-          "not-prose grid w-full grid-cols-4",
+          "not-prose grid w-full grid-cols-2 lg:grid-cols-4",
           "rounded border border-cat-surface0 bg-cat-mantle/80",
         )}
       >
-        {interests.map((x, i) => (
+        {interests.map(x => (
           <li
             key={x.label}
             className={clsx(
-              "flex flex-col items-stretch justify-center gap-2 px-10 py-6",
-              i < interests.length - 1 && "border-r border-r-cat-surface2",
+              "flex flex-col items-center justify-center gap-2 px-10 py-6",
             )}
           >
             <span className="text-4xl ">{x.icon}</span>

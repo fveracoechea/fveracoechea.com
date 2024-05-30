@@ -15,6 +15,7 @@ import sitemap from "lume/plugins/sitemap.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 
 import extractToc from "./src/_plugins/mdxToc.ts";
+import snippets from "./src/_plugins/snippets.ts";
 import tailwindConfig from "./tailwind.config.ts";
 
 const site = lume(
@@ -40,24 +41,9 @@ site.use(
   }),
 );
 
+// custom plugins
 site.use(extractToc("post"));
-
-site.use(site => {
-  site.process([".html"], pages => {
-    for (const page of pages) {
-      if (page.data.type !== "home" || !page.document) continue;
-
-      const snippets = pages
-        .filter(p => p.data.type === "snippet")
-        .map(p => p.document?.querySelector("pre code")?.innerHTML ?? "");
-
-      const script = page.document.createElement("script");
-      script.innerHTML = `window.__SNIPPETS__ = ${JSON.stringify(snippets)};`;
-
-      page.document.body.appendChild(script);
-    }
-  });
-});
+site.use(snippets());
 
 site.use(
   esbuild({

@@ -1,5 +1,3 @@
-import { DOMParser } from "https://deno.land/x/deno_dom@v0.1.45/deno-dom-wasm.ts";
-
 import Articles from "../components/Articles.tsx";
 import CodeWritter from "../components/CodeWritter.tsx";
 import Interests from "../components/Interests.tsx";
@@ -12,7 +10,7 @@ export default function HomeLayout(props: Lume.Data) {
 
   return (
     <div className="py-10">
-      <section className="flex gap-6 pb-10">
+      <section className="flex flex-col gap-6 pb-10 lg:flex-row">
         <article
           className="flex flex-1 flex-col justify-between gap-4"
           id="about-me"

@@ -83,7 +83,7 @@ function CodeWritter() {
 
   return (
     <div className="prose flex-[2]">
-      <pre ref={preRef} className="h-72 overflow-y-auto">
+      <pre ref={preRef} className="h-[300px] overflow-y-auto">
         <code
           className="language-tsx hljs language-typescript"
           dangerouslySetInnerHTML={{ __html: code }}
