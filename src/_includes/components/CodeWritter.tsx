@@ -44,38 +44,43 @@ async function* typewriter(text: string, start: number = 0) {
 
 function CodeWritter() {
   const preRef = useRef<HTMLPreElement | null>(null);
-  const [index, setIndex] = useState(0);
+  const indexRef = useRef(0);
   const [code, setCode] = useState("");
 
   async function onClick() {
-    const snippet = window.__SNIPPETS__?.at(index);
+    if (!window.__SNIPPETS__) return;
 
-    if (!preRef.current) return console.warn("No ref");
+    let newIndex = indexRef.current + 1;
+
+    if (window.__SNIPPETS__.length <= newIndex) newIndex = 0;
+
+    indexRef.current = newIndex;
+    const snippet = window.__SNIPPETS__.at(newIndex);
+
     if (!snippet) return console.warn("NO snippet");
 
-    for await (const char of typewriter(snippet)) {
-      setCode(c => c + char);
-      preRef.current.scrollTo(0, preRef.current.scrollHeight);
-    }
-
     await animationFrame();
-    preRef.current.scrollTo(0, preRef.current.scrollHeight);
+
+    setCode("");
+
+    for await (const char of typewriter(snippet)) {
+      if (newIndex === indexRef.current) setCode(c => c + char);
+      else break;
+    }
   }
 
   useEffect(() => {
-    const snippet = window.__SNIPPETS__?.at(1);
+    const snippet = window.__SNIPPETS__?.at(0);
+
+    const initialIndex = indexRef.current;
 
     async function generate() {
-      if (!preRef.current) return console.warn("No ref");
       if (!snippet) return console.warn("NO snippet");
 
       for await (const char of typewriter(snippet)) {
-        setCode(c => c + char);
-        preRef.current.scrollTo(0, preRef.current.scrollHeight);
+        if (initialIndex === indexRef.current) setCode(c => c + char);
+        else break;
       }
-
-      await animationFrame();
-      preRef.current.scrollTo(0, preRef.current.scrollHeight);
     }
 
     generate();
@@ -83,6 +88,7 @@ function CodeWritter() {
 
   return (
     <div className="prose flex-[2]">
+      <button onClick={onClick}>Shuffle</button>
       <pre ref={preRef} className="h-[300px] overflow-y-auto">
         <code
           className="language-tsx hljs language-typescript"

@@ -1,0 +1,25 @@
+# typewriter
+
+```typescript
+const animationFrame = () => new Promise(r => requestAnimationFrame(r));
+
+async function* typewriter(text: string, start: number = 0) {
+  for (let index = start; index < text.length; index++) {
+    const char = text[index];
+    await animationFrame();
+    yield char;
+  }
+}
+
+function useTypewriter(text: string) {
+  const [display, setDisplay] = useState("");
+
+  useEffect(async () => {
+    for await (const char of typewriter(text)) {
+      setDisplay(d => d + char);
+    }
+  }, []);
+
+  return display;
+}
+```

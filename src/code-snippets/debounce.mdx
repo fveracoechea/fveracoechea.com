@@ -21,6 +21,12 @@ function. Subsequent calls to the debounced function return the result of the
 last `func` invocation.
 
 ```typescript
+type Callback = (...args: any[]) => void;
+
+interface DebouncedCallback<Fn extends Callback> extends Fn {
+  cancel(): void;
+}
+
 function debounce<Fn extends Callback>(wait: number, func: Fn) {
   let timeout: null | NodeJS.Timeout = null;
 
@@ -31,18 +37,10 @@ function debounce<Fn extends Callback>(wait: number, func: Fn) {
       timeout = null;
     }, wait);
   }
-
   debounced.cancel = () => {
     if (timeout !== null) clearTimeout(timeout);
     timeout = null;
   };
-
   return debounced as DebouncedCallback<Fn>;
 }
-
-type Callback = (...args: any[]) => void;
-
-type DebouncedCallback<Fn extends Callback> = Fn & {
-  cancel(): void;
-};
 ```
