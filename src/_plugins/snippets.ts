@@ -6,7 +6,10 @@ export default () => (site: Lume.Site) => {
       const snippets = pages
         .filter(p => p.data.type === "snippet")
         .toSorted((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0))
-        .map(p => p.document?.querySelector("pre code")?.innerHTML ?? "");
+        .map(p => ({
+          title: p.data.title,
+          code: p.document?.querySelector("pre code")?.innerHTML ?? "",
+        }));
 
       const script = page.document.createElement("script");
       script.innerHTML = `window.__SNIPPETS__ = ${JSON.stringify(snippets)};`;

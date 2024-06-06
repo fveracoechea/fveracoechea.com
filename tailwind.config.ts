@@ -1,5 +1,6 @@
 import catppuccin from "@catppuccin/tailwindcss";
 import typography from "@tailwindcss/typography";
+import scrollbar from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -25,7 +26,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography, catppuccin({ prefix: "cat" })],
+  plugins: [typography, scrollbar, catppuccin({ prefix: "cat" })],
 };
 
 export default config;

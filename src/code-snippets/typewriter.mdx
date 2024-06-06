@@ -1,25 +1,21 @@
-# typewriter
+---
+title: Typewriter
+order: 5
+description:
+---
+
+# Typewriter
 
 ```typescript
-const animationFrame = () => new Promise(r => requestAnimationFrame(r));
-
 async function* typewriter(text: string, start: number = 0) {
   for (let index = start; index < text.length; index++) {
     const char = text[index];
-    await animationFrame();
+    await new Promise(resolve => requestAnimationFrame(resolve));
     yield char;
   }
 }
 
-function useTypewriter(text: string) {
-  const [display, setDisplay] = useState("");
-
-  useEffect(async () => {
-    for await (const char of typewriter(text)) {
-      setDisplay(d => d + char);
-    }
-  }, []);
-
-  return display;
+for await (const chunck of typewriter(text)) {
+  setText(text => text + chunk);
 }
 ```

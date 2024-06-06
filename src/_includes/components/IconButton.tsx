@@ -12,7 +12,10 @@ const iconButton = cva(
         true: [
           "border border-cat-blue border-opacity-80 bg-cat-blue text-cat-blue",
         ],
-        false: ["text-cat-text hover:bg-cat-overlay2/20"],
+        false: [
+          "text-cat-text hover:bg-cat-overlay2/20",
+          "active:ring-2 active:ring-cat-overlay0",
+        ],
       },
       rounded: {
         true: "rounded",

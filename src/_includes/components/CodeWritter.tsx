@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { withIsland } from "../helpers/islands.tsx";
+import { IconButton } from "./IconButton.tsx";
+import { ChevronLeft, ChevronRight } from "./Icons.tsx";
 
 declare global {
   interface Window {
-    __SNIPPETS__?: string[];
+    __SNIPPETS__?: { code: string; title: string }[];
   }
 }
 
@@ -44,58 +46,64 @@ async function* typewriter(text: string, start: number = 0) {
 
 function CodeWritter() {
   const preRef = useRef<HTMLPreElement | null>(null);
-  const indexRef = useRef(0);
+  const codeRef = useRef<HTMLElement | null>(null);
   const [code, setCode] = useState("");
+  const indexRef = useRef(0);
 
-  async function onClick() {
+  const title = window.__SNIPPETS__?.at(indexRef.current)?.title;
+
+  async function generateCode(newIndex: number) {
     if (!window.__SNIPPETS__) return;
+    if (!codeRef.current || !preRef.current) return;
 
-    let newIndex = indexRef.current + 1;
+    const snippets = window.__SNIPPETS__;
 
-    if (window.__SNIPPETS__.length <= newIndex) newIndex = 0;
+    if (newIndex >= snippets.length) newIndex = 0;
+    if (newIndex < 0) newIndex = snippets.length - 1;
 
     indexRef.current = newIndex;
-    const snippet = window.__SNIPPETS__.at(newIndex);
+    const snippet = snippets.at(newIndex)?.code;
 
     if (!snippet) return console.warn("NO snippet");
 
     await animationFrame();
-
     setCode("");
 
     for await (const char of typewriter(snippet)) {
-      if (newIndex === indexRef.current) setCode(c => c + char);
-      else break;
+      if (newIndex !== indexRef.current) break;
+      if (codeRef.current.offsetHeight >= preRef.current.clientHeight) {
+        setCode(snippet);
+        break;
+      }
+      setCode(c => c + char);
     }
   }
 
-  useEffect(() => {
-    const snippet = window.__SNIPPETS__?.at(0);
-
-    const initialIndex = indexRef.current;
-
-    async function generate() {
-      if (!snippet) return console.warn("NO snippet");
-
-      for await (const char of typewriter(snippet)) {
-        if (initialIndex === indexRef.current) setCode(c => c + char);
-        else break;
-      }
-    }
-
-    generate();
-  }, []);
+  useEffect(() => void generateCode(0), []);
 
   return (
-    <div className="prose flex-[2]">
-      <button onClick={onClick}>Shuffle</button>
-      <pre ref={preRef} className="h-[300px] overflow-y-auto">
-        <code
-          className="language-tsx hljs language-typescript"
-          dangerouslySetInnerHTML={{ __html: code }}
-        />
-      </pre>
-    </div>
+    <figure className="flex flex-[2] flex-col gap-2">
+      <figcaption className="flex items-end justify-between gap-4">
+        <h4 className="h-fit text-base font-semibold">{title}</h4>
+        <div className="flex gap-2">
+          <IconButton onClick={() => void generateCode(indexRef.current - 1)}>
+            <ChevronLeft />
+          </IconButton>
+          <IconButton onClick={() => void generateCode(indexRef.current + 1)}>
+            <ChevronRight />
+          </IconButton>
+        </div>
+      </figcaption>
+      <div className="prose">
+        <pre ref={preRef} className="scrollbar-thin h-[300px] overflow-y-auto">
+          <code
+            ref={codeRef}
+            className="language-tsx hljs language-typescript"
+            dangerouslySetInnerHTML={{ __html: code }}
+          />
+        </pre>
+      </div>
+    </figure>
   );
 }
 

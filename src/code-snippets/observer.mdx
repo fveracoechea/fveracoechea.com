@@ -1,0 +1,51 @@
+---
+title: Observer
+order: 3
+description:
+  Observer is a behavioral design pattern, which lets you define a subscription
+  mechanism to notify multiple objects about any events that happen to the
+  object they’re observing.
+---
+
+# observer
+
+Observer is a behavioral design pattern, which lets you define a subscription
+mechanism to notify multiple objects about any events that happen to the object
+they’re observing.
+
+- `subscribe`: Adds a listener function that will be called, when this observer
+  emits a value/event.
+- `unsubscribe`: Removes a listener function from the observer.
+- `emit`: Executes all subscribed listeners with a given value.
+
+```typescript
+type Listener<T = void> = (value: T) => void;
+
+class Observer<T = void> {
+  #listeners: Set<Listener<T>>;
+
+  constructor() {
+    this.#listeners = new Set<Listener<T>>();
+    this.emit = this.emit.bind(this);
+    this.subscribe = this.subscribe.bind(this);
+    this.unsubscribe = this.unsubscribe.bind(this);
+  }
+
+  subscribe(listener: Listener<T>) {
+    this.#listeners.add(listener);
+    return () => this.unsubscribe(listener);
+  }
+
+  unsubscribe(listener: Listener<T>) {
+    if (this.#listeners.has(listener)) {
+      this.#listeners.delete(listener);
+    }
+  }
+
+  emit(value: T) {
+    this.#listeners.forEach(listener => {
+      listener(value);
+    });
+  }
+}
+```

@@ -45,6 +45,7 @@
       "npm:satori@0.10.13": "npm:satori@0.10.13",
       "npm:sharp@0.33.3": "npm:sharp@0.33.3",
       "npm:svg2png-wasm@1.4.1": "npm:svg2png-wasm@1.4.1",
+      "npm:tailwind-scrollbar": "npm:tailwind-scrollbar@3.1.0_tailwindcss@3.4.3__postcss@8.4.38",
       "npm:tailwindcss": "npm:tailwindcss@3.4.3_postcss@8.4.38",
       "npm:tailwindcss@3.4.3": "npm:tailwindcss@3.4.3_postcss@8.4.38",
       "npm:unified@11.0.4": "npm:unified@11.0.4"
@@ -2578,6 +2579,12 @@
         "integrity": "sha512-ZFy1NtwZVAsslaTQoI+/QqX2sg0vjmgJ/jGAuLZZvYcRlndI54hLPiwLC9JzXlFBerfxN5JiS7kpEUG0mrXS3Q==",
         "dependencies": {}
       },
+      "tailwind-scrollbar@3.1.0_tailwindcss@3.4.3__postcss@8.4.38": {
+        "integrity": "sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==",
+        "dependencies": {
+          "tailwindcss": "tailwindcss@3.4.3_postcss@8.4.38"
+        }
+      },
       "tailwindcss@3.4.3_postcss@8.4.38": {
         "integrity": "sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==",
         "dependencies": {
@@ -3503,6 +3510,7 @@
       "npm:prettier",
       "npm:prettier-plugin-tailwindcss",
       "npm:react",
+      "npm:tailwind-scrollbar",
       "npm:tailwindcss"
     ]
   }

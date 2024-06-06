@@ -1,14 +1,30 @@
 import { cx } from "cva";
+import { ComponentProps } from "preact";
 
 import SocialLinks from "../components/SocialLinks.tsx";
 import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
 export const layout = "layouts/document.tsx";
 
+function NavLink(props: ComponentProps<"a">) {
+  return (
+    <a
+      {...props}
+      className={cx(
+        "rounded px-3 py-2",
+        "text-cat-text transition-colors hover:bg-cat-overlay2/20",
+        "active:ring-2 active:ring-cat-overlay2",
+        "focus-visible:ring-2 focus-visible:ring-cat-blue",
+        props.className,
+      )}
+    />
+  );
+}
+
 function Header() {
   return (
     <header className={cx("border-b border-cat-surface0")}>
-      <div className="container flex items-center justify-between gap-2 py-8">
+      <nav className="container flex items-center justify-between gap-2 py-8">
         <a
           href="/"
           class={cx(
@@ -35,8 +51,15 @@ function Header() {
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
-        <ThemeSwitcher />
-      </div>
+        <div className="flex items-center gap-2">
+          <NavLink href="/blog/">Blog</NavLink>
+          <NavLink href="/bookmars/">Bookmarks</NavLink>
+          <NavLink href="/code-snippets/" className="mr-3">
+            Snippets
+          </NavLink>
+          <ThemeSwitcher />
+        </div>
+      </nav>
     </header>
   );
 }
