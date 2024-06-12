@@ -47,7 +47,7 @@ site.use(snippets());
 
 site.use(
   esbuild({
-    extensions: [".ts", ".js", ".tsx"],
+    extensions: [".ts", ".tsx"],
     options: {
       minify: true,
       legalComments: "none",

@@ -52,9 +52,8 @@ function Header() {
           </h2>
         </a>
         <div className="flex items-center gap-2">
-          <NavLink href="/blog/">Blog</NavLink>
           <NavLink href="/bookmars/">Bookmarks</NavLink>
-          <NavLink href="/code-snippets/" className="mr-3">
+          <NavLink href="/snippets/" className="mr-3">
             Snippets
           </NavLink>
           <ThemeSwitcher />
