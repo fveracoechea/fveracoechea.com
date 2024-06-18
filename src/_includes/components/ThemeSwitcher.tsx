@@ -127,7 +127,7 @@ function ThemeSwitcher() {
         active={theme === "LIGHT"}
         tabIndex={theme === "LIGHT" ? 0 : -1}
         onClick={() => saveTheme("LIGHT")}
-        class="rounded-bl rounded-tl"
+        className="!rounded-bl !rounded-tl"
         aria-checked={theme === "LIGHT"}
       >
         <span>
@@ -154,7 +154,7 @@ function ThemeSwitcher() {
         active={theme === "SYSTEM"}
         tabIndex={theme === "SYSTEM" ? 0 : -1}
         onClick={() => saveTheme("SYSTEM")}
-        class="rounded-br rounded-tr"
+        className="!rounded-br !rounded-tr"
         aria-checked={theme === "SYSTEM"}
       >
         <Computer />

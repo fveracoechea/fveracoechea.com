@@ -1,25 +1,25 @@
-import { cx } from 'cva';
-import { format } from 'npm:date-fns';
+import { cx } from "cva";
+import { format } from "npm:date-fns";
 
-export const layout = 'layouts/base.tsx';
+export const layout = "layouts/base.tsx";
 
 function toTableOfContents(item: Lume.TocEntry): JSX.Element {
   return (
     <>
-      <li
-        key={item.id}
-        className={cx(
-          item.depth === 3 && `pl-3`,
-          item.depth === 4 && `pl-6`,
-          item.depth >= 5 && `pl-9`,
-        )}
-      >
+      <li key={item.id} className={cx()}>
         <a
           href={`#${item.id}`}
+          tabIndex={1}
           className={cx(
-            'text-sm hover:text-cat-blue',
-            item.depth === 2 && 'font-semibold',
-            // item.depth > 2 && "font-medium",
+            "flex py-1.5 text-sm transition",
+            "rounded-br rounded-tr",
+            "hover:bg-cat-overlay2/20 hover:text-cat-text",
+            "active:ring-2 active:ring-cat-overlay2",
+            "focus-visible:ring-2 focus-visible:ring-cat-overlay2",
+            item.depth === 2 && "pl-8 font-semibold",
+            item.depth === 3 && `pl-10`,
+            item.depth === 4 && `pl-14`,
+            item.depth >= 5 && `pl-16`,
           )}
         >
           {item.value}
@@ -45,7 +45,7 @@ export default function BlogLayout(props: Lume.Data) {
               className="text-sm text-cat-subtext0"
               dateTime={new Date(props.date).toString()}
             >
-              {format(props.date, 'PPPP')}
+              {format(props.date, "PPPP")}
             </time>
             <p className="m-0 text-sm text-cat-subtext0">{props.description}</p>
             <img
@@ -59,10 +59,12 @@ export default function BlogLayout(props: Lume.Data) {
         {props.children}
       </article>
 
-      <aside className="hidden flex-1 border-l border-cat-surface0 pl-8 lg:block">
+      <aside className="hidden flex-1 border-l border-cat-surface0 lg:block">
         <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-10">
-          <p className="text-md font-semibold text-cat-text">On This Page</p>
-          <ul className="flex flex-col gap-2.5 text-sm text-cat-overlay2">
+          <p className="text-md pl-8 font-semibold text-cat-text">
+            On This Page
+          </p>
+          <ul className="flex flex-col text-sm text-cat-overlay2">
             {props.toc.map(toTableOfContents)}
           </ul>
         </nav>

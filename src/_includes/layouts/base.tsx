@@ -6,22 +6,28 @@ import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
 export const layout = "layouts/document.tsx";
 
-function NavLink(props: ComponentProps<"a">) {
+export const FULL_HEIGHT = "FULL_HEIGHT";
+
+function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
   return (
     <a
       {...props}
       className={cx(
         "rounded px-3 py-2",
-        "text-cat-text transition-colors hover:bg-cat-overlay2/20",
-        "active:ring-2 active:ring-cat-overlay2",
-        "focus-visible:ring-2 focus-visible:ring-cat-blue",
+        props.isActive
+          ? "border border-cat-blue bg-cat-blue/10 text-cat-blue"
+          : [
+              "text-cat-text transition-colors hover:bg-cat-overlay2/20",
+              "active:ring-2 active:ring-cat-overlay2",
+              "focus-visible:ring-2 focus-visible:ring-cat-blue",
+            ],
         props.className,
       )}
     />
   );
 }
 
-function Header() {
+function Header(props: Lume.Data) {
   return (
     <header className={cx("border-b border-cat-surface0")}>
       <nav className="container flex items-center justify-between gap-2 py-8">
@@ -51,13 +57,23 @@ function Header() {
             <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
           </h2>
         </a>
-        <div className="flex items-center gap-2">
-          <NavLink href="/bookmars/">Bookmarks</NavLink>
-          <NavLink href="/snippets/" className="mr-3">
+        <div className="hidden items-center gap-2 md:flex">
+          <NavLink
+            href="/bookmarks/"
+            isActive={props.page.outputPath.includes("/bookmarks/")}
+          >
+            Bookmarks
+          </NavLink>
+          <NavLink
+            href="/snippets/"
+            isActive={props.page.outputPath.includes("/snippets/")}
+            className="mr-3"
+          >
             Snippets
           </NavLink>
           <ThemeSwitcher />
         </div>
+        <div className="block md:hidden">Menu</div>
       </nav>
     </header>
   );
@@ -82,10 +98,10 @@ export default function MainLayout(props: Lume.Data) {
   const { children } = props;
   return (
     <>
-      <Header />
-      <div className={cx("min-h-[calc(100vh-202px)] bg-transparent")}>
-        <div className="container">
-          <main>{children}</main>
+      <Header {...props} />
+      <div className={cx(FULL_HEIGHT, "bg-transparent")}>
+        <div className={cx(FULL_HEIGHT, "container")}>
+          <main className={FULL_HEIGHT}>{children}</main>
         </div>
       </div>
       <Footer />

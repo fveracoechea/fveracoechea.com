@@ -6,9 +6,12 @@ function getCodeSnippetPages(pages: Lume.Page[]) {
       path: p.src.path,
       outputPath: p.outputPath,
       title: p.data.title,
+      description: p.data.description,
       code: p.document?.querySelector("pre code")?.innerHTML ?? "",
     }));
 }
+
+export type Snippets = ReturnType<typeof getCodeSnippetPages>;
 
 export default () => (site: Lume.Site) => {
   site.process([".html"], pages => {
@@ -24,12 +27,15 @@ export default () => (site: Lume.Site) => {
 
   site.preprocess([".mdx"], pages => {
     const snippets = getCodeSnippetPages(pages);
-    const snippetsPage = pages.find(
-      page => page.data.type === "snippets-index-page",
-    );
 
-    if (snippetsPage) {
-      snippetsPage.data.snippets = snippets;
-    }
+    pages
+      .filter(
+        page =>
+          page.data.type === "snippets-index-page" ||
+          page.data.type === "snippet",
+      )
+      .forEach(page => {
+        page.data.snippets = snippets;
+      });
   });
 };

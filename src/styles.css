@@ -97,6 +97,10 @@ x-island {
     }
 }
 
+.FULL_HEIGHT {
+    @apply min-h-[calc(100vh-214px)];
+}
+
 svg.lucide {
     width: 1em;
     height: 1em;

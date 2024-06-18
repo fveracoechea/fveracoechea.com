@@ -63,10 +63,10 @@ export function IconButton<R extends Root = "button">(
       {...otherProps}
       style={
         active && !rounded
-          ? "--tw-bg-opacity: 0.2; --tw-border-opacity: 0.6"
+          ? "--tw-bg-opacity: 0.1; --tw-border-opacity: 0.6"
           : ""
       }
-      class={iconButton({
+      className={iconButton({
         active,
         rounded,
         className,
