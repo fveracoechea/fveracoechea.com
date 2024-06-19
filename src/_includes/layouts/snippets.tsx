@@ -68,44 +68,46 @@ export default function SnippetsLayout(props: Lume.Data) {
     );
 
   return (
-    <section>
-      <header className="prose overflow-x-hidden py-10">
-        {props.children}
-      </header>
+    <>
+      <div className="max-w-xl py-10">
+        <article className="prose overflow-x-hidden">{props.children}</article>
+      </div>
 
-      <nav>
-        <ul className="rounded border border-cat-surface0">
-          {snippets.map(({ outputPath, title, description }) => (
-            <li
-              className={cx(
-                "group flex even:border-y even:border-cat-surface0",
-                "transition-colors even:bg-cat-mantle",
-                "last-of-type:rounded-bl last-of-type:rounded-br last-of-type:border-b-0",
-              )}
-              key={outputPath}
-            >
-              <a
-                href={outputPath}
+      <section className="pb-12">
+        <nav>
+          <ul className="rounded border border-cat-surface0">
+            {snippets.map(({ outputPath, title, description }) => (
+              <li
                 className={cx(
-                  "flex w-full flex-col px-6 py-4 text-cat-text transition",
-                  "hover:bg-cat-overlay2/20 active:ring-2 active:ring-cat-overlay2",
-                  "focus-visible:ring-2 focus-visible:ring-cat-blue",
-                  "group-last-of-type:rounded-bl group-last-of-type:rounded-br",
-                  "group-first-of-type:rounded-tl group-first-of-type:rounded-tr",
+                  "group flex even:border-y even:border-cat-surface0",
+                  "transition-colors even:bg-cat-mantle",
+                  "last-of-type:rounded-bl last-of-type:rounded-br last-of-type:border-b-0",
                 )}
+                key={outputPath}
               >
-                <span className="font-medium transition-colors group-hover:text-cat-blue">
-                  {title}
-                </span>
+                <a
+                  href={outputPath}
+                  className={cx(
+                    "flex w-full flex-col px-6 py-4 text-cat-text transition",
+                    "hover:bg-cat-overlay2/20 active:ring-2 active:ring-cat-overlay2",
+                    "focus-visible:ring-2 focus-visible:ring-cat-blue",
+                    "group-last-of-type:rounded-bl group-last-of-type:rounded-br",
+                    "group-first-of-type:rounded-tl group-first-of-type:rounded-tr",
+                  )}
+                >
+                  <span className="font-medium transition-colors group-hover:text-cat-blue">
+                    {title}
+                  </span>
 
-                <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
-                  {description}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </section>
+                  <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
+                    {description}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </section>
+    </>
   );
 }
