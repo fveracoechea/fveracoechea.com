@@ -1,6 +1,7 @@
 import { cx } from "cva";
 import { ComponentProps } from "preact";
 
+import MobileMenu from "../components/MobileMenu.tsx";
 import SocialLinks from "../components/SocialLinks.tsx";
 import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
@@ -73,7 +74,9 @@ function Header(props: Lume.Data) {
           </NavLink>
           <ThemeSwitcher />
         </div>
-        <div className="block md:hidden">Menu</div>
+        <div className="block md:hidden">
+          <MobileMenu visible />
+        </div>
       </nav>
     </header>
   );

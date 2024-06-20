@@ -30,6 +30,12 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
+    href: "https://lucide.dev/",
+    date: "05/02/2024",
+    tag: "icons",
+    text: ["Lucide", "Beautiful and consistent icons bade by the community"],
+  },
+  {
     href: "https://cva.style/docs",
     date: "04/14/2024",
     tag: "CSS-in-TS",
