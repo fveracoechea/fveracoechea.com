@@ -1,5 +1,7 @@
 import { FunctionalComponent, hydrate } from "preact";
 
+import { ObjectAny } from "../../../examples/types/polymorphic.ts";
+
 const isBrowser = () => typeof document !== "undefined";
 
 export type IslandsConfig = Record<
@@ -28,16 +30,17 @@ type IslandProps = {
   media?: string;
 };
 
-export function withIsland<C>(
-  Component: FunctionalComponent,
-  src: C extends IslandsConfig ? keyof C : string,
+export function withIsland<S, Props extends ObjectAny>(
+  Component: FunctionalComponent<Props>,
+  src: S extends IslandsConfig ? keyof S : string,
 ) {
-  return (props: IslandProps) => {
-    if (isBrowser()) return <Component />;
+  return (props: Props & IslandProps) => {
+    const { visible, media, ...runTimeProps } = props;
+    if (isBrowser()) return <Component {...(runTimeProps as Props)} />;
 
     return (
-      <x-island src={String(src)} {...props}>
-        <Component />
+      <x-island src={String(src)} visible={visible} media={media}>
+        <Component {...(runTimeProps as Props)} />
       </x-island>
     );
   };

@@ -2,6 +2,7 @@ import { cx } from "cva";
 import { ComponentProps } from "preact";
 
 import MobileMenu from "../components/MobileMenu.tsx";
+import { NavLogo } from "../components/NavLogo.tsx";
 import SocialLinks from "../components/SocialLinks.tsx";
 import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
@@ -31,34 +32,9 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
 function Header(props: Lume.Data) {
   return (
     <header className={cx("border-b border-cat-surface0")}>
-      <nav className="container flex items-center justify-between gap-2 py-8">
-        <a
-          href="/"
-          class={cx(
-            "rounded border-4 border-transparent transition-shadow",
-            "ring-cat-blue/60 ring-offset-cat-crust focus-visible:ring-2",
-          )}
-        >
-          <h1
-            className={cx(
-              "bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text",
-              "text-lg font-semibold text-transparent transition-colors md:text-2xl",
-            )}
-          >
-            Francisco Veracoechea
-          </h1>
-          <h2
-            className={cx(
-              "font-mono text-xs font-normal leading-tight",
-              "md:text-base",
-            )}
-          >
-            <span className="text-cat-red">{"()"}</span>
-            <span className="text-cat-subtext0">{" => "}</span>
-            <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
-          </h2>
-        </a>
-        <div className="hidden items-center gap-2 md:flex">
+      <nav className="container hidden items-center justify-between gap-2 py-8 md:flex">
+        <NavLogo />
+        <div className="flex items-center gap-2">
           <NavLink
             href="/bookmarks/"
             isActive={props.page.outputPath.includes("/bookmarks/")}
@@ -74,10 +50,8 @@ function Header(props: Lume.Data) {
           </NavLink>
           <ThemeSwitcher />
         </div>
-        <div className="block md:hidden">
-          <MobileMenu visible />
-        </div>
       </nav>
+      <MobileMenu media="(max-width: 768px)" />
     </header>
   );
 }

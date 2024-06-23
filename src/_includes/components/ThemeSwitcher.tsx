@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cx } from "cva";
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { withIsland } from "../helpers/islands.tsx";
@@ -58,7 +58,8 @@ function checkNext(collection: HTMLLabelElement[], element: HTMLLabelElement) {
   }
 }
 
-function ThemeSwitcher() {
+function ThemeSwitcher(props: { fill?: boolean }) {
+  const { fill = false } = props;
   const [theme, setTheme] = useState<Theme | null>(null);
   const radiogroupRef = useRef<HTMLDivElement | null>(null);
 
@@ -114,7 +115,7 @@ function ThemeSwitcher() {
     <div
       role="radiogroup"
       ref={radiogroupRef}
-      class={clsx(
+      class={cx(
         "flex bg-cat-base text-xl md:text-2xl",
         "rounded border border-cat-surface0 text-cat-text",
       )}
@@ -127,7 +128,10 @@ function ThemeSwitcher() {
         active={theme === "LIGHT"}
         tabIndex={theme === "LIGHT" ? 0 : -1}
         onClick={() => saveTheme("LIGHT")}
-        className="!rounded-bl !rounded-tl"
+        className={cx(
+          fill && "flex-1 justify-center",
+          "!rounded-bl !rounded-tl",
+        )}
         aria-checked={theme === "LIGHT"}
       >
         <span>
@@ -143,6 +147,7 @@ function ThemeSwitcher() {
         tabIndex={theme === "DARK" ? 0 : -1}
         onClick={() => saveTheme("DARK")}
         aria-checked={theme === "DARK"}
+        className={cx(fill && "flex-1 justify-center")}
       >
         <Moon />
       </IconButton>
@@ -154,7 +159,10 @@ function ThemeSwitcher() {
         active={theme === "SYSTEM"}
         tabIndex={theme === "SYSTEM" ? 0 : -1}
         onClick={() => saveTheme("SYSTEM")}
-        className="!rounded-br !rounded-tr"
+        className={cx(
+          fill && "flex-1 justify-center",
+          "!rounded-br !rounded-tr",
+        )}
         aria-checked={theme === "SYSTEM"}
       >
         <Computer />
