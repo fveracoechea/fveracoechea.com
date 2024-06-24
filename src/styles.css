@@ -34,7 +34,7 @@ html.cat-latte button svg[data-icon="light"] {
     display: none;
 }
 
-x-island {
+preact-island {
     display: contents;
 }
 

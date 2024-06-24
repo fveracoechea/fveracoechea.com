@@ -1,0 +1,50 @@
+---
+title: animationFrames
+order: 6
+description:
+  Asynchronous generator function that produces a sequence of animation frames.
+---
+
+# animationFrames
+
+This function is designed to produce a continuous stream of animation frame
+timestamps. Each time the browser is about to repaint, requestAnimationFrame is
+called, the promise resolves, and the generator yields the timestamp of that
+frame.
+
+This allows any code using this generator to synchronize with the browser's
+painting cycle, which is especially useful for tasks like measuring frame rates,
+synchronizing animations, or performing time-based updates.
+
+```typescript
+async function* animationFrames() {
+  while (true) {
+    yield await new Promise<number>(resolve => requestAnimationFrame(resolve));
+  }
+}
+
+async function run(label: string) {
+  let numberOfFrames = 0;
+
+  console.time(label);
+  const startTime = performance.now();
+
+  for await (const timestamp of animationFrames()) {
+    if (performance.now() >= startTime + 1000) break;
+
+    numberOfFrames++;
+  }
+
+  console.timeEnd(label);
+  console.log("Number of frames: ", numberOfFrames);
+}
+
+run("animation 1");
+```
+
+When used in an asynchronous loop, **animationFrames** can help track how many
+frames are rendered over a period of time.
+
+For example, in the run function provided earlier, the `for await` loop iterates
+over the frames produced by **animationFrames**, allowing it to measure how many
+frames are rendered in one second.

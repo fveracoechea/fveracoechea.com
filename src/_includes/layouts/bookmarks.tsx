@@ -12,6 +12,30 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://cubic-bezier.com/",
+    date: "06/24/2024",
+    tag: "animations",
+    text: ["cubic-bezier", "Playground for CSS bezier-based timing functions"],
+  },
+  {
+    href: "https://easings.net/",
+    date: "06/24/2024",
+    tag: "animations",
+    text: [
+      "Easing Functions Cheat Sheet",
+      "Simple cheat sheet to help developers pick the right easing function",
+    ],
+  },
+  {
+    href: "https://dev.opera.com/articles/better-performance-with-requestanimationframe/",
+    date: "06/22/2024",
+    tag: "animations",
+    text: [
+      "Better Performance With requestAnimationFrame",
+      "This article discusses how you can improve the performance of your animations",
+    ],
+  },
+  {
     href: "https://github.com/unknownskl/greenlight",
     date: "06/19/2024",
     tag: "gaming",
@@ -74,7 +98,7 @@ const bookmarks: Bookmark[] = [
     tag: "deno",
     text: [
       "Fresh",
-      "Next generation web framework, built for speed, reliability, and simplicity.",
+      "Next generation web framework, built for speed, reliability, and simplicity",
     ],
   },
 ];

@@ -39,9 +39,9 @@ export function withIsland<S, Props extends ObjectAny>(
     if (isBrowser()) return <Component {...(runTimeProps as Props)} />;
 
     return (
-      <x-island src={String(src)} visible={visible} media={media}>
+      <preact-island src={String(src)} visible={visible} media={media}>
         <Component {...(runTimeProps as Props)} />
-      </x-island>
+      </preact-island>
     );
   };
 }
@@ -50,7 +50,7 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
   if (!isBrowser()) return;
 
   customElements.define(
-    "x-island",
+    "preact-island",
     class extends HTMLElement {
       async connectedCallback() {
         const src = this.getAttribute("src");
@@ -105,7 +105,7 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
 declare module "preact/jsx-runtime" {
   namespace JSX {
     interface IntrinsicElements {
-      "x-island": JSX.HTMLAttributes<HTMLElement> & {
+      "preact-island": JSX.HTMLAttributes<HTMLElement> & {
         visible?: boolean | string;
         media?: string;
       };
