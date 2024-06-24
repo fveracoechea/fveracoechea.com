@@ -3,15 +3,13 @@ import { ComponentProps } from "preact";
 
 const iconButton = cva(
   [
-    "flex cursor-pointer appearance-none p-2 ring-cat-blue/80",
-    "outline-none ring-0 transition-shadow focus-visible:ring-2",
+    "flex cursor-pointer appearance-none p-2 ring-cat-blue",
+    "outline-none transition-shadow focus-visible:ring-2",
   ],
   {
     variants: {
       active: {
-        true: [
-          "border border-cat-blue border-opacity-80 bg-cat-blue text-cat-blue",
-        ],
+        true: "bg-cat-blue/10 text-cat-blue",
         false: [
           "text-cat-text hover:bg-cat-overlay2/20",
           "active:ring-2 active:ring-cat-overlay0",
@@ -22,17 +20,6 @@ const iconButton = cva(
         false: "",
       },
     },
-    compoundVariants: [
-      {
-        active: false,
-        rounded: false,
-        className: [
-          "border border-transparent",
-          "first-of-type:border-r first-of-type:border-r-cat-surface0",
-          "last-of-type:border-l last-of-type:border-l-cat-surface0",
-        ],
-      },
-    ],
   },
 );
 
@@ -61,11 +48,6 @@ export function IconButton<R extends Root = "button">(
   return (
     <Element
       {...otherProps}
-      style={
-        active && !rounded
-          ? "--tw-bg-opacity: 0.1; --tw-border-opacity: 0.6"
-          : ""
-      }
       className={iconButton({
         active,
         rounded,

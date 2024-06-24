@@ -13,7 +13,7 @@ const THEME = {
 
 type Theme = keyof typeof THEME;
 
-function checkRadio(element: HTMLLabelElement) {
+function checkRadio(element: HTMLButtonElement) {
   element.tabIndex = 0;
   element.setAttribute("aria-checked", "true");
   element.focus();
@@ -21,7 +21,7 @@ function checkRadio(element: HTMLLabelElement) {
   element.click();
 }
 
-function uncheckRadio(element: HTMLLabelElement) {
+function uncheckRadio(element: HTMLButtonElement) {
   element.tabIndex = -1;
   element.setAttribute("aria-checked", "false");
   element.blur();
@@ -33,8 +33,8 @@ function uncheckRadio(element: HTMLLabelElement) {
  * If focus is on the first button, focus moves to the last button.
  * */
 function checkPrevious(
-  collection: HTMLLabelElement[],
-  element: HTMLLabelElement,
+  collection: HTMLButtonElement[],
+  element: HTMLButtonElement,
 ) {
   const idx = collection.indexOf(element);
   const previous = collection.at(idx - 1);
@@ -49,7 +49,10 @@ function checkPrevious(
  * uncheck the previously focused button, and check the newly focused button.
  * If focus is on the last button, focus moves to the first button.
  * */
-function checkNext(collection: HTMLLabelElement[], element: HTMLLabelElement) {
+function checkNext(
+  collection: HTMLButtonElement[],
+  element: HTMLButtonElement,
+) {
   const idx = collection.indexOf(element);
   const next = collection.at(idx >= collection.length - 1 ? 0 : idx + 1);
   if (next) {
@@ -58,8 +61,8 @@ function checkNext(collection: HTMLLabelElement[], element: HTMLLabelElement) {
   }
 }
 
-function ThemeSwitcher(props: { fill?: boolean }) {
-  const { fill = false } = props;
+function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
+  const { fill = false, border = "base" } = props;
   const [theme, setTheme] = useState<Theme | null>(null);
   const radiogroupRef = useRef<HTMLDivElement | null>(null);
 
@@ -75,11 +78,11 @@ function ThemeSwitcher(props: { fill?: boolean }) {
 
   function onKeyDownHandler(e: KeyboardEvent) {
     const target = e.currentTarget;
-    if (!(target instanceof HTMLLabelElement)) return;
+    if (!(target instanceof HTMLButtonElement)) return;
     if (!radiogroupRef.current) return;
 
-    const collection = Array.from<HTMLLabelElement>(
-      radiogroupRef.current.querySelectorAll('label[role="radio"]'),
+    const collection = Array.from<HTMLButtonElement>(
+      radiogroupRef.current.querySelectorAll('button[role="radio"]'),
     );
 
     const cases: Record<string, () => void> = {
@@ -115,10 +118,7 @@ function ThemeSwitcher(props: { fill?: boolean }) {
     <div
       role="radiogroup"
       ref={radiogroupRef}
-      class={cx(
-        "flex bg-cat-base text-xl md:text-2xl",
-        "rounded border border-cat-surface0 text-cat-text",
-      )}
+      class={cx("flex text-xl md:text-2xl", "text-cat-text")}
     >
       <IconButton
         role="radio"
@@ -129,15 +129,20 @@ function ThemeSwitcher(props: { fill?: boolean }) {
         tabIndex={theme === "LIGHT" ? 0 : -1}
         onClick={() => saveTheme("LIGHT")}
         className={cx(
+          "rounded-bl rounded-tl border",
           fill && "flex-1 justify-center",
-          "!rounded-bl !rounded-tl",
+          theme === "LIGHT"
+            ? "border-cat-blue"
+            : border === "base"
+              ? "border-cat-surface0"
+              : "border-cat-surface2",
         )}
         aria-checked={theme === "LIGHT"}
+        style={theme === "DARK" ? { borderRight: "none" } : {}}
       >
-        <span>
-          <Sun />
-        </span>
+        <Sun />
       </IconButton>
+
       <IconButton
         role="radio"
         onKeyDown={onKeyDownHandler}
@@ -147,10 +152,21 @@ function ThemeSwitcher(props: { fill?: boolean }) {
         tabIndex={theme === "DARK" ? 0 : -1}
         onClick={() => saveTheme("DARK")}
         aria-checked={theme === "DARK"}
-        className={cx(fill && "flex-1 justify-center")}
+        className={cx(
+          fill && "flex-1 justify-center",
+          theme === "DARK"
+            ? "border border-cat-blue"
+            : [
+                "border-y",
+                border === "base"
+                  ? "border-y-cat-surface0"
+                  : "border-y-cat-surface2",
+              ],
+        )}
       >
         <Moon />
       </IconButton>
+
       <IconButton
         role="radio"
         rounded={false}
@@ -160,10 +176,16 @@ function ThemeSwitcher(props: { fill?: boolean }) {
         tabIndex={theme === "SYSTEM" ? 0 : -1}
         onClick={() => saveTheme("SYSTEM")}
         className={cx(
+          "rounded-br rounded-tr border",
           fill && "flex-1 justify-center",
-          "!rounded-br !rounded-tr",
+          theme === "SYSTEM"
+            ? "border-cat-blue"
+            : border === "base"
+              ? "border-cat-surface0"
+              : "border-cat-surface2",
         )}
         aria-checked={theme === "SYSTEM"}
+        style={theme === "DARK" ? { borderLeft: "none" } : {}}
       >
         <Computer />
       </IconButton>

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cx } from "cva";
 
 import { BarChart, Gauge, Layers, Person } from "./Icons.tsx";
 
@@ -25,7 +25,7 @@ export default function Interests() {
       className="mb-10 rounded bg-cat-waves bg-cover bg-center text-cat-text"
     >
       <ul
-        className={clsx(
+        className={cx(
           "not-prose grid w-full grid-cols-2 lg:grid-cols-4",
           "rounded border border-cat-surface0 bg-cat-base/80",
           "p-2",
@@ -34,7 +34,7 @@ export default function Interests() {
         {interests.map(x => (
           <li
             key={x.label}
-            className={clsx(
+            className={cx(
               "flex flex-col items-center justify-center gap-2 px-10 py-6 text-center",
             )}
           >
