@@ -1,6 +1,8 @@
-import { FunctionalComponent, hydrate } from 'preact';
+import { FunctionalComponent, hydrate } from "preact";
 
-const isBrowser = () => typeof document !== 'undefined';
+import { ObjectAny } from "../../../examples/types/polymorphic.ts";
+
+const isBrowser = () => typeof document !== "undefined";
 
 export type IslandsConfig = Record<
   string,
@@ -16,9 +18,9 @@ function isKeyOf<R extends Record<PropertyKey, unknown>>(
   key: unknown,
 ): key is keyof R {
   return (
-    (typeof key === 'string' ||
-      typeof key === 'number' ||
-      typeof key === 'symbol') &&
+    (typeof key === "string" ||
+      typeof key === "number" ||
+      typeof key === "symbol") &&
     Object.prototype.hasOwnProperty.call(record, key)
   );
 }
@@ -28,16 +30,17 @@ type IslandProps = {
   media?: string;
 };
 
-export function withIsland<C>(
-  Component: FunctionalComponent,
-  src: C extends IslandsConfig ? keyof C : string,
+export function withIsland<S, Props extends ObjectAny>(
+  Component: FunctionalComponent<Props>,
+  src: S extends IslandsConfig ? keyof S : string,
 ) {
-  return (props: IslandProps) => {
-    if (isBrowser()) return <Component />;
+  return (props: Props & IslandProps) => {
+    const { visible, media, ...runTimeProps } = props;
+    if (isBrowser()) return <Component {...(runTimeProps as Props)} />;
 
     return (
-      <x-island src={String(src)} {...props}>
-        <Component />
+      <x-island src={String(src)} visible={visible} media={media}>
+        <Component {...(runTimeProps as Props)} />
       </x-island>
     );
   };
@@ -47,18 +50,18 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
   if (!isBrowser()) return;
 
   customElements.define(
-    'x-island',
+    "x-island",
     class extends HTMLElement {
       async connectedCallback() {
-        const src = this.getAttribute('src');
+        const src = this.getAttribute("src");
 
         if (!isKeyOf(config, src))
           throw new Error(`${src} is not a registered island`);
 
-        if (this.hasAttribute('visible')) await this.visible();
+        if (this.hasAttribute("visible")) await this.visible();
 
-        if (this.hasAttribute('media'))
-          await this.media(this.getAttribute('media')!);
+        if (this.hasAttribute("media"))
+          await this.media(this.getAttribute("media")!);
 
         const load = config[src];
         const Component = await load();
@@ -85,13 +88,13 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
           const mediaListener = (e: MediaQueryListEvent) => {
             if (e.matches) {
               resolve(true);
-              mediaQuery.removeEventListener('change', mediaListener);
+              mediaQuery.removeEventListener("change", mediaListener);
             }
           };
 
           if (mediaQuery.matches) resolve(true);
           else {
-            mediaQuery.addEventListener('change', mediaListener);
+            mediaQuery.addEventListener("change", mediaListener);
           }
         });
       }
@@ -99,10 +102,13 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
   );
 }
 
-declare module 'preact/jsx-runtime' {
+declare module "preact/jsx-runtime" {
   namespace JSX {
     interface IntrinsicElements {
-      'x-island': JSX.HTMLAttributes<HTMLElement>;
+      "x-island": JSX.HTMLAttributes<HTMLElement> & {
+        visible?: boolean | string;
+        media?: string;
+      };
     }
   }
 }

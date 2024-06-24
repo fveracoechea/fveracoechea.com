@@ -1,0 +1,58 @@
+---
+title: useResizeObserver
+order: 5
+description:
+  Designed to monitor the size of a DOM element and update its dimensions
+  whenever the element is resized.
+---
+
+# useResizeObserver
+
+Designed to monitor the size of a DOM element and update its dimensions whenever
+the element is resized. It takes two arguments: a ref that points to a DOM
+element and an optional callback function that is triggered whenever the
+observed element's size changes.
+
+The hook starts by initializing a state variable, this state holds the current
+size of the observed element. It then uses `useLayoutEffect` hook to set up a
+`ResizeObserver` that listens for resize events on the element referenced by
+ref. When the ref is non-null, the current dimensions of the element are
+immediately set into the size state.
+
+The `ResizeObserver` is created to observe the element and update the size state
+whenever the element's dimensions change. If a callback is provided, it is
+invoked with the resize entry. The observer is cleaned up when the component
+using this hook is unmounted or when the ref or callback changes.
+
+```typescript
+import { MutableRefObject, useLayoutEffect, useState } from "react";
+
+export function useResizeObserver<T extends Element>(
+  ref: MutableRefObject<T | null>,
+  callback?: (entry: ResizeObserverEntry) => void,
+) {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+
+    setSize({
+      width: ref.current.clientWidth,
+      height: ref.current.clientHeight,
+    });
+
+    const observer = new ResizeObserver(([entry]) => {
+      if (callback) callback(entry);
+      setSize({
+        width: entry.target.clientWidth,
+        height: entry.target.clientHeight,
+      });
+    });
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, callback]);
+
+  return size;
+}
+```

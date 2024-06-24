@@ -34,6 +34,10 @@ html.cat-latte button svg[data-icon="light"] {
     display: none;
 }
 
+x-island {
+    display: contents;
+}
+
 @media (prefers-reduced-motion) {
     html,
     body {
@@ -91,6 +95,10 @@ html.cat-latte button svg[data-icon="light"] {
     table tr td {
         @apply text-center;
     }
+}
+
+.FULL_HEIGHT {
+    @apply min-h-[calc(100vh-214px)];
 }
 
 svg.lucide {

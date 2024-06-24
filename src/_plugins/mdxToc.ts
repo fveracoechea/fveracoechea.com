@@ -33,6 +33,12 @@ declare global {
        * Extracted Table of contents
        */
       toc: TocData[];
+      snippets?: {
+        path: string;
+        outputPath: string;
+        title: string | undefined;
+        code: string;
+      }[];
     }
   }
 }

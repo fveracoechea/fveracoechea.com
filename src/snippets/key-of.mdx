@@ -1,0 +1,33 @@
+---
+title: "isKeyOf"
+order: 1
+description:
+  Type guard. Determines whether an object has a property with the specified
+  name.
+---
+
+# isKeyOf
+
+Type guard. Determines whether an object has a property with the specified name.
+
+Returns `true` if the specified property is a direct property of the object. The
+method returns `false` if the property is inherited, or has not been declared at
+all.
+
+Uses
+[Object.prototype.hasOwnProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+under the hood.
+
+```typescript
+function isKeyOf<R extends Record<PropertyKey, unknown>>(
+  record: R,
+  key: unknown,
+): key is keyof R {
+  return (
+    (typeof key === "string" ||
+      typeof key === "number" ||
+      typeof key === "symbol") &&
+    Object.prototype.hasOwnProperty.call(record, key)
+  );
+}
+```

@@ -1,0 +1,8 @@
+type: snippet
+layout: layouts/snippets.tsx
+metas:
+  title: "=title"
+  description: "=description"
+  lang: "en-US"
+  site: "Francisco Veracoechea"
+  robots: true

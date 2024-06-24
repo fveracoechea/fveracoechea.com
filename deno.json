@@ -11,9 +11,11 @@
     "prettier-plugin-tailwindcss": "npm:prettier-plugin-tailwindcss",
     "tailwindcss": "npm:tailwindcss",
     "tailwindcss/": "npm:tailwindcss/",
+    "tailwind-scrollbar": "npm:tailwind-scrollbar",
     "lucide-preact": "https://cdn.jsdelivr.net/npm/lucide-preact",
     "react": "npm:react",
     "preact": "npm:preact",
+    "preact/hooks": "npm:preact/hooks",
     "cva": "npm:class-variance-authority",
     "clsx": "npm:clsx"
   },

@@ -1,42 +1,57 @@
-import { cx } from 'cva';
+import { cx } from "cva";
+import { ComponentProps } from "preact";
 
-import SocialLinks from '../../_components/SocialLinks.tsx';
-import ThemeSwitcher from '../components/ThemeSwitcher.tsx';
+import MobileMenu from "../components/MobileMenu.tsx";
+import { NavLogo } from "../components/NavLogo.tsx";
+import SocialLinks from "../components/SocialLinks.tsx";
+import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
-export const layout = 'layouts/document.tsx';
+export const layout = "layouts/document.tsx";
 
-function Header() {
+export const FULL_HEIGHT = "FULL_HEIGHT";
+
+function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
   return (
-    <header className={cx('border-b border-cat-surface0')}>
-      <div className="container flex items-center justify-between gap-2 py-8">
-        <a
-          href="/"
-          class={cx(
-            'rounded border-4 border-transparent transition-shadow',
-            'ring-cat-blue/60 ring-offset-cat-crust focus-visible:ring-2',
-          )}
-        >
-          <h1
-            className={cx(
-              'bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text',
-              'text-lg font-semibold text-transparent transition-colors md:text-2xl',
-            )}
+    <a
+      {...props}
+      className={cx(
+        "rounded px-3 py-2",
+        props.isActive
+          ? "border border-cat-blue bg-cat-blue/10 text-cat-blue"
+          : [
+              "text-cat-text transition-colors hover:bg-cat-overlay2/20",
+              "active:ring-2 active:ring-cat-overlay2",
+              "focus-visible:ring-2 focus-visible:ring-cat-blue",
+            ],
+        props.className,
+      )}
+    />
+  );
+}
+
+function Header(props: Lume.Data) {
+  return (
+    <header className={cx("border-b border-cat-surface0")}>
+      <nav className="container hidden items-center justify-between gap-2 py-8 md:flex">
+        <NavLogo />
+        <div className="flex items-center gap-2">
+          <NavLink
+            href="/bookmarks/"
+            isActive={props.page.outputPath.includes("/bookmarks/")}
           >
-            Francisco Veracoechea
-          </h1>
-          <h2
-            className={cx(
-              'font-mono text-xs font-normal leading-tight',
-              'md:text-base',
-            )}
+            Bookmarks
+          </NavLink>
+          <NavLink
+            href="/snippets/"
+            isActive={props.page.outputPath.includes("/snippets/")}
+            className="mr-3"
           >
-            <span className="text-cat-red">{'()'}</span>
-            <span className="text-cat-subtext0">{' => '}</span>
-            <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
-          </h2>
-        </a>
-        <ThemeSwitcher />
-      </div>
+            Snippets
+          </NavLink>
+          <ThemeSwitcher />
+        </div>
+      </nav>
+      <MobileMenu media="(max-width: 768px)" />
     </header>
   );
 }
@@ -60,10 +75,10 @@ export default function MainLayout(props: Lume.Data) {
   const { children } = props;
   return (
     <>
-      <Header />
-      <div className={cx('min-h-[calc(100vh-202px)] bg-transparent')}>
-        <div className="container">
-          <main>{children}</main>
+      <Header {...props} />
+      <div className={cx(FULL_HEIGHT, "bg-transparent")}>
+        <div className={cx(FULL_HEIGHT, "container")}>
+          <main className={FULL_HEIGHT}>{children}</main>
         </div>
       </div>
       <Footer />

@@ -1,25 +1,29 @@
-import clsx from 'clsx';
+import Articles from "../components/Articles.tsx";
+import CodeWritter from "../components/CodeWritter.tsx";
+import Interests from "../components/Interests.tsx";
+import SocialLinks from "../components/SocialLinks.tsx";
 
-import Articles from '../components/Articles.tsx';
-
-export const layout = 'layouts/base.tsx';
+export const layout = "layouts/base.tsx";
 
 export default function HomeLayout(props: Lume.Data) {
   const { search } = props;
+
   return (
     <div className="py-10">
-      <section className="flex flex-col flex-wrap gap-10 pb-10 md:flex-row">
-        <div className="relative flex flex-1 items-center justify-center">
-          <img
-            className={clsx(
-              'h-full w-full max-w-80 rounded border border-cat-surface0',
-              'object-cover md:absolute md:max-w-none',
-            )}
-            src="/images/me.jpg"
-          />
-        </div>
-        <div className="prose w-full flex-1 lg:flex-[2]">{props.children}</div>
+      <section className="flex flex-col gap-6 pb-10 lg:flex-row">
+        <article
+          className="flex flex-1 flex-col justify-between gap-4"
+          id="about-me"
+        >
+          <div className="prose">{props.children}</div>
+
+          <SocialLinks className="self-end" />
+        </article>
+
+        <CodeWritter />
       </section>
+
+      <Interests />
       <Articles search={search} />
     </div>
   );

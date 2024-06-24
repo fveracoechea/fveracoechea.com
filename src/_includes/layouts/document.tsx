@@ -2,8 +2,16 @@ import { cx } from "cva";
 
 export default function Document(props: Lume.Data) {
   const { children } = props;
+
   return (
-    <html lang="en-US" className="bg-cat-crust">
+    <html
+      lang="en-US"
+      className={cx(
+        "scrollbar bg-cat-crust",
+        "scrollbar-thumb-cat-overlay0 scrollbar-track-cat-surface0",
+        "hover:scrollbar-thumb-cat-overlay2",
+      )}
+    >
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,7 +35,6 @@ export default function Document(props: Lume.Data) {
             "bg-gradient-to-b",
           )}
         />
-
         <script type="module" src="/main.js" />
       </body>
     </html>
