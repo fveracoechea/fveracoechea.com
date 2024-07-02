@@ -48,13 +48,13 @@ async function* typewriter(text: string, start: number = 0) {
 function CodeWritter(props: { initialSnippet: Snippets[number] }) {
   const preRef = useRef<HTMLPreElement | null>(null);
   const codeRef = useRef<HTMLElement | null>(null);
+
   const indexRef = useRef(0);
 
-  const current = isBrowser()
-    ? window.__SNIPPETS__![indexRef.current]
-    : props.initialSnippet;
+  const current =
+    props.initialSnippet ?? window.__SNIPPETS__![indexRef.current];
 
-  const [code, setCode] = useState(current?.code ?? "");
+  const [code, setCode] = useState("");
 
   async function generateCode(newIndex: number) {
     if (!window.__SNIPPETS__) return;
@@ -82,6 +82,10 @@ function CodeWritter(props: { initialSnippet: Snippets[number] }) {
       setCode(c => c + char);
     }
   }
+
+  useEffect(() => {
+    setCode(current.code);
+  }, []);
 
   return (
     <figure className="flex flex-[2] flex-col gap-2">
