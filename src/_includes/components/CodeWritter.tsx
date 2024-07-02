@@ -50,8 +50,6 @@ function CodeWritter(props: { initialSnippet: Snippets[number] }) {
   const codeRef = useRef<HTMLElement | null>(null);
   const indexRef = useRef(0);
 
-  console.log(props.initialSnippet);
-
   const current = isBrowser()
     ? window.__SNIPPETS__![indexRef.current]
     : props.initialSnippet;

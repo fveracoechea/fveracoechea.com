@@ -25,7 +25,6 @@ export default function SnippetsLayout(props: Lume.Data) {
             <ul className="flex flex-col text-sm text-cat-overlay2">
               {snippets.map(({ outputPath, title }) => {
                 const isActive = currentPath === outputPath;
-                console.log(currentPath, outputPath);
                 return (
                   <li
                     key={outputPath}
