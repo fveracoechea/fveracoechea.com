@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 
-import { withIsland } from "../helpers/islands.tsx";
+import { Snippets } from "../../_plugins/snippets.ts";
+import { isBrowser, withIsland } from "../helpers/islands.tsx";
 import { IconButton } from "./IconButton.tsx";
 import { ChevronLeft, ChevronRight } from "./Icons.tsx";
 
 declare global {
   interface Window {
-    __SNIPPETS__?: { code: string; title: string; outputPath: string }[];
+    __SNIPPETS__?: Snippets;
   }
 }
 
@@ -44,13 +45,18 @@ async function* typewriter(text: string, start: number = 0) {
   }
 }
 
-function CodeWritter() {
+function CodeWritter(props: { initialSnippet: Snippets[number] }) {
   const preRef = useRef<HTMLPreElement | null>(null);
   const codeRef = useRef<HTMLElement | null>(null);
-  const [code, setCode] = useState("");
   const indexRef = useRef(0);
 
-  const current = window.__SNIPPETS__?.at(indexRef.current);
+  console.log(props.initialSnippet);
+
+  const current = isBrowser()
+    ? window.__SNIPPETS__![indexRef.current]
+    : props.initialSnippet;
+
+  const [code, setCode] = useState(current?.code ?? "");
 
   async function generateCode(newIndex: number) {
     if (!window.__SNIPPETS__) return;
@@ -79,16 +85,14 @@ function CodeWritter() {
     }
   }
 
-  useEffect(() => void generateCode(0), []);
-
   return (
     <figure className="flex flex-[2] flex-col gap-2">
       <figcaption className="flex items-end justify-between gap-4">
         <a
-          href={current?.outputPath}
+          href={current.outputPath}
           className="cursor-pointer text-base font-normal underline-offset-2 hover:underline focus-visible:underline"
         >
-          {current?.title}
+          {current.title}
         </a>
         <div className="flex gap-2">
           <IconButton onClick={() => void generateCode(indexRef.current - 1)}>

@@ -22,6 +22,7 @@ export default () => (site: Lume.Site) => {
       const script = home.document.createElement("script");
       script.innerHTML = `window.__SNIPPETS__ = ${JSON.stringify(snippets)};`;
       home.document.body.appendChild(script);
+      home.data.snippets = snippets;
     }
   });
 
@@ -32,7 +33,8 @@ export default () => (site: Lume.Site) => {
       .filter(
         page =>
           page.data.type === "snippets-index-page" ||
-          page.data.type === "snippet",
+          page.data.type === "snippet" ||
+          page.data.type === "home",
       )
       .forEach(page => {
         page.data.snippets = snippets;

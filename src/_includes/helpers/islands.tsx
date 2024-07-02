@@ -2,7 +2,7 @@ import { FunctionalComponent, hydrate } from "preact";
 
 import { ObjectAny } from "../../../examples/types/polymorphic.ts";
 
-const isBrowser = () => typeof document !== "undefined";
+export const isBrowser = () => typeof document !== "undefined";
 
 export type IslandsConfig = Record<
   string,
