@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "./Icons.tsx";
 
 declare global {
   interface Window {
-    __SNIPPETS__?: { code: string; title: string }[];
+    __SNIPPETS__?: { code: string; title: string; outputPath: string }[];
   }
 }
 
@@ -50,7 +50,7 @@ function CodeWritter() {
   const [code, setCode] = useState("");
   const indexRef = useRef(0);
 
-  const title = window.__SNIPPETS__?.at(indexRef.current)?.title;
+  const current = window.__SNIPPETS__?.at(indexRef.current);
 
   async function generateCode(newIndex: number) {
     if (!window.__SNIPPETS__) return;
@@ -84,7 +84,12 @@ function CodeWritter() {
   return (
     <figure className="flex flex-[2] flex-col gap-2">
       <figcaption className="flex items-end justify-between gap-4">
-        <h4 className="h-fit text-base font-semibold">{title}</h4>
+        <a
+          href={current?.outputPath}
+          className="cursor-pointer text-base font-normal underline-offset-2 hover:underline focus-visible:underline"
+        >
+          {current?.title}
+        </a>
         <div className="flex gap-2">
           <IconButton onClick={() => void generateCode(indexRef.current - 1)}>
             <ChevronLeft />
@@ -95,7 +100,7 @@ function CodeWritter() {
         </div>
       </figcaption>
       <div className="prose">
-        <pre ref={preRef} className="scrollbar-thin h-[300px] overflow-y-auto">
+        <pre ref={preRef} className="h-[300px] overflow-y-auto scrollbar-thin">
           <code
             ref={codeRef}
             className="language-tsx hljs language-typescript"
