@@ -1,0 +1,96 @@
+---
+title: withSuspense
+order: 4
+description:
+  Higher-order component that wraps a given component with React's Suspense
+  component.
+---
+
+# withSuspense
+
+It's a **higher-order component** that wraps a given component with React's
+Suspense component, providing a fallback UI to display while the main component
+is loading. It uses `forwardRef` to pass refs to the wrapped component and
+handles the fallback logic to decide what to display while waiting.
+
+Within the returned function, the code checks if FallbackComponent is a function
+(indicating it is a React component). If it is, it renders FallbackComponent
+with the same props and ref; otherwise, it uses FallbackComponent directly as
+the fallback content.
+
+```tsx
+import { ComponentType, Ref, Suspense, forwardRef } from "react";
+
+export function withSuspense<P extends object>(
+  Component: ComponentType<P>,
+  FallbackComponent: ComponentType<P> | ReactNode,
+) {
+  return forwardRef((props: P, ref: Ref<HTMLElement>) => (
+    <Suspense
+      fallback={
+        typeof FallbackComponent === "function" ? (
+          <FallbackComponent {...props} ref={ref} />
+        ) : (
+          FallbackComponent
+        )
+      }
+    >
+      <Component {...props} ref={ref} />
+    </Suspense>
+  ));
+}
+```
+
+## Example Usage
+
+### Fallback as function component
+
+```tsx
+type UserCardProps = {
+  userId: string;
+};
+
+function UserCard({ userId }: UserCardProps) {
+  const user = useSuspenseQuery({ queryKey: [userId], queryFn: fetchUser });
+  return (
+    <div>
+      <img height={200} src={user.image} />
+      <h3>{user.fullname}</h3>
+    </div>
+  );
+}
+
+function Fallback({ userId }: UserCardProps) {
+  return (
+    <div>
+      <Skeleton height={200} />
+      <span>Loading user {userId}</span>
+    </div>
+  );
+}
+
+export default withSuspense(UserCard, Fallback);
+```
+
+### Fallback as plain ReactNode
+
+```tsx
+type UserCardProps = {
+  userId: string;
+};
+
+export const UserCard = withSuspense(
+  ({ userId }) => {
+    const user = useSuspenseQuery({ queryKey: [userId], queryFn: fetchUser });
+    return (
+      <div>
+        <img height={200} src={user.image} />
+        <h3>{user.fullname}</h3>
+      </div>
+    );
+  },
+  <div>
+    <Skeleton height={200} />
+  </div>,
+);
+```
