@@ -12,6 +12,24 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://github.com/dreamsofcode-io/dotfiles",
+    date: "06/29/2024",
+    tag: "repo",
+    text: [
+      "dreamsofcode-io/dotfiles",
+      "dotfile configuration for a consistent experience.",
+    ],
+  },
+  {
+    href: "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
+    date: "07/03/2024",
+    tag: "docs",
+    text: [
+      "Sentry's User Feedback Widget",
+      "Allows users to submit feedback quickly and easily",
+    ],
+  },
+  {
     href: "https://cubic-bezier.com/",
     date: "06/24/2024",
     tag: "animations",
@@ -100,6 +118,12 @@ const bookmarks: Bookmark[] = [
       "Fresh",
       "Next generation web framework, built for speed, reliability, and simplicity",
     ],
+  },
+  {
+    href: "https://danmarshall.github.io/google-font-to-svg-path/",
+    date: "10/17/2023",
+    tag: "svg",
+    text: ["font-to-svg-path", "Google Font to Svg Path"],
   },
 ];
 
