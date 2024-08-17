@@ -1,7 +1,7 @@
 import { cx } from "cva";
 import { useEffect, useRef, useState } from "preact/hooks";
 
-import { withIsland } from "../helpers/islands.tsx";
+import { withIsland } from "../islands/PreactIslands.tsx";
 import { IconButton } from "./IconButton.tsx";
 import { Computer, Moon, Sun } from "./Icons.tsx";
 

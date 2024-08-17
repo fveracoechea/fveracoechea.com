@@ -16,7 +16,6 @@ type Props = VariantProps<typeof list> & { className?: string };
 
 export default function SocialLinks(props: Props) {
   const { size = "sm", className } = props;
-
   const listClasname = list({ size, className });
 
   return (

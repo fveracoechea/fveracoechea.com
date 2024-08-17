@@ -1,7 +1,7 @@
 import { cx } from "cva";
 import { useRef, useState } from "preact/hooks";
 
-import { withIsland } from "../helpers/islands.tsx";
+import { withIsland } from "../islands/PreactIslands.tsx";
 import { IconButton } from "./IconButton.tsx";
 import { Close, Menu } from "./Icons.tsx";
 import { NavLogo } from "./NavLogo.tsx";

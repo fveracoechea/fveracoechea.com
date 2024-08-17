@@ -1,19 +1,16 @@
 import { FunctionalComponent, hydrate } from "preact";
 
-import { ObjectAny } from "../../../examples/types/polymorphic.ts";
+import { IslandProps, IslandsConfig, ObjectAny } from "./types.ts";
 
-export const isBrowser = () => typeof document !== "undefined";
-
-export type IslandsConfig = Record<
-  string,
-  () => Promise<{ default: (props: IslandProps) => JSX.Element }>
->;
+export function isBrowser() {
+  return typeof document !== "undefined";
+}
 
 /**
  * Type guard.
  * Determines whether an object has a property with the specified name.
  * */
-function isKeyOf<R extends Record<PropertyKey, unknown>>(
+export function isKeyOf<R extends Record<PropertyKey, unknown>>(
   record: R,
   key: unknown,
 ): key is keyof R {
@@ -24,11 +21,6 @@ function isKeyOf<R extends Record<PropertyKey, unknown>>(
     Object.prototype.hasOwnProperty.call(record, key)
   );
 }
-
-type IslandProps = {
-  visible?: boolean;
-  media?: string;
-};
 
 export function withIsland<S, Props extends ObjectAny>(
   Component: FunctionalComponent<Props>,
@@ -46,24 +38,26 @@ export function withIsland<S, Props extends ObjectAny>(
   };
 }
 
-export function hydrateIslands<C extends IslandsConfig>(config: C) {
+export function registerIslands<C extends IslandsConfig>(config: C) {
   if (!isBrowser()) return;
 
   customElements.define(
     "preact-island",
-    class extends HTMLElement {
+    class PreactIsland extends HTMLElement {
+      static config: IslandsConfig = config;
+
       async connectedCallback() {
         const src = this.getAttribute("src");
 
-        if (!isKeyOf(config, src))
+        if (!isKeyOf(PreactIsland.config, src))
           throw new Error(`${src} is not a registered island`);
-
-        if (this.hasAttribute("visible")) await this.visible();
 
         if (this.hasAttribute("media"))
           await this.media(this.getAttribute("media")!);
 
-        const load = config[src];
+        if (this.hasAttribute("visible")) await this.visible();
+
+        const load = PreactIsland.config[src];
         const Component = await load();
         hydrate(<Component.default />, this);
       }
@@ -84,18 +78,16 @@ export function hydrateIslands<C extends IslandsConfig>(config: C) {
 
       media(query: string) {
         const mediaQuery = globalThis.matchMedia(query);
+
         return new Promise(resolve => {
-          const mediaListener = (e: MediaQueryListEvent) => {
-            if (e.matches) {
-              resolve(true);
-              mediaQuery.removeEventListener("change", mediaListener);
-            }
-          };
+          function mediaListener(e: MediaQueryListEvent) {
+            if (!e.matches) return;
+            resolve(true);
+            mediaQuery.removeEventListener("change", mediaListener);
+          }
 
           if (mediaQuery.matches) resolve(true);
-          else {
-            mediaQuery.addEventListener("change", mediaListener);
-          }
+          else mediaQuery.addEventListener("change", mediaListener);
         });
       }
     },

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { Snippets } from "../../_plugins/snippets.ts";
-import { isBrowser, withIsland } from "../helpers/islands.tsx";
+import { withIsland } from "../islands/PreactIslands.tsx";
 import { IconButton } from "./IconButton.tsx";
 import { ChevronLeft, ChevronRight } from "./Icons.tsx";
 
