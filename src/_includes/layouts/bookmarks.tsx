@@ -12,6 +12,12 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://github.com/sxyazi/yazi",
+    date: "08/12/2024",
+    tag: "terminal",
+    text: ["Yazi", "A terminal file manager written in Rust"],
+  },
+  {
     href: "https://github.com/dreamsofcode-io/dotfiles",
     date: "06/29/2024",
     tag: "repo",
