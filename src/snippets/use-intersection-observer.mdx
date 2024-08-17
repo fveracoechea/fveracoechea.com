@@ -1,0 +1,130 @@
+---
+title: useIntersectionObserver
+order: 6
+description:
+  A react hook that observes when a target element intersects with its viewport.
+---
+
+# useIntersectionObserver
+
+A react hook that allows you to observe when a target element intersects with
+its viewport. It provides a simple way to track visibility changes, with options
+to trigger a callback or disconnect the observer after the first intersection.
+
+It returns an object containing a boolean `isVisible` that indicates whether the
+target element is currently visible, and the IntersectionObserverEntry object
+representing the current state of the intersection.
+
+```ts
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+
+export interface IntersectionObserverArgs<E extends Element>
+  extends IntersectionObserverInit {
+  ref: MutableRefObject<E | null>;
+  triggerOnce?: boolean;
+  callback?: (entry: IntersectionObserverEntry) => void;
+}
+
+export function useIntersectionObserver<E extends Element>(
+  args: IntersectionObserverArgs<E>,
+) {
+  const {
+    ref,
+    triggerOnce = false,
+    callback,
+    root,
+    rootMargin,
+    threshold,
+  } = args;
+
+  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
+
+  const isTriggeredRef = useRef(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (triggerOnce && isTriggeredRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setEntry(entry);
+        if (callback) callback(entry);
+
+        if (triggerOnce) {
+          isTriggeredRef.current = true;
+          observer.disconnect();
+        }
+      },
+      { root, rootMargin, threshold },
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, callback, triggerOnce, root, rootMargin, threshold]);
+
+  const isVisible = entry?.isIntersecting ?? false;
+
+  return { isVisible, entry };
+}
+```
+
+## Usage
+
+Here's a short example of how to use the `useIntersectionObserver` hook:
+
+```tsx
+import React, { useRef } from "react";
+
+import { useIntersectionObserver } from "./useIntersectionObserver";
+
+// assuming the hook is in the same folder
+
+const ExampleComponent: React.FC = () => {
+  const ref = useRef(null);
+
+  const { isVisible } = useIntersectionObserver({
+    ref,
+    triggerOnce: true, // Observer will disconnect after the first intersection
+    callback: entry => {
+      if (entry.isIntersecting) {
+        console.log("Element is visible");
+      } else {
+        console.log("Element is not visible");
+      }
+    },
+  });
+
+  return (
+    <div>
+      <div style={{ height: "150vh" }}>Scroll down to observe the element</div>
+      <div
+        ref={ref}
+        style={{
+          height: "100px",
+          backgroundColor: isVisible ? "green" : "red",
+        }}
+      >
+        Observe me
+      </div>
+    </div>
+  );
+};
+
+export default ExampleComponent;
+```
+
+### Breakdown
+
+- **`ref`**: The `useRef` hook is used to reference the target element.
+- **`useIntersectionObserver`**: The custom hook is used to monitor the
+  visibility of the target element.
+  - **`triggerOnce: true`**: The observer disconnects after the element becomes
+    visible for the first time.
+  - **`callback`**: Logs to the console when the element enters or leaves the
+    viewport.
+- **Conditional styling**: The background color of the target element changes
+  based on its visibility (`green` if visible, `red` if not).
+
+In this example, when you scroll down and the target element enters the
+viewport, the observer will trigger, change the background color, log visibility
+to the console, and then disconnect if `triggerOnce` is set to `true`.
