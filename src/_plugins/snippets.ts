@@ -14,16 +14,16 @@ function getCodeSnippetPages(pages: Lume.Page[]) {
 export type Snippets = ReturnType<typeof getCodeSnippetPages>;
 
 export default () => (site: Lume.Site) => {
-  site.process([".html"], pages => {
-    const snippets = getCodeSnippetPages(pages);
-    const home = pages.find(page => page.data.type === "home");
-
-    if (home && home.document) {
-      const script = home.document.createElement("script");
-      script.innerHTML = `window.__SNIPPETS__ = ${JSON.stringify(snippets)};`;
-      home.document.body.appendChild(script);
-    }
-  });
+  // site.process([".html"], pages => {
+  //   const snippets = getCodeSnippetPages(pages);
+  //   const home = pages.find(page => page.data.type === "home");
+  //
+  //   if (home && home.document) {
+  //     const script = home.document.createElement("script");
+  //     script.innerHTML = `window.__SNIPPETS__ = ${JSON.stringify(snippets)};`;
+  //     home.document.body.appendChild(script);
+  //   }
+  // });
 
   site.preprocess([".mdx"], pages => {
     const snippets = getCodeSnippetPages(pages);
