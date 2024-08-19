@@ -131,14 +131,9 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         className={cx(
           "rounded-bl rounded-tl border",
           fill && "flex-1 justify-center",
-          theme === "LIGHT"
-            ? "border-cat-blue"
-            : border === "base"
-              ? "border-cat-surface0"
-              : "border-cat-surface2",
+          border === "base" ? "border-cat-surface1" : "border-cat-surface2",
         )}
         aria-checked={theme === "LIGHT"}
-        style={theme === "DARK" ? { borderRight: "none" } : {}}
       >
         <Sun />
       </IconButton>
@@ -153,15 +148,9 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         onClick={() => saveTheme("DARK")}
         aria-checked={theme === "DARK"}
         className={cx(
+          "border-y",
           fill && "flex-1 justify-center",
-          theme === "DARK"
-            ? "border border-cat-blue"
-            : [
-                "border-y",
-                border === "base"
-                  ? "border-y-cat-surface0"
-                  : "border-y-cat-surface2",
-              ],
+          border === "base" ? "border-y-cat-surface1" : "border-cat-surface2",
         )}
       >
         <Moon />
@@ -178,14 +167,9 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         className={cx(
           "rounded-br rounded-tr border",
           fill && "flex-1 justify-center",
-          theme === "SYSTEM"
-            ? "border-cat-blue"
-            : border === "base"
-              ? "border-cat-surface0"
-              : "border-cat-surface2",
+          border === "base" ? "border-cat-surface1" : "border-cat-surface2",
         )}
         aria-checked={theme === "SYSTEM"}
-        style={theme === "DARK" ? { borderLeft: "none" } : {}}
       >
         <Computer />
       </IconButton>

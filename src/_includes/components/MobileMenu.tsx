@@ -4,7 +4,7 @@ import { useRef, useState } from "preact/hooks";
 import { withIsland } from "../islands/PreactIslands.tsx";
 import { IconButton } from "./IconButton.tsx";
 import { Close, Menu } from "./Icons.tsx";
-import { NavLogo } from "./NavLogo.tsx";
+import NavLogo from "./NavLogo.tsx";
 import ThemeSwitcher from "./ThemeSwitcher.tsx";
 
 function cubicBezier(x0: number, y0: number, x1: number, y1: number) {
@@ -120,30 +120,44 @@ function MobileMenu() {
       <nav
         ref={navRef}
         style={{ height: 0 }}
-        className={cx("overflow-hidden bg-cat-surface0 md:hidden")}
+        className={cx(
+          open && "border-y border-y-cat-surface0",
+          "overflow-hidden bg-transparent md:hidden",
+        )}
       >
         <ul ref={ulRef} className="flex flex-col gap-2 p-4">
-          <li className="">
+          <li>
+            <a
+              href="/#articles"
+              className="flex flex-1 rounded px-4 py-2 text-base hover:bg-cat-overlay2/10 active:text-cat-blue active:ring-2 active:ring-cat-overlay2"
+            >
+              Articles
+            </a>
+          </li>
+          <li>
+            <hr className="border-t border-t-cat-surface0" />
+          </li>
+          <li>
             <a
               href="/bookmarks/"
-              className="flex flex-1 rounded px-4 py-2 text-base hover:bg-cat-overlay2/20 active:text-cat-blue active:ring-2 active:ring-cat-overlay2"
+              className="flex flex-1 rounded px-4 py-2 text-base hover:bg-cat-overlay2/10 active:text-cat-blue active:ring-2 active:ring-cat-overlay2"
             >
               Bookmarks
             </a>
           </li>
           <li>
-            <hr className="border-t border-t-cat-surface2" />
+            <hr className="border-t border-t-cat-surface0" />
           </li>
           <li>
             <a
               href="/snippets/"
-              className="flex flex-1 rounded px-4 py-2 text-base hover:bg-cat-overlay2/20 active:text-cat-blue active:ring-2 active:ring-cat-overlay2"
+              className="flex flex-1 rounded px-4 py-2 text-base hover:bg-cat-overlay2/10 active:text-cat-blue active:ring-2 active:ring-cat-overlay2"
             >
               Snippets
             </a>
           </li>
           <li>
-            <hr className="border-t border-t-cat-surface2" />
+            <hr className="border-t border-t-cat-surface0" />
           </li>
           <li className="mt-4">
             <ThemeSwitcher border="surface" fill />

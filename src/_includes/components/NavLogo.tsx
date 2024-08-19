@@ -1,6 +1,6 @@
 import { cx } from "cva";
 
-export function NavLogo() {
+export default function NavLogo() {
   return (
     <a
       href="/"
@@ -10,18 +10,28 @@ export function NavLogo() {
       )}
     >
       <h1
+        style={{ whiteSpace: "pre-line" }}
         className={cx(
-          "bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text",
-          "text-xl font-semibold text-transparent transition-colors md:text-2xl",
+          "flex items-center font-mono !leading-[0.9]",
+          "text-xl font-semibold transition-colors md:text-2xl",
         )}
       >
-        Francisco Veracoechea
+        <span className="select-none text-4xl font-light text-cat-surface1 md:text-6xl">
+          {"<"}
+        </span>
+        <span
+          className={cx(
+            "flex flex-col text-transparent",
+            "bg-gradient-to-r from-cat-blue to-cat-mauve bg-clip-text",
+          )}
+        >
+          <span>Francisco</span>
+          <span>Veracoechea</span>
+        </span>
+        <span className="select-none text-4xl font-light text-cat-surface1 md:text-6xl">
+          {"/>"}
+        </span>
       </h1>
-      <h2 className="font-mono text-sm font-normal leading-tight md:text-base">
-        <span className="text-cat-red">{"()"}</span>
-        <span className="text-cat-subtext0">{" => "}</span>
-        <span className="text-cat-teal">{'"Frontend Engineer"'}</span>
-      </h2>
     </a>
   );
 }

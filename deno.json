@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": true,
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.1.4/",
+    "lume/": "https://deno.land/x/lume@v2.2.4/",
     "@catppuccin/tailwindcss": "npm:@catppuccin/tailwindcss",
     "@tailwindcss/typography": "npm:@tailwindcss/typography",
     "@trivago/prettier-plugin-sort-imports": "npm:@trivago/prettier-plugin-sort-imports",
@@ -26,20 +26,14 @@
     "serve": "deno task lume -s"
   },
   "compilerOptions": {
-    "types": [
-      "lume/types.ts"
-    ],
+    "types": ["lume/types.ts"],
     "jsx": "react-jsx",
     "jsxImportSource": "npm:preact"
   },
   "lint": {
     "rules": {
-      "exclude": [
-        "no-window"
-      ],
-      "tags": [
-        "recommended"
-      ]
+      "exclude": ["no-window"],
+      "tags": ["recommended"]
     }
   },
   "fmt": false

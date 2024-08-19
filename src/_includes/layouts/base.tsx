@@ -2,7 +2,7 @@ import { cx } from "cva";
 import { ComponentProps } from "preact";
 
 import MobileMenu from "../components/MobileMenu.tsx";
-import { NavLogo } from "../components/NavLogo.tsx";
+import NavLogo from "../components/NavLogo.tsx";
 import SocialLinks from "../components/SocialLinks.tsx";
 import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
@@ -15,12 +15,13 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
     <a
       {...props}
       className={cx(
-        "rounded px-3 py-2",
+        "relative rounded px-2 py-2.5 font-medium",
+        "after:absolute after:h-[2px] after:w-0 after:rounded after:bg-cat-blue",
+        "after:bottom-0 after:left-0 after:transition-all",
         props.isActive
-          ? "border border-cat-blue bg-cat-blue/10 text-cat-blue"
+          ? "text-cat-blue after:w-full"
           : [
-              "text-cat-text transition-colors hover:bg-cat-overlay2/20",
-              "active:ring-2 active:ring-cat-overlay2",
+              "text-cat-subtext0 transition-colors hover:text-cat-blue hover:after:w-full",
               "focus-visible:ring-2 focus-visible:ring-cat-blue",
             ],
         props.className,
@@ -31,28 +32,37 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
 
 function Header(props: Lume.Data) {
   return (
-    <header className={cx("border-b border-cat-surface0")}>
-      <nav className="container hidden items-center justify-between gap-2 py-8 md:flex">
+    <div className={cx("border-b border-cat-surface0")}>
+      <nav className="container hidden items-center justify-between gap-2 py-6 md:flex">
         <NavLogo />
-        <div className="flex items-center gap-2">
-          <NavLink
-            href="/bookmarks/"
-            isActive={props.page.outputPath.includes("/bookmarks/")}
-          >
-            Bookmarks
-          </NavLink>
-          <NavLink
-            href="/snippets/"
-            isActive={props.page.outputPath.includes("/snippets/")}
-            className="mr-3"
-          >
-            Snippets
-          </NavLink>
+        <div className="flex items-center gap-1">
+          <ul className="flex items-center gap-2.5">
+            <li>
+              <NavLink href="/#articles">Articles</NavLink>
+            </li>
+            <li>
+              <NavLink
+                href="/bookmarks/"
+                isActive={props.page.outputPath.includes("/bookmarks/")}
+              >
+                Bookmarks
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                href="/snippets/"
+                isActive={props.page.outputPath.includes("/snippets/")}
+                className="mr-3"
+              >
+                Snippets
+              </NavLink>
+            </li>
+          </ul>
           <ThemeSwitcher />
         </div>
       </nav>
       <MobileMenu media="(max-width: 768px)" />
-    </header>
+    </div>
   );
 }
 
@@ -76,7 +86,12 @@ export default function MainLayout(props: Lume.Data) {
   return (
     <>
       <Header {...props} />
-      <div className={cx(FULL_HEIGHT, "bg-transparent")}>
+      <div
+        className={cx(
+          FULL_HEIGHT,
+          "max-w-[100vw] overflow-x-hidden bg-transparent",
+        )}
+      >
         <div className={cx(FULL_HEIGHT, "container")}>
           <main className={FULL_HEIGHT}>{children}</main>
         </div>

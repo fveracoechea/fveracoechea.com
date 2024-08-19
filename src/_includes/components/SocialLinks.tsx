@@ -8,6 +8,7 @@ const list = cva("not-prose flex", {
     size: {
       md: "gap-2 text-2xl",
       sm: "gap-2 text-xl",
+      lg: "gap-2.5 text-2xl",
     },
   },
 });

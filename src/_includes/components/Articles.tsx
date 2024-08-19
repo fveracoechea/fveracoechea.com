@@ -13,8 +13,8 @@ function Articles(props: { search: Lume.Data["search"] }) {
   );
 
   return (
-    <section id="post-grid">
-      <h3 className="mb-6 text-xl font-semibold">Articles</h3>
+    <section id="articles">
+      <h3 className="mb-6 text-2xl font-semibold">Articles</h3>
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         {blog.map(post => {

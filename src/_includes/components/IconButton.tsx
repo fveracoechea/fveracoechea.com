@@ -11,7 +11,7 @@ const iconButton = cva(
       active: {
         true: "bg-cat-blue/10 text-cat-blue",
         false: [
-          "text-cat-text hover:bg-cat-overlay2/20",
+          "text-cat-subtext0 hover:bg-cat-blue/10 hover:text-cat-blue",
           "active:ring-2 active:ring-cat-overlay0",
         ],
       },
