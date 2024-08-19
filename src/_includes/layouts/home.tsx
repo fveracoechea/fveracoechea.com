@@ -29,9 +29,11 @@ export default function HomeLayout(props: Lume.Data) {
     <div className="py-10">
       <section class="flex flex-col items-center gap-8 rounded pb-20 md:flex-row md:pt-10">
         <div className="flex flex-1 flex-col gap-4">
-          <h2 className="text-4xl leading-tight md:text-5xl">
-            Web engineering experimentation, learning, and ideas worth sharing
-            in the world wide web.
+          <h2 className="text-4xl !leading-[1.15] md:text-5xl">
+            Web engineering <i className="text-cat-blue">experimentation</i>,{" "}
+            <i className="text-cat-mauve">learning</i>, and{" "}
+            <i className="text-cat-flamingo">ideas</i> worth sharing in the
+            world wide web.
           </h2>
           <SocialLinks size="lg" />
         </div>

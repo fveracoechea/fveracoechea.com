@@ -89,7 +89,7 @@ export default function MainLayout(props: Lume.Data) {
       <div
         className={cx(
           FULL_HEIGHT,
-          "max-w-[100vw] overflow-x-hidden bg-transparent",
+          "max-w-[100vw] overflow-x-hidden bg-transparent md:overflow-x-visible",
         )}
       >
         <div className={cx(FULL_HEIGHT, "container")}>
