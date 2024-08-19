@@ -1,5 +1,5 @@
-@import "css/fonts.css";
-@import "css/code-catppuccin.css";
+@import "fonts.css";
+@import "code-catppuccin.css";
 
 @tailwind base;
 @tailwind components;

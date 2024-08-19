@@ -27,6 +27,7 @@ const config: Config = {
       },
     },
   },
+  // @ts-ignore catppuccin theme
   plugins: [typography, scrollbar, catppuccin({ prefix: "cat" })],
 };
 

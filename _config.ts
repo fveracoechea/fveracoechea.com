@@ -1,3 +1,4 @@
+import nano from "cssnano";
 import rehypeSlug from "https://esm.sh/rehype-slug@6.0.0";
 import lume from "lume/mod.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
@@ -88,7 +89,13 @@ site.use(
     options: tailwindConfig,
   }),
 );
-site.use(postcss());
+
+site.use(
+  postcss({
+    includes: "_styles",
+  }),
+);
+site.hooks.addPostcssPlugin(nano);
 
 site.use(
   ogImages({

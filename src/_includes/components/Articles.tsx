@@ -27,6 +27,7 @@ function Articles(props: { search: Lume.Data["search"] }) {
                     alt={post.title}
                     height={281}
                     width={535}
+                    loading="lazy"
                     className={cx(
                       "h-auto w-full rounded border border-cat-surface0 object-cover",
                       "ring-0 ring-cat-surface0 transition-shadow",
