@@ -41,7 +41,7 @@ function Articles(props: { search: Lume.Data["search"] }) {
                   <h4
                     className={cx(
                       "text-base font-medium text-cat-text underline-offset-2 transition-colors",
-                      "group-hover:text-cat-blue group-hover:underline",
+                      "group-hover:text-cat-blue",
                       "group-focus-within:text-cat-blue",
                     )}
                   >
