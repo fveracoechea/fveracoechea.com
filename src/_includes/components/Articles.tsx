@@ -14,19 +14,24 @@ function Articles(props: { search: Lume.Data["search"] }) {
 
   return (
     <section id="articles">
-      <h3 className="mb-6 text-2xl font-semibold">Articles</h3>
+      <h3 className="mb-6 border-b-cat-surface1 text-2xl font-semibold">
+        Articles
+      </h3>
 
-      <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-10">
         {blog.map(post => {
           return (
-            <article key={post.url} className="group flex ">
-              <a href={post.url} className="flex w-full flex-col">
-                <figure className="flex-1">
+            <a href={post.url} className="w-full">
+              <article
+                key={post.url}
+                className="group flex flex-col gap-6 md:flex-row"
+              >
+                <figure className="w-72">
                   <img
                     src={post.image}
                     alt={post.title}
-                    height={281}
-                    width={535}
+                    width={240}
+                    height={126}
                     loading="lazy"
                     className={cx(
                       "h-auto w-full rounded border border-cat-surface0 object-cover",
@@ -37,10 +42,11 @@ function Articles(props: { search: Lume.Data["search"] }) {
                     )}
                   />
                 </figure>
-                <figcaption className="flex flex-[3] flex-col gap-2 pt-4">
+
+                <figcaption className="flex flex-col justify-center gap-2">
                   <h4
                     className={cx(
-                      "text-base font-medium text-cat-text underline-offset-2 transition-colors",
+                      "text-lg font-medium text-cat-text underline-offset-2 transition-colors",
                       "group-hover:text-cat-blue",
                       "group-focus-within:text-cat-blue",
                     )}
@@ -48,13 +54,14 @@ function Articles(props: { search: Lume.Data["search"] }) {
                     {post.title}
                   </h4>
                   <p className="text-sm text-cat-subtext1">
-                    <b>{format(post.date, "PPP")}</b>
-                    <span>&nbsp;-&nbsp;</span>
-                    <span>{post.description}</span>
+                    {format(post.date, "PPP")}
+                  </p>
+                  <p className="text-base text-cat-subtext1">
+                    {post.description}
                   </p>
                 </figcaption>
-              </a>
-            </article>
+              </article>
+            </a>
           );
         })}
       </div>

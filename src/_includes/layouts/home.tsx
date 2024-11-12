@@ -45,7 +45,7 @@ export default function HomeLayout(props: Lume.Data) {
       <section className="flex flex-col gap-6 pb-20">
         <div className="prose text-lg">{props.children}</div>
         <ul
-          className={cx("flex flex-wrap gap-2 text-sm  md:gap-8 md:text-base")}
+          className={cx("flex flex-wrap gap-2 text-sm md:gap-8 md:text-base")}
         >
           {interests.map(x => (
             <li key={x.label} className={cx("flex items-center text-left")}>

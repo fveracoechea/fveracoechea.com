@@ -1,0 +1,41 @@
+---
+title: Islands Architecture a step by step implementation
+description:
+  Understanding the islands architecture, step by step implementation with
+  Preact.
+image: /images/islands.webp
+published: true
+---
+
+You may have heard the term "Islands Architecture" being use online, usually
+it's most comontly associated with a framework like Astro or Fresh.
+
+That's why to some extend, it may seem like these frameworks are doing magic
+behind the scens, but the main goal of this article is to demonstrate how to do
+implement architecture, as it can be done in any type of websice with just a
+little bit of Javascript.
+
+## The Islands Architecture
+
+The overall main idea of this architecture is to inject the absolute minimum
+amount of Javascript possible, while having a good balance between interactivity
+and SEO via Server Side Rendering (SSR) or pre-rendering with Static Site
+Generation (SSG).
+
+As this is a component-based architecture, we can separate the static
+(non-interactive HTML) components from the dynamic and interactive ones that
+need some Javascript to work.
+
+Let's take a look that the following example:
+
+<comp.IslandsDemo />
+
+Basically, we only `hydrate` (download Javascript) for specific components that
+require some type of client-site interactivity, while the other static regions
+of the page are pure non-interactive HTML that do not require hydration.
+
+Here I link a couple resources, in case you'd like to dig more in to this
+subject:
+
+- [Islands Architecture - Javascript Patterns](https://www.patterns.dev/vanilla/islands-architecture/)
+- [Islands Architecture - JASON Format](https://jasonformat.com/islands-architecture/)

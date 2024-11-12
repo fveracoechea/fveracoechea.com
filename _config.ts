@@ -106,6 +106,7 @@ site.use(
     },
   }),
 );
+
 site.use(metas(/* Options */));
 // Explicit allow access to Google and Bing
 site.use(
