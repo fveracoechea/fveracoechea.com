@@ -9,7 +9,7 @@ import feed from "lume/plugins/feed.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import mdx from "lume/plugins/mdx.ts";
 import metas from "lume/plugins/metas.ts";
-import ogImages from "lume/plugins/og_images.ts";
+// import ogImages from "lume/plugins/og_images.ts";
 import postcss from "lume/plugins/postcss.ts";
 import robots from "lume/plugins/robots.ts";
 import sitemap from "lume/plugins/sitemap.ts";
@@ -97,15 +97,15 @@ site.use(
 );
 site.hooks.addPostcssPlugin(nano);
 
-site.use(
-  ogImages({
-    // @ts-ignore invalid type
-    satori: {
-      width: 750,
-      height: 400,
-    },
-  }),
-);
+// site.use(
+//   ogImages({
+//     // @ts-ignore invalid type
+//     satori: {
+//       width: 750,
+//       height: 400,
+//     },
+//   }),
+// );
 
 site.use(metas(/* Options */));
 // Explicit allow access to Google and Bing
