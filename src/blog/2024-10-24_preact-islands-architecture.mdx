@@ -12,7 +12,7 @@ it's most comontly associated with frameworks like Astro and Fresh.
 
 That's why to some extend, it may seem like these frameworks are doing magic
 behind the scens, however the main goal of this article is to demonstrate how to
-do implement architecture, as it can be done in any type of websice with just a
+implement this pattern, as it can be done in any type of website with just a
 little bit of Javascript.
 
 ## The islands architecture
@@ -24,17 +24,21 @@ amount of Javascript possible, while having a good balance between interactivity
 and SEO via Server Side Rendering (SSR) or Static Site Generation (SSG) also
 known as pre-rendering.
 
-As this is a component-based architecture, we can separate the static
+Since this is a component-based architecture, we can separate the static
 (non-interactive HTML) components from the dynamic and interactive ones that
 need some Javascript to work.
 
-Basically, we only `hydrate` (download Javascript) for specific components that
-require some type of client-site interactivity, while the other static regions
-of the page are pure non-interactive HTML that do not require hydration.
+At which point, we only `hydrate` (download Javascript) for specific components
+that require some type of client-site interactivity, while the other static
+regions of the page are pure non-interactive HTML that do not require hydration.
 
-Let's take a look that the following example:
+Let's imagine a website that looks like the following:
 
 <comp.IslandsDemo />
+
+As you may have noticed, most of the user-interface is pretty much
+non-interactive components that can be rendered at the server or build time,
+only a few components need JS to execute some kind of client site code.
 
 Here are a couple resources, in case you'd like to dig more in to this subject:
 
@@ -44,9 +48,9 @@ Here are a couple resources, in case you'd like to dig more in to this subject:
 <br />
 Alright, enough talk, let's start writing some code...
 
-## Custom implementation
+## Technologies
 
-We are going to base our islands implementation on the following technologes:
+We are going to base our islands implementation on the following technologies:
 
 ### Vite
 

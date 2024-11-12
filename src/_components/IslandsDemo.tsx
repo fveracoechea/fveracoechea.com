@@ -64,9 +64,7 @@ export default function () {
         </span>
         <span className="flex items-center gap-2">
           <span className="h-5 w-5 rounded-full border-2 border-cat-surface2 bg-cat-surface0" />
-          <span>
-            Non-dynamic components, server side rendered or static HTML content.
-          </span>
+          <span>Non-interactive UI components.</span>
         </span>
       </div>
     </section>
