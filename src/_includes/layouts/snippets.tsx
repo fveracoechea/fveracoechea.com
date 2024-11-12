@@ -23,7 +23,7 @@ export default function SnippetsLayout(props: Lume.Data) {
               Other snippets
             </p>
             <ul className="flex flex-col text-sm text-cat-overlay2">
-              {snippets.map(({ outputPath, title }) => {
+              {snippets.map(({ path, outputPath, title }) => {
                 const isActive = currentPath === outputPath;
                 return (
                   <li
@@ -42,7 +42,7 @@ export default function SnippetsLayout(props: Lume.Data) {
                       />
                     )}
                     <a
-                      href={outputPath}
+                      href={path}
                       tabIndex={isActive ? -1 : 0}
                       disabled={isActive}
                       className={cx(
@@ -75,7 +75,7 @@ export default function SnippetsLayout(props: Lume.Data) {
       <section className="pb-12">
         <nav>
           <ul className="rounded border border-cat-surface0">
-            {snippets.map(({ outputPath, title, description }) => (
+            {snippets.map(({ outputPath, title, description, path }, idx) => (
               <li
                 className={cx(
                   "group flex even:border-y even:border-cat-surface0",
@@ -85,20 +85,20 @@ export default function SnippetsLayout(props: Lume.Data) {
                 key={outputPath}
               >
                 <a
-                  href={outputPath}
+                  href={path}
                   className={cx(
                     "flex w-full flex-col px-6 py-4 text-cat-text transition",
-                    "hover:bg-cat-overlay2/20 active:ring-2 active:ring-cat-overlay2",
+                    "hover:bg-cat-blue/10 active:ring-2 active:ring-cat-overlay2",
                     "focus-visible:ring-2 focus-visible:ring-cat-blue",
-                    "group-last-of-type:rounded-bl group-last-of-type:rounded-br",
-                    "group-first-of-type:rounded-tl group-first-of-type:rounded-tr",
+                    idx + 1 === snippets.length && "rounded-bl rounded-br",
+                    idx === 0 && "rounded-lg-tl rounded-lg-tr",
                   )}
                 >
                   <span className="font-medium transition-colors group-hover:text-cat-blue">
                     {title}
                   </span>
 
-                  <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
+                  <span className="text-sm text-cat-text transition-colors group-hover:text-cat-text">
                     {description}
                   </span>
                 </a>

@@ -3,19 +3,23 @@ import { cx } from "cva";
 export default function Document(props: Lume.Data) {
   const { children } = props;
 
+  const isHomepage = props.page.outputPath === "/index.html";
+
   return (
     <html
       lang="en-US"
       className={cx(
-        "scrollbar bg-cat-crust",
-        "scrollbar-thumb-cat-overlay0 scrollbar-track-cat-surface0",
+        "bg-cat-crust scrollbar",
+        "scrollbar-track-cat-surface0 scrollbar-thumb-cat-overlay0",
         "hover:scrollbar-thumb-cat-overlay2",
       )}
     >
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{props.title}</title>
+        <title>
+          {isHomepage ? props.title : `${props.title} - Francisco Veracoechea`}
+        </title>
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/theme.js" />
       </head>

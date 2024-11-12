@@ -26,7 +26,7 @@ const interests = [
 export default function HomeLayout(props: Lume.Data) {
   const { search } = props;
   return (
-    <div className="py-10">
+    <div className="pb-12 pt-10">
       <section class="flex flex-col items-center gap-8 rounded pb-20 md:flex-row md:pt-10">
         <div className="flex flex-1 flex-col gap-4">
           <h2 className="text-4xl !leading-[1.15] md:text-5xl">

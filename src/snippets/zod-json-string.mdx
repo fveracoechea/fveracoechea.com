@@ -1,0 +1,53 @@
+---
+title: Type-safe JSON String
+order: 7
+description:
+  Defines a way to validate and transform JSON strings into objects using the
+  zod library.
+---
+
+# Type-safe JSON String
+
+`zJsonString` is a [zod](https://zod.dev/) schema that validates and transform
+`string` into a parsed JSON object.
+
+It creates a strong type definition for JSON structures and a validation schema
+for JSON strings, useful for safe parsing and handling of JSON data in
+TypeScript. If the JSON string is invalid, an error is flagged, making it a
+helpful utility for applications that handle JSON data.
+
+```ts
+import { z } from "zod";
+
+export type Primitive = string | number | boolean | null;
+
+export type JsonType =
+  | Primitive
+  | { [key: PropertyKey]: JsonType }
+  | JsonType[];
+
+export const zJsonString = z.string().transform((str, ctx): JsonType => {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    ctx.addIssue({ code: "custom", message: "Invalid JSON" });
+    return z.NEVER;
+  }
+});
+```
+
+## Example usage
+
+```ts
+const UserSchema = z.object({
+  id: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  age: z.number(),
+  role: z.enum(["Author", "Editor", "Super Admin"]),
+});
+
+const UserJsonSchema = zJsonString.pipe(UserSchema);
+
+const currentUser = UserJsonSchema.parse(sessionStorage.get("__user__"));
+```

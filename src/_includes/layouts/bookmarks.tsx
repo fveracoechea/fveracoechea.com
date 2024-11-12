@@ -12,6 +12,24 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://www.patterns.dev/",
+    date: "11/10/2024",
+    tag: "web development",
+    text: [
+      "Patterns.dev",
+      "Design, rendering, and performance patterns for building powerful web apps",
+    ],
+  },
+  {
+    href: "https://www.w3.org/WAI/ARIA/apg/patterns/",
+    date: "10/23/2024",
+    tag: "web development",
+    text: [
+      "Web Accessibility Patterns",
+      "How to build accessibility semantics into web patterns and widgets",
+    ],
+  },
+  {
     href: "https://github.com/sxyazi/yazi",
     date: "08/12/2024",
     tag: "terminal",
@@ -140,14 +158,14 @@ export default function BookmarksLayout(props: Lume.Data) {
         <article className="prose overflow-x-hidden">{props.children}</article>
       </div>
 
-      <section className="pb-12">
+      <section className="pb-14">
         <nav>
-          <ul className="rounded border border-cat-surface0">
-            {bookmarks.map(({ href, text, date, tag }) => (
+          <ul className="overflow-hidden rounded border border-cat-surface0 bg-cat-mantle">
+            {bookmarks.map(({ href, text, date, tag }, idx) => (
               <li
                 className={cx(
                   "group flex even:border-y even:border-cat-surface0",
-                  "transition-colors even:bg-cat-mantle",
+                  "transition-colors odd:bg-cat-base even:bg-cat-mantle",
                   "last-of-type:rounded-bl last-of-type:rounded-br last-of-type:border-b-0",
                 )}
                 key={href}
@@ -157,17 +175,17 @@ export default function BookmarksLayout(props: Lume.Data) {
                   target="_blank"
                   className={cx(
                     "flex w-full flex-col flex-wrap px-4 py-4 transition",
-                    "hover:bg-cat-overlay2/20 active:ring-2 active:ring-cat-overlay2",
+                    "hover:bg-cat-blue/10 active:ring-2 active:ring-cat-overlay2",
                     "focus-visible:ring-2 focus-visible:ring-cat-blue",
-                    "group-last-of-type:rounded-bl group-last-of-type:rounded-br",
-                    "group-first-of-type:rounded-tl group-first-of-type:rounded-tr",
+                    idx + 1 === bookmarks.length && "rounded-bl rounded-br",
+                    idx === 0 && "rounded-lg-tl rounded-lg-tr",
                   )}
                 >
                   <b className="transition-colors group-hover:text-cat-blue">
                     {text.at(0)}
                   </b>
-                  <span className="flex flex-wrap justify-between  text-sm">
-                    <span className="flex flex-wrap gap-2 text-cat-subtext0 transition-colors group-hover:text-cat-text">
+                  <span className="flex flex-wrap justify-between text-sm">
+                    <span className="flex flex-wrap gap-2 text-cat-text transition-colors group-hover:text-cat-text">
                       <span>{format(date, "PPP")}</span>
                       <span className="hidden md:inline">-</span>
                       <span>{text.at(1)}</span>
