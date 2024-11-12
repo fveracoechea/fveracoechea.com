@@ -30,8 +30,8 @@ function Articles(props: { search: Lume.Data["search"] }) {
                   <img
                     src={post.image}
                     alt={post.title}
-                    width={240}
-                    height={126}
+                    width={288}
+                    height={151}
                     loading="lazy"
                     className={cx(
                       "h-auto w-full rounded border border-cat-surface0 object-cover",
