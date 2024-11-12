@@ -57,14 +57,16 @@ export default function () {
         </div>
       </div>
 
-      <div role="list" title="legends">
-        <span className="flex items-center gap-2">
-          <span className="h-5 w-5 rounded-full border-2 border-cat-surface2 bg-cat-surface0" />
-          <span>Static components, Server side rendered HTML content.</span>
-        </span>
+      <div role="list" title="legends" className="pt-4">
         <span className="flex items-center gap-2">
           <span className="h-5 w-5 rounded-full border-2 border-cat-blue bg-cat-blue/25" />
-          <span>Islands of interactivity, dynamic components.</span>
+          <span>Islands of interactivity.</span>
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="h-5 w-5 rounded-full border-2 border-cat-surface2 bg-cat-surface0" />
+          <span>
+            Non-dynamic components, server side rendered or static HTML content.
+          </span>
         </span>
       </div>
     </section>
