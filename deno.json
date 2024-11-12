@@ -1,5 +1,5 @@
 {
-  "nodeModulesDir": true,
+  "nodeModulesDir": "auto",
   "imports": {
     "lume/": "https://deno.land/x/lume@v2.2.4/",
     "@catppuccin/tailwindcss": "npm:@catppuccin/tailwindcss",
