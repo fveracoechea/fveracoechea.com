@@ -14,6 +14,12 @@ function Card() {
   );
 }
 
+async function* animationFrames() {
+  while (true) {
+    yield await new Promise(globalThis.requestAnimationFrame);
+  }
+}
+
 export default function () {
   return (
     <section className="flex flex-col gap-4 rounded border border-cat-surface1 bg-cat-mantle p-4">

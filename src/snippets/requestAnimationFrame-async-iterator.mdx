@@ -1,50 +1,52 @@
 ---
-title: animationFrames
+title: Animation Frames
 order: 6
 description:
   Asynchronous generator function that produces a sequence of animation frames.
 ---
 
-# animationFrames
+# Animation Frames
 
-This function is designed to produce a continuous stream of animation frame
-timestamps. Each time the browser is about to repaint, requestAnimationFrame is
-called, the promise resolves, and the generator yields the timestamp of that
-frame.
+Asynchronous generator function that executes a continuous stream of
+user-supplied actions before the next repaint. Each time the browser is about to
+repaint, the `requestAnimationFrame()` callback is called, the promise resolves,
+and the generator yields the timestamp of that frame.
 
 This allows any code using this generator to synchronize with the browser's
-painting cycle, which is especially useful for tasks like measuring frame rates,
-synchronizing animations, or performing time-based updates.
+painting cycle, it can be especially useful for tasks like measuring frame
+rates, synchronizing animations, or performing time-based updates.
 
-```typescript
+```ts
 async function* animationFrames() {
   while (true) {
-    yield await new Promise<number>(resolve => requestAnimationFrame(resolve));
+    yield await new Promise(globalThis.requestAnimationFrame);
   }
 }
+```
 
-async function run(label: string) {
-  let numberOfFrames = 0;
+MDN docs:
+https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 
-  console.time(label);
+## Example usage
+
+```typescript
+async function logFPS() {
   const startTime = performance.now();
+
+  let numberOfFrames = 0;
 
   for await (const timestamp of animationFrames()) {
     if (performance.now() >= startTime + 1000) break;
-
     numberOfFrames++;
   }
 
-  console.timeEnd(label);
-  console.log("Number of frames: ", numberOfFrames);
+  console.log("Frames Per Second: ", numberOfFrames);
 }
 
-run("animation 1");
+logFPS();
 ```
 
 When used in an asynchronous loop, **animationFrames** can help track how many
-frames are rendered over a period of time.
-
-For example, in the run function provided earlier, the `for await` loop iterates
-over the frames produced by **animationFrames**, allowing it to measure how many
-frames are rendered in one second.
+frames are rendered over a period of time. For example, in the run function
+provided earlier, the `for await` loop iterates over the frames produced,
+allowing it to measure how many frames are rendered in one second.

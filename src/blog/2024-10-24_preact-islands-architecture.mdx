@@ -8,7 +8,8 @@ published: true
 ---
 
 You may have heard the term "Islands Architecture" being use online, usually
-it's most commonly associated with frameworks like Astro and Fresh.
+it's most commonly associated with frameworks like [Astro](https://astro.build/)
+and [Fresh](https://fresh.deno.dev/).
 
 That's why to some extend, it may seem like these frameworks are doing magic
 behind the scenes, however the main goal of this article is to demonstrate how
@@ -40,22 +41,75 @@ As you may have noticed, most of the user-interface is pretty much
 non-interactive components that can be rendered at the server or build time,
 only a few components need JS to execute some kind of client site code.
 
+## Technologies
+
+Let's break down the technologies we'll actually be using for this
+implementation:
+
+### Vite
+
+> The Build Tool for the Web
+
+Simply put, [Vite](https://vite.dev/) is one of the best JavaScript build tools
+available. It's really fast, easy to use, and UI agnostic, meaning it can bundle
+various frontend frameworks, Preact being one of them.
+
+### Preact
+
+> Fast 3kB alternative to React with the same modern API
+
+When it comes to islands architecture, [Preact](https://preactjs.com/) is my UI
+framework of choice. Its main selling point are:
+
+1. Familiar React-like API with support for JSX, Hooks, function components,
+   Context, and even Suspense.
+2. Overall better performance and a _hilariously_ smaller in bundle size.
+
+Here is a quick comparison:
+
+- [react](https://bundlephobia.com/package/react@18.3.1) +
+  [react-dom](https://bundlephobia.com/package/react-dom@18.3.1) +
+  [react-router-dom](https://bundlephobia.com/package/react-router-dom@6.28.0) =
+  **70.8kB** <small>minified and gzipped</small>
+- [preact](https://bundlephobia.com/package/preact@10.24.3) +
+  [preact-iso](https://bundlephobia.com/package/preact-iso@2.8.1) = **6.7kB**
+  <small>minified and gzipped</small>
+
+That is **64.1kB** - a massive **165%** difference!! let's remember with islands
+we are looking to inject the minimum amount of Javascript possible, so using
+Preact sounds like the more reasonable approach.
+
+### Web components
+
+> A web standard for creating reusable UI elements
+
+In this situation, this piece of the puzzle is perhaps the most important. It
+allows us to effortlessly `hydrate` specific Preact components by wrapping them
+in a special Custom Element. As a plus, we can pass attributes to specify when
+hydration should happen, for example when visible or when a given media query
+matches.
+
+## The implementation
+
+Enough talk, let's start writing some code...
+
+### Scaffolding
+
+First, let's generate a Vite + Preact with pre-rendering project by running
+`pnpm craate preact` or `npm init preact`, as well make sure to select the
+following options:
+
+- Project language: **TypeScript**
+- Use router?: **Yes**
+- Prerender app (SSG)? **Yes**
+
+After running `npm run dev` or `pnpm dev` you should see the following:
+
+![Vite + Preact](/images/vite-preact.png)
+
+## Final thoughts
+
 Here are a couple resources, in case you'd like to dig more in to this subject:
 
 - [Islands Architecture - Javascript Patterns](https://www.patterns.dev/vanilla/islands-architecture/)
 - [Islands Architecture - JASON Format](https://jasonformat.com/islands-architecture/)
-
-<br />
-Alright, enough talk, let's start writing some code...
-
-## Technologies
-
-We are going to base our islands implementation on the following technologies:
-
-### Vite
-
-https://vite-plugin-ssr.com/
-
-### Preact
-
-### Web-components standard
