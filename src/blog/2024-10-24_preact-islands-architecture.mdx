@@ -21,17 +21,18 @@ little bit of Javascript.
 First of all, what is the islands architecture?
 
 The overall main idea of this architecture is to inject the absolute minimum
-amount of Javascript possible, while having a good balance between interactivity
-and SEO via Server Side Rendering (SSR) or Static Site Generation (SSG) also
-known as pre-rendering.
+amount of Javascript possible, while having a good balance between
+interactivity, performance, and SEO, the latter is usually achieved via either
+Server Side Rendering (SSR) or Static Site Generation (SSG) also known as
+pre-rendering.
 
 Since this is a component-based architecture, we can separate the static
 (non-interactive HTML) components from the dynamic and interactive ones that
-need some Javascript to work.
+need some client-side Javascript to work.
 
-At which point, we only `hydrate` (download Javascript) for specific components
-that require some type of client-site interactivity, while the other static
-regions of the page are pure non-interactive HTML that do not require hydration.
+At which point, we only `hydrate` (download Javascript) specific components that
+require some type of user interactivity, while the other static regions of the
+page are pure non-interactive HTML that do not require hydration.
 
 Let's imagine a website that looks like the following:
 
@@ -59,7 +60,7 @@ various frontend frameworks, Preact being one of them.
 > Fast 3kB alternative to React with the same modern API
 
 When it comes to islands architecture, [Preact](https://preactjs.com/) is my UI
-framework of choice. Its main selling point are:
+framework of choice. Its main selling points are:
 
 1. Familiar React-like API with support for JSX, Hooks, function components,
    Context, and even Suspense.
