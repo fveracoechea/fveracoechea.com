@@ -11,10 +11,11 @@ You may have heard the term "Islands Architecture" being use online, usually
 it's most commonly associated with frameworks like [Astro](https://astro.build/)
 and [Fresh](https://fresh.deno.dev/).
 
-That's why to some extend, it may seem like these frameworks are doing magic
-behind the scenes, however the main goal of this article is to demonstrate how
-to implement this pattern, as it can be done in any type of website with just a
-little bit of Javascript.
+Because of it, to some extend it could look like these frameworks are doing
+magic behind the scenes, that's why the main goal of this article is to
+demonstrate how to implement this pattern, and hopefully give you a better idea
+about how this type of optimizations work, as it can be done in any type of
+website with just a little bit of JavaScript.
 
 ## The islands architecture
 
@@ -27,25 +28,26 @@ Server Side Rendering (SSR) or Static Site Generation (SSG) also known as
 pre-rendering.
 
 Since this is a component-based architecture, we can separate the static
-(non-interactive HTML) components from the dynamic and interactive ones that
-need some client-side Javascript to work.
+(non-interactive) components from the ones that need some client-side JavaScript
+to work.
 
-At which point, we only `hydrate` (download Javascript) specific components that
-require some type of user interactivity, while the other static regions of the
-page are pure non-interactive HTML that do not require hydration.
+At which point, we only **hydrate** (load JS for) specific components that
+provide some kind of user interactivity, while the other static regions of the
+page stay as pure non-interactive HTML that do not require hydration.
 
 Let's imagine a website that looks like the following:
 
 <comp.IslandsDemo />
 
-As you may have noticed, most of the user-interface is pretty much
-non-interactive components that can be rendered at the server or build time,
-only a few components need JS to execute some kind of client site code.
+I'm sure you noticed, most of the user interface is pretty much made of
+non-interactive elements that can be rendered at the server or build time, only
+a few components need JavaScript to execute some kind of client site code. This
+is specially true when it comes to content driven websites like marketing sites,
+blogs, and e-commerce.
 
 ## Technologies
 
-Let's break down the technologies we'll actually be using for this
-implementation:
+Let's break down the technologies we'll actually be using for this exercise:
 
 ### Vite
 
@@ -76,19 +78,22 @@ Here is a quick comparison:
   [preact-iso](https://bundlephobia.com/package/preact-iso@2.8.1) = **6.7kB**
   <small>minified and gzipped</small>
 
-That is **64.1kB** - a massive **165%** difference!! let's remember with islands
-we are looking to inject the minimum amount of Javascript possible, so using
-Preact sounds like the more reasonable approach.
+That is **64.1kB** - a huge **165%** difference!! so let's remember with islands
+we are looking to inject the minimum amount of Javascript possible, using Preact
+sounds like the more reasonable approach.
 
 ### Web components
 
 > A web standard for creating reusable UI elements
 
-In this situation, this piece of the puzzle is perhaps the most important. It
-allows us to effortlessly `hydrate` specific Preact components by wrapping them
-in a special Custom Element. As a plus, we can pass attributes to specify when
-hydration should happen, for example when visible or when a given media query
-matches.
+Well, kind of 😃... they turned out to be a very niche standard, but to be fair,
+I think they got some really interesting use cases like in this specific
+situation.
+
+We’ll create a custom element that will work as a wrapper for specific Preact
+components and will enable them to be hydrated independently. As a plus, we
+could pass attributes to specify when hydration should happen, for example when
+visible or when a given media query matches.
 
 ## The implementation
 
@@ -96,9 +101,9 @@ Enough talk, let's start writing some code...
 
 ### Scaffolding
 
-First, let's generate a Vite + Preact with pre-rendering project by running
-`pnpm craate preact` or `npm init preact`, as well make sure to select the
-following options:
+First, let's generate a Vite + Preact project by running `pnpm craate preact` or
+`npm init preact`, as well make sure to select the following options so that
+both router and pre-rendering are enabled:
 
 - Project language: **TypeScript**
 - Use router?: **Yes**
@@ -108,35 +113,33 @@ After running `npm run dev` or `pnpm dev` you should see the following:
 
 ![Vite + Preact](/images/vite-preact.png)
 
-### Preact Islands
+### Preact islands
 
-What be want is a way to allow specific components to be rendered on the server
-as placeholders and then hydrated into interactive elements on the client.
-
-Two key functions make this happen:
+At this point, we want to allow for components to be rendered on the server as
+placeholders and then hydrated into interactive elements on the client. Two key
+functions make this happen:
 
 ```tsx
 // src/lib/preact-islands.tsx
-import { FunctionalComponent, JSX, hydrate } from "preact";
+import type { FunctionalComponent, JSX } from "preact";
+import hydrate from "preact-iso/hydrate";
 
 export type IslandsConfig = Record<
   string,
-  () => Promise<{ default: () => JSX.Element }>
+  () => Promise<{ default: FunctionalComponent }>
 >;
 
 export function registerIslands<C extends IslandsConfig>(config: C) {
-  if (typeof document !== "undefined") return;
   customElements.define(
     "preact-island",
-    class PreactIsland extends HTMLElement {
-      static config: IslandsConfig = config;
+    class extends HTMLElement {
       async connectedCallback() {
         const src = this.getAttribute("src");
 
-        if (!Object.prototype.hasOwnProperty.call(PreactIsland.config, src))
+        if (!Object.prototype.hasOwnProperty.call(config, src))
           throw new Error(`${src} is not a registered island`);
 
-        const load = PreactIsland.config[src];
+        const load = config[src];
         const Component = await load();
         hydrate(<Component.default />, this);
       }
@@ -147,7 +150,7 @@ export function registerIslands<C extends IslandsConfig>(config: C) {
 export function withIsland<S, Props = {}>(
   Component: FunctionalComponent<Props>,
   displayName: string,
-) {
+): FunctionalComponent<Props> {
   return (props: Props) => {
     if (typeof document !== "undefined") return <Component {...props} />;
     return (
@@ -159,14 +162,16 @@ export function withIsland<S, Props = {}>(
 }
 ```
 
-#### registerIslands()
+Here is a quick breakdown:
 
-This is where most of the magic happens, basically this function registers a
+**registerIslands()**
+
+It's where most of the magic happens, basically this function registers a
 `preact-island` custom element that tells the browser to lazy-load the
 corresponding component's code (via `connectedCallback`), then hydrates it,
 making it interactive.
 
-#### withIsland()
+**withIsland()**
 
 A very simple higher-order component that marks a given Preact component as an
 "island."
@@ -176,14 +181,156 @@ Component directly using any provided props. But when running on the server, it
 renders the Component wrapped by a custom `<preact-island>` HTML tag with a
 `src` attribute pointing to the name of the island.
 
-**It is important to notice, that `displayName` should match one of the keys in
+**It is important to notice that `displayName` should match one of the keys in
 the config object passed to `registerIslands()`.**
 
-### Vite script
+### Writing your first island
 
-Now we need to configure Vite to avoid sending the entire app's code to the
-browser. instead we only want to send the islands. Fortunately, we can do so via
-code-splitting using dynamic `import()`.
+Let's start by building a simple button as our first island component. This
+simple button will trigger a `window.alert` when clicked:
+
+```tsx
+// src/islands/Button.tsx
+import { withIsland } from "../lib/preact-islands";
+
+function Button() {
+  return (
+    <button
+      style={{ width: 300, fontSize: 16 }}
+      onClick={() => alert("Interactivity Yeah!!")}
+    >
+      <span>Button Island - Click me!</span>
+    </button>
+  );
+}
+
+export default withIsland(Button, "Button");
+```
+
+Notice that the component is wrapped with `withIsland()`, which requires the
+component itself and a `displayName` as arguments. The `displayName` is used to
+identify the component during hydration.
+
+### Loading islads
+
+Finally! The last piece of the puzzle! it is basically configuring Vite to
+ensure only the necessary "islands" are sent to the browser, rather than the
+entire app. Luckily this can be easily done using the dynamic `import()`
+function, follow the next steps:
+
+#### Move app component
+
+First, copy/paste the main App component into a separate file:
+
+```tsx
+// src/App.tsx
+import { LocationProvider, Route, Router } from "preact-iso/router";
+
+import { Header } from "./components/Header.jsx";
+import { Home } from "./pages/Home/index.jsx";
+import { NotFound } from "./pages/_404.jsx";
+
+export function App() {
+  return (
+    <LocationProvider>
+      <Header />
+      <main>
+        <Router>
+          <Route path="/" component={Home} />
+          <Route default component={NotFound} />
+        </Router>
+      </main>
+    </LocationProvider>
+  );
+}
+```
+
+#### Add code splitting
+
+Now, modify the `src/index.tsx` entrypoint to handle different behaviors for
+development and production:
+
+```tsx
+// src/index.tsx
+import hydrate from "preact-iso/hydrate";
+import render from "preact-iso/prerender";
+
+import { registerIslands } from "./lib/preact-islands";
+import "./style.css";
+
+// the dev server (dev command) runs in development mode
+const isDEV = import.meta.env.MODE === "development";
+const isBrowser = typeof window !== "undefined";
+
+if (isBrowser && isDEV) {
+  // Hydrate the whole app while in development
+  import("./App").then(({ App }) => {
+    hydrate(<App />, document.getElementById("app"));
+  });
+}
+
+if (isBrowser && !isDEV) {
+  // Only hydrate Islands in production
+  registerIslands({
+    Button: () => import("./islands/Button"),
+  });
+}
+
+export async function prerender(data) {
+  const { App } = await import("./App");
+  return await render(<App {...data} />);
+}
+```
+
+Please make sure you notice the following:
+
+- **In development**, the entire app is hydrated to simplify debugging.
+- **In production**, only the defined islands are hydrated using the
+  `registerIslands()` function.
+- **Button key** in the `registerIslands()` configuration matches the
+  `displayName` arg provided to `withIsland()`. This link is really important
+  for identifying and loading the correct island dynamically.
+
+### Render it on the page!
+
+At this point, we should we able to render our button island anywhere on the
+page, so let's do that and run:
+
+```sh
+npm run build && npm run preview
+```
+
+This is what you would get on `localhost:4173`:
+
+![Button Island](/images/button-island.png)
+
+Not so fast, there are a couple more thigs I'd like to mention...
+
+You can add the following snippet to your CSS styles:
+
+```css
+preact-island {
+  display: contents;
+}
+```
+
+It should help preventing styling issues if any, by making it so that the custom
+element is not perceived as a box by the browser, and instead is replaced by its
+child.
+
+Also if you are using TypeScript and I hope you are... add the following snippet
+somewhere in the code, it would make TypeScript recognize `preact-island` as a
+usable html tag:
+
+```ts
+declare module "preact/jsx-runtime" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "preact-island": JSX.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+```
 
 ## Final thoughts
 
