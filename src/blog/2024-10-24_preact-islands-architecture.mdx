@@ -4,7 +4,7 @@ description:
   Understanding the islands architecture, step by step implementation with
   Preact.
 image: /images/islands.webp
-published: false
+published: true
 ---
 
 You may have heard the term "Islands Architecture" being use online, usually
@@ -107,6 +107,83 @@ following options:
 After running `npm run dev` or `pnpm dev` you should see the following:
 
 ![Vite + Preact](/images/vite-preact.png)
+
+### Preact Islands
+
+What be want is a way to allow specific components to be rendered on the server
+as placeholders and then hydrated into interactive elements on the client.
+
+Two key functions make this happen:
+
+```tsx
+// src/lib/preact-islands.tsx
+import { FunctionalComponent, JSX, hydrate } from "preact";
+
+export type IslandsConfig = Record<
+  string,
+  () => Promise<{ default: () => JSX.Element }>
+>;
+
+export function registerIslands<C extends IslandsConfig>(config: C) {
+  if (typeof document !== "undefined") return;
+  customElements.define(
+    "preact-island",
+    class PreactIsland extends HTMLElement {
+      static config: IslandsConfig = config;
+      async connectedCallback() {
+        const src = this.getAttribute("src");
+
+        if (!Object.prototype.hasOwnProperty.call(PreactIsland.config, src))
+          throw new Error(`${src} is not a registered island`);
+
+        const load = PreactIsland.config[src];
+        const Component = await load();
+        hydrate(<Component.default />, this);
+      }
+    },
+  );
+}
+
+export function withIsland<S, Props = {}>(
+  Component: FunctionalComponent<Props>,
+  displayName: string,
+) {
+  return (props: Props) => {
+    if (typeof document !== "undefined") return <Component {...props} />;
+    return (
+      <preact-island src={displayName}>
+        <Component {...props} />
+      </preact-island>
+    );
+  };
+}
+```
+
+#### registerIslands()
+
+This is where most of the magic happens, basically this function registers a
+`preact-island` custom element that tells the browser to lazy-load the
+corresponding component's code (via `connectedCallback`), then hydrates it,
+making it interactive.
+
+#### withIsland()
+
+A very simple higher-order component that marks a given Preact component as an
+"island."
+
+When running in the browser, it does during hydration, so it renders the
+Component directly using any provided props. But when running on the server, it
+renders the Component wrapped by a custom `<preact-island>` HTML tag with a
+`src` attribute pointing to the name of the island.
+
+**It is important to notice, that `displayName` should match one of the keys in
+the config object passed to `registerIslands()`.**
+
+### Vite script
+
+Now we need to configure Vite to avoid sending the entire app's code to the
+browser. instead we only want to send the islands. Fortunately, we can do so via
+code-splitting using dynamic `import()`.
 
 ## Final thoughts
 
