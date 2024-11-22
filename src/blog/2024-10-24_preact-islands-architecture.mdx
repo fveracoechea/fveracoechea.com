@@ -113,7 +113,7 @@ After running `npm run dev` or `pnpm dev` you should see the following:
 
 ![Vite + Preact](/images/vite-preact.png)
 
-### Preact islands
+### Utility functions
 
 At this point, we want to allow for components to be rendered on the server as
 placeholders and then hydrated into interactive elements on the client. Two key
@@ -184,7 +184,7 @@ renders the Component wrapped by a custom `<preact-island>` HTML tag with a
 **It is important to notice that `displayName` should match one of the keys in
 the config object passed to `registerIslands()`.**
 
-### Writing your first island
+### Writing a simple island
 
 Let's start by building a simple button as our first island component. This
 simple button will trigger a `window.alert` when clicked:

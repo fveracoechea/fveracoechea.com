@@ -1,11 +1,11 @@
 ---
-title: Animation Frames
+title: Async Animation Frames Generator
 order: 6
 description:
   Asynchronous generator function that produces a sequence of animation frames.
 ---
 
-# Animation Frames
+# Async Animation Frames Generator
 
 Asynchronous generator function that executes a continuous stream of
 user-supplied actions before the next repaint. Each time the browser is about to
@@ -27,16 +27,15 @@ async function* animationFrames() {
 MDN docs:
 https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 
-## Example usage
+## Example
 
 ```typescript
 async function logFPS() {
   const startTime = performance.now();
-
   let numberOfFrames = 0;
 
   for await (const timestamp of animationFrames()) {
-    if (performance.now() >= startTime + 1000) break;
+    if (timestamp >= startTime + 1000) break;
     numberOfFrames++;
   }
 
@@ -50,3 +49,28 @@ When used in an asynchronous loop, **animationFrames** can help track how many
 frames are rendered over a period of time. For example, in the run function
 provided earlier, the `for await` loop iterates over the frames produced,
 allowing it to measure how many frames are rendered in one second.
+
+## Typewriter example
+
+```ts
+async function* typewriter(text, start = 0) {
+  let index = start;
+
+  for await (const timestamp of animationFrames()) {
+    if (index < text.length) {
+      const char = text[index];
+      index++;
+      yield char;
+    }
+  }
+}
+
+const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+let value = "";
+
+for await (const char of typewriter(text)) {
+  value += char;
+  document.body.innerHTML = value;
+}
+```
