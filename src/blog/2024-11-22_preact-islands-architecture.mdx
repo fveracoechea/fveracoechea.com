@@ -1,15 +1,15 @@
 ---
 title: Islands Architecture a step by step implementation
 description:
-  Understanding the islands architecture, step by step implementation with
+  Understanding the islands architecture, a step by step implementation with
   Preact.
 image: /images/islands.webp
-published: false
+published: true
 ---
 
 You may have heard the term "Islands Architecture" being use online, usually
 it's most commonly associated with frameworks like [Astro](https://astro.build/)
-and [Fresh](https://fresh.deno.dev/).
+or [Fresh](https://fresh.deno.dev/).
 
 Because of it, to some extend it could look like these frameworks are doing
 magic behind the scenes, that's why the main goal of this article is to
@@ -21,11 +21,10 @@ website with just a little bit of JavaScript.
 
 First of all, what is the islands architecture?
 
-The overall main idea of this architecture is to inject the absolute minimum
-amount of Javascript possible, while having a good balance between
-interactivity, performance, and SEO, the latter is usually achieved via either
-Server Side Rendering (SSR) or Static Site Generation (SSG) also known as
-pre-rendering.
+The overall main idea of this pattern is to inject the absolute minimum amount
+of Javascript possible, while having a good balance between interactivity,
+performance, and SEO, the latter is usually achieved via either Server Side
+Rendering (SSR) or Static Site Generation (SSG) also known as pre-rendering.
 
 Since this is a component-based architecture, we can separate the static
 (non-interactive) components from the ones that need some client-side JavaScript
@@ -40,10 +39,22 @@ Let's imagine a website that looks like the following:
 <comp.IslandsDemo />
 
 I'm sure you noticed, most of the user interface is pretty much made of
-non-interactive elements that can be rendered at the server or build time, only
-a few components need JavaScript to execute some kind of client site code. This
-is specially true when it comes to content driven websites like marketing sites,
-blogs, and e-commerce.
+non-interactive elements that can be rendered during a request to the server or
+build time. In this example, only a few components need JavaScript to execute
+some kind of client site code. This is often the case when it comes to content
+driven websites like marketing sites, blogs, and e-commerce.
+
+To some degree, this architecture promotes using Web standards by taking
+advantage of native browser features, rather than reinventing the wheel for
+things the browser and servers already know how to do. That's the case for most
+single-page-applications as they often make use of a client site routing,
+caching, form handling/validation, and similar libraries that quickly add up
+slowing down and complicating things over time.
+
+Fortunately most websites dont really need to deal with that type of
+complexity...
+
+Now, let's explore how to build a custom islands implementation.
 
 ## Technologies
 
@@ -96,6 +107,9 @@ could pass attributes to specify when hydration should happen, for example when
 visible or when a given media query matches.
 
 ## The implementation
+
+TLDR; Here's a demo put together with the steps blow:
+[github.com/fveracoechea/preact-islands-demo](https://github.com/fveracoechea/preact-islands-demo)
 
 Enough talk, let's start writing some code...
 
@@ -302,7 +316,7 @@ npm run build && npm run preview
 
 This is what you would get on `localhost:4173`:
 
-![Button Island](/images/button-island.png)
+![Button Island](/images/button-island.webp)
 
 Not so fast, there are a couple more thigs I'd like to mention...
 
@@ -334,5 +348,38 @@ declare module "preact/jsx-runtime" {
 
 ## Final thoughts
 
+All in all, this is just one of many ways to implement this pattern. The main
+goal is to use UI components to generate a static HTML skeleton of the page and
+then add interactivity as needed. When working with different technologies, I
+believe it's just a matter of adapting to the build tools and server setup being
+used. This approach can most likely be applied to custom server-side rendering
+or most static site generators. For the latter, I recommend checking out
+[Lume](https://lume.land/) and [Eleventy](https://www.11ty.dev/).
+
+Personally, I find it to be a solid solution, especially for
+performance-sensitive websites that should be lightweight and focused on
+displaying content to users as quickly as possible.
+
+As a plus, it also enables **Progressive Enhancement**, which is the idea that
+your page work with HTML first, allowing everyone to access the basic content
+and functionality as a baseline, and then enhancing the user experience for
+those with advanced browser features or faster internet access.
+
+All that being said, **should You roll out your custom islands to production?**
+
+Probably not. I'd say it's safer to go for a framework like
+[Astro](https://astro.build/) or [Fresh](https://fresh.deno.dev/), as they offer
+documentation and more features that can be useful over time. However, I still
+think it may be ok if we're talking about a small personal site.
+
+Thanks for reading this article! I really hope it sparks some new ideas and
+encourages you to try your own DIY implementation of this pattern.
+
+### Resources
+
 Here are a couple resources, in case you'd like to dig more in to this subject:
 
+- [Islands Architecture - Javascript Patterns](https://www.patterns.dev/vanilla/islands-architecture/)
+- [Islands Architecture - JASON Format](https://jasonformat.com/islands-architecture/)
+- [Progressive Enhancement - MDN](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement)
+- [Progressive Enhancement - Wikipedia](https://en.wikipedia.org/wiki/Progressive_enhancement)
