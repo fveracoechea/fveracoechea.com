@@ -26,15 +26,15 @@ function Articles(props: { search: Lume.Data["search"] }) {
                 key={post.url}
                 className="group flex flex-col gap-6 md:flex-row"
               >
-                <figure className="w-72">
+                <figure className="w-80">
                   <img
                     src={post.image}
                     alt={post.title}
-                    width={288}
-                    height={151}
+                    width={320}
+                    height={168}
                     loading="lazy"
                     className={cx(
-                      "h-auto w-full rounded border border-cat-surface0 object-cover",
+                      "h-auto min-w-80 rounded border border-cat-surface0 object-cover",
                       "ring-0 ring-cat-surface0 transition-shadow",
                       "group-hover:border-cat-blue group-hover:ring-2 group-hover:ring-cat-blue",
                       "group-focus-within:border-cat-blue",
