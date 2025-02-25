@@ -78,15 +78,6 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
-    href: "https://dev.opera.com/articles/better-performance-with-requestanimationframe/",
-    date: "06/22/2024",
-    tag: "animations",
-    text: [
-      "Better Performance With requestAnimationFrame",
-      "This article discusses how you can improve the performance of your animations",
-    ],
-  },
-  {
     href: "https://github.com/unknownskl/greenlight",
     date: "06/19/2024",
     tag: "gaming",
@@ -195,7 +186,7 @@ export default function BookmarksLayout(props: Lume.Data) {
                   </b>
                   <span className="flex flex-wrap justify-between text-sm">
                     <span className="flex flex-wrap gap-2 text-cat-text transition-colors group-hover:text-cat-text">
-                      <span>{format(date, "PPP")}</span>
+                      <span>{format(date, "PP")}</span>
                       <span className="hidden md:inline">-</span>
                       <span>{text.at(1)}</span>
                     </span>
