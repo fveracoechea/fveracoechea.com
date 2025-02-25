@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.2.4/",
+    "lume/": "https://deno.land/x/lume@v2.5.2/",
     "@catppuccin/tailwindcss": "npm:@catppuccin/tailwindcss",
     "@tailwindcss/typography": "npm:@tailwindcss/typography",
     "@trivago/prettier-plugin-sort-imports": "npm:@trivago/prettier-plugin-sort-imports",
