@@ -1,4 +1,5 @@
 import nano from "cssnano";
+import rehypeSlug from "https://esm.sh/rehype-slug@6.0.0";
 import lume from "lume/mod.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import date from "lume/plugins/date.ts";
@@ -13,7 +14,6 @@ import postcss from "lume/plugins/postcss.ts";
 import robots from "lume/plugins/robots.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
-import rehypeSlug from "npm:rehype-slug@6.0.0";
 
 import extractToc from "./src/_plugins/mdxToc.ts";
 import snippets from "./src/_plugins/snippets.ts";
