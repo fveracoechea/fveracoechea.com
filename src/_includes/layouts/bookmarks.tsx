@@ -12,6 +12,15 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://www.better-auth.com/",
+    date: "02/02/2025",
+    tag: "web development",
+    text: [
+      "Better Auth",
+      "The comprehensive authentication framework for TypeScript",
+    ],
+  },
+  {
     href: "https://www.patterns.dev/",
     date: "11/10/2024",
     tag: "web development",
