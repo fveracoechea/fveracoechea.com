@@ -17,7 +17,8 @@
     "preact": "npm:preact",
     "preact/hooks": "npm:preact/hooks",
     "cva": "npm:class-variance-authority",
-    "clsx": "npm:clsx"
+    "clsx": "npm:clsx",
+    "rehype-slug": "npm:rehype-slug"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
