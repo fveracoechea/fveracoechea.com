@@ -13,7 +13,7 @@ import postcss from "lume/plugins/postcss.ts";
 import robots from "lume/plugins/robots.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
-import rehypeSlug from "npm:rehype-slug";
+import rehypeSlug from "npm:rehype-slug@6.0.0";
 
 import extractToc from "./src/_plugins/mdxToc.ts";
 import snippets from "./src/_plugins/snippets.ts";
