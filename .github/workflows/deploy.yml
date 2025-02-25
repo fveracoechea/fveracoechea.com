@@ -19,11 +19,6 @@ jobs:
 
       - name: Setup Deno environment
         uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
-      - name: Cache
-        run: deno cache _config.ts
 
       - name: Build site
         run: deno task build
