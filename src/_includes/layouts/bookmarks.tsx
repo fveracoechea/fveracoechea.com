@@ -12,6 +12,15 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://yoavik.com/snippets/image-with-fallback",
+    date: "03/01/2025",
+    tag: "react",
+    text: [
+      "Lazy Image with Fallback Component",
+      "A Component for showing a fallback component when an image cannot be found",
+    ],
+  },
+  {
     href: "https://www.better-auth.com/",
     date: "02/02/2025",
     tag: "web development",
