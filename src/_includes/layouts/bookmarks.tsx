@@ -12,6 +12,15 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://reactrouter.com/explanation/progressive-enhancement",
+    date: "04/29/2025",
+    tag: "web development",
+    text: [
+      "Progressive Enhancement",
+      "A strategy in web design that puts emphasis on web content first",
+    ],
+  },
+  {
     href: "https://yoavik.com/snippets/image-with-fallback",
     date: "03/01/2025",
     tag: "react",
@@ -63,8 +72,7 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
-    href:
-      "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
+    href: "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
     date: "07/03/2024",
     tag: "docs",
     text: [
