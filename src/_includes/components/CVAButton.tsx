@@ -1,4 +1,4 @@
-import { VariantProps, cva } from "cva";
+import { cva, VariantProps } from "cva";
 import { ComponentChildren } from "preact";
 
 const button = cva(

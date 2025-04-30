@@ -19,7 +19,7 @@ function Articles(props: { search: Lume.Data["search"] }) {
       </h3>
 
       <div className="grid grid-cols-1 gap-10">
-        {blog.map(post => {
+        {blog.map((post) => {
           return (
             <a href={post.url} className="w-full">
               <article

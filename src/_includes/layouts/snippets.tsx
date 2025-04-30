@@ -10,7 +10,7 @@ export default function SnippetsLayout(props: Lume.Data) {
   const snippets = (props.page.data.snippets ?? []) as Snippets;
   const currentPath = props.page.outputPath;
 
-  if (!isIndex)
+  if (!isIndex) {
     return (
       <div className={cx("flex gap-10", FULL_HEIGHT)}>
         <article className="prose flex-[4] overflow-x-hidden py-10">
@@ -65,6 +65,7 @@ export default function SnippetsLayout(props: Lume.Data) {
         </aside>
       </div>
     );
+  }
 
   return (
     <>

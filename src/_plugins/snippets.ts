@@ -1,8 +1,8 @@
 function getCodeSnippetPages(pages: Lume.Page[]) {
   return pages
-    .filter(p => p.data.type === "snippet")
+    .filter((p) => p.data.type === "snippet")
     .toSorted((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0))
-    .map(p => ({
+    .map((p) => ({
       path: p.src.path,
       outputPath: p.outputPath,
       title: p.data.title,
@@ -25,16 +25,16 @@ export default () => (site: Lume.Site) => {
   //   }
   // });
 
-  site.preprocess([".mdx"], pages => {
+  site.preprocess([".mdx"], (pages) => {
     const snippets = getCodeSnippetPages(pages);
 
     pages
       .filter(
-        page =>
+        (page) =>
           page.data.type === "snippets-index-page" ||
           page.data.type === "snippet",
       )
-      .forEach(page => {
+      .forEach((page) => {
         page.data.snippets = snippets;
       });
   });

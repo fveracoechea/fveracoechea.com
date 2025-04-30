@@ -18,12 +18,10 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
         "relative rounded px-2 py-2.5 font-medium",
         "after:absolute after:h-[2px] after:w-0 after:rounded after:bg-cat-blue",
         "after:bottom-0 after:left-0 after:transition-all",
-        props.isActive
-          ? "text-cat-blue after:w-full"
-          : [
-              "text-cat-subtext0 transition-colors hover:text-cat-blue hover:after:w-full",
-              "focus-visible:ring-2 focus-visible:ring-cat-blue",
-            ],
+        props.isActive ? "text-cat-blue after:w-full" : [
+          "text-cat-subtext0 transition-colors hover:text-cat-blue hover:after:w-full",
+          "focus-visible:ring-2 focus-visible:ring-cat-blue",
+        ],
         props.className,
       )}
     />

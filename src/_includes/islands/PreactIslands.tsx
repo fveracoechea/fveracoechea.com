@@ -9,7 +9,7 @@ export function isBrowser() {
 /**
  * Type guard.
  * Determines whether an object has a property with the specified name.
- * */
+ */
 export function isKeyOf<R extends Record<PropertyKey, unknown>>(
   record: R,
   key: unknown,
@@ -49,11 +49,13 @@ export function registerIslands<C extends IslandsConfig>(config: C) {
       async connectedCallback() {
         const src = this.getAttribute("src");
 
-        if (!isKeyOf(PreactIsland.config, src))
+        if (!isKeyOf(PreactIsland.config, src)) {
           throw new Error(`${src} is not a registered island`);
+        }
 
-        if (this.hasAttribute("media"))
+        if (this.hasAttribute("media")) {
           await this.media(this.getAttribute("media")!);
+        }
 
         if (this.hasAttribute("visible")) await this.visible();
 
@@ -63,8 +65,8 @@ export function registerIslands<C extends IslandsConfig>(config: C) {
       }
 
       visible() {
-        return new Promise(resolve => {
-          const observer = new IntersectionObserver(entries => {
+        return new Promise((resolve) => {
+          const observer = new IntersectionObserver((entries) => {
             for (const entry of entries) {
               if (entry.isIntersecting) {
                 observer.disconnect();
@@ -79,7 +81,7 @@ export function registerIslands<C extends IslandsConfig>(config: C) {
       media(query: string) {
         const mediaQuery = globalThis.matchMedia(query);
 
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           function mediaListener(e: MediaQueryListEvent) {
             if (!e.matches) return;
             resolve(true);

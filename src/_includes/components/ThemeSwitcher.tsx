@@ -31,7 +31,7 @@ function uncheckRadio(element: HTMLButtonElement) {
  * Moves focus to the previous radio button in the group,
  * uncheck the previously focused button, and check the newly focused button.
  * If focus is on the first button, focus moves to the last button.
- * */
+ */
 function checkPrevious(
   collection: HTMLButtonElement[],
   element: HTMLButtonElement,
@@ -48,7 +48,7 @@ function checkPrevious(
  * Moves focus to the next radio button in the group,
  * uncheck the previously focused button, and check the newly focused button.
  * If focus is on the last button, focus moves to the first button.
- * */
+ */
 function checkNext(
   collection: HTMLButtonElement[],
   element: HTMLButtonElement,
@@ -69,8 +69,9 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
   function saveTheme(t: Theme) {
     setTheme(t);
     for (const key in THEME) {
-      if (Object.prototype.hasOwnProperty.call(THEME, key))
+      if (Object.prototype.hasOwnProperty.call(THEME, key)) {
         document.querySelector("html")?.classList.remove(THEME[key as Theme]);
+      }
     }
     document.querySelector("html")?.classList.add(THEME[t]);
     localStorage.setItem("theme", THEME[t]);
@@ -129,7 +130,7 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         tabIndex={theme === "LIGHT" ? 0 : -1}
         onClick={() => saveTheme("LIGHT")}
         className={cx(
-          "rounded-bl rounded-tl border",
+          "rounded-tl rounded-bl border",
           fill && "flex-1 justify-center",
           border === "base" ? "border-cat-surface1" : "border-cat-surface2",
         )}
@@ -165,7 +166,7 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         tabIndex={theme === "SYSTEM" ? 0 : -1}
         onClick={() => saveTheme("SYSTEM")}
         className={cx(
-          "rounded-br rounded-tr border",
+          "rounded-tr rounded-br border",
           fill && "flex-1 justify-center",
           border === "base" ? "border-cat-surface1" : "border-cat-surface2",
         )}

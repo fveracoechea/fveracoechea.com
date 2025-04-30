@@ -30,10 +30,11 @@ export default function HomeLayout(props: Lume.Data) {
       <section class="flex flex-col items-center gap-8 rounded pb-20 md:flex-row md:pt-10">
         <div className="flex flex-1 flex-col gap-4">
           <h2 className="text-4xl !leading-[1.15] md:text-5xl">
-            Web engineering <i className="text-cat-blue">experimentation</i>,{" "}
+            Web engineering <i className="text-cat-blue">experimentation</i>,
+            {" "}
             <i className="text-cat-mauve">learning</i>, and{" "}
-            <i className="text-cat-flamingo">ideas</i> worth sharing in the
-            world wide web.
+            <i className="text-cat-flamingo">ideas</i>{" "}
+            worth sharing in the world wide web.
           </h2>
           <SocialLinks size="lg" />
         </div>
@@ -47,7 +48,7 @@ export default function HomeLayout(props: Lume.Data) {
         <ul
           className={cx("flex flex-wrap gap-2 text-sm md:gap-8 md:text-base")}
         >
-          {interests.map(x => (
+          {interests.map((x) => (
             <li key={x.label} className={cx("flex items-center text-left")}>
               <span className="p-2 text-2xl text-cat-overlay2">{x.icon}</span>
               <span className="leading-none text-cat-subtext0">{x.label}</span>

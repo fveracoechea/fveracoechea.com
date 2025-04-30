@@ -8,10 +8,11 @@ import NavLogo from "./NavLogo.tsx";
 import ThemeSwitcher from "./ThemeSwitcher.tsx";
 
 function cubicBezier(x0: number, y0: number, x1: number, y1: number) {
-  if (!(x0 >= 0 && x0 <= 1 && x1 >= 0 && x1 <= 1))
+  if (!(x0 >= 0 && x0 <= 1 && x1 >= 0 && x1 <= 1)) {
     throw new Error(
       `CubicBezier x1 & x2 values must be { 0 < x < 1 }, got { x1 : ${x0}, x2: ${x1} }`,
     );
+  }
 
   const ax = 1.0 - (x1 = 3.0 * (x1 - x0) - (x0 *= 3.0)) - x0,
     ay = 1.0 - (y1 = 3.0 * (y1 - y0) - (y0 *= 3.0)) - y0;
@@ -23,16 +24,18 @@ function cubicBezier(x0: number, y0: number, x1: number, y1: number) {
     x = 0.0;
 
   return function (t: number) {
-    for (r = t, i = 0; 32 > i; i++)
-      if (1e-5 > Math.abs((x = r * (r * (r * ax + x1) + x0) - t)))
+    for (r = t, i = 0; 32 > i; i++) {
+      if (1e-5 > Math.abs(x = r * (r * (r * ax + x1) + x0) - t)) {
         return r * (r * (r * ay + y1) + y0);
-      else if (1e-5 > Math.abs((d = r * (r * ax * 3.0 + x1 * 2.0) + x0))) break;
+      } else if (1e-5 > Math.abs(d = r * (r * ax * 3.0 + x1 * 2.0) + x0)) break;
       else r -= x / d;
+    }
     if ((s = 0.0) > (r = t)) return 0;
     else if ((d = 1.0) < r) return 1;
-    while (d > s)
+    while (d > s) {
       if (1e-5 > Math.abs((x = r * (r * (r * ax + x1) + x0)) - t)) break;
       else t > x ? (s = r) : (d = r), (r = 0.5 * (d - s) + s);
+    }
     return r * (r * (r * ay + y1) + y0);
   };
 }
@@ -66,7 +69,7 @@ async function* collapse(height: number) {
   let currentHeight = height;
   const startTime = Date.now();
   while (currentHeight > 0) {
-    await new Promise(resolve => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
     currentHeight = height - animate(startTime, height);
     yield currentHeight;
   }
@@ -76,7 +79,7 @@ async function* expand(height: number) {
   let currentHeight = 0;
   const startTime = Date.now();
   while (currentHeight < height) {
-    await new Promise(resolve => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
     currentHeight = animate(startTime, height);
     yield currentHeight;
   }

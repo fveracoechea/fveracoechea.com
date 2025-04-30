@@ -11,7 +11,7 @@ type TocData = {
 };
 
 export default (pageType?: string) => (site: Lume.Site) => {
-  site.preprocess([".mdx"], async pages => {
+  site.preprocess([".mdx"], async (pages) => {
     for (const page of pages) {
       if (pageType && pageType !== page.data.type) continue;
 

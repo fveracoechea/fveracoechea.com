@@ -1,7 +1,8 @@
 {
   "nodeModulesDir": "auto",
+  "lock": { "frozen": true },
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.5.2/",
+    "lume/": "https://deno.land/x/lume@v2.5.3/",
     "@catppuccin/tailwindcss": "npm:@catppuccin/tailwindcss",
     "@tailwindcss/typography": "npm:@tailwindcss/typography",
     "@trivago/prettier-plugin-sort-imports": "npm:@trivago/prettier-plugin-sort-imports",
@@ -29,13 +30,11 @@
   "compilerOptions": {
     "types": ["lume/types.ts"],
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:preact"
+    "jsxImportSource": "preact"
   },
   "lint": {
     "rules": {
-      "exclude": ["no-window"],
-      "tags": ["recommended"]
+      "tags": ["recommended", "react"]
     }
-  },
-  "fmt": false
+  }
 }

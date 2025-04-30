@@ -1,44 +1,44 @@
 @font-face {
-    font-family: "Fira Code";
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    src: url(/fonts/FiraCode-Regular.woff2) format("woff2");
+  font-family: "Fira Code";
+  font-display: swap;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  src: url(/fonts/FiraCode-Regular.woff2) format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    src: url(/fonts/FiraSans-Regular.woff2) format("woff2");
+  font-family: "Fira Sans";
+  font-display: swap;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  src: url(/fonts/FiraSans-Regular.woff2) format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-    src: url(/fonts/FiraSans-Medium.woff2) format("woff2");
+  font-family: "Fira Sans";
+  font-display: swap;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  src: url(/fonts/FiraSans-Medium.woff2) format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    src: url(/fonts/FiraSans-SemiBold.woff2) format("woff2");
+  font-family: "Fira Sans";
+  font-display: swap;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  src: url(/fonts/FiraSans-SemiBold.woff2) format("woff2");
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: italic;
-    src: url("/fonts/FiraSans-MediumItalic.woff2") format("woff2");
+  font-family: "Fira Sans";
+  font-display: swap;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+  src: url("/fonts/FiraSans-MediumItalic.woff2") format("woff2");
 }

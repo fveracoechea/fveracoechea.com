@@ -1,4 +1,4 @@
-import { type VariantProps, cva } from "cva";
+import { cva, type VariantProps } from "cva";
 
 import { IconButton } from "./IconButton.tsx";
 import { Github, Linkedin, RSS } from "./Icons.tsx";

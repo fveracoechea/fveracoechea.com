@@ -63,7 +63,8 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
-    href: "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
+    href:
+      "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
     date: "07/03/2024",
     tag: "docs",
     text: [
