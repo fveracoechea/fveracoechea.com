@@ -6,20 +6,20 @@ export const layout = "layouts/base.tsx";
 function toTableOfContents(item: Lume.TocEntry): JSX.Element {
   return (
     <>
-      <li key={item.id} className={cx()}>
+      <li key={item.id}>
         <a
           href={`#${item.id}`}
           tabIndex={1}
           className={cx(
-            "flex py-1.5 text-sm transition",
+            "flex py-1.5 text-sm transition text-cat-subtext0",
             "rounded-br rounded-tr",
             "hover:bg-cat-overlay2/20 hover:text-cat-text",
             "active:ring-2 active:ring-cat-overlay2",
             "focus-visible:ring-2 focus-visible:ring-cat-overlay2",
-            item.depth === 2 && "pl-8 font-semibold",
-            item.depth === 3 && `pl-10`,
-            item.depth === 4 && `pl-14`,
-            item.depth >= 5 && `pl-16`,
+            item.depth === 2 && "pl-8",
+            item.depth === 3 && `pl-12`,
+            item.depth === 4 && `pl-16`,
+            item.depth >= 5 && `pl-18`,
           )}
         >
           {item.value}
@@ -60,7 +60,7 @@ export default function BlogLayout(props: Lume.Data) {
       </article>
 
       <aside className="hidden flex-1 border-l border-cat-surface0 lg:block">
-        <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-10">
+        <nav className="flex flex-1 flex-col gap-4 py-10">
           <p className="text-md pl-8 font-semibold text-cat-text">
             On This Page
           </p>
