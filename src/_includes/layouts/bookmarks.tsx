@@ -12,6 +12,33 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://kyleshevlin.com/use-encapsulation/",
+    date: "06/10/2025",
+    tag: "react",
+    text: [
+      "useEncapsulation",
+      "Why Your React Components Should Only Use Custom Hooks",
+    ],
+  },
+  {
+    href: "https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/",
+    date: "06/8/2025",
+    tag: "AI",
+    text: [
+      "Stack overflow is almost dead",
+      "Today, Stack overflow has almost as few questions asked per month...",
+    ],
+  },
+  {
+    href: "https://world.hey.com/dhh/coding-should-be-a-vibe-50908f49",
+    date: "05/18/2025",
+    tag: "AI",
+    text: [
+      "Coding should be a vibe!",
+      `The appeal of "vibe coding" appears to be based on the fact that many development environments are unpleasant to work with.`,
+    ],
+  },
+  {
     href: "https://reactrouter.com/explanation/progressive-enhancement",
     date: "04/29/2025",
     tag: "web development",
@@ -72,7 +99,8 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
-    href: "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
+    href:
+      "https://blog.sentry.io/introducing-user-feedback-the-easiest-way-to-connect-with-your-users/",
     date: "07/03/2024",
     tag: "docs",
     text: [

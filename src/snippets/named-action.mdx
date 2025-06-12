@@ -1,0 +1,101 @@
+---
+title: Named Actions
+order: 9
+description:
+  Resolves and invokes a named function from a given set of actions.
+---
+
+# Named Actions
+
+Resolves and invokes a named function from a given set of actions.
+
+This utility is ideal for scenarios where behavior depends on a dynamic string
+key — such as handling commands, user intents, or routing logic. It's especially
+useful in **React Router v7** route modules, where multiple named action
+handlers can be defined and invoked based on form submissions.
+
+- Type-safe: key checking with [isKeyOf](/snippets/key-of/)
+- Fallback support: Optional "default" action
+- Declarative: Replaces switch or if/else chains
+- React Router v7 ready: Clean action routing in loaders and actions
+
+```ts
+import { isKeyOf } from "./helpers.ts";
+
+type ActionRecord = Record<string, () => unknown>;
+
+export function namedAction<A extends ActionRecord>(
+  name: unknown,
+  actions: A,
+) {
+  if (name && isKeyOf(actions, name)) {
+    const actionFn = actions[name];
+    return actionFn() as ReturnType<A[keyof A]>;
+  }
+
+  if (isKeyOf(actions, "default")) {
+    return actions.default() as ReturnType<A[keyof A]>;
+  }
+
+  if (!name) {
+    throw new ReferenceError(
+      `Action name not found, try providing a "default" action.`,
+    );
+  }
+
+  throw new ReferenceError(
+    `Action "${name}" not found, try providing a "default" action.`,
+  );
+}
+```
+
+## Example usage
+
+### In React Router
+
+When handling a form or data mutation, you might receive an action name from a
+form submission and delegate it to the correct handler:
+
+```ts
+export async function action(
+  { request, params: { linkId } }: Route.ActionArgs,
+) {
+  const formData = await request.formData();
+  const intent = formData.get("intent")?.toString();
+
+  return namedAction(intent, {
+    async delete() {
+      const res = await api.record.$delete({ linkId });
+      return await res.json();
+    },
+    async favorite() {
+      const res = await api.record.favorites.$put({ linkId });
+      return await res.json();
+    },
+    async search() {
+      const search = formData.get("search");
+      const res = await api.record.search.$get({ search });
+      return await res.json();
+    },
+    default() {
+      throw redirect("/error-page");
+    },
+  });
+}
+```
+
+### Error Handling
+
+You can use it to map error codes to more user friendly messages
+
+```ts
+function getErrorMessage(code: number | undefined) {
+  return namedAction(code, {
+    400: () => "Bad request. Please check your input.",
+    401: () => "Unauthorized. Please log in.",
+    404: () => "Not found. The resource doesn't exist.",
+    500: () => "Server error. Please try again later.",
+    default: () => "Something went wrong. Try again.",
+  });
+}
+```
