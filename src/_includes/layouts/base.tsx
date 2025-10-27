@@ -31,12 +31,17 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
 function Header(props: Lume.Data) {
   return (
     <div className={cx("border-b border-cat-surface0")}>
-      <nav className="container hidden items-center justify-between gap-2 py-6 md:flex">
+      <div className="container hidden items-center justify-between gap-2 py-6 md:flex">
         <NavLogo />
-        <div className="flex items-center gap-1">
-          <ul className="flex items-center gap-2.5">
+        <nav className="flex items-center">
+          <ul className="flex items-center gap-4">
             <li>
-              <NavLink href="/#articles">Articles</NavLink>
+              <NavLink
+                href="/snippets/"
+                isActive={props.page.outputPath.includes("/snippets/")}
+              >
+                Snippets
+              </NavLink>
             </li>
             <li>
               <NavLink
@@ -46,19 +51,12 @@ function Header(props: Lume.Data) {
                 Bookmarks
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                href="/snippets/"
-                isActive={props.page.outputPath.includes("/snippets/")}
-                className="mr-3"
-              >
-                Snippets
-              </NavLink>
+            <li className="ml-2">
+              <ThemeSwitcher />
             </li>
           </ul>
-          <ThemeSwitcher />
-        </div>
-      </nav>
+        </nav>
+      </div>
       <MobileMenu media="(max-width: 768px)" />
     </div>
   );

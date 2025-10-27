@@ -16,7 +16,10 @@ export default function NavLogo() {
           "text-xl font-semibold transition-colors md:text-2xl",
         )}
       >
-        <span className="select-none text-4xl font-light text-cat-surface1 md:text-6xl">
+        <span
+          className="select-none text-4xl font-light text-cat-surface1 md:text-6xl"
+          aria-hidden="true"
+        >
           {"<"}
         </span>
         <span
@@ -28,7 +31,10 @@ export default function NavLogo() {
           <span>Francisco</span>
           <span>Veracoechea</span>
         </span>
-        <span className="select-none text-4xl font-light text-cat-surface1 md:text-6xl">
+        <span
+          className="select-none text-4xl font-light text-cat-surface1 md:text-6xl"
+          aria-hidden="true"
+        >
           {"/>"}
         </span>
       </h1>

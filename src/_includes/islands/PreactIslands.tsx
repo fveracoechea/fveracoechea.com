@@ -102,6 +102,7 @@ declare module "preact/jsx-runtime" {
       "preact-island": JSX.HTMLAttributes<HTMLElement> & {
         visible?: boolean | string;
         media?: string;
+        src?: string;
       };
     }
   }

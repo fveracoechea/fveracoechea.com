@@ -149,30 +149,12 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         onClick={() => saveTheme("DARK")}
         aria-checked={theme === "DARK"}
         className={cx(
-          "border-y",
-          fill && "flex-1 justify-center",
-          border === "base" ? "border-y-cat-surface1" : "border-cat-surface2",
-        )}
-      >
-        <Moon />
-      </IconButton>
-
-      <IconButton
-        role="radio"
-        rounded={false}
-        onKeyDown={onKeyDownHandler}
-        title="System theme"
-        active={theme === "SYSTEM"}
-        tabIndex={theme === "SYSTEM" ? 0 : -1}
-        onClick={() => saveTheme("SYSTEM")}
-        className={cx(
-          "rounded-tr rounded-br border",
+          "border-y border-r rounded-r",
           fill && "flex-1 justify-center",
           border === "base" ? "border-cat-surface1" : "border-cat-surface2",
         )}
-        aria-checked={theme === "SYSTEM"}
       >
-        <Computer />
+        <Moon />
       </IconButton>
     </div>
   );

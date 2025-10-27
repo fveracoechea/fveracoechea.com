@@ -44,7 +44,6 @@ export default function SnippetsLayout(props: Lume.Data) {
                     <a
                       href={path}
                       tabIndex={isActive ? -1 : 0}
-                      disabled={isActive}
                       className={cx(
                         "flex rounded-br rounded-tr px-4 py-2 pl-8 text-sm transition",
                         !isActive && [
@@ -88,18 +87,18 @@ export default function SnippetsLayout(props: Lume.Data) {
                 <a
                   href={path}
                   className={cx(
-                    "flex w-full flex-col px-6 py-4 text-cat-text transition",
-                    "hover:bg-cat-blue/10 active:ring-2 active:ring-cat-overlay2",
+                    "flex w-full flex-col px-6 gap-1 py-4 text-cat-text transition",
+                    "hover:bg-cat-surface0/80 active:ring-2 active:ring-cat-overlay2",
                     "focus-visible:ring-2 focus-visible:ring-cat-blue",
                     idx + 1 === snippets.length && "rounded-bl rounded-br",
                     idx === 0 && "rounded-lg-tl rounded-lg-tr",
                   )}
                 >
-                  <span className="font-medium transition-colors group-hover:text-cat-blue">
+                  <span className="font-medium transition-colors">
                     {title}
                   </span>
 
-                  <span className="text-sm text-cat-text transition-colors group-hover:text-cat-text">
+                  <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
                     {description}
                   </span>
                 </a>

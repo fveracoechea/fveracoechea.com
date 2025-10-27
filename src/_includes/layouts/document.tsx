@@ -20,6 +20,13 @@ export default function Document(props: Lume.Data) {
         <title>
           {isHomepage ? props.title : `${props.title} - Francisco Veracoechea`}
         </title>
+        
+        <link rel="preload" href="/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/FiraSans-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/FiraSans-Medium.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/FiraSans-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/FiraSans-MediumItalic.woff2" as="font" type="font/woff2" crossOrigin="" />
+        
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/theme.js" />
       </head>
