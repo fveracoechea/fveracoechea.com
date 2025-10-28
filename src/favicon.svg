@@ -1,1 +1,55 @@
-<svg width="102" height="102" viewBox="0 0 102 102" xmlns="http://www.w3.org/2000/svg"><mask id="satori_om-id"><rect x="0" y="0" width="102" height="102" fill="#fff"/></mask><path x="0" y="0" width="102" height="102" fill="rgb(30 30 46)" d="M51,0 h0 a51,51 0 0 1 51,51 v0 a51,51 0 0 1 -51,51 h0 a51,51 0 0 1 -51,-51 v0 a51,51 0 0 1 51,-51"/><clipPath id="satori_bct-id-0"><path d="M26.0 71.2L16.8 71.2L16.8 27.5L45.7 27.5L45.7 35.1L26.0 35.1L26.0 45.5L43.8 45.5L43.8 53.1L26.0 53.1L26.0 71.2ZM47.5 27.5L57.8 27.5L68.3 60.7L68.7 60.7L79.3 27.5L89.5 27.5L74.5 71.2L62.6 71.2L47.5 27.5Z "/></clipPath><defs><pattern id="satori_pattern_id-0_0" x="0" y="0" width="1" height="1" patternUnits="objectBoundingBox"><linearGradient id="satori_biid-0_0" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgb(137,180,250)"/><stop offset="100%" stop-color="rgb(203,166,247)"/></linearGradient><rect x="0" y="0" width="76" height="72" fill="url(#satori_biid-0_0)"/></pattern></defs><mask id="satori_om-id-0"><rect x="13" y="15" width="76" height="72" fill="#fff"/></mask><rect x="13" y="15" width="76" height="72" fill="url(#satori_pattern_id-0_0)" clip-path="url(#satori_bct-id-0)"/></svg>
+<svg
+  width="102"
+  height="102"
+  viewBox="0 0 102 102"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <mask id="satori_om-id"><rect
+      x="0"
+      y="0"
+      width="102"
+      height="102"
+      fill="#fff"
+    /></mask><path
+    x="0"
+    y="0"
+    width="102"
+    height="102"
+    fill="rgb(30 30 46)"
+    d="M51,0 h0 a51,51 0 0 1 51,51 v0 a51,51 0 0 1 -51,51 h0 a51,51 0 0 1 -51,-51 v0 a51,51 0 0 1 51,-51"
+  /><clipPath id="satori_bct-id-0"><path
+      d="M26.0 71.2L16.8 71.2L16.8 27.5L45.7 27.5L45.7 35.1L26.0 35.1L26.0 45.5L43.8 45.5L43.8 53.1L26.0 53.1L26.0 71.2ZM47.5 27.5L57.8 27.5L68.3 60.7L68.7 60.7L79.3 27.5L89.5 27.5L74.5 71.2L62.6 71.2L47.5 27.5Z "
+    /></clipPath><defs><pattern
+      id="satori_pattern_id-0_0"
+      x="0"
+      y="0"
+      width="1"
+      height="1"
+      patternUnits="objectBoundingBox"
+    ><linearGradient id="satori_biid-0_0" x1="0" y1="0" x2="1" y2="0"><stop
+          offset="0%"
+          stop-color="rgb(137,180,250)"
+        /><stop
+          offset="100%"
+          stop-color="rgb(203,166,247)"
+        /></linearGradient><rect
+        x="0"
+        y="0"
+        width="76"
+        height="72"
+        fill="url(#satori_biid-0_0)"
+      /></pattern></defs><mask id="satori_om-id-0"><rect
+      x="13"
+      y="15"
+      width="76"
+      height="72"
+      fill="#fff"
+    /></mask><rect
+    x="13"
+    y="15"
+    width="76"
+    height="72"
+    fill="url(#satori_pattern_id-0_0)"
+    clip-path="url(#satori_bct-id-0)"
+  />
+</svg>

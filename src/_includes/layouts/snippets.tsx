@@ -68,20 +68,16 @@ export default function SnippetsLayout(props: Lume.Data) {
 
   return (
     <>
-      <div className="max-w-xl py-10">
+      <div className="py-10">
         <article className="prose overflow-x-hidden">{props.children}</article>
       </div>
 
       <section className="pb-12">
         <nav>
-          <ul className="rounded border border-cat-surface0">
+          <ul>
             {snippets.map(({ outputPath, title, description, path }, idx) => (
               <li
-                className={cx(
-                  "group flex even:border-y even:border-cat-surface0",
-                  "transition-colors even:bg-cat-mantle",
-                  "last-of-type:rounded-bl last-of-type:rounded-br last-of-type:border-b-0",
-                )}
+                className="group flex rounded  transition-colors even:bg-cat-mantle"
                 key={outputPath}
               >
                 <a
@@ -89,9 +85,7 @@ export default function SnippetsLayout(props: Lume.Data) {
                   className={cx(
                     "flex w-full flex-col px-6 gap-1 py-4 text-cat-text transition",
                     "hover:bg-cat-surface0/80 active:ring-2 active:ring-cat-overlay2",
-                    "focus-visible:ring-2 focus-visible:ring-cat-blue",
-                    idx + 1 === snippets.length && "rounded-bl rounded-br",
-                    idx === 0 && "rounded-lg-tl rounded-lg-tr",
+                    "focus-visible:ring-2 focus-visible:ring-cat-blue rounded",
                   )}
                 >
                   <span className="font-medium transition-colors">

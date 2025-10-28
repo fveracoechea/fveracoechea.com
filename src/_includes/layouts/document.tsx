@@ -20,13 +20,43 @@ export default function Document(props: Lume.Data) {
         <title>
           {isHomepage ? props.title : `${props.title} - Francisco Veracoechea`}
         </title>
-        
-        <link rel="preload" href="/fonts/FiraCode-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <link rel="preload" href="/fonts/FiraSans-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <link rel="preload" href="/fonts/FiraSans-Medium.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <link rel="preload" href="/fonts/FiraSans-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <link rel="preload" href="/fonts/FiraSans-MediumItalic.woff2" as="font" type="font/woff2" crossOrigin="" />
-        
+
+        <link
+          rel="preload"
+          href="/fonts/FiraCode-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/FiraSans-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/FiraSans-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/FiraSans-SemiBold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/FiraSans-MediumItalic.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/theme.js" />
       </head>
@@ -39,13 +69,6 @@ export default function Document(props: Lume.Data) {
           )}
         />
         <div className="relative z-10">{children}</div>
-        <div
-          className={cx(
-            "absolute bottom-0 left-0 z-0 h-[30vh] w-full md:h-[20vh]",
-            "from-cat-base to-cat-crust",
-            "bg-gradient-to-b",
-          )}
-        />
         <script type="module" src="/main.js" />
       </body>
     </html>

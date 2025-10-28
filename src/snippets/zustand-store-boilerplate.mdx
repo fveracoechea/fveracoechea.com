@@ -1,0 +1,71 @@
+---
+title: Zustand Store Boilerplate
+order: 10
+description: Typed vanilla Zustand store + React and non-React examples.
+---
+
+# Zustand Store Boilerplate
+
+A small, typed pattern for a Zustand store with a clear split between state and
+actions.
+
+- Typed state + actions: Safer refactors and autocomplete
+- Devtools ready: Named instance for easy inspection
+- Selector friendly: Tiny slices keep renders fast
+- Extensible: Add slices, persist, or immer gradually
+
+```ts
+import { createStore, type StateCreator, useStore } from "zustand";
+import { devtools } from "zustand/middleware";
+
+export type MyStoreType = {
+  count: number;
+  actions: {
+    add(value: number): void;
+    subtract(value: number): void;
+  };
+};
+
+const creator: StateCreator<MyStoreType> = (set, get) => ({
+  count: 1,
+  actions: {
+    add(value) {
+      set({ count: get().count + value });
+    },
+    subtract(value) {
+      set({ count: get().count - value });
+    },
+  },
+});
+
+export const MyStore = createStore(devtools(creator, { name: "MY_STORE" }));
+
+export const useMyStore = <T>(selector: (s: MyStoreType) => T) =>
+  useStore(MyStore, selector);
+```
+
+## Example Usage
+
+### React hooks
+
+```tsx
+import { useMyStore } from "./path/to/store";
+
+export function Counter() {
+  const count = useMyStore((s) => s.count);
+  const { add, subtract } = useMyStore((s) => s.actions);
+  return; /** jsx */
+}
+```
+
+### Outsite React (clientLoader)
+
+Use the vanilla store directly in a React Router v7 `clientLoader` to initialize
+data before components render.
+
+```ts
+export async function clientLoader() {
+  MyStore.setState({ count: 5 });
+  return null;
+}
+```

@@ -18,6 +18,14 @@ const bookmarks: Bookmark[] = [
     ],
   },
   {
+    href: "https://www.epicweb.dev/talks/caching-for-cash",
+    tag: "performance",
+    text: [
+      "Caching for Cash",
+      "The fundamentals of caching including vocabulary, solid practices, general considerations, and recommendations",
+    ],
+  },
+  {
     href: "https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/",
     tag: "ai",
     text: [
@@ -30,7 +38,7 @@ const bookmarks: Bookmark[] = [
     tag: "ai",
     text: [
       "Coding should be a vibe!",
-      `The appeal of "vibe coding" appears to be based on the fact that many development environments are unpleasant to work with.`,
+      `The appeal of "vibe coding" appears to be based on the fact that many development environments are unpleasant to work with`,
     ],
   },
   {
@@ -175,20 +183,16 @@ const bookmarks: Bookmark[] = [
 export default function BookmarksLayout(props: Lume.Data) {
   return (
     <>
-      <div className="max-w-xl py-10">
+      <div className="py-10">
         <article className="prose overflow-x-hidden">{props.children}</article>
       </div>
 
       <section className="pb-14">
         <nav>
-          <ul className="rounded border border-cat-surface0">
+          <ul>
             {bookmarks.map(({ href, text, tag }, idx) => (
               <li
-                className={cx(
-                  "group flex even:border-y even:border-cat-surface0",
-                  "transition-colors even:bg-cat-mantle",
-                  "last-of-type:rounded-bl last-of-type:rounded-br last-of-type:border-b-0",
-                )}
+                className="group flex transition-colors even:bg-cat-mantle rounded"
                 key={href}
               >
                 <a
@@ -197,9 +201,7 @@ export default function BookmarksLayout(props: Lume.Data) {
                   className={cx(
                     "flex w-full flex-col px-6 py-4 gap-1 text-cat-text transition relateive",
                     "hover:bg-cat-surface0/80 active:ring-2 active:ring-cat-overlay2",
-                    "focus-visible:ring-2 focus-visible:ring-cat-blue",
-                    idx + 1 === bookmarks.length && "rounded-bl rounded-br",
-                    idx === 0 && "rounded-lg-tl rounded-lg-tr",
+                    "focus-visible:ring-2 focus-visible:ring-cat-blue rounded",
                   )}
                 >
                   <span className="flex gap-4 justify-between items-center">
