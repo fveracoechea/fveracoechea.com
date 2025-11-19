@@ -190,7 +190,7 @@ export default function BookmarksLayout(props: Lume.Data) {
       <section className="pb-14">
         <nav>
           <ul>
-            {bookmarks.map(({ href, text, tag }, idx) => (
+            {bookmarks.map(({ href, text, tag }) => (
               <li
                 className="group flex transition-colors even:bg-cat-mantle rounded"
                 key={href}
@@ -208,12 +208,12 @@ export default function BookmarksLayout(props: Lume.Data) {
                     <span className="font-medium transition-colors">
                       {text.at(0)}
                     </span>
-                    <span className="text-cat-subtext0 transition-colors text-sm rounded-xl px-2 border border-cat-surface1">
+                    <span className="text-cat-subtext1 transition-colors text-sm rounded-xl px-2 border border-cat-surface1">
                       {tag}
                     </span>
                   </span>
 
-                  <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
+                  <span className="text-sm text-cat-subtext1 transition-colors group-hover:text-cat-text">
                     {text.at(1)}
                   </span>
                 </a>

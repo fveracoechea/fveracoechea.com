@@ -11,9 +11,9 @@ function toTableOfContents(item: Lume.TocEntry): JSX.Element {
           href={`#${item.id}`}
           tabIndex={1}
           className={cx(
-            "flex py-1.5 text-sm transition text-cat-subtext0",
+            "flex py-1.5 text-sm transition text-cat-subtext1",
             "rounded-br rounded-tr",
-            "hover:bg-cat-overlay2/20 hover:text-cat-text",
+            "hover:bg-cat-overlay0/20 hover:text-cat-text",
             "active:ring-2 active:ring-cat-overlay2",
             "focus-visible:ring-2 focus-visible:ring-cat-overlay2",
             item.depth === 2 && "pl-8",
@@ -42,12 +42,12 @@ export default function BlogLayout(props: Lume.Data) {
 
           <section>
             <time
-              className="text-sm text-cat-subtext0"
+              className="text-sm text-cat-subtext1"
               dateTime={new Date(props.date).toString()}
             >
               {format(props.date, "PPPP")}
             </time>
-            <p className="m-0 text-sm text-cat-subtext0">{props.description}</p>
+            <p className="m-0 text-sm text-cat-subtext1">{props.description}</p>
             <img
               className="mx-0 mb-0 mt-4"
               src={props.image}
@@ -60,7 +60,7 @@ export default function BlogLayout(props: Lume.Data) {
       </article>
 
       <aside className="hidden flex-1 border-l border-cat-surface0 lg:block">
-        <nav className="flex flex-1 flex-col gap-4 py-10">
+        <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-8">
           <p className="text-md pl-8 font-semibold text-cat-text">
             On This Page
           </p>

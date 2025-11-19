@@ -57,6 +57,16 @@ preact-island {
   }
 }
 
+html.cat-latte .prose pre {
+  @apply bg-white;
+}
+html.cat-latte .prose pre code {
+  @apply bg-white;
+}
+html.cat-latte .prose pre code * {
+  @apply bg-white;
+}
+
 .prose {
   --tw-prose-body: theme(colors.cat-subtext1.DEFAULT);
   --tw-prose-headings: theme(colors.cat-text.DEFAULT);
@@ -64,7 +74,7 @@ preact-island {
   --tw-prose-counters: theme(colors.cat-blue.DEFAULT);
   --tw-prose-bullets: theme(colors.cat-blue.DEFAULT);
   --tw-prose-pre-bg: theme(colors.cat-mantle.DEFAULT);
-  --tw-prose-quotes: theme(colors.cat-subtext0.DEFAULT);
+  --tw-prose-quotes: theme(colors.cat-subtext1.DEFAULT);
   --tw-prose-quote-borders: theme(colors.cat-mauve.DEFAULT);
   --tw-prose-code: theme(colors.cat-maroon.DEFAULT);
   --tw-prose-links: theme(colors.cat-blue.DEFAULT);

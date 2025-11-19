@@ -26,7 +26,7 @@ const interests = [
 export default function HomeLayout(props: Lume.Data) {
   const { search } = props;
   return (
-    <div className="pb-12 pt-10">
+    <div className="pb-12 pt-8">
       <section class="flex flex-col items-center gap-8 rounded pb-20 md:flex-row md:pt-10">
         <div className="flex flex-1 flex-col gap-4">
           <h2 className="text-4xl !leading-[1.15] md:text-5xl">
@@ -51,7 +51,7 @@ export default function HomeLayout(props: Lume.Data) {
           {interests.map((x) => (
             <li key={x.label} className={cx("flex items-center text-left")}>
               <span className="p-2 text-2xl text-cat-overlay2">{x.icon}</span>
-              <span className="leading-none text-cat-subtext0">{x.label}</span>
+              <span className="leading-none text-cat-subtext1">{x.label}</span>
             </li>
           ))}
         </ul>

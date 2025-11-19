@@ -54,7 +54,7 @@ import { useMyStore } from "./path/to/store";
 export function Counter() {
   const count = useMyStore((s) => s.count);
   const { add, subtract } = useMyStore((s) => s.actions);
-  return; /** jsx */
+  return <div>{count}</div>;
 }
 ```
 

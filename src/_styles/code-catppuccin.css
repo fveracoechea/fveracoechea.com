@@ -36,7 +36,7 @@ code .hljs-char.escape_ {
   color: rgb(var(--ctp-green));
 }
 code .hljs-subst {
-  color: rgb(var(--ctp-subtext0));
+  color: rgb(var(--ctp-subtext1));
 }
 code .hljs-symbol {
   color: rgb(var(--ctp-flamingo));
@@ -63,7 +63,7 @@ code .hljs-params {
   color: rgb(var(--ctp-text));
 }
 code .hljs-comment {
-  color: rgb(var(--ctp-surface2));
+  color: rgb(var(--ctp-subtext0));
 }
 code .hljs-doctag {
   color: rgb(var(--ctp-red));

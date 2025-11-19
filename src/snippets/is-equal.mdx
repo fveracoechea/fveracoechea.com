@@ -1,0 +1,38 @@
+---
+order: 2
+title: "isEqual"
+description: Recursive deep equality comparison of plain objects, arrays, and privitive types.
+---
+
+# isEqual
+
+Performs a deep comparison between two values to determine if they are
+equivalent, supports objects, arrays, numbers, strings, booleans, null, and
+undefined.
+
+Relies on [isKeyOf](/snippets/key-of/) for object key comparison.
+
+```ts
+export function isEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  if (typeof a !== typeof b) return false;
+
+  if (Array.isArray(a)) {
+    if (!Array.isArray(b) || a.length !== b.length) return false;
+    return a.every((val, i) => isEqual(val, b[i]));
+  }
+
+  if (typeof a === "object" && typeof b === "object") {
+    const keysA = Object.keys(a);
+    const keysB = Object.keys(b);
+    if (keysA.length !== keysB.length) return false;
+    for (const key of keysA) {
+      if (!isKeyOf(b, key)) return false;
+      if (!isEqual(a[key], b[key])) return false;
+    }
+  }
+
+  return true;
+}
+```

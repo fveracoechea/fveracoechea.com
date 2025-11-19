@@ -1,5 +1,3 @@
-import { cx } from "cva";
-
 export default function Document(props: Lume.Data) {
   const { children } = props;
 
@@ -8,11 +6,7 @@ export default function Document(props: Lume.Data) {
   return (
     <html
       lang="en-US"
-      className={cx(
-        "bg-cat-crust scrollbar",
-        "scrollbar-track-cat-surface0 scrollbar-thumb-cat-overlay0",
-        "hover:scrollbar-thumb-cat-overlay2",
-      )}
+      className="bg-cat-crust scrollbar scrollbar-track-cat-surface0 scrollbar-thumb-cat-overlay0 hover:scrollbar-thumb-cat-overlay2"
     >
       <head>
         <meta charSet="UTF-8" />
@@ -60,14 +54,7 @@ export default function Document(props: Lume.Data) {
         <link rel="stylesheet" href="/styles.css" title="main-tailwindcss" />
         <script src="/theme.js" />
       </head>
-      <body className={cx("relative bg-cat-base text-cat-text")}>
-        <div
-          className={cx(
-            "absolute left-0 top-0 z-0 h-[30vh] w-full md:h-[20vh]",
-            "from-cat-crust to-cat-base",
-            "bg-gradient-to-b",
-          )}
-        />
+      <body className="relative bg-cat-base text-cat-text">
         <div className="relative z-10">{children}</div>
         <script type="module" src="/main.js" />
       </body>

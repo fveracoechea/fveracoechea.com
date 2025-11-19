@@ -1,9 +1,7 @@
 ---
 title: "isKeyOf"
 order: 1
-description:
-  Type guard. Determines whether an object has a property with the specified
-  name.
+description: Type guard. Determines whether an object has a property with the specified name.
 ---
 
 # isKeyOf
@@ -19,14 +17,14 @@ Uses
 under the hood.
 
 ```typescript
-function isKeyOf<R extends Record<PropertyKey, unknown>>(
+export function isKeyOf<R extends object>(
   record: R,
   key: unknown,
 ): key is keyof R {
+  const isValidKey = typeof key === "string" || typeof key === "number" ||
+    typeof key === "symbol";
   return (
-    (typeof key === "string" ||
-      typeof key === "number" ||
-      typeof key === "symbol") &&
+    isValidKey &&
     Object.prototype.hasOwnProperty.call(record, key)
   );
 }

@@ -18,11 +18,11 @@ export default function SnippetsLayout(props: Lume.Data) {
         </article>
 
         <aside className="hidden min-h-full flex-1 border-l border-cat-surface0 lg:block">
-          <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-10">
+          <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-8">
             <p className="text-md pl-8 font-semibold text-cat-text">
               Other snippets
             </p>
-            <ul className="flex flex-col text-sm text-cat-overlay2">
+            <ul className="flex flex-col text-sm text-cat-subtext1">
               {snippets.map(({ path, outputPath, title }) => {
                 const isActive = currentPath === outputPath;
                 return (
@@ -47,7 +47,7 @@ export default function SnippetsLayout(props: Lume.Data) {
                       className={cx(
                         "flex rounded-br rounded-tr px-4 py-2 pl-8 text-sm transition",
                         !isActive && [
-                          "group-hover:bg-cat-overlay2/20 group-hover:text-cat-text",
+                          "group-hover:bg-cat-overlay0/20 group-hover:text-cat-text",
                           "active:ring-2 active:ring-cat-overlay2",
                           "focus-visible:ring-2 focus-visible:ring-cat-overlay2",
                         ],
@@ -92,7 +92,7 @@ export default function SnippetsLayout(props: Lume.Data) {
                     {title}
                   </span>
 
-                  <span className="text-sm text-cat-subtext0 transition-colors group-hover:text-cat-text">
+                  <span className="text-sm text-cat-subtext1 transition-colors group-hover:text-cat-text">
                     {description}
                   </span>
                 </a>

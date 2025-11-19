@@ -19,7 +19,7 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
         "after:absolute after:h-[2px] after:w-0 after:rounded after:bg-cat-blue",
         "after:bottom-0 after:left-0 after:transition-all",
         props.isActive ? "text-cat-blue after:w-full" : [
-          "text-cat-subtext0 transition-colors hover:text-cat-blue hover:after:w-full",
+          "text-cat-text transition-colors hover:text-cat-blue hover:after:w-full",
           "focus-visible:ring-2 focus-visible:ring-cat-blue",
         ],
         props.className,
@@ -30,8 +30,8 @@ function NavLink(props: ComponentProps<"a"> & { isActive?: boolean }) {
 
 function Header(props: Lume.Data) {
   return (
-    <div className={cx("border-b border-cat-surface0")}>
-      <div className="container hidden items-center justify-between gap-2 py-6 md:flex">
+    <div className="border-b border-cat-surface0">
+      <header className="container hidden items-center justify-between gap-2 py-6 md:flex">
         <NavLogo />
         <nav className="flex items-center">
           <ul className="flex items-center gap-4">
@@ -56,7 +56,7 @@ function Header(props: Lume.Data) {
             </li>
           </ul>
         </nav>
-      </div>
+      </header>
       <MobileMenu media="(max-width: 768px)" />
     </div>
   );
