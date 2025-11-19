@@ -6,17 +6,72 @@ export default function UndrawProgramming() {
       viewBox="0 0 786.81995 572.25773"
       className="undraw"
     >
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translate(-8px, -15px); }
+          }
+
+          .floating {
+            animation: float 4s ease-in-out infinite;
+          }
+
+          @keyframes fadeSequence {
+            0% { opacity: 0; }
+            20% { opacity: 1; }   /* fade in */
+            80% { opacity: 1; }   /* stay visible */
+            100% { opacity: 0; }  /* fade out */
+          }
+
+          .code-1 {
+            animation: fadeSequence 2s ease-in-out 2s infinite;
+          }
+          .code-2 {
+            animation: fadeSequence 2s ease-out 2.2s infinite;
+          }
+          .code-3 {
+            animation: fadeSequence 2s ease-out 2.4s infinite;
+          }
+          .code-4 {
+            animation: fadeSequence 2s ease-out 2.6s infinite;
+          }
+          .code-5 {
+            animation: fadeSequence 2s ease-out 2.8s infinite;
+          }
+          .code-6 {
+            animation: fadeSequence 2s ease-out 3s infinite;
+          }
+          .code-7 {
+            animation: fadeSequence 2s ease-out 3.2s infinite;
+          }
+          .code-8 {
+            animation: fadeSequence 2s ease-out 3.4s infinite;
+          }
+        `}
+      </style>
       <circle
         cx="458.32136"
         cy="74.18162"
         r="26.70075"
-        className="fill-cat-peach"
+        data-slot="sun"
+        className="fill-cat-peach floating"
       />
       <path
         d="M872.03753,661.02307c39.6877-30.22889,58.64352-81.02546,46.77635-129.48234q-.44231-1.806-.93367-3.6038c-7.86742-28.76343-27.33167-56.10058-55.7-65.29129-23.81971-7.71694-49.81962-1.78274-74.66936-4.85149-48.78136-6.02417-86.60057-45.494-113.21115-86.81933-26.61064-41.32546-47.06182-87.58331-82.42157-121.72413-58.28479-56.27536-153.36192-68.39149-225.62671-31.76044C293.98673,254.12142,247.95487,335.39062,249.918,416.38554c1.96322,80.995,50.04632,158.43176,119.87492,199.517,25.65222,15.093,55.32138,25.78522,84.84826,22.04377,25.62011-3.24641,48.89908-17.01264,74.39861-21.09959,40.09115-6.42568,79.92687,11.70084,114.60268,32.82375,34.67571,21.12288,68.17007,46.15988,107.57436,55.95242C789.47831,715.13139,836.88051,687.80109,872.03753,661.02307Z"
         transform="translate(-206.59003 -163.87113)"
+        data-slot="background-shape"
         className="fill-cat-mantle"
-      />
+      >
+        <animateTransform
+          dur="3s"
+          type="translate"
+          attributeType="XML"
+          repeatCount="indefinite"
+          attributeName="transform"
+          values="-206.59003 -163.87113; -190 -155; -206.59003 -163.87113"
+        />
+      </path>
       <path
         d="M815.016,219.19108c-.87006-.58-1.75-1.13-2.62006-1.69a380.24008,380.24008,0,0,0-80.31-38.93l-6.54,90.22h-41.46v-103.39c-2.61-.54-5.24-1.05-7.87-1.53v104.92H626.94587A102.26992,102.26992,0,0,1,524.67595,166.5212v-.0001c-2.64.57-5.26,1.18-7.88,1.83v100.44h-40.13l-6.23-86.03a380.8581,380.8581,0,0,0-81.94,43.53c-.44.3-.88.61-1.31.91-2.21,1.55-4.39,3.13-6.56,4.73v344.19h118.27l-2.09-28.95-11.5-158.95h231.59l-11.5,158.95-2.09,28.95h116.96v-353.45Q817.65591,220.90114,815.016,219.19108Zm-298.22,142.78h-33.39l-6.17-85.3h39.56Zm159.42,0h-56.08v-1.69a6.17975,6.17975,0,0,0-6.19-6.18h-24.38a6.17757,6.17757,0,0,0-6.18,6.18v1.69h-58.71v-85.3h151.54Zm7.87,0v-85.3h40.89l-6.17,85.3Z"
         transform="translate(-206.59003 -163.87113)"
@@ -345,7 +400,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-1"
       />
       <rect
         x="548.15407"
@@ -353,7 +408,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-1"
       />
       <rect
         x="557.36892"
@@ -361,7 +416,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-1"
       />
       <rect
         x="524.47742"
@@ -369,7 +424,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-1"
       />
       <rect
         x="567.84144"
@@ -377,7 +432,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-1"
       />
       <rect
         x="524.30386"
@@ -385,7 +440,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-2"
       />
       <rect
         x="556.82687"
@@ -393,7 +448,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-2"
       />
       <rect
         x="566.04172"
@@ -401,7 +456,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-2"
       />
       <rect
         x="533.15023"
@@ -409,7 +464,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-2"
       />
       <rect
         x="576.51424"
@@ -417,7 +472,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-2"
       />
       <rect
         x="532.97666"
@@ -425,7 +480,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-3"
       />
       <rect
         x="565.49967"
@@ -433,7 +488,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-3"
       />
       <rect
         x="574.71453"
@@ -441,7 +496,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-3"
       />
       <rect
         x="541.82303"
@@ -449,7 +504,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-3"
       />
       <rect
         x="585.18704"
@@ -457,7 +512,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-3"
       />
       <rect
         x="541.64947"
@@ -465,7 +520,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-4"
       />
       <rect
         x="574.17248"
@@ -473,7 +528,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-4"
       />
       <rect
         x="583.38733"
@@ -481,7 +536,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-4"
       />
       <rect
         x="550.49583"
@@ -489,7 +544,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-4"
       />
       <rect
         x="548.15407"
@@ -497,7 +552,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-8"
       />
       <rect
         x="557.36892"
@@ -505,7 +560,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-8"
       />
       <rect
         x="567.84144"
@@ -513,7 +568,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-8"
       />
       <rect
         x="515.63106"
@@ -521,7 +576,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-8"
       />
       <rect
         x="524.47742"
@@ -529,7 +584,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-8"
       />
       <rect
         x="524.30386"
@@ -537,7 +592,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-7"
       />
       <rect
         x="556.82687"
@@ -545,7 +600,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="566.04172"
@@ -553,7 +608,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="533.15023"
@@ -561,7 +616,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-7"
       />
       <rect
         x="532.97666"
@@ -569,7 +624,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="565.49967"
@@ -577,7 +632,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="574.71453"
@@ -585,7 +640,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="541.82303"
@@ -593,7 +648,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-6"
       />
       <rect
         x="541.64947"
@@ -601,7 +656,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-5"
       />
       <rect
         x="574.17248"
@@ -609,7 +664,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-5"
       />
       <rect
         x="583.38733"
@@ -617,7 +672,7 @@ export default function UndrawProgramming() {
         width="5.96585"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-5"
       />
       <rect
         x="550.49583"
@@ -625,7 +680,7 @@ export default function UndrawProgramming() {
         width="20.79613"
         height="3.12216"
         rx="1.56108"
-        className="fill-white"
+        className="fill-white code-5"
       />
       <path
         d="M711.50727,654.35273l-13.34954-21.10162,41.902-33.40283,17.29534-19.16107a19.16138,19.16138,0,0,1,32.418,6.8279h0a19.16136,19.16136,0,0,1-11.57015,23.991l-27.3488,10.07535Z"
@@ -768,7 +823,7 @@ export default function UndrawProgramming() {
         cx="386.3965"
         cy="267.20052"
         r="44.55826"
-        className="cat-frappe  fill-cat-flamingo"
+        className="cat-frappe fill-cat-flamingo"
       />
       <path
         d="M653.21227,399.94791a3.75933,3.75933,0,0,0-2.69-1.19l.67-1.86a3.52769,3.52769,0,0,0-3.96-4.7l-2.44.47.23-1.63a3.53387,3.53387,0,0,0-4.73-3.82,3.76631,3.76631,0,0,1-3.24-.23,3.84647,3.84647,0,0,1-1.92-2.61005l-.85-4.1-.09-.22c-4.14-6.9-12.1-11.92-21.84-13.76-8.67005-1.65-17.56-.81-26.13-.02-3.4.32-7.24.68-10.44,2.64-2.72,1.68-5.02,5.04-4.55,8.43-8.45-2.59-17.51,2.58-22,9.1-5.32,7.76-6.19,17.48-6.33,25.08-.38,17.98,3.33,32.69,11,43.73.56.8.7,2.47,1.81,3.03l-.23-.37c1.24.62,2.5,1.62,2.03,2.69-1.35,3.08,7.62,9.89,13.94,12.14,11.53,4.11,26.86,3.76,37.64,2.28l.38-2.55c3.89-.53,6.63-1.54,7.4-3.12,1.36005-1.16,2.52-2.2,3.53-3.16l.01-.01c.02-.02.06-.05.08-.07,4.87-4.67,6-7.32995,6.51-11.37994.49-3.97-.38-8-1.27-11.63,18.74,2.9-7.38-19.96,10.08-24.38a5.434,5.434,0,0,1,.61-.15c.51-.12,1.02-.24,1.51-.38a26.44846,26.44846,0,0,0,6.72-2.87c4.88-2.97,6.49-6.91,9.01-11.35A3.42652,3.42652,0,0,0,653.21227,399.94791Z"
