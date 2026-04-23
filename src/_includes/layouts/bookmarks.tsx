@@ -10,6 +10,14 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://github.com/fveracoechea/ralph-opencode",
+    tag: "ai",
+    text: [
+      "Ralph agent loop for Opencode",
+      "An autonomous agent loop that runs AI via Opencode repeatedly until PRD items are complete",
+    ],
+  },
+  {
     href: "https://kyleshevlin.com/use-encapsulation/",
     tag: "react",
     text: [
