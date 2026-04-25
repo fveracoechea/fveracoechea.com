@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="en-US"
+  class="mocha bg-ctp-crust scrollbar scrollbar-track-ctp-surface0 scrollbar-thumb-ctp-surface2 hover:scrollbar-thumb-ctp-overlay2"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/FiraCode-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/FiraSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/FiraSans-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/FiraSans-SemiBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link
+      rel="preload"
+      href="/fonts/FiraSans-MediumItalic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <script>
+      var THEME = { DARK: "mocha", LIGHT: "latte", SYSTEM: "system-theme" };
+      var theme = localStorage.getItem("theme");
+      var html = document.querySelector("html");
+      html.classList.remove("mocha", "latte", "system-theme");
+      if (theme === THEME.DARK || theme === THEME.LIGHT || theme === THEME.SYSTEM) {
+        html.classList.add(theme);
+      } else {
+        localStorage.setItem("theme", THEME.SYSTEM);
+        html.classList.add(THEME.SYSTEM);
+      }
+    </script>
+  </head>
+  <body class="relative bg-ctp-base text-ctp-text">
+    <div id="app"></div>
+    <script prerender type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
