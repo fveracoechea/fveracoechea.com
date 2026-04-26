@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "skills": {
+    "Bun": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "e81aa6ae97fdbc21cbccdbee38e0f314171fe8d7a09c5fdda72b82095cf4b9fa"
+    },
+    "agent-browser": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "6f68d01b14796e410746fab39c2d6b36dcfa030dd59eb772f6418e2db949a16c"
+    },
+    "better-auth-best-practices": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "a4c830509e85557b59339d8d93a4e243e9e59c686e7678854d39230e12c2a6dc"
+    },
+    "better-auth-security-best-practices": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "7a230edf3a24ce18162cb4379f59b6a19b8d24ca04db530609d0f15cede556dc"
+    },
+    "design-an-interface": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "885b05367fb1cf61a1e27e0d50f14d2502a05c1fa276c6e9ea050ce6a90e7095"
+    },
+    "edit-article": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "6d29872a4015fcbb4879fe1bddf1919995c477dcf7248885efb85722f50e6c4d"
+    },
+    "frontend-design": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "grill-me": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "784f0dbb7403b0f00324bce9a112f715342777a0daee7bbb7385f9c6f0a170ea"
+    },
+    "improve-codebase-architecture": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "76d07c4c0bebc162cc76ca7494bfe7a90e279f35832f7ce6dfc4ce16518fd560"
+    },
+    "react-router-framework-mode": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "26c5bdac2f686c47eb4c4b48b6cb52401cde1dc833e6d26408ddfb22ea83c5ca"
+    },
+    "request-refactor-plan": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "176cf1d0c4dc4fc4d958c4bc4ed67f222f2656bda2f3f15e3a3e98b2e5edaf2f"
+    },
+    "tdd": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ad055544599481182d0079c4198e85da26677cb408a677be2da04915375f0427"
+    },
+    "to-issues": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "2db47f0db7e6975486cd28bc6744f1358b47a434fb98df5b6ad507b6c3685b6a"
+    },
+    "to-prd": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "8351452ad372ea4f839d3f7b951927b417851ffa49e7e6af28ea0f0ae111dca8"
+    },
+    "triage-issue": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "6834b87393bff8f529b3126b9f761c1c2b9706af8a784ad1061961c34bbdb4a9"
+    },
+    "turborepo": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ef0b9f7c7301696e51d9a559b9fdc2bdcc2d1417ae57f82319a1c558994c2aba"
+    },
+    "ubiquitous-language": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "32f8a3426cb2d2c3db05977369e70d793e342c38ea87f5447eb22108c03c8d7a"
+    },
+    "vercel-composition-patterns": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07"
+    },
+    "vercel-react-best-practices": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "3219a1944e404ffc14d1d9d6aef6dd2e3855b81387ee0a044ccbfe14d34c2357"
+    },
+    "write-a-skill": {
+      "source": "fveracoechea/agent-skills",
+      "sourceType": "github",
+      "computedHash": "b44d8aab2ead83c716e01af4c9a24ccc4575ce70ad58ec4f1749fb88c9cc82ba"
+    }
+  }
+}

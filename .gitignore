@@ -38,4 +38,6 @@ yarn-error.log*
 _site
 _bin
 _cache
-# deno.lock
+dist
+.content-collections
+bun.lock
