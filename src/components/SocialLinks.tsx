@@ -1,7 +1,7 @@
-import { cva, type VariantProps } from "cva";
+import { cva, type VariantProps } from "cva"
 
-import { IconButton } from "./IconButton";
-import { Github, Linkedin, RSS } from "./Icons";
+import { IconButton } from "./IconButton"
+import { Github, Linkedin, RSS } from "./Icons"
 
 const list = cva("not-prose flex", {
   variants: {
@@ -11,23 +11,18 @@ const list = cva("not-prose flex", {
       lg: "gap-2.5 text-2xl",
     },
   },
-});
+})
 
-type Props = VariantProps<typeof list> & { className?: string };
+type Props = VariantProps<typeof list> & { className?: string }
 
 export default function SocialLinks(props: Props) {
-  const { size = "sm", className } = props;
-  const listClasname = list({ size, className });
+  const { size = "sm", className } = props
+  const listClasname = list({ size, className })
 
   return (
     <ul className={listClasname}>
       <li className="justify-self-end">
-        <IconButton
-          as="a"
-          title="Github"
-          target="_blank"
-          href="https://github.com/fveracoechea"
-        >
+        <IconButton as="a" title="Github" target="_blank" href="https://github.com/fveracoechea">
           <Github />
         </IconButton>
       </li>
@@ -47,5 +42,5 @@ export default function SocialLinks(props: Props) {
         </IconButton>
       </li>
     </ul>
-  );
+  )
 }

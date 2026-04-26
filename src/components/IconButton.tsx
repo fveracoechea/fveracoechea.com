@@ -1,5 +1,5 @@
-import { cva } from "cva";
-import { ComponentProps } from "preact";
+import { cva } from "cva"
+import type { ComponentType } from "preact"
 
 const iconButton = cva(
   [
@@ -21,19 +21,19 @@ const iconButton = cva(
       },
     },
   },
-);
+)
 
-type Root = "a" | "button" | "label";
+type Root = "a" | "button" | "label"
 
-type IconButtonProps<R extends Root> = ComponentProps<R> & {
-  as?: Root;
-  active?: boolean;
-  rounded?: boolean;
-};
+type IconButtonProps = {
+  as?: Root
+  active?: boolean
+  rounded?: boolean
+  className?: string
+  children?: preact.ComponentChildren
+} & Record<string, unknown>
 
-export function IconButton<R extends Root = "button">(
-  props: IconButtonProps<R>,
-) {
+export function IconButton(props: IconButtonProps) {
   const {
     children,
     as,
@@ -41,9 +41,9 @@ export function IconButton<R extends Root = "button">(
     active = false,
     rounded = true,
     ...otherProps
-  } = props as IconButtonProps<"button">;
+  } = props
 
-  const Element = (as ?? "button") as "button";
+  const Element = (as ?? "button") as unknown as ComponentType<Record<string, unknown>>
 
   return (
     <Element
@@ -56,5 +56,5 @@ export function IconButton<R extends Root = "button">(
     >
       {children}
     </Element>
-  );
+  )
 }

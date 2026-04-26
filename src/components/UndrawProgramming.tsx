@@ -841,5 +841,5 @@ export default function UndrawProgramming() {
         opacity="0.2"
       />
     </svg>
-  );
+  )
 }

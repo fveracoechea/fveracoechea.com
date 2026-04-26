@@ -1,17 +1,20 @@
-import { cx } from "cva";
-import { LocationProvider, Route, Router } from "preact-iso/router";
+import { cx } from "cva"
+import { LocationProvider, Route, Router } from "preact-iso/router"
 
-import MobileMenu from "./components/MobileMenu.tsx";
-import NavLogo from "./components/NavLogo.tsx";
-import SocialLinks from "./components/SocialLinks.tsx";
-import ThemeSwitcher from "./components/ThemeSwitcher.tsx";
+import MobileMenu from "./components/MobileMenu.tsx"
+import NavLogo from "./components/NavLogo.tsx"
+import SocialLinks from "./components/SocialLinks.tsx"
+import ThemeSwitcher from "./components/ThemeSwitcher.tsx"
+import BlogPost from "./pages/BlogPost.tsx"
+import Bookmarks from "./pages/Bookmarks.tsx"
+import Home from "./pages/Home.tsx"
+import NotFound from "./pages/NotFound.tsx"
+import SnippetDetail from "./pages/SnippetDetail.tsx"
+import SnippetsIndex from "./pages/SnippetsIndex.tsx"
 
-import Home from "./pages/Home.tsx";
-import NotFound from "./pages/NotFound.tsx";
+export const FULL_HEIGHT = "FULL_HEIGHT"
 
-export const FULL_HEIGHT = "FULL_HEIGHT";
-
-function NavLink(props: preact.JSX.HTMLAttributes<HTMLAnchorElement> & { isActive?: boolean }) {
+function NavLink(props: preact.JSX.AnchorHTMLAttributes<HTMLAnchorElement> & { isActive?: boolean }) {
   return (
     <a
       {...props}
@@ -19,14 +22,16 @@ function NavLink(props: preact.JSX.HTMLAttributes<HTMLAnchorElement> & { isActiv
         "relative rounded px-2 py-2.5 font-medium",
         "after:absolute after:h-[2px] after:w-0 after:rounded after:bg-ctp-blue",
         "after:bottom-0 after:left-0 after:transition-all",
-        props.isActive ? "text-ctp-blue after:w-full" : [
-          "text-ctp-text transition-colors hover:text-ctp-blue hover:after:w-full",
-          "focus-visible:ring-2 focus-visible:ring-ctp-blue",
-        ],
+        props.isActive
+          ? "text-ctp-blue after:w-full"
+          : [
+              "text-ctp-text transition-colors hover:text-ctp-blue hover:after:w-full",
+              "focus-visible:ring-2 focus-visible:ring-ctp-blue",
+            ],
         props.className,
       )}
     />
-  );
+  )
 }
 
 function Header() {
@@ -50,7 +55,7 @@ function Header() {
       </header>
       <MobileMenu media="(max-width: 768px)" />
     </div>
-  );
+  )
 }
 
 function Footer() {
@@ -65,11 +70,12 @@ function Footer() {
         <SocialLinks size="sm" />
       </div>
     </footer>
-  );
+  )
 }
 
 export function App({ url }: { url?: string }) {
   return (
+    // @ts-expect-error - preact-iso LocationProvider accepts url at runtime but not in types
     <LocationProvider url={url}>
       <Header />
       <div
@@ -82,6 +88,10 @@ export function App({ url }: { url?: string }) {
           <main className={FULL_HEIGHT}>
             <Router>
               <Route path="/" component={Home} />
+              <Route path="/blog/:slug" component={BlogPost} />
+              <Route path="/snippets" component={SnippetsIndex} />
+              <Route path="/snippets/:slug" component={SnippetDetail} />
+              <Route path="/bookmarks" component={Bookmarks} />
               <Route default component={NotFound} />
             </Router>
           </main>
@@ -89,5 +99,5 @@ export function App({ url }: { url?: string }) {
       </div>
       <Footer />
     </LocationProvider>
-  );
+  )
 }

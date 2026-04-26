@@ -1,4 +1,4 @@
-import { cx } from "cva";
+import { cx } from "cva"
 
 export default function NavLogo() {
   return (
@@ -39,5 +39,5 @@ export default function NavLogo() {
         </span>
       </h1>
     </a>
-  );
+  )
 }

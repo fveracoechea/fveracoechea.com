@@ -1,30 +1,30 @@
-import { cx } from "cva";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { cx } from "cva"
+import { useEffect, useRef, useState } from "preact/hooks"
 
-import { withIsland } from "../lib/preact-islands";
-import { IconButton } from "./IconButton";
-import { Computer, Moon, Sun } from "./Icons";
+import { withIsland } from "../lib/preact-islands"
+import { IconButton } from "./IconButton"
+import { Moon, Sun } from "./Icons"
 
 const THEME = {
   DARK: "mocha",
   LIGHT: "latte",
   SYSTEM: "system-theme",
-} as const;
+} as const
 
-type Theme = keyof typeof THEME;
+type Theme = keyof typeof THEME
 
 function checkRadio(element: HTMLButtonElement) {
-  element.tabIndex = 0;
-  element.setAttribute("aria-checked", "true");
-  element.focus();
+  element.tabIndex = 0
+  element.setAttribute("aria-checked", "true")
+  element.focus()
   // We click it to "check", so that the radio change event fires.
-  element.click();
+  element.click()
 }
 
 function uncheckRadio(element: HTMLButtonElement) {
-  element.tabIndex = -1;
-  element.setAttribute("aria-checked", "false");
-  element.blur();
+  element.tabIndex = -1
+  element.setAttribute("aria-checked", "false")
+  element.blur()
 }
 
 /**
@@ -32,15 +32,12 @@ function uncheckRadio(element: HTMLButtonElement) {
  * uncheck the previously focused button, and check the newly focused button.
  * If focus is on the first button, focus moves to the last button.
  */
-function checkPrevious(
-  collection: HTMLButtonElement[],
-  element: HTMLButtonElement,
-) {
-  const idx = collection.indexOf(element);
-  const previous = collection.at(idx - 1);
+function checkPrevious(collection: HTMLButtonElement[], element: HTMLButtonElement) {
+  const idx = collection.indexOf(element)
+  const previous = collection.at(idx - 1)
   if (previous) {
-    uncheckRadio(element);
-    checkRadio(previous);
+    uncheckRadio(element)
+    checkRadio(previous)
   }
 }
 
@@ -49,42 +46,39 @@ function checkPrevious(
  * uncheck the previously focused button, and check the newly focused button.
  * If focus is on the last button, focus moves to the first button.
  */
-function checkNext(
-  collection: HTMLButtonElement[],
-  element: HTMLButtonElement,
-) {
-  const idx = collection.indexOf(element);
-  const next = collection.at(idx >= collection.length - 1 ? 0 : idx + 1);
+function checkNext(collection: HTMLButtonElement[], element: HTMLButtonElement) {
+  const idx = collection.indexOf(element)
+  const next = collection.at(idx >= collection.length - 1 ? 0 : idx + 1)
   if (next) {
-    uncheckRadio(element);
-    checkRadio(next);
+    uncheckRadio(element)
+    checkRadio(next)
   }
 }
 
 function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
-  const { fill = false, border = "base" } = props;
-  const [theme, setTheme] = useState<Theme | null>(null);
-  const radiogroupRef = useRef<HTMLDivElement | null>(null);
+  const { fill = false, border = "base" } = props
+  const [theme, setTheme] = useState<Theme | null>(null)
+  const radiogroupRef = useRef<HTMLDivElement | null>(null)
 
   function saveTheme(t: Theme) {
-    setTheme(t);
+    setTheme(t)
     for (const key in THEME) {
-      if (Object.prototype.hasOwnProperty.call(THEME, key)) {
-        document.querySelector("html")?.classList.remove(THEME[key as Theme]);
+      if (Object.hasOwn(THEME, key)) {
+        document.querySelector("html")?.classList.remove(THEME[key as Theme])
       }
     }
-    document.querySelector("html")?.classList.add(THEME[t]);
-    localStorage.setItem("theme", THEME[t]);
+    document.querySelector("html")?.classList.add(THEME[t])
+    localStorage.setItem("theme", THEME[t])
   }
 
   function onKeyDownHandler(e: KeyboardEvent) {
-    const target = e.currentTarget;
-    if (!(target instanceof HTMLButtonElement)) return;
-    if (!radiogroupRef.current) return;
+    const target = e.currentTarget
+    if (!(target instanceof HTMLButtonElement)) return
+    if (!radiogroupRef.current) return
 
     const collection = Array.from<HTMLButtonElement>(
       radiogroupRef.current.querySelectorAll('button[role="radio"]'),
-    );
+    )
 
     const cases: Record<string, () => void> = {
       ArrowUp: () => checkPrevious(collection, target),
@@ -93,27 +87,27 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
       ArrowRight: () => checkNext(collection, target),
       " ": () => checkRadio(target),
       Enter: () => checkRadio(target),
-    };
+    }
 
-    const action = cases[e.key];
+    const action = cases[e.key]
 
     if (action) {
-      e.preventDefault();
-      action();
+      e.preventDefault()
+      action()
     }
   }
 
   useEffect(function loadTheme() {
-    const theme = localStorage.getItem("theme");
+    const theme = localStorage.getItem("theme")
     switch (theme) {
       case THEME.DARK:
-        return setTheme("DARK");
+        return setTheme("DARK")
       case THEME.LIGHT:
-        return setTheme("LIGHT");
+        return setTheme("LIGHT")
       case THEME.SYSTEM:
-        return setTheme("SYSTEM");
+        return setTheme("SYSTEM")
     }
-  }, []);
+  }, [])
 
   return (
     <div
@@ -157,7 +151,7 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
         <Moon />
       </IconButton>
     </div>
-  );
+  )
 }
 
-export default withIsland(ThemeSwitcher, "ThemeSwitcher");
+export default withIsland(ThemeSwitcher, "ThemeSwitcher")

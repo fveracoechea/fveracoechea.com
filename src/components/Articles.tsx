@@ -1,21 +1,18 @@
-import { cx } from "cva";
-import { format } from "date-fns";
+import { cx } from "cva"
+import { format } from "date-fns"
 
-function Articles(props: { posts: { url: string; title: string; image: string; description: string; date: string }[] }) {
+function Articles(props: {
+  posts: { url: string; title: string; image: string; description: string; date: string }[]
+}) {
   return (
     <section id="articles">
-      <h3 className="mb-6 border-b-ctp-surface1 text-2xl font-semibold">
-        Articles
-      </h3>
+      <h3 className="mb-6 border-b-ctp-surface1 text-2xl font-semibold">Articles</h3>
 
       <div className="grid grid-cols-1 gap-10">
         {props.posts.map((post) => {
           return (
             <a href={post.url} className="w-full">
-              <article
-                key={post.url}
-                className="group flex flex-col gap-6 md:flex-row"
-              >
+              <article key={post.url} className="group flex flex-col gap-6 md:flex-row">
                 <figure className="w-80">
                   <img
                     src={post.image}
@@ -43,20 +40,16 @@ function Articles(props: { posts: { url: string; title: string; image: string; d
                   >
                     {post.title}
                   </h4>
-                  <p className="text-sm text-ctp-subtext1">
-                    {format(post.date, "PPP")}
-                  </p>
-                  <p className="text-base text-ctp-subtext1">
-                    {post.description}
-                  </p>
+                  <p className="text-sm text-ctp-subtext1">{format(post.date, "PPP")}</p>
+                  <p className="text-base text-ctp-subtext1">{post.description}</p>
                 </figcaption>
               </article>
             </a>
-          );
+          )
         })}
       </div>
     </section>
-  );
+  )
 }
 
-export default Articles;
+export default Articles

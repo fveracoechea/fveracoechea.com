@@ -2,6 +2,6 @@ export const THEME = {
   DARK: "mocha",
   LIGHT: "latte",
   SYSTEM: "system-theme",
-} as const;
+} as const
 
-export type Theme = keyof typeof THEME;
+export type Theme = keyof typeof THEME

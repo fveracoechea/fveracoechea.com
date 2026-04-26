@@ -1,10 +1,10 @@
-import type { FunctionalComponent } from "preact";
-import hydrate from "preact-iso/hydrate";
+import type { FunctionalComponent } from "preact"
+import hydrate from "preact-iso/hydrate"
 
-import { IslandProps, IslandsConfig, ObjectAny } from "../types/islands.ts";
+import type { IslandProps, IslandsConfig, ObjectAny } from "../types/islands.ts"
 
 export function isBrowser() {
-  return typeof document !== "undefined";
+  return typeof document !== "undefined"
 }
 
 export function isKeyOf<R extends Record<PropertyKey, unknown>>(
@@ -12,11 +12,9 @@ export function isKeyOf<R extends Record<PropertyKey, unknown>>(
   key: unknown,
 ): key is keyof R {
   return (
-    (typeof key === "string" ||
-      typeof key === "number" ||
-      typeof key === "symbol") &&
-    Object.prototype.hasOwnProperty.call(record, key)
-  );
+    (typeof key === "string" || typeof key === "number" || typeof key === "symbol") &&
+    Object.hasOwn(record, key)
+  )
 }
 
 export function withIsland<S, Props extends ObjectAny>(
@@ -24,41 +22,42 @@ export function withIsland<S, Props extends ObjectAny>(
   src: S extends IslandsConfig ? keyof S : string,
 ) {
   return (props: Props & IslandProps) => {
-    const { visible, media, ...runTimeProps } = props;
-    if (isBrowser()) return <Component {...(runTimeProps as Props)} />;
+    const { visible, media, ...runTimeProps } = props
+    if (isBrowser()) return <Component {...(runTimeProps as Props)} />
 
     return (
       <preact-island src={String(src)} visible={visible} media={media}>
         <Component {...(runTimeProps as Props)} />
       </preact-island>
-    );
-  };
+    )
+  }
 }
 
 export function registerIslands<C extends IslandsConfig>(config: C) {
-  if (!isBrowser()) return;
+  if (!isBrowser()) return
 
   customElements.define(
     "preact-island",
     class PreactIsland extends HTMLElement {
-      static config: IslandsConfig = config;
+      static config: IslandsConfig = config
 
       async connectedCallback() {
-        const src = this.getAttribute("src");
+        const src = this.getAttribute("src")
 
         if (!isKeyOf(PreactIsland.config, src)) {
-          throw new Error(`${src} is not a registered island`);
+          throw new Error(`${src} is not a registered island`)
         }
 
         if (this.hasAttribute("media")) {
-          await this.media(this.getAttribute("media")!);
+          await this.media(this.getAttribute("media")!)
         }
 
-        if (this.hasAttribute("visible")) await this.visible();
+        if (this.hasAttribute("visible")) await this.visible()
 
-        const load = PreactIsland.config[src];
-        const Component = await load();
-        hydrate(<Component.default />, this);
+        const load = PreactIsland.config[src]
+        if (!load) throw new Error(`${src} loader is undefined`)
+        const Component = await load()
+        hydrate(<Component.default />, this)
       }
 
       visible() {
@@ -66,41 +65,41 @@ export function registerIslands<C extends IslandsConfig>(config: C) {
           const observer = new IntersectionObserver((entries) => {
             for (const entry of entries) {
               if (entry.isIntersecting) {
-                observer.disconnect();
-                resolve(true);
+                observer.disconnect()
+                resolve(true)
               }
             }
-          });
-          observer.observe(this);
-        });
+          })
+          observer.observe(this)
+        })
       }
 
       media(query: string) {
-        const mediaQuery = globalThis.matchMedia(query);
+        const mediaQuery = globalThis.matchMedia(query)
 
         return new Promise((resolve) => {
           function mediaListener(e: MediaQueryListEvent) {
-            if (!e.matches) return;
-            resolve(true);
-            mediaQuery.removeEventListener("change", mediaListener);
+            if (!e.matches) return
+            resolve(true)
+            mediaQuery.removeEventListener("change", mediaListener)
           }
 
-          if (mediaQuery.matches) resolve(true);
-          else mediaQuery.addEventListener("change", mediaListener);
-        });
+          if (mediaQuery.matches) resolve(true)
+          else mediaQuery.addEventListener("change", mediaListener)
+        })
       }
     },
-  );
+  )
 }
 
 declare module "preact/jsx-runtime" {
   namespace JSX {
     interface IntrinsicElements {
       "preact-island": JSX.HTMLAttributes<HTMLElement> & {
-        visible?: boolean | string;
-        media?: string;
-        src?: string;
-      };
+        visible?: boolean | string
+        media?: string
+        src?: string
+      }
     }
   }
 }
