@@ -47,7 +47,7 @@ export function computeContent(
   const postBySlug = new Map(publishedPosts.map((p) => [p.slug, p]))
   const postByUrl = new Map(publishedPosts.map((p) => [p.url, p]))
 
-  const sortedSnippets = [...rawSnippets].sort((a, b) => a.order - b.order)
+  const sortedSnippets = [...rawSnippets].sort((a, b) => b.order - a.order)
   const snippetBySlug = new Map(sortedSnippets.map((s) => [s.slug, s]))
   const snippetByUrl = new Map(sortedSnippets.map((s) => [s.url, s]))
 
