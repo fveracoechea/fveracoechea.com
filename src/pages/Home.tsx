@@ -1,25 +1,17 @@
-import { cx } from "cva"
-
 import Articles from "../components/Articles.tsx"
-import { BarChart, Gauge, Layers, Person } from "../components/Icons.tsx"
+import { BarChart, Blocks, Brain, Gauge, Layers, Person } from "../components/Icons.tsx"
+import { InterestsCards } from "../components/Interests.tsx"
 import SocialLinks from "../components/SocialLinks.tsx"
 import UndrawProgramming from "../components/UndrawProgramming.tsx"
 import { articles } from "../lib/content"
 
 const interests = [
-  {
-    icon: <Gauge />,
-    label: "Web Performance",
-  },
-  {
-    icon: <Layers />,
-    label: "Fronted Architecture",
-  },
-  {
-    icon: <Person />,
-    label: "Accessible Interfaces",
-  },
+  { icon: <Gauge />, label: "Web Performance" },
+  { icon: <Layers />, label: "Frontend Architecture" },
+  { icon: <Person />, label: "Accessible Interfaces" },
   { icon: <BarChart />, label: "Data visualizations" },
+  { icon: <Brain />, label: "AI-assisted Engineering" },
+  { icon: <Blocks />, label: "Design Systems" },
 ]
 
 export default function Home() {
@@ -41,19 +33,12 @@ export default function Home() {
 
       <section className="flex flex-col gap-4 pb-20">
         <p className="text-lg font-semibold">Hello there</p>
-        <p className=" text-lg">
+        <p className="text-lg">
           I'm Francisco, a software engineer specialized in web technologies, who really enjoys
           figuring out technical challenges, learning, research, and loves building{" "}
           <b>performant</b> and <b>polished</b> user interfaces.
         </p>
-        <ul className={cx("flex flex-wrap gap-2 text-sm md:gap-8 md:text-base")}>
-          {interests.map((x) => (
-            <li key={x.label} className={cx("flex items-center text-left")}>
-              <span className="p-2 text-2xl text-ctp-overlay2">{x.icon}</span>
-              <span className="leading-none text-ctp-subtext1">{x.label}</span>
-            </li>
-          ))}
-        </ul>
+        <InterestsCards interests={interests} />
       </section>
 
       <Articles posts={articles} />
