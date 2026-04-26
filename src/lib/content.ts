@@ -1,10 +1,10 @@
 import { allPosts, allSnippets } from "content-collections"
-import { computeContent, type RawPost, type RawSnippet, SITE } from "./content-logic"
+import { computeContent, SITE } from "./content-logic"
+import type { Post, Snippet } from "./schemas"
 
+export type { Post, Snippet }
 export { SITE }
 
-export type Post = (typeof allPosts)[number]
-export type Snippet = (typeof allSnippets)[number]
 export type ArticleCard = {
   url: string
   title: string
@@ -13,14 +13,10 @@ export type ArticleCard = {
   date: string
 }
 
-const computed = computeContent(
-  allPosts as unknown as readonly RawPost[],
-  allSnippets as unknown as readonly RawSnippet[],
-  SITE,
-)
+const computed = computeContent(allPosts, allSnippets, SITE)
 
-export const posts: readonly Post[] = computed.posts.published as readonly Post[]
-export const snippets: readonly Snippet[] = computed.snippets.sorted as readonly Snippet[]
+export const posts: readonly Post[] = computed.posts.published
+export const snippets: readonly Snippet[] = computed.snippets.sorted
 
 export const articles: readonly ArticleCard[] = posts.map((p) => ({
   url: p.url,
@@ -31,11 +27,11 @@ export const articles: readonly ArticleCard[] = posts.map((p) => ({
 }))
 
 export function getPost(slug: string): Post | undefined {
-  return computed.posts.bySlug.get(slug) as Post | undefined
+  return computed.posts.bySlug.get(slug)
 }
 
 export function getSnippet(slug: string): Snippet | undefined {
-  return computed.snippets.bySlug.get(slug) as Snippet | undefined
+  return computed.snippets.bySlug.get(slug)
 }
 
 export function getPostRoutes(): string[] {
@@ -51,7 +47,7 @@ export function getHeadMeta(url: string): { title: string; description: string; 
 }
 
 export function getFeedPosts(limit?: number): Post[] {
-  return computed.posts.feedPosts(limit) as Post[]
+  return computed.posts.feedPosts(limit)
 }
 
 export function getSitemapUrls(): string[] {

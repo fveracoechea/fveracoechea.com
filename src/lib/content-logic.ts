@@ -1,39 +1,23 @@
+import type { Post, Snippet } from "./schemas"
+
 export interface SiteConfig {
   url: string
   title: string
   description: string
 }
 
-export interface RawPost {
-  slug: string
-  url: string
-  title: string
-  description: string
-  image: string
-  date?: string
-  published: boolean
-}
-
-export interface RawSnippet {
-  slug: string
-  url: string
-  title: string
-  description: string
-  order: number
-}
-
 export interface Content {
   readonly posts: {
-    readonly published: readonly RawPost[]
-    readonly bySlug: ReadonlyMap<string, RawPost>
-    readonly byUrl: ReadonlyMap<string, RawPost>
+    readonly published: readonly Post[]
+    readonly bySlug: ReadonlyMap<string, Post>
+    readonly byUrl: ReadonlyMap<string, Post>
     readonly routes: readonly string[]
-    readonly feedPosts: (limit?: number) => RawPost[]
+    readonly feedPosts: (limit?: number) => Post[]
   }
   readonly snippets: {
-    readonly sorted: readonly RawSnippet[]
-    readonly bySlug: ReadonlyMap<string, RawSnippet>
-    readonly byUrl: ReadonlyMap<string, RawSnippet>
+    readonly sorted: readonly Snippet[]
+    readonly bySlug: ReadonlyMap<string, Snippet>
+    readonly byUrl: ReadonlyMap<string, Snippet>
     readonly routes: readonly string[]
   }
   readonly sitemapUrls: readonly string[]
@@ -48,8 +32,8 @@ export const SITE = {
 } as const satisfies SiteConfig
 
 export function computeContent(
-  rawPosts: readonly RawPost[],
-  rawSnippets: readonly RawSnippet[],
+  rawPosts: readonly Post[],
+  rawSnippets: readonly Snippet[],
   config: SiteConfig,
 ): Content {
   const publishedPosts = rawPosts

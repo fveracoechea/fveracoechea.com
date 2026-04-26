@@ -2,14 +2,15 @@ import { mkdirSync, writeFileSync } from "node:fs"
 import RSS from "rss"
 import type { Plugin } from "vite"
 import { readFromDisk, SITE } from "../lib/content-build"
-import { computeContent, type RawPost, type RawSnippet } from "../lib/content-logic"
+import { computeContent } from "../lib/content-logic"
+import type { Post, Snippet } from "../lib/schemas"
 
 export function feedsPlugin(): Plugin {
   return {
     name: "feeds-sitemap",
     async closeBundle() {
-      const posts = readFromDisk<RawPost>("allPosts.js")
-      const snippets = readFromDisk<RawSnippet>("allSnippets.js")
+      const posts = readFromDisk<Post>("allPosts.js")
+      const snippets = readFromDisk<Snippet>("allSnippets.js")
 
       const content = computeContent(posts, snippets, SITE)
       const feedPosts = content.posts.feedPosts(8)

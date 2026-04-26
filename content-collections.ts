@@ -1,18 +1,12 @@
 import { defineCollection, defineConfig } from "@content-collections/core"
-import { z } from "zod"
+import { PostFrontmatterSchema, SnippetFrontmatterSchema } from "./src/lib/schemas"
 
 const posts = defineCollection({
   name: "posts",
   directory: "content/blog",
   include: "*.mdx",
   parser: "frontmatter-only",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    date: z.string().optional(),
-    published: z.boolean().default(true),
-  }),
+  schema: PostFrontmatterSchema,
   transform: ({ _meta, ...post }) => {
     const slug = _meta.path
     return {
@@ -28,11 +22,7 @@ const snippets = defineCollection({
   directory: "content/snippets",
   include: "*.mdx",
   parser: "frontmatter-only",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    order: z.number().default(0),
-  }),
+  schema: SnippetFrontmatterSchema,
   transform: ({ _meta, ...snippet }) => {
     const slug = _meta.path
     return {

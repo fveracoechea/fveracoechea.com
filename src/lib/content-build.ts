@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs"
-import { computeContent, type RawPost, type RawSnippet, SITE } from "./content-logic"
+import { computeContent, SITE } from "./content-logic"
+import type { Post, Snippet } from "./schemas"
 
 export { SITE }
 
@@ -13,13 +14,13 @@ export function readFromDisk<T>(filename: string): T[] {
 }
 
 export function getPublishedBlogRoutes(): string[] {
-  const posts = readFromDisk<RawPost>("allPosts.js")
+  const posts = readFromDisk<Post>("allPosts.js")
   const content = computeContent(posts, [], SITE)
   return [...content.posts.routes]
 }
 
 export function getSnippetRoutesFromDisk(): string[] {
-  const snippets = readFromDisk<RawSnippet>("allSnippets.js")
+  const snippets = readFromDisk<Snippet>("allSnippets.js")
   const content = computeContent([], snippets, SITE)
   return ["/snippets", ...content.snippets.routes]
 }
