@@ -1,8 +1,7 @@
 import { allPosts } from "content-collections"
 import { cx } from "cva"
 import { format } from "date-fns"
-import type { ComponentType } from "preact"
-import type { JSX } from "preact"
+import type { ComponentType, JSX } from "preact"
 import { useLocation } from "preact-iso/router"
 
 type TocEntry = {

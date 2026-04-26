@@ -1,7 +1,7 @@
 import { cx } from "cva"
 import { useRef, useState } from "preact/hooks"
 
-import { withIsland } from "../lib/preact-islands"
+import { island } from "../lib/preact-islands"
 import { IconButton } from "./IconButton"
 import { Close, Menu } from "./Icons"
 import NavLogo from "./NavLogo"
@@ -171,4 +171,4 @@ function MobileMenu() {
   )
 }
 
-export default withIsland(MobileMenu, "MobileMenu")
+export default island(MobileMenu)

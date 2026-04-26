@@ -1,7 +1,7 @@
 import { cx } from "cva"
 import { useEffect, useRef, useState } from "preact/hooks"
 
-import { withIsland } from "../lib/preact-islands"
+import { island } from "../lib/preact-islands"
 import { IconButton } from "./IconButton"
 import { Moon, Sun } from "./Icons"
 
@@ -154,4 +154,4 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
   )
 }
 
-export default withIsland(ThemeSwitcher, "ThemeSwitcher")
+export default island(ThemeSwitcher)

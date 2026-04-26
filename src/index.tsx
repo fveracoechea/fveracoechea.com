@@ -1,6 +1,7 @@
 import { allPosts, allSnippets } from "content-collections"
 import hydrate from "preact-iso/hydrate"
 import render from "preact-iso/prerender"
+import { ISLANDS } from "./islands.ts"
 import { registerIslands } from "./lib/preact-islands.tsx"
 
 import "./styles.css"
@@ -15,10 +16,7 @@ if (isBrowser && isDEV) {
 }
 
 if (isBrowser && !isDEV) {
-  registerIslands({
-    ThemeSwitcher: () => import("./components/ThemeSwitcher.tsx"),
-    MobileMenu: () => import("./components/MobileMenu.tsx"),
-  })
+  registerIslands(ISLANDS)
 }
 
 const SITE_TITLE = "Francisco Veracoechea"

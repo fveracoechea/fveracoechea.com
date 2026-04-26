@@ -34,14 +34,7 @@ type IconButtonProps = {
 } & Record<string, unknown>
 
 export function IconButton(props: IconButtonProps) {
-  const {
-    children,
-    as,
-    className,
-    active = false,
-    rounded = true,
-    ...otherProps
-  } = props
+  const { children, as, className, active = false, rounded = true, ...otherProps } = props
 
   const Element = (as ?? "button") as unknown as ComponentType<Record<string, unknown>>
 

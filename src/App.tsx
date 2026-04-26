@@ -14,7 +14,9 @@ import SnippetsIndex from "./pages/SnippetsIndex.tsx"
 
 export const FULL_HEIGHT = "FULL_HEIGHT"
 
-function NavLink(props: preact.JSX.AnchorHTMLAttributes<HTMLAnchorElement> & { isActive?: boolean }) {
+function NavLink(
+  props: preact.JSX.AnchorHTMLAttributes<HTMLAnchorElement> & { isActive?: boolean },
+) {
   return (
     <a
       {...props}
