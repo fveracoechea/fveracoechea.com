@@ -14,7 +14,7 @@ export default function UndrawProgramming() {
           }
 
           .floating {
-            animation: float 4s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite;
           }
 
           @keyframes fadeSequence {
@@ -48,15 +48,97 @@ export default function UndrawProgramming() {
           .code-8 {
             animation: fadeSequence 2s ease-out 3.4s infinite;
           }
+
+          .undraw-sun {
+            opacity: 1;
+          }
+          .undraw-moon {
+            opacity: 0;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            .undraw-sun {
+              opacity: 0;
+            }
+            .undraw-moon {
+              opacity: 1;
+            }
+          }
+
+          html.mocha .undraw-sun {
+            opacity: 0;
+          }
+          html.mocha .undraw-moon {
+            opacity: 1;
+          }
+          html.latte .undraw-sun {
+            opacity: 1;
+          }
+          html.latte .undraw-moon {
+            opacity: 0;
+          }
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(12px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .layer-0 {
+            animation: fadeInUp 0.5s ease-out 0s both;
+          }
+          .layer-1 {
+            animation: fadeInUp 0.5s ease-out 0.12s both;
+          }
+          .layer-2 {
+            animation: fadeInUp 0.5s ease-out 0.24s both;
+          }
+          .layer-3 {
+            animation: fadeInUp 0.5s ease-out 0.36s both;
+          }
+          .layer-4 {
+            animation: fadeInUp 0.5s ease-out 0.48s both;
+          }
+          .layer-5 {
+            animation: fadeInUp 0.5s ease-out 0.6s both;
+          }
         `}
       </style>
-      <circle
-        cx="458.32136"
-        cy="74.18162"
-        r="26.70075"
-        data-slot="sun"
-        className="fill-ctp-peach floating"
-      />
+      <g transform="translate(458.32136, 74.18162)" data-slot="sun">
+        <g className="layer-5">
+          <g
+            transform="scale(2.225) translate(-12, -12)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <g className="text-ctp-peach floating">
+              <g className="undraw-sun">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="m6.34 17.66-1.41 1.41" />
+                <path d="m19.07 4.93-1.41 1.41" />
+              </g>
+              <g className="undraw-moon">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g className="layer-0">
       <path
         d="M872.03753,661.02307c39.6877-30.22889,58.64352-81.02546,46.77635-129.48234q-.44231-1.806-.93367-3.6038c-7.86742-28.76343-27.33167-56.10058-55.7-65.29129-23.81971-7.71694-49.81962-1.78274-74.66936-4.85149-48.78136-6.02417-86.60057-45.494-113.21115-86.81933-26.61064-41.32546-47.06182-87.58331-82.42157-121.72413-58.28479-56.27536-153.36192-68.39149-225.62671-31.76044C293.98673,254.12142,247.95487,335.39062,249.918,416.38554c1.96322,80.995,50.04632,158.43176,119.87492,199.517,25.65222,15.093,55.32138,25.78522,84.84826,22.04377,25.62011-3.24641,48.89908-17.01264,74.39861-21.09959,40.09115-6.42568,79.92687,11.70084,114.60268,32.82375,34.67571,21.12288,68.17007,46.15988,107.57436,55.95242C789.47831,715.13139,836.88051,687.80109,872.03753,661.02307Z"
         transform="translate(-206.59003 -163.87113)"
@@ -72,6 +154,8 @@ export default function UndrawProgramming() {
           values="-206.59003 -163.87113; -190 -155; -206.59003 -163.87113"
         />
       </path>
+      </g>
+      <g className="layer-1">
       <path
         d="M815.016,219.19108c-.87006-.58-1.75-1.13-2.62006-1.69a380.24008,380.24008,0,0,0-80.31-38.93l-6.54,90.22h-41.46v-103.39c-2.61-.54-5.24-1.05-7.87-1.53v104.92H626.94587A102.26992,102.26992,0,0,1,524.67595,166.5212v-.0001c-2.64.57-5.26,1.18-7.88,1.83v100.44h-40.13l-6.23-86.03a380.8581,380.8581,0,0,0-81.94,43.53c-.44.3-.88.61-1.31.91-2.21,1.55-4.39,3.13-6.56,4.73v344.19h118.27l-2.09-28.95-11.5-158.95h231.59l-11.5,158.95-2.09,28.95h116.96v-353.45Q817.65591,220.90114,815.016,219.19108Zm-298.22,142.78h-33.39l-6.17-85.3h39.56Zm159.42,0h-56.08v-1.69a6.17975,6.17975,0,0,0-6.19-6.18h-24.38a6.17757,6.17757,0,0,0-6.18,6.18v1.69h-58.71v-85.3h151.54Zm7.87,0v-85.3h40.89l-6.17,85.3Z"
         transform="translate(-206.59003 -163.87113)"
@@ -97,6 +181,8 @@ export default function UndrawProgramming() {
         transform="translate(-206.59003 -163.87113)"
         className="fill-ctp-surface0"
       />
+      </g>
+      <g className="layer-2">
       <rect
         x="830.03379"
         y="595.58843"
@@ -682,6 +768,8 @@ export default function UndrawProgramming() {
         rx="1.56108"
         className="fill-white code-5"
       />
+      </g>
+      <g className="layer-3">
       <path
         d="M711.50727,654.35273l-13.34954-21.10162,41.902-33.40283,17.29534-19.16107a19.16138,19.16138,0,0,1,32.418,6.8279h0a19.16136,19.16136,0,0,1-11.57015,23.991l-27.3488,10.07535Z"
         transform="translate(-206.59003 -163.87113)"
@@ -802,6 +890,8 @@ export default function UndrawProgramming() {
         rx="3.26417"
         className="fill-ctp-mauve"
       />
+      </g>
+      <g className="layer-4">
       <path
         d="M497.30123,540.717l.21675.68444.01142.02283,6.52515,19.838,7.50627,22.86094,14.1227,42.96133.13688,6.67346v.02283l1.04949,53.6845-2.90894,7.2781,3.274,11.93237s-1.50582-18.037-9.5824-7.67884c-4.57448,5.8864-9.92468,11.90961-14.31668,17.55642q9.59964,3.88436,19.50716,7.0271c1.426.45633,2.86334.88983,4.30071,1.32333q.46194.13692.924.27377a266.86342,266.86342,0,0,0,67.35086,10.82587c1.18637.03425,2.35.057,3.47932.07986.39932.01142.78714.02284,1.175.02284,1.27765.01142,2.54389.02277,3.82154.02277q3.86721,0,7.70018-.11405a266.85337,266.85337,0,0,0,56.09149-7.58613c-.12547-7.58606-.46768-16.44984-.9582-25.91819-.22817-4.64293-5.3502-9.67369-5.65823-14.53336-.21675-3.65047,4.38057-7.08419,4.141-10.79169-1.55143-22.82675-3.49075-14.06417-4.92813-30.22882q-.22245-2.37852-.41066-4.55165c-.924-10.381-1.56284-16.872-1.56284-16.872l6.13733-38.68338,9.6395-60.73442-.74153-1.22063-.83274-.41066-50.844-25.16532-2.76064-7.07276a10.97881,10.97881,0,0,0-10.14143-6.94731l-33.4929-.13688a10.93117,10.93117,0,0,0-8.90946,4.52888l-9.069,12.55978Z"
         transform="translate(-206.59003 -163.87113)"
@@ -840,6 +930,7 @@ export default function UndrawProgramming() {
         transform="translate(-206.59003 -163.87113)"
         opacity="0.2"
       />
+      </g>
     </svg>
   )
 }
