@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "bun run scripts/build-content.ts && vite build",
     "preview": "vite preview",
     "format": "biome format . --write",
     "lint": "biome lint .",
