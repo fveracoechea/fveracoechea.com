@@ -8,6 +8,14 @@ type Bookmark = {
 
 const bookmarks: Bookmark[] = [
   {
+    href: "https://github.com/fveracoechea/agent-skills",
+    tag: "ai",
+    text: [
+      "Agent Skills",
+      "Collection of skills for building full-stack TypeScript projects with React",
+    ],
+  },
+  {
     href: "https://github.com/fveracoechea/ralph-opencode",
     tag: "ai",
     text: [
@@ -167,7 +175,11 @@ export default function Bookmarks() {
       <div className="py-10">
         <article className="prose overflow-x-hidden">
           <h1>Bookmarks</h1>
-          <p>My bookmarks</p>
+          <p>
+            This is where I keep track of all the <b>interesting things</b> I discover on the web.
+            The internet is constantly evolving, some items on this list may become outdated or
+            vanish over time, so consider this a log rather than an archive.
+          </p>
         </article>
       </div>
 

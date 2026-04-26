@@ -1,6 +1,5 @@
 import hydrate from "preact-iso/hydrate"
 import render from "preact-iso/prerender"
-import { ISLANDS } from "./islands.ts"
 import { getHeadMeta } from "./lib/content"
 import { registerIslands } from "./lib/preact-islands.tsx"
 
@@ -16,12 +15,12 @@ if (isBrowser && isDEV) {
 }
 
 if (isBrowser && !isDEV) {
-  registerIslands(ISLANDS)
+  registerIslands()
 }
 
 export async function prerender(data: { url: string }) {
   const { App } = await import("./App.tsx")
-  const result = await render(<App url={data.url} />)
+  const result = await render(<App />)
 
   const meta = getHeadMeta(data.url)
 

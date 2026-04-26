@@ -1,5 +1,5 @@
 import { cx } from "cva"
-import { LocationProvider, Route, Router } from "preact-iso/router"
+import { LocationProvider, Route, Router, useLocation } from "preact-iso/router"
 
 import MobileMenu from "./components/MobileMenu.tsx"
 import NavLogo from "./components/NavLogo.tsx"
@@ -14,22 +14,19 @@ import SnippetsIndex from "./pages/SnippetsIndex.tsx"
 
 export const FULL_HEIGHT = "FULL_HEIGHT"
 
-function NavLink(
-  props: preact.JSX.AnchorHTMLAttributes<HTMLAnchorElement> & { isActive?: boolean },
-) {
+type NavLinkProps = { children: preact.ComponentChildren; href: string; className?: string }
+
+function NavLink(props: NavLinkProps) {
+  const location = useLocation()
+  const isActive = location.path.startsWith(props.href ?? "/")
+
   return (
     <a
       {...props}
       className={cx(
-        "relative rounded px-2 py-2.5 font-medium",
-        "after:absolute after:h-[2px] after:w-0 after:rounded after:bg-ctp-blue",
-        "after:bottom-0 after:left-0 after:transition-all",
-        props.isActive
-          ? "text-ctp-blue after:w-full"
-          : [
-              "text-ctp-text transition-colors hover:text-ctp-blue hover:after:w-full",
-              "focus-visible:ring-2 focus-visible:ring-ctp-blue",
-            ],
+        "relative rounded px-2 py-2.5 font-medium transition-colors",
+        "focus-visible:ring-2 focus-visible:ring-ctp-blue",
+        isActive ? "text-ctp-blue" : "text-ctp-subtext0 hover:text-ctp-text",
         props.className,
       )}
     />
@@ -44,10 +41,10 @@ function Header() {
         <nav className="flex items-center">
           <ul className="flex items-center gap-4">
             <li>
-              <NavLink href="/snippets/">Snippets</NavLink>
+              <NavLink href="/snippets">Snippets</NavLink>
             </li>
             <li>
-              <NavLink href="/bookmarks/">Bookmarks</NavLink>
+              <NavLink href="/bookmarks">Bookmarks</NavLink>
             </li>
             <li className="ml-2">
               <ThemeSwitcher />
@@ -75,10 +72,9 @@ function Footer() {
   )
 }
 
-export function App({ url }: { url?: string }) {
+export function App() {
   return (
-    // @ts-expect-error - preact-iso LocationProvider accepts url at runtime but not in types
-    <LocationProvider url={url}>
+    <LocationProvider>
       <Header />
       <div
         className={cx(

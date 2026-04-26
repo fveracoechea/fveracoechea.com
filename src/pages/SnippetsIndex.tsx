@@ -8,7 +8,9 @@ export default function SnippetsIndex() {
         <article className="prose overflow-x-hidden">
           <h1>Code snippets</h1>
           <p>
-            A curated collection of tips, tricks, and reusable code blocks that I've found valuable.
+            A curated collection of tips, tricks, and reusable <b>code blocks</b> that I've found
+            valuable. It is where I gather experimentation, lerning, and web development discoveries
+            that were worth a share with the world wide web.
           </p>
         </article>
       </div>

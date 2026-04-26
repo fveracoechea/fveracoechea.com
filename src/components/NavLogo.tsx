@@ -12,7 +12,7 @@ export default function NavLogo() {
       <h1
         style={{ whiteSpace: "pre-line" }}
         className={cx(
-          "flex items-center font-mono !leading-[0.9]",
+          "flex items-center font-mono leading-[0.9]",
           "text-xl font-semibold transition-colors md:text-2xl",
         )}
       >
@@ -25,7 +25,7 @@ export default function NavLogo() {
         <span
           className={cx(
             "flex flex-col text-transparent",
-            "bg-gradient-to-r from-ctp-blue to-ctp-mauve bg-clip-text",
+            "bg-linear-to-r from-ctp-blue to-ctp-mauve bg-clip-text",
           )}
         >
           <span>Francisco</span>

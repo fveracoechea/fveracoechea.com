@@ -154,4 +154,4 @@ function ThemeSwitcher(props: { fill?: boolean; border?: "base" | "surface" }) {
   )
 }
 
-export default island(ThemeSwitcher)
+export default island(ThemeSwitcher, "ThemeSwitcher")

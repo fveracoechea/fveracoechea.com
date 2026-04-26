@@ -171,4 +171,4 @@ function MobileMenu() {
   )
 }
 
-export default island(MobileMenu)
+export default island(MobileMenu, "MobileMenu")
