@@ -1,11 +1,5 @@
-import { allSnippets } from "content-collections"
 import { cx } from "cva"
-
-export function getSnippetPrerenderRoutes() {
-  return ["/snippets", ...allSnippets.map((s) => `/snippets/${s.slug}`)]
-}
-
-const sortedSnippets = [...allSnippets].sort((a, b) => a.order - b.order)
+import { snippets } from "../lib/content"
 
 export default function SnippetsIndex() {
   return (
@@ -22,7 +16,7 @@ export default function SnippetsIndex() {
       <section className="pb-12">
         <nav>
           <ul>
-            {sortedSnippets.map((snippet, idx) => (
+            {snippets.map((snippet, idx) => (
               <li
                 className={cx(
                   "group flex rounded transition-colors",

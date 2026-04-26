@@ -2,7 +2,7 @@ import { cx } from "cva"
 import { format } from "date-fns"
 
 function Articles(props: {
-  posts: { url: string; title: string; image: string; description: string; date: string }[]
+  posts: readonly { url: string; title: string; image: string; description: string; date: string }[]
 }) {
   return (
     <section id="articles">

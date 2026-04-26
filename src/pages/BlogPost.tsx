@@ -1,8 +1,8 @@
-import { allPosts } from "content-collections"
 import { cx } from "cva"
 import { format } from "date-fns"
 import type { ComponentType, JSX } from "preact"
 import { useLocation } from "preact-iso/router"
+import { getPost } from "../lib/content"
 
 type TocEntry = {
   depth: number
@@ -15,22 +15,6 @@ const mdxModules = import.meta.glob<{ default: ComponentType; tableOfContents?: 
   "../../content/blog/*.mdx",
   { eager: true },
 )
-
-const postMap = new Map(allPosts.filter((p) => p.published).map((p) => [p.slug, p]))
-
-export function getPublishedPosts() {
-  return allPosts
-    .filter((p) => p.published)
-    .sort((a, b) => {
-      if (!a.date) return 1
-      if (!b.date) return -1
-      return b.date.localeCompare(a.date)
-    })
-}
-
-export function getBlogPrerenderRoutes() {
-  return getPublishedPosts().map((p) => `/blog/${p.slug}`)
-}
 
 function toTableOfContents(item: TocEntry): JSX.Element {
   return (
@@ -74,7 +58,7 @@ function TocSidebar({ toc }: { toc: TocEntry[] }) {
 export default function BlogPost() {
   const location = useLocation()
   const slug = location.path.replace(/^\/blog\//, "")
-  const post = postMap.get(slug)
+  const post = getPost(slug)
 
   if (!post) {
     return (

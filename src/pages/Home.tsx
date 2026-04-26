@@ -1,10 +1,10 @@
-import { allPosts } from "content-collections"
 import { cx } from "cva"
 
 import Articles from "../components/Articles.tsx"
 import { BarChart, Gauge, Layers, Person } from "../components/Icons.tsx"
 import SocialLinks from "../components/SocialLinks.tsx"
 import UndrawProgramming from "../components/UndrawProgramming.tsx"
+import { articles } from "../lib/content"
 
 const interests = [
   {
@@ -56,22 +56,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <Articles
-        posts={allPosts
-          .filter((p) => p.published)
-          .sort((a, b) => {
-            if (!a.date) return 1
-            if (!b.date) return -1
-            return b.date.localeCompare(a.date)
-          })
-          .map((p) => ({
-            url: p.url,
-            title: p.title,
-            image: p.image,
-            description: p.description,
-            date: p.date ?? "",
-          }))}
-      />
+      <Articles posts={articles} />
     </div>
   )
 }

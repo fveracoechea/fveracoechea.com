@@ -1,13 +1,10 @@
-import { allSnippets } from "content-collections"
 import { cx } from "cva"
 import type { ComponentType } from "preact"
 import { lazy, Suspense } from "preact/compat"
 import { useLocation } from "preact-iso/router"
+import { getSnippet, snippets } from "../lib/content"
 
 const mdxModules = import.meta.glob("../../content/snippets/*.mdx")
-
-const snippetMap = new Map(allSnippets.map((s) => [s.slug, s]))
-const sortedSnippets = [...allSnippets].sort((a, b) => a.order - b.order)
 
 const mdxCache = new Map<string, ComponentType>()
 
@@ -17,7 +14,7 @@ function SnippetSidebar({ currentSlug }: { currentSlug: string }) {
       <nav className="sticky top-0 flex flex-1 flex-col gap-4 py-8">
         <p className="text-md pl-8 font-semibold text-ctp-text">Other snippets</p>
         <ul className="flex flex-col text-sm text-ctp-subtext1">
-          {sortedSnippets.map((snippet) => {
+          {snippets.map((snippet) => {
             const isActive = snippet.slug === currentSlug
             return (
               <li key={snippet.slug} className={cx("group relative transition-colors")}>
@@ -75,7 +72,7 @@ function MdxLoader({ slug }: { slug: string }) {
 export default function SnippetDetail() {
   const location = useLocation()
   const slug = location.path.replace(/^\/snippets\//, "")
-  const snippet = snippetMap.get(slug)
+  const snippet = getSnippet(slug)
 
   if (!snippet) {
     return (
